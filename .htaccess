@@ -1,0 +1,73 @@
+# cPanel document root = this folder (repo root).
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+<IfModule mod_authz_core.c>
+  <FilesMatch "(^#.*#|\.(bak|config|dist|env|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$">
+    Require all denied
+  </FilesMatch>
+  <FilesMatch "\.php$">
+    Require all denied
+  </FilesMatch>
+  <Files "index.php">
+    Require all granted
+  </Files>
+  <Files "front.php">
+    Require all denied
+  </Files>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/gif "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 30 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|ico|svg|woff2)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  RewriteRule ^\. - [F]
+
+  RewriteCond %{THE_REQUEST} \s/+(server|client/src|client/public)[/?\s] [NC]
+  RewriteRule ^ - [F]
+
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteCond %{DOCUMENT_ROOT}/client/public/$1 -f
+  RewriteRule ^((?:css|js|images|fonts)/.+)$ client/public/$1 [END]
+
+  RewriteCond %{DOCUMENT_ROOT}/client/public/$1 -f
+  RewriteRule ^(favicon\.ico|favicon\.png|apple-touch-icon\.png)$ client/public/$1 [END]
+
+  RewriteRule ^index\.php$ - [L]
+  RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+<IfModule !mod_rewrite.c>
+  <IfModule mod_dir.c>
+    FallbackResource /index.php
+  </IfModule>
+</IfModule>
