@@ -1,4 +1,5 @@
-.env
+﻿.env
 storage/*.json
 /vendor/
 composer.lock
+.vscode/
