@@ -1,0 +1,12 @@
+{
+  "intelephense.environment.includePaths": [
+    "app/lib",
+    "app",
+    "config"
+  ],
+  "intelephense.files.maxSize": 5000000,
+  "files.associations": {
+    "*.php": "php"
+  },
+  "php.validate.enable": true
+}

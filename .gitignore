@@ -1,2 +1,4 @@
-server/.env
-server/storage/*.json
+.env
+storage/*.json
+/vendor/
+composer.lock

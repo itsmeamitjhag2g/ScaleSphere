@@ -1,0 +1,11 @@
+{
+    "name": "scalesphere/website",
+    "description": "ScaleSphere marketing site",
+    "require": {
+        "php": ">=8.1",
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

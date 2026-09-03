@@ -1,0 +1,83 @@
+/* ScaleSphere — Service pages (Tailwind companion) */
+
+.svc-hero-grid{
+  background-image:
+    linear-gradient(rgba(0,102,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,102,255,.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
+}
+
+/* Scroll reveal */
+.svc-reveal{
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1);
+}
+.svc-reveal.svc-visible{
+  opacity: 1;
+  transform: none;
+}
+.svc-delay-1{ transition-delay: .06s; }
+.svc-delay-2{ transition-delay: .12s; }
+.svc-delay-3{ transition-delay: .18s; }
+.svc-delay-4{ transition-delay: .24s; }
+
+/* Float animation */
+@keyframes svcFloat{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-12px); }
+}
+.svc-float{ animation: svcFloat 5s ease-in-out infinite; }
+
+@keyframes svcPulse{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.06); }
+}
+.svc-pulse{ animation: svcPulse 4s ease-in-out infinite; }
+
+/* Tech marquee */
+.svc-marquee{ overflow: hidden; }
+@keyframes svcMarquee{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+.svc-marquee-track{ animation: svcMarquee 28s linear infinite; }
+
+/* FAQ */
+.svc-faq summary::-webkit-details-marker{ display: none; }
+.svc-faq[open]{ box-shadow: 0 8px 30px rgba(15,23,42,.06); }
+
+/* Hub accordion active state */
+.svc-acc-item.is-active{
+  border-color: rgba(0,102,255,.35);
+  box-shadow: 0 12px 40px rgba(15,23,42,.08);
+}
+.svc-acc-item.is-active .fa-arrow-right{ opacity: 1; }
+
+/* Timeline connector on desktop */
+@media (min-width:768px){
+  .svc-timeline .svc-step:not(:last-child)::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, #cbd5e1, transparent);
+    transform: translateY(-50%);
+  }
+}
+
+/* Line clamp fallback */
+.line-clamp-3{
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .svc-reveal{ opacity: 1; transform: none; transition: none; }
+  .svc-float, .svc-pulse, .svc-marquee-track{ animation: none; }
+}

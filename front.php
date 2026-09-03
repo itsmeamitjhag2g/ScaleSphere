@@ -8,7 +8,7 @@ declare(strict_types=1);
  */
 function ts_front(string $repoRoot, string $publicRoot): bool
 {
-    require_once $repoRoot . "/server/src/utils/path.php";
+    require_once $repoRoot . "/app/lib/path.php";
 
     $path = ts_normalize_request_path();
 
@@ -35,12 +35,14 @@ function ts_front(string $repoRoot, string $publicRoot): bool
     }
 
     try {
-        require_once $repoRoot . "/server/src/bootstrap.php";
-        require_once $repoRoot . "/client/src/php/site.php";
-        require_once $repoRoot . "/client/src/php/services-content.php";
-        require_once $repoRoot . "/client/src/php/seo.php";
-        require_once $repoRoot . "/client/src/php/render.php";
-        require_once $repoRoot . "/client/src/php/router.php";
+        require_once $repoRoot . "/app/bootstrap.php";
+        require_once $repoRoot . "/app/lib/site.php";
+        require_once $repoRoot . "/app/lib/services-content.php";
+        require_once $repoRoot . "/app/lib/seo.php";
+        require_once $repoRoot . "/app/lib/render.php";
+        require_once $repoRoot . "/app/lib/mail.php";
+        require_once $repoRoot . "/app/lib/service-pages.php";
+        require_once $repoRoot . "/app/lib/router.php";
 
         if ($path === "/health") {
             header("Content-Type: application/json; charset=utf-8");

@@ -49,18 +49,19 @@ DirectoryIndex index.php
 
   RewriteRule ^\. - [F]
 
-  RewriteCond %{THE_REQUEST} \s/+(server|client/src|client/public)[/?\s] [NC]
+  # Block app internals / deps from direct web access
+  RewriteCond %{THE_REQUEST} \s/+(app|config|storage|vendor|scripts|composer\.(json|lock)|README\.md)[/?\s] [NC]
   RewriteRule ^ - [F]
 
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  RewriteCond %{DOCUMENT_ROOT}/client/public/$1 -f
-  RewriteRule ^((?:css|js|images|fonts)/.+)$ client/public/$1 [END]
+  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+  RewriteRule ^((?:css|js|images|fonts)/.+)$ public/$1 [END]
 
-  RewriteCond %{DOCUMENT_ROOT}/client/public/$1 -f
-  RewriteRule ^(favicon\.ico|favicon\.png|apple-touch-icon\.png)$ client/public/$1 [END]
+  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
+  RewriteRule ^(favicon\.ico|favicon\.png|apple-touch-icon\.png|scalesphere-logo\.png)$ public/$1 [END]
 
   RewriteRule ^index\.php$ - [L]
   RewriteRule ^ index.php [QSA,L]
