@@ -1,55 +1,28 @@
 /* =========================================================
    ScaleSphere — site-motion.js
-   Lenis smooth scroll + GSAP ScrollTrigger
+   Native scroll (1:1 with wheel) + GSAP ScrollTrigger
+   Lenis disabled site-wide — it felt sticky vs /services.
    ========================================================= */
 (() => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   document.documentElement.classList.add("motion-on");
+  document.documentElement.classList.remove("lenis", "has-smooth-scroll");
+  window.__ssLenis = null;
 
-  let lenis = null;
   const isHome = () => !!document.querySelector(".ss-home");
 
-  function initLenis() {
-    if (reduce || !window.Lenis) return null;
-    lenis = new Lenis({
-      duration: isHome() ? 0.55 : 1.0,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: "vertical",
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      wheelMultiplier: isHome() ? 1.35 : 0.95,
-      touchMultiplier: 1.5,
-      infinite: false,
-    });
-    window.__ssLenis = lenis;
-
-    document.documentElement.classList.add("lenis", "has-smooth-scroll");
-
-    if (window.ScrollTrigger) lenis.on("scroll", ScrollTrigger.update);
-
-    if (window.gsap) {
-      gsap.ticker.add((time) => lenis.raf(time * 1000));
-      gsap.ticker.lagSmoothing(0);
-    } else {
-      const raf = (t) => {
-        lenis.raf(t);
-        requestAnimationFrame(raf);
-      };
-      requestAnimationFrame(raf);
-    }
-
+  function initAnchorScroll() {
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
       a.addEventListener("click", (e) => {
         const id = a.getAttribute("href");
         if (!id || id === "#") return;
         const target = document.querySelector(id);
-        if (!target || !lenis) return;
+        if (!target) return;
         e.preventDefault();
-        lenis.scrollTo(target, { offset: -64, duration: 1.2 });
+        const top = target.getBoundingClientRect().top + window.scrollY - 64;
+        window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
       });
     });
-
-    return lenis;
   }
 
   function scrollProgress() {
@@ -65,8 +38,7 @@
       }
       if (homeBar) homeBar.style.width = `${p * 100}%`;
     };
-    if (lenis) lenis.on("scroll", paint);
-    else window.addEventListener("scroll", paint, { passive: true });
+    window.addEventListener("scroll", paint, { passive: true });
     window.addEventListener("resize", paint);
     paint();
   }
@@ -99,7 +71,7 @@
   }
 
   function start() {
-    initLenis();
+    initAnchorScroll();
     scrollProgress();
     genericReveals();
     if (window.ScrollTrigger) {

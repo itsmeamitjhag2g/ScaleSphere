@@ -13,8 +13,8 @@
   --ink:            #1a1a1a;
   --text:           #2c3340;
   --muted:          #6c757d;
-  --bg:             #ffffff;
-  --bg-soft:        #f6f4fc;
+  --bg:             #F6F7F9;
+  --bg-soft:        #EEF0F4;
   --card:           #ffffff;
   --line:           rgba(30,89,204,.12);
   --shadow:         0 12px 32px rgba(30, 40, 90, .10);
@@ -30,7 +30,7 @@
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
+html{ scroll-behavior:auto; }
 body{
   background:var(--bg);
   color:var(--text);
@@ -78,7 +78,7 @@ button, input, textarea{ font-family:inherit; }
 /* =============== HEADER =============== */
 .site-header{
   position:sticky; top:0; z-index:100;
-  background:#fff; height:var(--header-h);
+  background:#F6F7F9; height:var(--header-h);
   box-shadow:0 1px 0 var(--line);
   transition:box-shadow .3s ease;
   overflow:hidden;

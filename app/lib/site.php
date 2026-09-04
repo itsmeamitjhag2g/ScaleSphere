@@ -34,7 +34,7 @@ const TS_MAIN_NAV = [
     ["href" => "/", "label" => "Home"],
     ["href" => "/about-us", "label" => "About Us"],
     ["href" => "/services", "label" => "Services", "mega" => true],
-    ["href" => "/#ss-work", "label" => "Our Work"],
+    ["href" => "/our-work", "label" => "Our Work"],
     ["href" => "/contact", "label" => "Contact Us"],
 ];
 

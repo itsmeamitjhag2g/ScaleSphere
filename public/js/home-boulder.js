@@ -36,12 +36,12 @@
     requestAnimationFrame(tick);
   }
 
-  /* Hero: each word scrambles ONLY one letter (rest stay fixed) */
+  /* Hero: only “Scale” scrambles outside → inside; other words fade in */
   const title = document.querySelector("#ssHeroTitle");
   if (title) {
     const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    const scrambleSingleLetter = (el, { durationMs = 900 } = {}) =>
+    const scrambleOutsideIn = (el, { durationMs = 1400 } = {}) =>
       new Promise((resolve) => {
         const finalText = (el.getAttribute("data-final") || el.textContent || "").trim();
         if (reduce || finalText.length === 0) {
@@ -50,27 +50,52 @@
         }
 
         const chars = finalText.split("");
-        // pick one letter toward the middle (never scramble whole word)
-        const idx = Math.min(chars.length - 1, Math.max(0, Math.floor(chars.length / 2)));
-        const target = chars[idx];
-        const pool = target === target.toLowerCase() ? CHARS.toLowerCase() : CHARS;
+        const n = chars.length;
+        const order = [];
+        let l = 0;
+        let r = n - 1;
+        while (l <= r) {
+          if (l === r) order.push(l);
+          else {
+            order.push(l);
+            order.push(r);
+          }
+          l += 1;
+          r -= 1;
+        }
+
+        const resolved = new Set();
         const startAt = performance.now();
+        const stepMs = Math.max(90, durationMs / Math.max(order.length, 1));
 
         const id = setInterval(() => {
-          const t = Math.min(1, (performance.now() - startAt) / durationMs);
-          if (t >= 1) {
+          const elapsed = performance.now() - startAt;
+          const unlockCount = Math.min(order.length, Math.floor(elapsed / stepMs) + 1);
+          for (let i = 0; i < unlockCount; i++) resolved.add(order[i]);
+
+          let out = "";
+          for (let i = 0; i < n; i++) {
+            if (chars[i] === " ") {
+              out += " ";
+              continue;
+            }
+            if (resolved.has(i)) out += chars[i];
+            else {
+              const pool = chars[i] === chars[i].toLowerCase() ? CHARS.toLowerCase() : CHARS;
+              out += pool[(Math.random() * 26) | 0];
+            }
+          }
+          el.textContent = out;
+
+          if (resolved.size >= order.length && elapsed >= durationMs) {
             clearInterval(id);
             el.textContent = finalText;
             resolve();
-            return;
           }
-          chars[idx] = pool[(Math.random() * 26) | 0];
-          el.textContent = chars.join("");
-          chars[idx] = target; // keep source array clean for next paint base
-        }, 40);
+        }, 36);
       });
 
-    const runHeroScramble = async () => {
+    const runHero = async () => {
       const words = [...title.querySelectorAll("[data-hero-word]")];
       const marks = [...title.querySelectorAll("[data-hero-mark]")];
       marks.forEach((m) => {
@@ -78,17 +103,20 @@
         m.style.transform = "scale(0.6)";
       });
 
-      for (let i = 0; i < words.length; i++) {
-        const el = words[i];
-        const isScale = el.hasAttribute("data-hero-scale");
+      for (const el of words) {
         const finalText = (el.getAttribute("data-final") || "").trim();
+        const isScale = el.hasAttribute("data-hero-scale");
         el.style.opacity = "1";
-        el.textContent = finalText;
         if (window.gsap) {
-          gsap.fromTo(el, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.18, ease: "power2.out" });
+          gsap.fromTo(el, { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: "power2.out" });
         }
-        await scrambleSingleLetter(el, { durationMs: isScale ? 1100 : 850 });
-        await new Promise((r) => setTimeout(r, reduce ? 0 : 50));
+        if (isScale) {
+          el.textContent = finalText.replace(/./g, (c) => (c === " " ? " " : "·"));
+          await scrambleOutsideIn(el, { durationMs: reduce ? 0 : 1500 });
+        } else {
+          el.textContent = finalText;
+          await new Promise((r) => setTimeout(r, reduce ? 0 : 70));
+        }
       }
 
       if (window.gsap) {
@@ -104,7 +132,7 @@
     title.querySelectorAll("[data-hero-word]").forEach((el) => {
       el.textContent = el.getAttribute("data-final") || el.textContent;
     });
-    runHeroScramble();
+    runHero();
   }
 
   /* Floating chips — desktop only (perf) */
@@ -191,12 +219,18 @@
       ScrollTrigger.create({
         trigger: revealTrack,
         start: "top top",
-        end: "bottom bottom",
-        scrub: 0.35,
+        end: () => {
+          const spacer = document.getElementById("ssRevealSpacer");
+          return `+=${spacer ? spacer.offsetHeight : Math.round(window.innerHeight * 0.9)}`;
+        },
+        pin: true,
+        pinSpacing: false,
+        scrub: 0.45,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          // progress↑ doors open L+R; progress↓ doors close back to center
-          const open = easeOpen(Math.min(1, self.progress / 0.72));
+          // Open doors in the first ~50% of the pin, then hold fully open until handoff
+          const open = easeOpen(Math.min(1, self.progress / 0.5));
           const scale = 1 - open;
           doorLeft.style.transform = `scaleX(${scale})`;
           doorRight.style.transform = `scaleX(${scale})`;
@@ -238,49 +272,44 @@
     }
   }
 
-  /* Later sections — light enter only (no heavy clip delay) */
+  /* Later sections — keep visible; light lift-in only when entering */
   if (hasGsap && !reduce) {
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.utils.toArray(".ss-panel").forEach((panel) => {
       if (panel.classList.contains("ss-work")) return;
       const inner = panel.querySelector("[data-ss-panel-inner]") || panel;
-      gsap.fromTo(
-        inner,
-        { autoAlpha: 0.65, y: 20 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: panel,
-            start: "top 94%",
-            end: "top 78%",
-            scrub: true,
-          },
-        }
-      );
-    });
-
-    root.querySelectorAll("[data-scramble]").forEach((el) => {
-      // Services section has its own self-contained scramble script
-      if (el.closest("[data-ss-services]")) return;
-      const finalText = el.getAttribute("data-scramble") || el.textContent.trim();
-      let done = false;
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top 90%",
-        once: true,
-        onEnter: () => {
-          if (done) return;
-          done = true;
-          scrambleTo(el, finalText, 6);
+      gsap.from(inner, {
+        y: 24,
+        duration: 0.55,
+        ease: "power2.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: panel,
+          start: "top 90%",
+          once: true,
         },
       });
     });
+
+    root.querySelectorAll("[data-scramble]").forEach((el) => {
+      const finalText = el.getAttribute("data-scramble") || el.textContent.trim();
+      el.textContent = finalText;
+      if (reduce) return;
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 16 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          ease: "power2.out",
+          scrollTrigger: { trigger: el, start: "top 90%", once: true },
+        }
+      );
+    });
   } else {
     root.querySelectorAll("[data-scramble]").forEach((el) => {
-      if (el.closest("[data-ss-services]")) return;
       el.textContent = el.getAttribute("data-scramble") || el.textContent;
     });
   }
@@ -293,7 +322,6 @@
   if (storyRoot && bridgeLayer && workLayer && hasGsap && workData.length) {
     gsap.registerPlugin(ScrollTrigger);
 
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789↘●";
     const bridgeLines = [...bridgeLayer.querySelectorAll("[data-bridge-scramble]")];
     const bridgeCopy = bridgeLayer.querySelector("[data-bridge-copy]");
     const track = document.getElementById("ssWorkTrack");
@@ -362,44 +390,23 @@
       paintTrack(workP);
     };
 
-    const scrambleLine = (el, durationMs = 900) =>
-      new Promise((resolve) => {
-        const target = el.getAttribute("data-bridge-scramble") || "";
-        if (reduce) {
-          el.textContent = target;
-          return resolve();
-        }
-        const startAt = performance.now();
-        const id = setInterval(() => {
-          const prog = Math.min(1, (performance.now() - startAt) / durationMs);
-          let out = "";
-          for (let i = 0; i < target.length; i++) {
-            if (target[i] === " ") {
-              out += " ";
-              continue;
-            }
-            out += prog >= (i + 1) / target.length ? target[i] : CHARS[(Math.random() * CHARS.length) | 0];
-          }
-          el.textContent = out;
-          if (prog >= 1) {
-            clearInterval(id);
-            el.textContent = target;
-            resolve();
-          }
-        }, 40);
-      });
-
-    const playBridgeScramble = async () => {
+    const playBridgeIntro = async () => {
       if (scrambleStarted) return;
       scrambleStarted = true;
-      for (const line of bridgeLines) {
-        await scrambleLine(line, 900);
-        await new Promise((r) => setTimeout(r, reduce ? 0 : 60));
+      bridgeLines.forEach((el) => {
+        el.textContent = el.getAttribute("data-bridge-scramble") || "";
+      });
+      if (!reduce) {
+        gsap.fromTo(
+          bridgeLines,
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.45, stagger: 0.1, ease: "power2.out" }
+        );
       }
       if (bridgeCopy) {
-        gsap.to(bridgeCopy, { opacity: 1, duration: 0.3, ease: "power2.out" });
+        gsap.to(bridgeCopy, { opacity: 1, duration: 0.35, ease: "power2.out", delay: reduce ? 0 : 0.15 });
       }
-      await new Promise((r) => setTimeout(r, reduce ? 0 : 280));
+      await new Promise((r) => setTimeout(r, reduce ? 0 : 420));
       scrambleDone = true;
       measureStep();
       gsap.to(bridgeLayer, { opacity: 0, y: -16, duration: 0.4, ease: "power2.inOut" });
@@ -438,16 +445,22 @@
     storyTrigger = ScrollTrigger.create({
       trigger: storyRoot,
       start: "top top",
-      end: "bottom bottom",
-      scrub: 0.35,
+      end: () => {
+        const spacer = document.getElementById("ssStorySpacer");
+        return `+=${spacer ? spacer.offsetHeight : Math.round(window.innerHeight * (0.75 + n * 0.55))}`;
+      },
+      pin: true,
+      pinSpacing: false,
+      scrub: 0.45,
+      anticipatePin: 1,
       invalidateOnRefresh: true,
-      onEnter: () => playBridgeScramble(),
+      onEnter: () => playBridgeIntro(),
       onEnterBack: () => {
-        if (!scrambleStarted) playBridgeScramble();
+        if (!scrambleStarted) playBridgeIntro();
       },
       onRefresh: () => measureStep(),
       onUpdate: (self) => {
-        if (self.progress > 0.01) playBridgeScramble();
+        if (self.progress > 0.01) playBridgeIntro();
         if (scrambleDone) applyStoryProgress(self.progress);
       },
     });
@@ -492,21 +505,17 @@
     });
   }
 
-  /* Reveals */
+  /* Reveals — never leave content invisible */
   if (hasGsap && !reduce) {
     gsap.registerPlugin(ScrollTrigger);
     root.querySelectorAll("[data-reveal]").forEach((el) => {
-      gsap.fromTo(
-        el,
-        { opacity: 0.35, y: 18 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 92%", once: true },
-        }
-      );
+      gsap.from(el, {
+        y: 18,
+        duration: 0.35,
+        ease: "power2.out",
+        clearProps: "transform",
+        scrollTrigger: { trigger: el, start: "top 92%", once: true },
+      });
     });
 
     requestAnimationFrame(() => ScrollTrigger.refresh());

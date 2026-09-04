@@ -12,9 +12,9 @@ $site = ts_site();
       <?php foreach (TS_MAIN_NAV as $item): ?>
       <?php if (!empty($item["mega"])): ?>
       <div class="nav-item has-mega<?= ts_nav_on($path, $item["href"]) ?>" id="servicesMega">
-        <button type="button" class="nav-link nav-link-btn" aria-haspopup="true" aria-expanded="false" id="servicesMegaLink">
+        <a href="<?= ts_h($item["href"]) ?>" class="nav-link nav-link-btn" aria-haspopup="true" aria-expanded="false" id="servicesMegaLink">
           <?= ts_h($item["label"]) ?> <i class="fas fa-chevron-down nav-caret" aria-hidden="true"></i>
-        </button>
+        </a>
         <div class="mega-drop" id="servicesMegaDrop">
           <div class="mega-panel">
             <div class="mega-head mega-head-desktop">

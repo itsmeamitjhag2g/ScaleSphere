@@ -23,22 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const closeMega = () => setMegaOpen(false);
 
   if (megaLink && megaItem) {
-    megaLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const opening = !megaItem.classList.contains('open');
-      setMegaOpen(opening);
-      if (opening && isMobileNav()) {
-        document.querySelectorAll('.mega-acc-item.open').forEach((el) => {
-          el.classList.remove('open');
-          const panel = el.querySelector('.mega-acc-panel');
-          const trigger = el.querySelector('.mega-acc-trigger');
-          if (panel) panel.setAttribute('aria-hidden', 'true');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        });
-      }
-    });
-
+    /* Desktop: hover opens mega; click navigates to /services.
+       Mobile: tap Services goes to /services (no preventDefault). */
     megaItem.addEventListener('mouseenter', () => {
       if (isMobileNav()) return;
       clearTimeout(megaItem._leaveTimer);
@@ -50,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     megaDrop?.addEventListener('mousedown', (e) => e.stopPropagation());
-    megaDrop?.addEventListener('click', (e) => e.stopPropagation());
 
     document.addEventListener('click', (e) => {
       if (!megaItem.classList.contains('open')) return;

@@ -44,7 +44,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      important: '.tw-site, .tw-svc, .tw-home',
+      // Must be ONE selector. Commas break CSS (e.g. `.tw-home, .tw-about .flex`
+      // applies every utility to `.tw-home` itself and empties / crushes layouts).
+      important: 'main',
       corePlugins: { preflight: false },
       theme: {
         extend: {
@@ -56,7 +58,8 @@
           },
           fontFamily: {
             display: ['Montserrat', 'sans-serif'],
-            body: ['Nunito Sans', 'sans-serif']
+            body: ['Nunito Sans', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace']
           },
           maxWidth: {
             site: '1400px'
@@ -70,14 +73,77 @@
     /* Home: hide native scrollbar — sections open via wheel + GSAP */
     html.ss-home-scroll, body.page-home { scrollbar-width: none; }
     html.ss-home-scroll::-webkit-scrollbar, body.page-home::-webkit-scrollbar { width: 0; height: 0; display: none; }
-    body.page-home { overflow-x: hidden; }
+    body.page-home { overflow-x: clip; }
+    /* While a section unpins, spacer keeps section color — no white flash */
+    body.page-home .pin-spacer {
+      background: linear-gradient(160deg, #0066FF 0%, #1a7aff 45%, #22b8ff 100%);
+    }
+    body.page-home .pin-spacer:has([data-ss-story]),
+    body.page-home .pin-spacer:has(#ss-work) {
+      background: #0B1A3A;
+    }
   </style>
   <script>document.documentElement.classList.add('ss-home-scroll');</script>
   <?php endif; ?>
-  <link rel="stylesheet" href="/css/style.css?v=34">
-  <?php if (!str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
-  <link rel="stylesheet" href="/css/home.css?v=10">
+  <?php if (str_contains((string) ($bodyClass ?? ''), 'page-work')): ?>
+  <style>
+    /* Our Work — cream stage; keep shared footer readable above page grid */
+    body.page-work {
+      background: #F7F4EF !important;
+      overflow-x: clip;
+    }
+    body.page-work main {
+      background: transparent;
+      position: relative;
+      z-index: 1;
+    }
+    body.page-work .header-home,
+    body.page-work .site-header {
+      background: rgba(247, 244, 239, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom-color: rgba(15, 23, 42, 0.06);
+      box-shadow: none;
+      position: relative;
+      z-index: 30;
+    }
+    body.page-work .site-footer.ss-footer {
+      position: relative;
+      z-index: 20;
+      margin-top: 0;
+      background: #0B1A3A;
+    }
+    body.page-work .scroll-progress {
+      background: #0066FF;
+    }
+  </style>
   <?php endif; ?>
+  <link rel="stylesheet" href="/css/style.css?v=36">
+  <?php if (!str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
+  <link rel="stylesheet" href="/css/home.css?v=11">
+  <?php endif; ?>
+  <style>
+    /* Soft royal white page canvas — easier on the eyes than pure #fff */
+    body.page-site,
+    body.page-site main,
+    body.page-home,
+    body.page-about,
+    body.page-contact,
+    body.page-services {
+      background-color: #F6F7F9;
+    }
+    body.page-services.page-services-index,
+    body.page-services.page-services-index main {
+      background-color: #F6F7F9 !important;
+    }
+    body.page-hub-development,
+    body.page-hub-development main {
+      background-color: #F6F7F9 !important;
+    }
+    /* Sticky service stack needs overflow visible on ancestors */
+    body.page-hub-development {
+      overflow-x: visible;
+    }
+  </style>
   <?php foreach ($extraStyles ?? [] as $href): ?>
   <link rel="stylesheet" href="<?= ts_h($href) ?>">
   <?php endforeach; ?>
@@ -100,8 +166,8 @@
   <?php include __DIR__ . "/Header.php"; ?>
   <main><?= $body ?></main>
   <?php include __DIR__ . "/Footer.php"; ?>
-  <script src="/js/main.js?v=9"></script>
-  <script src="/js/site-motion.js?v=37"></script>
+  <script src="/js/main.js?v=10"></script>
+  <script src="/js/site-motion.js?v=43"></script>
   <script src="/js/route-progress.js?v=3"></script>
   <?php foreach ($extraScripts ?? [] as $src): ?>
   <script src="<?= ts_h($src) ?>"></script>

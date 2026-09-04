@@ -123,15 +123,14 @@ $testimonials = [
 
 ob_start();
 ?>
-<div class="ss-home tw-home font-display text-ink bg-white overflow-x-hidden">
+<div class="ss-home tw-home font-display text-ink bg-[#F6F7F9] overflow-x-clip">
   <div class="fixed top-0 left-0 h-[3px] w-0 z-[1300] bg-gradient-to-r from-brand to-[#22b8ff] pointer-events-none" id="ssProgress" aria-hidden="true"></div>
 
-  <!-- 1–2. HERO → BRAND center split reveal -->
-  <div class="relative h-[155vh] sm:h-[165vh] md:h-[170vh]" id="ssRevealTrack">
-    <div class="sticky top-0 h-[100svh] overflow-hidden">
+  <!-- 1–2. HERO → BRAND center split reveal (GSAP pins this; height from end distance) -->
+  <div class="relative h-[100svh] min-h-[100dvh] overflow-hidden" id="ssRevealTrack">
 
       <!-- HERO sits above dual doors; doors supply the white while closed -->
-      <div class="absolute inset-0 z-[5] flex items-center justify-center text-center px-4 sm:px-6 pt-20 pb-14" id="hero">
+      <div class="absolute inset-0 z-[5] flex items-center justify-center text-center px-4 sm:px-5 pt-16 pb-10" id="hero">
         <div class="absolute inset-0 pointer-events-none opacity-40 sm:opacity-50" aria-hidden="true"
              style="background-image:linear-gradient(rgba(0,102,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%);mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%)"></div>
         <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_50%_at_50%_35%,rgba(0,102,255,.14),transparent_70%)]"></div>
@@ -166,7 +165,7 @@ ob_start();
           </p>
           <div class="flex flex-col xs:flex-row flex-wrap gap-3 justify-center mt-6 sm:mt-8 sm:flex-row">
             <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-gradient-to-br from-brand to-[#2e7cff] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(0,102,255,.28)] hover:-translate-y-0.5 transition">Start a Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-            <a href="#ss-work" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:-translate-y-0.5 transition">Explore Our Work</a>
+            <a href="/our-work" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:-translate-y-0.5 transition">Explore Our Work</a>
           </div>
         </div>
 
@@ -206,12 +205,12 @@ ob_start();
              style="background:linear-gradient(to bottom,transparent,rgba(0,102,255,.85),transparent);box-shadow:0 0 28px 5px rgba(0,102,255,.35);transform:translateX(-50%) scaleY(0.15)"></div>
       </div>
 
-    </div>
   </div>
+  <div class="w-full pointer-events-none" id="ssRevealSpacer" aria-hidden="true"
+       style="height:90vh;background:linear-gradient(160deg,#0066FF 0%,#1a7aff 45%,#22b8ff 100%)"></div>
 
   <!-- 3–4. BRIDGE SCRAMBLE → FEATURED WORK (smooth filmstrip) -->
-  <div class="relative bg-brand-deep text-white" id="ss-work" data-ss-story>
-    <div class="sticky top-0 h-[100svh] overflow-hidden" id="ssStorySticky">
+  <div class="relative h-[100svh] min-h-[100dvh] overflow-hidden bg-brand-deep text-white" id="ss-work" data-ss-story>
 
       <!-- Bridge scramble (phase 1) -->
       <div class="absolute inset-0 z-[2] flex items-center justify-center px-4" id="ssBridgeLayer" data-ss-bridge>
@@ -259,13 +258,12 @@ ob_start();
         </div>
         <div class="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-[#4c8dff] to-[#22b8ff]" id="ssWorkProgress" aria-hidden="true"></div>
       </div>
-    </div>
-    <!-- shorter scroll: ~1 screen hold + ~0.55 screen per project -->
-    <div class="pointer-events-none" aria-hidden="true" id="ssStorySpacer" style="height:calc(70vh + <?= (int) count($projects) ?> * 55vh)"></div>
   </div>
+  <div class="w-full pointer-events-none bg-brand-deep" id="ssStorySpacer" aria-hidden="true"
+       style="height:calc(75vh + <?= (int) count($projects) ?> * 55vh)"></div>
 
-  <!-- 5. SERVICES — scramble starts only when section enters view -->
-  <section class="ss-panel relative bg-white py-12 sm:py-16 overflow-hidden" id="ss-services" data-ss-panel data-ss-services>
+  <!-- 5. SERVICES -->
+  <section class="ss-panel relative bg-[#F6F7F9] py-9 sm:py-12 overflow-hidden" id="ss-services" data-ss-panel data-ss-services>
     <div class="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"
          style="background-image:radial-gradient(ellipse 50% 40% at 15% 20%,rgba(0,102,255,.08),transparent 60%),radial-gradient(ellipse 40% 35% at 90% 80%,rgba(34,184,255,.07),transparent 55%)"></div>
 
@@ -273,12 +271,10 @@ ob_start();
     <span class="ss-float absolute right-[5%] top-[14%] hidden lg:inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand" data-float>Market</span>
     <span class="ss-float absolute left-[7%] bottom-[12%] hidden lg:inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand" data-float>Ship</span>
 
-    <div class="ss-panel-inner relative z-[1] w-[min(1280px,calc(100%-28px))] mx-auto" data-ss-panel-inner>
-      <div class="mb-6 sm:mb-8">
-        <p class="m-0 text-[clamp(1.6rem,5vw,2.75rem)] font-extrabold tracking-[-0.04em] uppercase leading-none text-brand min-h-[1.1em]"
-           data-ss-scramble="What We Do"
-           data-ss-scramble-label>··········</p>
-        <p class="m-0 mt-3 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">
+    <div class="ss-panel-inner relative z-[1] w-[min(1320px,calc(100%-24px))] sm:w-[min(1360px,calc(100%-32px))] mx-auto" data-ss-panel-inner>
+      <div class="mb-5 sm:mb-6">
+        <p class="m-0 text-[clamp(1.5rem,4.5vw,2.5rem)] font-extrabold tracking-[-0.04em] uppercase leading-none text-brand">What We Do</p>
+        <p class="m-0 mt-2.5 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">
           Four focused disciplines that help your business grow online — from first click to lasting product.
         </p>
       </div>
@@ -289,17 +285,16 @@ ob_start();
           $href = ts_category_href($col["title"]);
           $summary = $serviceDesc[$col["title"]] ?? ($col["lead"] ?? "");
           $num = str_pad((string) ($i + 1), 2, "0", STR_PAD_LEFT);
-          $titleDots = str_repeat("·", max(6, strlen($d["title"])));
         ?>
         <a href="<?= ts_h($href) ?>"
-           class="ss-svc-row group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[3rem_1fr_auto] gap-3 sm:gap-5 items-start sm:items-center border-b border-line py-4 sm:py-5 no-underline text-inherit opacity-0 translate-y-4 transition-[padding,colors,opacity,transform] duration-300 hover:pl-1 sm:hover:pl-2"
+           class="ss-svc-row group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[3rem_1fr_auto] gap-3 sm:gap-5 items-start sm:items-center border-b border-line py-3.5 sm:py-4 no-underline text-inherit opacity-0 translate-y-3 transition-[padding,colors,opacity,transform] duration-300 hover:pl-1 sm:hover:pl-2"
            data-ss-svc-row>
           <span class="pt-1 sm:pt-0 text-[11px] sm:text-[12px] font-extrabold tracking-[0.14em] text-brand/70 tabular-nums"><?= ts_h($num) ?></span>
           <div class="min-w-0">
-            <h3 class="m-0 text-[clamp(1.35rem,5.2vw,3.4rem)] font-extrabold tracking-[-0.04em] uppercase leading-[1.05] text-ink group-hover:text-brand transition-colors">
-              <span data-ss-scramble="<?= ts_h($d["title"]) ?>" data-ss-scramble-title><?= ts_h($titleDots) ?></span><span class="text-brand ml-1.5 opacity-0" data-ss-svc-mark aria-hidden="true"><?= ts_h($d["mark"]) ?></span>
+            <h3 class="m-0 text-[clamp(1.25rem,4.8vw,3rem)] font-extrabold tracking-[-0.04em] uppercase leading-[1.05] text-ink group-hover:text-brand transition-colors">
+              <?= ts_h($d["title"]) ?><span class="text-brand ml-1.5" aria-hidden="true"><?= ts_h($d["mark"]) ?></span>
             </h3>
-            <p class="m-0 mt-1.5 sm:mt-2 max-w-2xl text-[13px] sm:text-[15px] leading-snug text-muted font-body"><?= ts_h($summary) ?></p>
+            <p class="m-0 mt-1.5 max-w-2xl text-[13px] sm:text-[15px] leading-snug text-muted font-body"><?= ts_h($summary) ?></p>
           </div>
           <span class="hidden sm:inline-flex items-center justify-center w-10 h-10 rounded-full border border-line text-brand opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition duration-300" aria-hidden="true">
             <i class="fas fa-arrow-right text-sm"></i>
@@ -311,105 +306,62 @@ ob_start();
   </section>
 
   <script>
-  /* Services scramble — only when user reaches this section */
   (() => {
     const section = document.querySelector("[data-ss-services]");
     if (!section || section.dataset.ssServicesReady === "1") return;
     section.dataset.ssServicesReady = "1";
-
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789●▀▫↘►";
+    const rows = [...section.querySelectorAll("[data-ss-svc-row]")];
 
-    const scrambleTo = (el, finalText, durationMs = 2200) => new Promise((resolve) => {
-      if (!el) return resolve();
-      const target = finalText || "";
-      if (reduce) {
-        el.textContent = target;
-        return resolve();
-      }
-      const startAt = performance.now();
-      const id = setInterval(() => {
-        const progress = Math.min(1, (performance.now() - startAt) / durationMs);
-        let out = "";
-        for (let i = 0; i < target.length; i++) {
-          if (target[i] === " ") {
-            out += " ";
-            continue;
-          }
-          const revealAt = (i + 1) / target.length;
-          out += progress >= revealAt ? target[i] : CHARS[(Math.random() * CHARS.length) | 0];
-        }
-        el.textContent = out;
-        if (progress >= 1) {
-          clearInterval(id);
-          el.textContent = target;
-          resolve();
-        }
-      }, 50);
-    });
-
-    const run = async () => {
-      const label = section.querySelector("[data-ss-scramble-label]");
-      const rows = [...section.querySelectorAll("[data-ss-svc-row]")];
-      if (label) {
-        await scrambleTo(label, label.getAttribute("data-ss-scramble") || "What We Do", 2400);
-      }
-      await new Promise((r) => setTimeout(r, reduce ? 0 : 280));
-      for (const row of rows) {
-        row.style.opacity = "1";
-        row.style.transform = "translateY(0)";
-        const title = row.querySelector("[data-ss-scramble-title]");
-        const mark = row.querySelector("[data-ss-svc-mark]");
-        if (title) {
-          await scrambleTo(title, title.getAttribute("data-ss-scramble") || title.textContent.trim(), 2000);
-        }
-        if (mark) mark.style.opacity = "1";
-        await new Promise((r) => setTimeout(r, reduce ? 0 : 220));
-      }
-    };
-
-    const start = () => {
+    const show = () => {
       if (section.dataset.ssServicesPlayed === "1") return;
       section.dataset.ssServicesPlayed = "1";
-      run();
+      rows.forEach((row, i) => {
+        if (reduce) {
+          row.style.opacity = "1";
+          row.style.transform = "none";
+          return;
+        }
+        if (window.gsap) {
+          gsap.to(row, { opacity: 1, y: 0, duration: 0.45, delay: i * 0.08, ease: "power2.out" });
+        } else {
+          row.style.transitionDelay = `${i * 80}ms`;
+          row.style.opacity = "1";
+          row.style.transform = "translateY(0)";
+        }
+      });
     };
 
-    // Start only when section is clearly in view — no early timeout
     if (window.gsap && window.ScrollTrigger && !reduce) {
       gsap.registerPlugin(ScrollTrigger);
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top 68%",
-        once: true,
-        onEnter: start,
-      });
+      ScrollTrigger.create({ trigger: section, start: "top 75%", once: true, onEnter: show });
     } else if ("IntersectionObserver" in window) {
       const io = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting && e.intersectionRatio >= 0.2)) {
-          start();
+        if (entries.some((e) => e.isIntersecting)) {
+          show();
           io.disconnect();
         }
-      }, { threshold: [0.2, 0.35] });
+      }, { threshold: 0.15 });
       io.observe(section);
     } else {
-      start();
+      show();
     }
   })();
   </script>
 
   <!-- 6. MODEL / PILLARS -->
-  <section class="ss-panel relative bg-gradient-to-b from-[#f7faff] to-white py-10 sm:py-12" id="ss-approach" data-ss-panel>
-    <div class="ss-panel-inner w-[min(1280px,calc(100%-28px))] mx-auto" data-ss-panel-inner>
-      <h2 class="m-0 mb-6 sm:mb-8 text-[clamp(1.6rem,4.4vw,3rem)] font-extrabold tracking-[-0.04em] uppercase leading-tight">
+  <section class="ss-panel relative bg-gradient-to-b from-[#f7faff] to-white py-8 sm:py-10" id="ss-approach" data-ss-panel>
+    <div class="ss-panel-inner w-[min(1320px,calc(100%-24px))] sm:w-[min(1360px,calc(100%-32px))] mx-auto" data-ss-panel-inner>
+      <h2 class="m-0 mb-5 sm:mb-6 text-[clamp(1.5rem,4vw,2.75rem)] font-extrabold tracking-[-0.04em] uppercase leading-tight">
         A Model For <span class="text-brand">Digital Growth</span>
       </h2>
       <?php foreach ($pillars as $i => $pillar): ?>
-      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-center mb-8 last:mb-0 <?= $i % 2 ? "md:[&>*:first-child]:order-2" : "" ?>" data-reveal>
+      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-center mb-6 last:mb-0 <?= $i % 2 ? "md:[&>*:first-child]:order-2" : "" ?>" data-reveal>
         <div>
-          <h3 class="m-0 mb-2.5 text-[clamp(1.35rem,3.5vw,2.4rem)] font-extrabold tracking-[-0.035em] uppercase leading-tight" data-scramble="<?= ts_h($pillar["title"]) ?>"><?= ts_h($pillar["title"]) ?></h3>
-          <p class="m-0 max-w-md text-[15px] leading-relaxed text-muted font-body"><?= ts_h($pillar["copy"]) ?></p>
+          <h3 class="m-0 mb-2 text-[clamp(1.25rem,3.2vw,2.15rem)] font-extrabold tracking-[-0.035em] uppercase leading-tight"><?= ts_h($pillar["title"]) ?></h3>
+          <p class="m-0 max-w-md text-[14px] sm:text-[15px] leading-relaxed text-muted font-body"><?= ts_h($pillar["copy"]) ?></p>
         </div>
-        <div class="rounded-2xl overflow-hidden border border-line shadow-[0_18px_40px_rgba(15,23,42,.08)] aspect-[4/3]">
+        <div class="rounded-2xl overflow-hidden border border-line shadow-[0_14px_36px_rgba(15,23,42,.08)] aspect-[4/3]">
           <img src="<?= ts_h($pillar["img"]) ?>" alt="<?= ts_h($pillar["title"]) ?>" class="w-full h-full object-cover block" loading="lazy" width="900" height="675">
         </div>
       </article>
@@ -468,7 +420,7 @@ ob_start();
   <section class="ss-panel relative min-h-[55svh] flex items-center justify-center text-center text-white px-4 py-14 overflow-hidden" id="ss-cta" data-ss-panel
            style="background:linear-gradient(135deg,#071d50,#0c4fba 60%,#1287e8)">
     <div class="ss-panel-inner max-w-3xl mx-auto" data-ss-panel-inner>
-      <h2 class="m-0 mb-4 text-[clamp(2.4rem,10vw,6rem)] font-extrabold tracking-[-0.05em] uppercase leading-[0.92]" data-scramble="Let’s Talk">Let&rsquo;s Talk <span aria-hidden="true">৹</span></h2>
+      <h2 class="m-0 mb-4 text-[clamp(2.2rem,9vw,5.25rem)] font-extrabold tracking-[-0.05em] uppercase leading-[0.92]">Let&rsquo;s Talk <span aria-hidden="true">৹</span></h2>
       <p class="m-0 mx-auto mb-7 max-w-md text-[15px] leading-relaxed text-white/85 font-body">
         Have a project in mind? Tell us your goals — we&rsquo;ll respond with a clear plan, timeline and estimate that helps your business grow.
       </p>
@@ -502,7 +454,7 @@ ts_layout(
         "path" => "/",
         "bodyClass" => "page-home",
         "jsonld" => [ts_services_jsonld()],
-        "extraScripts" => ["/js/home-boulder.js?v=16"],
+        "extraScripts" => ["/js/home-boulder.js?v=27"],
     ]
 );
 ?>

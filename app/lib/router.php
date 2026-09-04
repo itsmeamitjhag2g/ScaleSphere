@@ -7,11 +7,13 @@ function ts_web_route(string $path): array
     $pages = [
         "/" => "page.php",
         "/about-us" => "about-us/page.php",
+        "/our-work" => "our-work/page.php",
         "/services" => "services/page.php",
         "/contact" => "contact/page.php",
     ];
     $retired = [
-        "/case-studies" => "/contact",
+        "/case-studies" => "/our-work",
+        "/work" => "/our-work",
         "/products" => "/services",
         "/clients" => "/contact",
         "/careers" => "/contact",
@@ -61,11 +63,12 @@ function ts_dispatch_web(string $path): void
                 (string) ($_POST["name"] ?? ""),
                 (string) ($_POST["email"] ?? ""),
                 (string) ($_POST["phone"] ?? ""),
-                (string) ($_POST["message"] ?? "")
+                (string) ($_POST["message"] ?? ""),
+                (string) ($_POST["service"] ?? "")
             );
             $GLOBALS["TS_CONTACT_MSG"] = ts_mail_configured()
-                ? "Thank you! Your inquiry has been sent. We will get back to you soon."
-                : "Thank you! Your inquiry has been received. We will get back to you soon.";
+                ? "Thank you! Your appointment request has been sent. We will get back to you soon."
+                : "Thank you! Your appointment request has been received. We will get back to you soon.";
             $GLOBALS["TS_CONTACT_ERR"] = "";
         } catch (Throwable $error) {
             $GLOBALS["TS_CONTACT_MSG"] = "";

@@ -23,7 +23,7 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/services">Services</a></li>
-          <li><a href="/#ss-work">Our Work</a></li>
+          <li><a href="/our-work">Our Work</a></li>
           <li><a href="/contact">Contact Us</a></li>
         </ul>
       </div>

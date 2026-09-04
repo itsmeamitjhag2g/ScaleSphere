@@ -93,18 +93,22 @@ function ts_layout(string $title, string $body, array $opts = []): void
     include dirname(__DIR__) . "/components/layout.php";
 }
 
-function ts_save_contact(string $name, string $email, string $phone, string $message): void
+function ts_save_contact(string $name, string $email, string $phone, string $message, string $service = ""): void
 {
     $name = trim($name);
     $email = trim($email);
     $phone = trim($phone);
     $message = trim($message);
+    $service = trim($service);
 
-    if (mb_strlen($name) > 120 || mb_strlen($email) > 180 || mb_strlen($phone) > 40 || mb_strlen($message) > 4000) {
+    if (mb_strlen($name) > 120 || mb_strlen($email) > 180 || mb_strlen($phone) > 40 || mb_strlen($message) > 4000 || mb_strlen($service) > 120) {
         throw new RuntimeException("One or more fields are too long. Please shorten your message.");
     }
-    if ($name === "" || $email === "" || $message === "") {
-        throw new RuntimeException("Please fill in name, email and message.");
+    if ($name === "" || $email === "" || $phone === "") {
+        throw new RuntimeException("Please fill in name, email and phone.");
+    }
+    if ($service === "") {
+        throw new RuntimeException("Please choose a service.");
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new RuntimeException("Please enter a valid email address.");
@@ -112,6 +116,7 @@ function ts_save_contact(string $name, string $email, string $phone, string $mes
     // Strip control chars from phone / name
     $name = preg_replace("/[\x00-\x1F\x7F]/", "", $name) ?? $name;
     $phone = preg_replace("/[^\d+\-\s()]/", "", $phone) ?? $phone;
+    $service = preg_replace("/[\x00-\x1F\x7F]/", "", $service) ?? $service;
 
     if (!ts_contact_rate_ok()) {
         throw new RuntimeException("Too many submissions. Please wait a few minutes and try again.");
@@ -133,6 +138,7 @@ function ts_save_contact(string $name, string $email, string $phone, string $mes
         "name" => $name,
         "email" => $email,
         "phone" => $phone,
+        "service" => $service,
         "message" => $message,
         "at" => date("c"),
         "ip" => (string) ($_SERVER["REMOTE_ADDR"] ?? ""),
@@ -140,7 +146,7 @@ function ts_save_contact(string $name, string $email, string $phone, string $mes
     file_put_contents($file, json_encode($rows, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE), LOCK_EX);
 
     if (ts_mail_configured()) {
-        if (!ts_send_contact_mail($name, $email, $phone, $message)) {
+        if (!ts_send_contact_mail($name, $email, $phone, $message, $service)) {
             throw new RuntimeException(
                 "We saved your message but could not send email right now. Please call us at "
                 . ts_site()["phone"]

@@ -38,6 +38,7 @@ function ts_front(string $repoRoot, string $publicRoot): bool
         require_once $repoRoot . "/app/bootstrap.php";
         require_once $repoRoot . "/app/lib/site.php";
         require_once $repoRoot . "/app/lib/services-content.php";
+        require_once $repoRoot . "/app/lib/work-content.php";
         require_once $repoRoot . "/app/lib/seo.php";
         require_once $repoRoot . "/app/lib/render.php";
         require_once $repoRoot . "/app/lib/mail.php";
