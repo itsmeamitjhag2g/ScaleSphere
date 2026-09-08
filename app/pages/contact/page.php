@@ -53,7 +53,7 @@ ob_start();
 ?>
 <div class="tw-contact relative font-display text-ink overflow-x-clip bg-[#F6F7F9]" data-contact-page>
   <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"
-       style="background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(0,102,255,.08),transparent 55%),linear-gradient(#F6F7F9,#EEF1F5 50%,#F6F7F9)"></div>
+       style="background:radial-gradient(ellipse 70% 40% at 50% -8%,rgba(28,79,214,.08),transparent 55%),linear-gradient(#F6F7F9,#EEF1F5 50%,#F6F7F9)"></div>
 
   <section class="relative z-[1] pt-8 sm:pt-10 pb-5 sm:pb-6 px-3 sm:px-5 text-center">
     <div class="w-[min(1100px,100%)] mx-auto">
@@ -80,7 +80,7 @@ ob_start();
 
         <div class="mt-4 flex flex-col gap-2">
           <?php foreach ($contactCards as $card): ?>
-          <a class="group flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-line bg-white/95 no-underline text-inherit hover:border-brand/30 hover:shadow-[0_10px_28px_rgba(0,102,255,.08)] hover:-translate-y-0.5 transition duration-300"
+          <a class="group flex items-center gap-3 p-3 sm:p-3.5 rounded-xl border border-line bg-white/95 no-underline text-inherit hover:border-brand/30 hover:shadow-[0_10px_28px_rgba(28,79,214,.08)] hover:-translate-y-0.5 transition duration-300"
              href="<?= ts_h($card["href"]) ?>"<?= str_starts_with($card["href"], "http") ? ' target="_blank" rel="noopener noreferrer"' : "" ?>>
             <span class="shrink-0 w-10 h-10 rounded-xl <?= ts_h($card["tone"]) ?> flex items-center justify-center text-base">
               <i class="<?= ts_h($card["icon_set"] ?? "fas") ?> <?= ts_h($card["icon"]) ?>" aria-hidden="true"></i>
@@ -95,21 +95,98 @@ ob_start();
         </div>
       </div>
 
-      <div class="ct-rise rounded-2xl border border-line bg-white p-4 sm:p-6 shadow-[0_14px_40px_rgba(15,23,42,.07)] relative overflow-hidden" data-ct data-ct-d="2">
-        <div class="pointer-events-none absolute -top-14 -right-14 w-36 h-36 rounded-full bg-brand/5 blur-2xl" aria-hidden="true"></div>
+      <div class="ct-rise ct-form-media relative p-4 sm:p-6" data-ct data-ct-d="2">
+        <style>
+          .ct-form-media{
+            background:
+              linear-gradient(135deg, rgba(255,255,255,.92), rgba(246,247,249,.98)),
+              repeating-linear-gradient(-18deg, transparent 0 10px, rgba(28,79,214,.025) 10px 11px);
+            border:1.5px solid rgba(15,23,42,.18);
+            border-radius:4px 14px 6px 12px;
+            box-shadow:none;
+            transform:rotate(-0.4deg);
+          }
+          .ct-form-media::before{
+            content:"";
+            position:absolute;
+            inset:8px;
+            border:1px dashed rgba(15,23,42,.14);
+            border-radius:2px 10px 4px 8px;
+            pointer-events:none;
+          }
+          /* Masking-tape scraps */
+          .ct-form-media .ct-tape{
+            position:absolute;
+            height:22px;
+            background:rgba(255,236,179,.88);
+            border:1px solid rgba(15,23,42,.08);
+            box-shadow:none;
+            pointer-events:none;
+            z-index:2;
+          }
+          .ct-form-media .ct-tape-a{
+            width:88px; top:-9px; left:18%;
+            transform:rotate(-8deg);
+            background:linear-gradient(180deg, rgba(191,219,254,.95), rgba(147,197,253,.75));
+          }
+          .ct-form-media .ct-tape-b{
+            width:72px; top:-7px; right:14%;
+            transform:rotate(6deg);
+            background:linear-gradient(180deg, rgba(255,236,179,.95), rgba(253,224,140,.7));
+          }
+          .ct-form-media .ct-stamp{
+            position:absolute;
+            top:14px; right:16px;
+            font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+            color:rgba(28,79,214,.55);
+            border:1.5px solid rgba(28,79,214,.4);
+            padding:4px 8px;
+            transform:rotate(8deg);
+            pointer-events:none;
+            z-index:2;
+          }
+          .ct-form-media input,
+          .ct-form-media select,
+          .ct-form-media textarea{
+            background:#fff !important;
+            border-radius:2px 8px 3px 7px !important;
+            border:1.5px solid rgba(15,23,42,.16) !important;
+            box-shadow:inset 0 0 0 1px rgba(255,255,255,.4);
+          }
+          .ct-form-media input:focus,
+          .ct-form-media select:focus,
+          .ct-form-media textarea:focus{
+            border-color:#1C4FD6 !important;
+            box-shadow:2px 2px 0 rgba(28,79,214,.18) !important;
+            outline:none;
+          }
+          .ct-form-media [type=submit]{
+            border-radius:3px 14px 4px 12px !important;
+            box-shadow:3px 3px 0 rgba(11,26,58,.18) !important;
+            background:#1C4FD6 !important;
+            background-image:none !important;
+          }
+          .ct-form-media [type=submit]:hover{
+            transform:translate(-1px,-1px);
+            box-shadow:4px 4px 0 rgba(11,26,58,.2) !important;
+          }
+        </style>
+        <span class="ct-tape ct-tape-a" aria-hidden="true"></span>
+        <span class="ct-tape ct-tape-b" aria-hidden="true"></span>
+        <span class="ct-stamp" aria-hidden="true">Book</span>
 
         <?php if ($contactMsg): ?>
-        <div class="mb-3 flex items-start gap-2 rounded-xl bg-emerald-50 text-emerald-800 px-3.5 py-3 text-[13px] font-body" role="status">
+        <div class="mb-3 flex items-start gap-2 rounded-xl bg-emerald-50 text-emerald-800 px-3.5 py-3 text-[13px] font-body relative z-[1]" role="status">
           <i class="fas fa-check-circle mt-0.5"></i> <?= ts_h($contactMsg) ?>
         </div>
         <?php endif; ?>
         <?php if ($contactErr): ?>
-        <div class="mb-3 flex items-start gap-2 rounded-xl bg-red-50 text-red-700 px-3.5 py-3 text-[13px] font-body" role="alert">
+        <div class="mb-3 flex items-start gap-2 rounded-xl bg-red-50 text-red-700 px-3.5 py-3 text-[13px] font-body relative z-[1]" role="alert">
           <i class="fas fa-exclamation-circle mt-0.5"></i> <?= ts_h($contactErr) ?>
         </div>
         <?php endif; ?>
 
-        <form method="POST" action="/contact" class="relative flex flex-col gap-3.5" data-contact-form>
+        <form method="POST" action="/contact" class="relative z-[1] flex flex-col gap-3.5" data-contact-form>
           <div>
             <h3 class="m-0 text-[clamp(1.1rem,2.2vw,1.35rem)] font-extrabold tracking-[-0.02em]">Book an appointment</h3>
             <p class="m-0 mt-1 text-[12px] sm:text-[13px] text-muted font-body">We usually respond within 1 business day.</p>
@@ -125,22 +202,22 @@ ob_start();
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <label class="flex flex-col gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-ink">
               Full Name
-              <input class="min-h-11 px-3.5 rounded-xl border border-line bg-slate-50 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white transition" type="text" name="name" placeholder="Your name" required maxlength="120" autocomplete="name">
+              <input class="min-h-11 px-3.5 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none transition" type="text" name="name" placeholder="Your name" required maxlength="120" autocomplete="name">
             </label>
             <label class="flex flex-col gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-ink">
               Email Address
-              <input class="min-h-11 px-3.5 rounded-xl border border-line bg-slate-50 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white transition" type="email" name="email" placeholder="you@company.com" required maxlength="180" autocomplete="email">
+              <input class="min-h-11 px-3.5 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none transition" type="email" name="email" placeholder="you@company.com" required maxlength="180" autocomplete="email">
             </label>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <label class="flex flex-col gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-ink">
               Phone Number
-              <input class="min-h-11 px-3.5 rounded-xl border border-line bg-slate-50 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white transition" type="tel" name="phone" placeholder="+91 00000 00000" required maxlength="40" autocomplete="tel">
+              <input class="min-h-11 px-3.5 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none transition" type="tel" name="phone" placeholder="+91 00000 00000" required maxlength="40" autocomplete="tel">
             </label>
             <label class="flex flex-col gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-ink">
               Service
-              <select class="min-h-11 px-3.5 rounded-xl border border-line bg-slate-50 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white transition appearance-none" name="service" required>
+              <select class="min-h-11 px-3.5 font-body font-normal text-[15px] normal-case tracking-normal focus:outline-none transition appearance-none" name="service" required>
                 <option value="" disabled selected>Choose a service</option>
                 <?php foreach ($serviceOptions as $opt): ?>
                 <option value="<?= ts_h($opt) ?>"><?= ts_h($opt) ?></option>
@@ -151,10 +228,10 @@ ob_start();
 
           <label class="flex flex-col gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-ink">
             Description <span class="font-semibold normal-case tracking-normal text-muted">(optional)</span>
-            <textarea class="min-h-[96px] px-3.5 py-3 rounded-xl border border-line bg-slate-50 font-body font-normal text-[15px] normal-case tracking-normal resize-y focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 focus:bg-white transition" name="message" rows="4" placeholder="Anything we should know before the call..." maxlength="4000"></textarea>
+            <textarea class="min-h-[96px] px-3.5 py-3 font-body font-normal text-[15px] normal-case tracking-normal resize-y focus:outline-none transition" name="message" rows="4" placeholder="Anything we should know before the call..." maxlength="4000"></textarea>
           </label>
 
-          <button type="submit" class="group inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-gradient-to-br from-brand to-[#2e7cff] text-white text-[13px] font-extrabold tracking-wide uppercase border-0 cursor-pointer shadow-[0_12px_28px_rgba(0,102,255,.28)] hover:-translate-y-0.5 transition">
+          <button type="submit" class="group inline-flex items-center justify-center gap-2 min-h-12 px-6 text-white text-[13px] font-extrabold tracking-wide uppercase border-0 cursor-pointer transition">
             <span data-ct-submit-label>Request</span>
             <i class="fas fa-arrow-right group-hover:translate-x-0.5 transition" aria-hidden="true"></i>
           </button>

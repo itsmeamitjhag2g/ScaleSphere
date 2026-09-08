@@ -53,7 +53,7 @@ ob_start();
 
   <!-- 1. HERO — Griflan oversized statement, ScaleSphere palette -->
   <section class="relative min-h-[72svh] flex items-center justify-center text-center px-4 sm:px-6 pt-20 pb-12 bg-gradient-to-b from-[#F6F7F9] via-brand-soft/40 to-[#F6F7F9]">
-    <div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_60%_45%_at_50%_20%,rgba(0,102,255,.12),transparent_70%)]" aria-hidden="true"></div>
+    <div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_60%_45%_at_50%_20%,rgba(28,79,214,.12),transparent_70%)]" aria-hidden="true"></div>
     <div class="relative z-[1] max-w-5xl mx-auto w-full">
       <p class="ab-reveal m-0 mb-6 text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase text-brand" data-ab-reveal>
         Who We Are
@@ -68,7 +68,7 @@ ob_start();
         <span class="hidden sm:inline-block w-8 h-px bg-brand/40" aria-hidden="true"></span>
       </p>
       <div class="ab-reveal mt-10 flex flex-wrap gap-3 justify-center" data-ab-reveal data-ab-delay="3">
-        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-gradient-to-br from-brand to-[#2e7cff] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(0,102,255,.28)] hover:-translate-y-0.5 transition">
+        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-gradient-to-br from-brand to-[#3D6BE8] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">
           Start a Project <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         <a href="#ab-story" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:border-brand/30 hover:text-brand transition">
@@ -249,7 +249,7 @@ ob_start();
         Partnering with ambitious teams from <?= ts_h($site["address"]) ?>.
       </p>
       <div class="ab-reveal mt-10" data-ab-reveal data-ab-delay="2">
-        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-8 rounded-full bg-gradient-to-br from-brand to-[#2e7cff] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(0,102,255,.28)] hover:-translate-y-0.5 transition">
+        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-8 rounded-full bg-gradient-to-br from-brand to-[#3D6BE8] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">
           Let’s Connect <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
       </div>

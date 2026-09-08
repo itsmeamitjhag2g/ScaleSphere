@@ -99,7 +99,7 @@ function ts_render_online_marketing_hub(): void
     .ok{
       --ink:#0F172A;
       --soft:#F6F7F9;
-      --blue:#0066FF;
+      --blue:#1C4FD6;
       --deep:#0B1A3A;
       --muted:rgba(15,23,42,.62);
       --line:rgba(15,23,42,.12);
@@ -126,7 +126,7 @@ function ts_render_online_marketing_hub(): void
       background:var(--blue); color:#fff; border-color:var(--ink);
       box-shadow:3px 3px 0 var(--ink);
     }
-    .ok-btn-solid:hover{ background:#0052cc; }
+    .ok-btn-solid:hover{ background:#163AA8; }
     .ok-btn-ghost{
       background:#fff; color:var(--ink);
       box-shadow:3px 3px 0 var(--ink);
@@ -346,7 +346,7 @@ function ts_render_online_marketing_hub(): void
       font-family:"IBM Plex Mono",monospace;
       font-size:10px; letter-spacing:.08em; text-transform:uppercase;
       padding:.3rem .55rem; border-radius:999px;
-      background:rgba(0,102,255,.1); color:var(--blue); border:1px solid rgba(0,102,255,.25);
+      background:rgba(28,79,214,.1); color:var(--blue); border:1px solid rgba(28,79,214,.25);
     }
     .ok-post p{ margin:0 0 .85rem; font-size:14px; line-height:1.55; color:rgba(15,23,42,.78); }
     .ok-post a{
@@ -415,8 +415,8 @@ function ts_render_online_marketing_hub(): void
     .ok-dir-card i{
       width:2.4rem; height:2.4rem; border-radius:.7rem;
       display:grid; place-items:center;
-      background:rgba(0,102,255,.1); color:var(--blue);
-      border:1.5px solid rgba(0,102,255,.25);
+      background:rgba(28,79,214,.1); color:var(--blue);
+      border:1.5px solid rgba(28,79,214,.25);
     }
     .ok-dir-card strong{ font-size:15px; font-weight:800; }
     .ok-dir-card span{ font-size:13px; color:var(--muted); line-height:1.45; }
@@ -586,13 +586,13 @@ function ts_render_online_marketing_hub(): void
     <div class="ok-gallery-grid">
       <?php
       $gImgs = [
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1557838923-2985c318be48?w=800&q=80&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1543286386-713bdd548da4?w=800&q=80&auto=format&fit=crop",
+          "/images/stock/photo-1460925895917-afdab827c52f.jpg",
+          "/images/stock/photo-1551288049-bebda4e38f71.jpg",
+          "/images/stock/photo-1432888622747-4eb9a8efeb07.jpg",
+          "/images/stock/photo-1552664730-d307ca884978.jpg",
+          "/images/stock/photo-1563986768609-322da13575f3.jpg",
+          "/images/stock/photo-1557838923-2985c318be48.jpg",
+          "/images/stock/photo-1543286386-713bdd548da4.jpg",
       ];
       foreach ($services as $i => $svc):
           $rich = ts_service_rich($svc);

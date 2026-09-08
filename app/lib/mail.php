@@ -108,7 +108,7 @@ function ts_send_contact_mail(string $name, string $email, string $phone, string
       <td align="center">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(15,23,42,.08);">
           <tr>
-            <td style="background:linear-gradient(135deg,#0066FF,#2e7cff);padding:22px 28px;">
+            <td style="background:linear-gradient(135deg,#1C4FD6,#3D6BE8);padding:22px 28px;">
               <p style="margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:700;">{$siteName} · Book appointment</p>
               <h1 style="margin:8px 0 0;font-size:22px;line-height:1.25;color:#fff;font-weight:800;">New appointment request</h1>
             </td>
@@ -123,7 +123,7 @@ function ts_send_contact_mail(string $name, string $email, string $phone, string
                 </tr>
                 <tr>
                   <td style="padding:12px 16px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Email</td>
-                  <td style="padding:12px 16px;border-bottom:1px solid #E2E8F0;font-size:15px;"><a href="mailto:{$safeEmail}" style="color:#0066FF;text-decoration:none;font-weight:600;">{$safeEmail}</a></td>
+                  <td style="padding:12px 16px;border-bottom:1px solid #E2E8F0;font-size:15px;"><a href="mailto:{$safeEmail}" style="color:#1C4FD6;text-decoration:none;font-weight:600;">{$safeEmail}</a></td>
                 </tr>
                 <tr>
                   <td style="padding:12px 16px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Phone</td>
@@ -131,7 +131,7 @@ function ts_send_contact_mail(string $name, string $email, string $phone, string
                 </tr>
                 <tr>
                   <td style="padding:12px 16px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Service</td>
-                  <td style="padding:12px 16px;border-bottom:1px solid #E2E8F0;font-size:15px;font-weight:700;color:#0066FF;">{$safeService}</td>
+                  <td style="padding:12px 16px;border-bottom:1px solid #E2E8F0;font-size:15px;font-weight:700;color:#1C4FD6;">{$safeService}</td>
                 </tr>
                 <tr>
                   <td style="padding:12px 16px;background:#F8FAFC;border-bottom:1px solid #E2E8F0;font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;">Submitted</td>
@@ -149,7 +149,7 @@ function ts_send_contact_mail(string $name, string $email, string $phone, string
               <p style="margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#64748B;">Description</p>
               <div style="padding:16px 18px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:12px;font-size:15px;line-height:1.65;color:#0F172A;">{$safeMessage}</div>
               <p style="margin:20px 0 0;">
-                <a href="mailto:{$safeEmail}?subject=Re:%20Your%20appointment%20request%20to%20{$siteName}" style="display:inline-block;padding:12px 20px;background:#0066FF;color:#fff;text-decoration:none;border-radius:999px;font-size:13px;font-weight:700;">Reply to {$safeName}</a>
+                <a href="mailto:{$safeEmail}?subject=Re:%20Your%20appointment%20request%20to%20{$siteName}" style="display:inline-block;padding:12px 20px;background:#1C4FD6;color:#fff;text-decoration:none;border-radius:999px;font-size:13px;font-weight:700;">Reply to {$safeName}</a>
               </p>
             </td>
           </tr>

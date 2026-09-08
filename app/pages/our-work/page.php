@@ -48,9 +48,9 @@ ob_start();
       color:transparent;
       -webkit-text-stroke:1.15px rgba(0,82,204,.85);
       background-image:
-        repeating-linear-gradient(-38deg, rgba(0,102,255,.95) 0 1.1px, transparent 1.1px 3.2px),
+        repeating-linear-gradient(-38deg, rgba(28,79,214,.95) 0 1.1px, transparent 1.1px 3.2px),
         repeating-linear-gradient(52deg, rgba(46,124,255,.75) 0 1px, transparent 1px 3.6px),
-        repeating-linear-gradient(12deg, rgba(0,102,255,.45) 0 .8px, transparent .8px 4px);
+        repeating-linear-gradient(12deg, rgba(28,79,214,.45) 0 .8px, transparent .8px 4px);
       background-size:100% 100%;
       -webkit-background-clip:text;
       background-clip:text;
@@ -102,7 +102,7 @@ ob_start();
       </p>
 
       <div class="nw-rise mt-6 sm:mt-7 flex flex-wrap justify-center gap-2.5 sm:gap-3" data-nw data-nw-d="4">
-        <a href="/contact" class="nw-cta inline-flex items-center gap-2 min-h-[48px] sm:min-h-[52px] px-6 sm:px-7 rounded-full bg-brand text-white text-[14px] sm:text-[15px] font-bold no-underline shadow-[0_12px_28px_rgba(0,102,255,.3)] hover:brightness-105 transition">
+        <a href="/contact" class="nw-cta inline-flex items-center gap-2 min-h-[48px] sm:min-h-[52px] px-6 sm:px-7 rounded-full bg-brand text-white text-[14px] sm:text-[15px] font-bold no-underline shadow-[0_12px_28px_rgba(28,79,214,.3)] hover:brightness-105 transition">
           <?= ts_h($copy["ctaPrimary"]) ?> <span aria-hidden="true">↗</span>
         </a>
         <a href="#nw-gallery" class="nw-cta inline-flex items-center gap-2 min-h-[48px] sm:min-h-[52px] px-6 sm:px-7 rounded-full bg-white/95 text-[#111] text-[14px] sm:text-[15px] font-bold no-underline border border-black/[0.06] shadow-[0_8px_22px_rgba(15,23,42,.06)] hover:bg-white transition">
@@ -147,7 +147,7 @@ ob_start();
         <?= ts_h($copy["growBody"]) ?>
       </p>
       <div class="nw-rise mt-5 sm:mt-6" data-nw data-nw-d="2">
-        <a href="/contact" class="nw-cta inline-flex items-center gap-2 min-h-[48px] px-6 sm:px-7 rounded-full bg-brand text-white text-[14px] sm:text-[15px] font-bold no-underline shadow-[0_12px_28px_rgba(0,102,255,.3)]">
+        <a href="/contact" class="nw-cta inline-flex items-center gap-2 min-h-[48px] px-6 sm:px-7 rounded-full bg-brand text-white text-[14px] sm:text-[15px] font-bold no-underline shadow-[0_12px_28px_rgba(28,79,214,.3)]">
           <?= ts_h($copy["ctaDemo"]) ?> <span aria-hidden="true">↗</span>
         </a>
       </div>
@@ -253,7 +253,7 @@ ob_start();
             </a>
           </div>
           <div class="relative min-h-[200px] sm:min-h-[240px] lg:min-h-[300px]">
-            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+            <img src="/images/stock/photo-1522071820081-009f0129c71c.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
             <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-brand-deep via-brand-deep/35 to-transparent"></div>
           </div>
         </div>
@@ -302,7 +302,7 @@ ob_start();
       </h2>
       <div class="nw-rise max-w-3xl mx-auto space-y-2.5 sm:space-y-3" data-nw data-nw-d="1">
         <?php foreach ($copy["faqs"] as $i => $faq): ?>
-        <details class="group rounded-2xl bg-white border border-black/[0.05] shadow-[0_6px_22px_rgba(15,23,42,.045)] open:shadow-[0_10px_28px_rgba(0,102,255,.08)]" <?= $i === 0 ? "open" : "" ?>>
+        <details class="group rounded-2xl bg-white border border-black/[0.05] shadow-[0_6px_22px_rgba(15,23,42,.045)] open:shadow-[0_10px_28px_rgba(28,79,214,.08)]" <?= $i === 0 ? "open" : "" ?>>
           <summary class="cursor-pointer list-none flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 sm:py-4 text-[13px] sm:text-[15px] font-bold text-[#111]">
             <span class="text-left"><?= ts_h($faq["q"]) ?></span>
             <span class="shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#F7F4EF] grid place-items-center text-brand text-base sm:text-lg leading-none group-open:rotate-45 transition">+</span>
@@ -341,7 +341,7 @@ ob_start();
           <label class="sr-only" for="nwEmail">Email</label>
           <input id="nwEmail" name="email" type="email" required placeholder="Enter your email"
                  class="flex-1 min-h-[48px] w-full px-4 sm:px-5 rounded-full border border-black/[0.08] bg-[#F7F4EF] text-[14px] outline-none focus:border-brand">
-          <button type="submit" class="min-h-[48px] px-5 sm:px-6 rounded-full bg-brand text-white text-[13px] sm:text-[14px] font-bold border-0 cursor-pointer shadow-[0_10px_24px_rgba(0,102,255,.25)] shrink-0">
+          <button type="submit" class="min-h-[48px] px-5 sm:px-6 rounded-full bg-brand text-white text-[13px] sm:text-[14px] font-bold border-0 cursor-pointer shadow-[0_10px_24px_rgba(28,79,214,.25)] shrink-0">
             <?= ts_h($copy["ctaButton"]) ?>
           </button>
         </form>

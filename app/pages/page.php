@@ -41,22 +41,22 @@ $pillars = [
     [
         "title" => "Deep Product Expertise",
         "copy" => "We dig into your goals, users and constraints — then ship systems that actually move metrics. Strategy first, then code, then growth.",
-        "img" => "https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1552664730-d307ca884978.jpg",
     ],
     [
         "title" => "World-Class Execution",
         "copy" => "Average delivery is wasteful. We obsess over craft — clean architecture, sharp UI and launches that feel intentional from day one.",
-        "img" => "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1522071820081-009f0129c71c.jpg",
     ],
     [
         "title" => "Move Fast + Ship",
         "copy" => "Agile sprints, transparent milestones and open collaboration. We share progress early so you can steer before it is too late.",
-        "img" => "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1460925895917-afdab827c52f.jpg",
     ],
     [
         "title" => "Every Rupee Counts",
         "copy" => "Outstanding work at a clear, pre-agreed scope. We measure clicks, conversions and outcomes — not vanity activity.",
-        "img" => "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1551288049-bebda4e38f71.jpg",
     ],
 ];
 
@@ -68,10 +68,10 @@ $projects = [
         "right" => "Made",
         "footL" => "Scale",
         "footR" => "Growth",
-        "img" => "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
         "side" => [
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80&auto=format&fit=crop",
+            "/images/stock/photo-1460925895917-afdab827c52f.jpg",
+            "/images/stock/photo-1551288049-bebda4e38f71.jpg",
         ],
     ],
     [
@@ -81,10 +81,10 @@ $projects = [
         "right" => "Shipped",
         "footL" => "Data",
         "footR" => "Clarity",
-        "img" => "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1551288049-bebda4e38f71.jpg",
         "side" => [
-            "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&q=80&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80&auto=format&fit=crop",
+            "/images/stock/photo-1576091160550-2173dba999ef.jpg",
+            "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
         ],
     ],
     [
@@ -94,10 +94,10 @@ $projects = [
         "right" => "Proven",
         "footL" => "Care",
         "footR" => "Mobile",
-        "img" => "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1576091160550-2173dba999ef.jpg",
         "side" => [
-            "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80&auto=format&fit=crop",
+            "/images/stock/photo-1552664730-d307ca884978.jpg",
+            "/images/stock/photo-1460925895917-afdab827c52f.jpg",
         ],
     ],
     [
@@ -107,10 +107,10 @@ $projects = [
         "right" => "Compelling",
         "footL" => "Reach",
         "footR" => "Convert",
-        "img" => "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80&auto=format&fit=crop",
+        "img" => "/images/stock/photo-1460925895917-afdab827c52f.jpg",
         "side" => [
-            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80&auto=format&fit=crop",
-            "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80&auto=format&fit=crop",
+            "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
+            "/images/stock/photo-1551288049-bebda4e38f71.jpg",
         ],
     ],
 ];
@@ -123,8 +123,8 @@ $testimonials = [
 
 ob_start();
 ?>
-<div class="ss-home tw-home font-display text-ink bg-[#F6F7F9] overflow-x-clip">
-  <div class="fixed top-0 left-0 h-[3px] w-0 z-[1300] bg-gradient-to-r from-brand to-[#22b8ff] pointer-events-none" id="ssProgress" aria-hidden="true"></div>
+<div class="ss-home tw-home font-display text-ink bg-[#FFFEFA] overflow-x-clip">
+  <div class="fixed top-0 left-0 h-[3px] w-0 z-[1300] bg-gradient-to-r from-brand to-[#3D6BE8] pointer-events-none" id="ssProgress" aria-hidden="true"></div>
 
   <!-- 1–2. HERO → BRAND center split reveal (GSAP pins this; height from end distance) -->
   <div class="relative h-[100svh] min-h-[100dvh] overflow-hidden" id="ssRevealTrack">
@@ -132,11 +132,11 @@ ob_start();
       <!-- HERO sits above dual doors; doors supply the white while closed -->
       <div class="absolute inset-0 z-[5] flex items-center justify-center text-center px-4 sm:px-5 pt-16 pb-10" id="hero">
         <div class="absolute inset-0 pointer-events-none opacity-40 sm:opacity-50" aria-hidden="true"
-             style="background-image:linear-gradient(rgba(0,102,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%);mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%)"></div>
-        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_50%_at_50%_35%,rgba(0,102,255,.14),transparent_70%)]"></div>
+             style="background-image:linear-gradient(rgba(28,79,214,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(28,79,214,.05) 1px,transparent 1px);background-size:56px 56px;-webkit-mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%);mask-image:radial-gradient(circle at 50% 40%,#000 20%,transparent 72%)"></div>
+        <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_50%_at_50%_35%,rgba(28,79,214,.14),transparent_70%)]"></div>
 
         <?php foreach ($floatChips as $i => $chip): ?>
-        <span class="ss-float absolute <?= ts_h($chip["class"]) ?> z-[2] pointer-events-none select-none rounded-full border border-brand/20 bg-white/90 sm:bg-white/85 px-3 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand shadow-[0_8px_24px_rgba(0,102,255,.10)] <?= $i > 3 ? "hidden lg:block" : "" ?>" data-float-hero="<?= (int)$i ?>">
+        <span class="ss-float absolute <?= ts_h($chip["class"]) ?> z-[2] pointer-events-none select-none rounded-full border border-brand/20 bg-white/90 sm:bg-white/85 px-3 py-1.5 text-[10px] sm:text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand shadow-[0_8px_24px_rgba(28,79,214,.10)] <?= $i > 3 ? "hidden lg:block" : "" ?>" data-float-hero="<?= (int)$i ?>">
           <?= ts_h($chip["label"]) ?>
         </span>
         <?php endforeach; ?>
@@ -164,7 +164,7 @@ ob_start();
             From idea to launch and beyond, we craft products, marketing and experiences that drive real growth for ambitious teams.
           </p>
           <div class="flex flex-col xs:flex-row flex-wrap gap-3 justify-center mt-6 sm:mt-8 sm:flex-row">
-            <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-gradient-to-br from-brand to-[#2e7cff] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(0,102,255,.28)] hover:-translate-y-0.5 transition">Start a Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-brand text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">Start a Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             <a href="/our-work" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:-translate-y-0.5 transition">Explore Our Work</a>
           </div>
         </div>
@@ -178,7 +178,7 @@ ob_start();
       <!-- BRAND: full panel under dual doors that open center → left & right -->
       <div class="absolute inset-0 z-[1] flex items-center justify-center text-center px-4 sm:px-6 text-white"
            id="ssBrandPanel"
-           style="background:linear-gradient(160deg,#0066FF 0%,#1a7aff 45%,#22b8ff 100%)">
+           style="background:linear-gradient(160deg,#163AA8 0%,#1C4FD6 50%,#3D6BE8 100%)">
         <div class="absolute inset-0 pointer-events-none opacity-20" aria-hidden="true"
              style="background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.32),transparent 38%)"></div>
 
@@ -198,26 +198,26 @@ ob_start();
 
       <!-- Dual doors: closed = cover brand; open = slide out left & right from center -->
       <div class="absolute inset-0 z-[4] pointer-events-none" id="ssBrandDoors" aria-hidden="true">
-        <div class="absolute inset-y-0 left-0 w-1/2 bg-white origin-right will-change-transform" data-brand-door="left" style="transform:scaleX(1)"></div>
-        <div class="absolute inset-y-0 right-0 w-1/2 bg-white origin-left will-change-transform" data-brand-door="right" style="transform:scaleX(1)"></div>
+        <div class="absolute inset-y-0 left-0 w-1/2 bg-[#FFFEFA] origin-right will-change-transform" data-brand-door="left" style="transform:scaleX(1)"></div>
+        <div class="absolute inset-y-0 right-0 w-1/2 bg-[#FFFEFA] origin-left will-change-transform" data-brand-door="right" style="transform:scaleX(1)"></div>
         <div class="absolute top-0 bottom-0 left-1/2 w-px -translate-x-1/2 opacity-0 z-[1]"
              data-brand-seam
-             style="background:linear-gradient(to bottom,transparent,rgba(0,102,255,.85),transparent);box-shadow:0 0 28px 5px rgba(0,102,255,.35);transform:translateX(-50%) scaleY(0.15)"></div>
+             style="background:linear-gradient(to bottom,transparent,rgba(28,79,214,.85),transparent);box-shadow:0 0 28px 5px rgba(28,79,214,.35);transform:translateX(-50%) scaleY(0.15)"></div>
       </div>
 
   </div>
   <div class="w-full pointer-events-none" id="ssRevealSpacer" aria-hidden="true"
-       style="height:90vh;background:linear-gradient(160deg,#0066FF 0%,#1a7aff 45%,#22b8ff 100%)"></div>
+       style="height:90vh;background:linear-gradient(160deg,#163AA8 0%,#1C4FD6 50%,#3D6BE8 100%)"></div>
 
   <!-- 3–4. BRIDGE SCRAMBLE → FEATURED WORK (smooth filmstrip) -->
-  <div class="relative h-[100svh] min-h-[100dvh] overflow-hidden bg-brand-deep text-white" id="ss-work" data-ss-story>
+  <div class="relative h-[100svh] min-h-[100dvh] overflow-hidden bg-[#FFFEFA] text-ink" id="ss-work" data-ss-story>
 
       <!-- Bridge scramble (phase 1) -->
       <div class="absolute inset-0 z-[2] flex items-center justify-center px-4" id="ssBridgeLayer" data-ss-bridge>
         <div class="text-center uppercase font-extrabold tracking-[-0.04em] leading-[0.95] max-w-5xl">
-          <p class="m-0 text-[clamp(1.8rem,7vw,4.5rem)]" data-bridge-scramble="DIGITAL ↘ MADE">······AJ······</p>
-          <p class="m-0 mt-2 text-[clamp(2rem,8vw,5rem)] text-[#9ec5ff]" data-bridge-scramble="COMPELLING">·····BD·····</p>
-          <p class="mt-6 max-w-lg mx-auto text-[14px] sm:text-[15px] font-body font-normal normal-case tracking-normal text-white/75 leading-relaxed opacity-0" data-bridge-copy>
+          <p class="m-0 text-[clamp(1.8rem,7vw,4.5rem)] text-ink" data-bridge-scramble="DIGITAL ↘ MADE">······AJ······</p>
+          <p class="m-0 mt-2 text-[clamp(2rem,8vw,5rem)] text-brand" data-bridge-scramble="COMPELLING">·····BD·····</p>
+          <p class="mt-6 max-w-lg mx-auto text-[14px] sm:text-[15px] font-body font-normal normal-case tracking-normal text-muted leading-relaxed opacity-0" data-bridge-copy>
             Clear strategy, sharp product and marketing that help your business grow — without wasted spend.
           </p>
         </div>
@@ -227,20 +227,20 @@ ob_start();
       <div class="absolute inset-0 z-[1] flex flex-col pt-[72px] pb-5 opacity-0 pointer-events-none" id="ssWorkLayer" data-ss-work-layer>
         <div class="w-[min(1280px,calc(100%-24px))] mx-auto flex items-end justify-between gap-3 mb-2 px-1 shrink-0">
           <div class="min-w-0">
-            <p class="m-0 text-[11px] tracking-[0.16em] uppercase text-white/60" id="ssWorkType"><?= ts_h($projects[0]["type"]) ?></p>
-            <h2 class="m-0 text-[clamp(1.2rem,3vw,2rem)] font-extrabold tracking-[-0.03em] uppercase leading-tight" id="ssWorkTitle"><?= ts_h($projects[0]["title"]) ?></h2>
+            <p class="m-0 text-[11px] tracking-[0.16em] uppercase text-muted" id="ssWorkType"><?= ts_h($projects[0]["type"]) ?></p>
+            <h2 class="m-0 text-[clamp(1.2rem,3vw,2rem)] font-extrabold tracking-[-0.03em] uppercase leading-tight text-ink" id="ssWorkTitle"><?= ts_h($projects[0]["title"]) ?></h2>
           </div>
-          <p class="m-0 hidden sm:block text-[11px] font-extrabold tracking-[0.14em] uppercase text-[#9ec5ff] shrink-0" id="ssWorkCount">01 / <?= str_pad((string) count($projects), 2, "0", STR_PAD_LEFT) ?></p>
+          <p class="m-0 hidden sm:block text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand shrink-0" id="ssWorkCount">01 / <?= str_pad((string) count($projects), 2, "0", STR_PAD_LEFT) ?></p>
         </div>
 
         <div class="relative flex-1 min-h-0 w-full overflow-hidden" id="ssWorkStage">
           <div class="absolute inset-0 flex items-center will-change-transform" id="ssWorkTrack" style="gap:1rem;padding-inline:max(1rem,calc(50% - min(36vw,360px)))">
             <?php foreach ($projects as $i => $p): ?>
-            <article class="ss-work-card relative shrink-0 w-[min(72vw,560px)] sm:w-[min(56vw,640px)] aspect-[16/10] rounded-2xl overflow-hidden border border-white/15 bg-[#122a5c] shadow-[0_20px_60px_rgba(0,0,0,.28)]"
+            <article class="ss-work-card relative shrink-0 w-[min(72vw,560px)] sm:w-[min(56vw,640px)] aspect-[16/10] rounded-2xl overflow-hidden border border-[rgba(15,23,42,.1)] bg-[#0F172A] shadow-[0_16px_40px_rgba(15,23,42,.12)]"
                      data-work-card="<?= (int)$i ?>">
               <img src="<?= ts_h($p["img"]) ?>" alt="<?= ts_h($p["title"]) ?>" class="absolute inset-0 w-full h-full object-cover" loading="<?= $i < 2 ? "eager" : "lazy" ?>">
-              <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(10,42,102,.82),transparent 55%)"></div>
-              <div class="absolute left-3 right-3 bottom-3 z-[1]">
+              <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(15,23,42,.78),transparent 55%)"></div>
+              <div class="absolute left-3 right-3 bottom-3 z-[1] text-white">
                 <span class="block text-[10px] tracking-[0.12em] uppercase text-white/80"><?= ts_h($p["type"]) ?></span>
                 <strong class="block text-[clamp(.9rem,1.8vw,1.25rem)] font-extrabold leading-tight"><?= ts_h($p["title"]) ?></strong>
               </div>
@@ -250,31 +250,31 @@ ob_start();
         </div>
 
         <div class="w-[min(1280px,calc(100%-24px))] mx-auto mt-2 grid grid-cols-2 md:grid-cols-[1fr_auto_1fr] items-center gap-2 font-extrabold uppercase tracking-[-0.02em] shrink-0">
-          <span class="block text-[#9ec5ff] text-[clamp(.85rem,2vw,1.35rem)] overflow-hidden whitespace-nowrap text-ellipsis" id="ssWorkFootL"><?= ts_h($projects[0]["footL"]) ?></span>
-          <span class="col-span-2 md:col-span-1 order-3 md:order-none inline-flex items-center justify-center gap-2 text-[clamp(.75rem,1.6vw,1.05rem)] text-white/80 whitespace-nowrap" aria-hidden="true">
-            <span class="text-[#4c8dff]">→</span> Scroll <span class="text-[#4c8dff]">←</span>
+          <span class="block text-brand text-[clamp(.85rem,2vw,1.35rem)] overflow-hidden whitespace-nowrap text-ellipsis" id="ssWorkFootL"><?= ts_h($projects[0]["footL"]) ?></span>
+          <span class="col-span-2 md:col-span-1 order-3 md:order-none inline-flex items-center justify-center gap-2 text-[clamp(.75rem,1.6vw,1.05rem)] text-muted whitespace-nowrap" aria-hidden="true">
+            <span class="text-brand">→</span> Scroll <span class="text-brand">←</span>
           </span>
-          <span class="block text-right text-[#9ec5ff] text-[clamp(.85rem,2vw,1.35rem)] overflow-hidden whitespace-nowrap text-ellipsis" id="ssWorkFootR"><?= ts_h($projects[0]["footR"]) ?></span>
+          <span class="block text-right text-brand text-[clamp(.85rem,2vw,1.35rem)] overflow-hidden whitespace-nowrap text-ellipsis" id="ssWorkFootR"><?= ts_h($projects[0]["footR"]) ?></span>
         </div>
-        <div class="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-[#4c8dff] to-[#22b8ff]" id="ssWorkProgress" aria-hidden="true"></div>
+        <div class="absolute bottom-0 left-0 h-[3px] w-0 bg-gradient-to-r from-brand to-[#3D6BE8]" id="ssWorkProgress" aria-hidden="true"></div>
       </div>
   </div>
-  <div class="w-full pointer-events-none bg-brand-deep" id="ssStorySpacer" aria-hidden="true"
+  <div class="w-full pointer-events-none bg-[#FFFEFA]" id="ssStorySpacer" aria-hidden="true"
        style="height:calc(75vh + <?= (int) count($projects) ?> * 55vh)"></div>
 
   <!-- 5. SERVICES -->
-  <section class="ss-panel relative bg-[#F6F7F9] py-9 sm:py-12 overflow-hidden" id="ss-services" data-ss-panel data-ss-services>
+  <section class="ss-panel relative bg-[#FFFEFA] py-6 sm:py-8 overflow-hidden" id="ss-services" data-ss-panel data-ss-services>
     <div class="pointer-events-none absolute inset-0 opacity-40" aria-hidden="true"
-         style="background-image:radial-gradient(ellipse 50% 40% at 15% 20%,rgba(0,102,255,.08),transparent 60%),radial-gradient(ellipse 40% 35% at 90% 80%,rgba(34,184,255,.07),transparent 55%)"></div>
+         style="background-image:radial-gradient(ellipse 50% 40% at 15% 20%,rgba(28,79,214,.08),transparent 60%),radial-gradient(ellipse 40% 35% at 90% 80%,rgba(34,184,255,.07),transparent 55%)"></div>
 
     <span class="ss-float absolute left-[4%] top-[10%] hidden lg:inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand" data-float>Build</span>
     <span class="ss-float absolute right-[5%] top-[14%] hidden lg:inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand" data-float>Market</span>
     <span class="ss-float absolute left-[7%] bottom-[12%] hidden lg:inline-flex rounded-full border border-brand/15 bg-brand-soft px-3 py-1.5 text-[11px] font-extrabold tracking-[0.14em] uppercase text-brand" data-float>Ship</span>
 
     <div class="ss-panel-inner relative z-[1] w-[min(1320px,calc(100%-24px))] sm:w-[min(1360px,calc(100%-32px))] mx-auto" data-ss-panel-inner>
-      <div class="mb-5 sm:mb-6">
+      <div class="mb-4 sm:mb-5">
         <p class="m-0 text-[clamp(1.5rem,4.5vw,2.5rem)] font-extrabold tracking-[-0.04em] uppercase leading-none text-brand">What We Do</p>
-        <p class="m-0 mt-2.5 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">
+        <p class="m-0 mt-2 max-w-xl text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">
           Four focused disciplines that help your business grow online — from first click to lasting product.
         </p>
       </div>
@@ -287,7 +287,7 @@ ob_start();
           $num = str_pad((string) ($i + 1), 2, "0", STR_PAD_LEFT);
         ?>
         <a href="<?= ts_h($href) ?>"
-           class="ss-svc-row group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[3rem_1fr_auto] gap-3 sm:gap-5 items-start sm:items-center border-b border-line py-3.5 sm:py-4 no-underline text-inherit opacity-0 translate-y-3 transition-[padding,colors,opacity,transform] duration-300 hover:pl-1 sm:hover:pl-2"
+           class="ss-svc-row group grid grid-cols-[auto_1fr_auto] sm:grid-cols-[3rem_1fr_auto] gap-3 sm:gap-5 items-start sm:items-center border-b border-line py-2.5 sm:py-3 no-underline text-inherit opacity-0 translate-y-3 transition-[padding,colors,opacity,transform] duration-300 hover:pl-1 sm:hover:pl-2"
            data-ss-svc-row>
           <span class="pt-1 sm:pt-0 text-[11px] sm:text-[12px] font-extrabold tracking-[0.14em] text-brand/70 tabular-nums"><?= ts_h($num) ?></span>
           <div class="min-w-0">
@@ -350,18 +350,18 @@ ob_start();
   </script>
 
   <!-- 6. MODEL / PILLARS -->
-  <section class="ss-panel relative bg-gradient-to-b from-[#f7faff] to-white py-8 sm:py-10" id="ss-approach" data-ss-panel>
+  <section class="ss-panel relative bg-gradient-to-b from-[#F4F6FB] to-[#FFFEFA] py-6 sm:py-8" id="ss-approach" data-ss-panel>
     <div class="ss-panel-inner w-[min(1320px,calc(100%-24px))] sm:w-[min(1360px,calc(100%-32px))] mx-auto" data-ss-panel-inner>
-      <h2 class="m-0 mb-5 sm:mb-6 text-[clamp(1.5rem,4vw,2.75rem)] font-extrabold tracking-[-0.04em] uppercase leading-tight">
+      <h2 class="m-0 mb-4 sm:mb-5 text-[clamp(1.5rem,4vw,2.75rem)] font-extrabold tracking-[-0.04em] uppercase leading-tight">
         A Model For <span class="text-brand">Digital Growth</span>
       </h2>
       <?php foreach ($pillars as $i => $pillar): ?>
-      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-center mb-6 last:mb-0 <?= $i % 2 ? "md:[&>*:first-child]:order-2" : "" ?>" data-reveal>
+      <article class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-center mb-5 last:mb-0 <?= $i % 2 ? "md:[&>*:first-child]:order-2" : "" ?>" data-reveal>
         <div>
           <h3 class="m-0 mb-2 text-[clamp(1.25rem,3.2vw,2.15rem)] font-extrabold tracking-[-0.035em] uppercase leading-tight"><?= ts_h($pillar["title"]) ?></h3>
           <p class="m-0 max-w-md text-[14px] sm:text-[15px] leading-relaxed text-muted font-body"><?= ts_h($pillar["copy"]) ?></p>
         </div>
-        <div class="rounded-2xl overflow-hidden border border-line shadow-[0_14px_36px_rgba(15,23,42,.08)] aspect-[4/3]">
+        <div class="rounded-2xl overflow-hidden border border-line shadow-[0_14px_36px_rgba(15,23,42,.08)] aspect-[16/10]">
           <img src="<?= ts_h($pillar["img"]) ?>" alt="<?= ts_h($pillar["title"]) ?>" class="w-full h-full object-cover block" loading="lazy" width="900" height="675">
         </div>
       </article>
@@ -370,7 +370,7 @@ ob_start();
   </section>
 
   <!-- 7. TECH MARQUEE -->
-  <section class="border-y border-line bg-[#fbfdff] py-6 overflow-hidden" data-ss-panel>
+  <section class="border-y border-line bg-[#FFFEFA] py-4 overflow-hidden" data-ss-panel>
     <div class="w-[min(1280px,calc(100%-28px))] mx-auto text-[12px] font-extrabold tracking-[0.14em] uppercase text-muted mb-2">↘ Name drops / Stack</div>
     <div class="ss-marquee flex gap-10 w-max text-[clamp(1.2rem,3vw,2rem)] font-extrabold tracking-[-0.03em] uppercase text-slate-400" aria-hidden="true">
       <?php for ($r = 0; $r < 2; $r++): ?>
@@ -382,34 +382,34 @@ ob_start();
   </section>
 
   <!-- 8. TESTIMONIALS (Boulder-style) -->
-  <section class="ss-panel relative min-h-[100svh] flex items-center bg-brand-deep text-white py-12 sm:py-16 overflow-hidden" id="ss-testimonials" data-ss-panel>
+  <section class="ss-panel relative bg-[#FFFEFA] text-ink py-8 sm:py-10 overflow-hidden" id="ss-testimonials" data-ss-panel>
     <div class="ss-panel-inner w-[min(1280px,calc(100%-28px))] mx-auto" data-ss-panel-inner>
-      <div class="text-[12px] font-extrabold tracking-[0.16em] uppercase text-[#9ec5ff] mb-6">↘ Testimonials</div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center" id="ssQuoteStage">
-        <div class="relative rounded-2xl overflow-hidden aspect-[16/11] border border-white/10 bg-[#122a5c]">
-          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1000&q=80&auto=format&fit=crop" alt="" class="absolute inset-0 w-full h-full object-cover opacity-80" loading="lazy">
-          <div class="absolute inset-0 bg-gradient-to-t from-brand-deep/80 to-transparent"></div>
+      <div class="text-[12px] font-extrabold tracking-[0.16em] uppercase text-brand mb-4">↘ Testimonials</div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center" id="ssQuoteStage">
+        <div class="relative rounded-2xl overflow-hidden aspect-[16/11] border border-[rgba(15,23,42,.1)] bg-[#0F172A] shadow-[0_16px_40px_rgba(15,23,42,.1)]">
+          <img src="/images/stock/photo-1551836022-d5d88e9218df.jpg" alt="" class="absolute inset-0 w-full h-full object-cover opacity-90" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/75 to-transparent"></div>
         </div>
         <div class="lg:text-right">
           <?php foreach ($testimonials as $i => $t): ?>
           <blockquote class="ss-quote m-0 <?= $i === 0 ? "" : "hidden" ?>" data-quote="<?= (int)$i ?>">
-            <p class="m-0 mb-6 text-[clamp(1.15rem,2.8vw,1.85rem)] leading-snug font-bold tracking-[-0.02em]">&ldquo;<?= ts_h($t["quote"]) ?>&rdquo;</p>
+            <p class="m-0 mb-6 text-[clamp(1.15rem,2.8vw,1.85rem)] leading-snug font-bold tracking-[-0.02em] text-ink">&ldquo;<?= ts_h($t["quote"]) ?>&rdquo;</p>
             <footer class="flex items-center gap-3 lg:justify-end">
               <?php if ($t["photo"]): ?>
                 <img class="w-12 h-12 rounded-full object-cover" src="<?= ts_h(ts_live($t["photo"])) ?>" alt="<?= ts_h($t["name"]) ?>" width="48" height="48" loading="lazy">
               <?php else: ?>
-                <span class="w-12 h-12 rounded-full bg-white/10 grid place-items-center font-extrabold text-[#9ec5ff]"><?= ts_h($t["initials"]) ?></span>
+                <span class="w-12 h-12 rounded-full bg-brand-soft grid place-items-center font-extrabold text-brand"><?= ts_h($t["initials"]) ?></span>
               <?php endif; ?>
               <div class="lg:text-right">
-                <strong class="block text-[13px] tracking-wide uppercase"><?= ts_h($t["name"]) ?></strong>
-                <span class="text-[12px] text-white/65 uppercase tracking-wide"><?= ts_h($t["role"]) ?></span>
+                <strong class="block text-[13px] tracking-wide uppercase text-ink"><?= ts_h($t["name"]) ?></strong>
+                <span class="text-[12px] text-muted uppercase tracking-wide"><?= ts_h($t["role"]) ?></span>
               </div>
             </footer>
           </blockquote>
           <?php endforeach; ?>
           <div class="flex gap-2 mt-6 lg:justify-end">
-            <button type="button" class="ss-quote-prev w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white cursor-pointer hover:border-[#4c8dff]" aria-label="Previous"><i class="fas fa-arrow-left"></i></button>
-            <button type="button" class="ss-quote-next w-11 h-11 rounded-full border border-white/20 bg-white/5 text-white cursor-pointer hover:border-[#4c8dff]" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
+            <button type="button" class="ss-quote-prev w-11 h-11 rounded-full border border-line bg-white text-ink cursor-pointer hover:border-brand hover:text-brand" aria-label="Previous"><i class="fas fa-arrow-left"></i></button>
+            <button type="button" class="ss-quote-next w-11 h-11 rounded-full border border-line bg-white text-ink cursor-pointer hover:border-brand hover:text-brand" aria-label="Next"><i class="fas fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
@@ -417,14 +417,13 @@ ob_start();
   </section>
 
   <!-- 9. CTA -->
-  <section class="ss-panel relative min-h-[55svh] flex items-center justify-center text-center text-white px-4 py-14 overflow-hidden" id="ss-cta" data-ss-panel
-           style="background:linear-gradient(135deg,#071d50,#0c4fba 60%,#1287e8)">
+  <section class="ss-panel relative text-center text-ink px-4 py-8 sm:py-10 overflow-hidden bg-[#FFFEFA] border-t border-line" id="ss-cta" data-ss-panel>
     <div class="ss-panel-inner max-w-3xl mx-auto" data-ss-panel-inner>
-      <h2 class="m-0 mb-4 text-[clamp(2.2rem,9vw,5.25rem)] font-extrabold tracking-[-0.05em] uppercase leading-[0.92]">Let&rsquo;s Talk <span aria-hidden="true">৹</span></h2>
-      <p class="m-0 mx-auto mb-7 max-w-md text-[15px] leading-relaxed text-white/85 font-body">
+      <h2 class="m-0 mb-3 text-[clamp(1.85rem,6.5vw,3.5rem)] font-extrabold tracking-[-0.05em] uppercase leading-[0.95] text-ink">Let&rsquo;s Talk <span class="text-brand" aria-hidden="true">৹</span></h2>
+      <p class="m-0 mx-auto mb-5 max-w-md text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">
         Have a project in mind? Tell us your goals — we&rsquo;ll respond with a clear plan, timeline and estimate that helps your business grow.
       </p>
-      <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-6 rounded-full bg-white text-[#0a2a66] text-[13px] font-extrabold tracking-wide uppercase no-underline hover:-translate-y-0.5 transition">Get In Touch <i class="fas fa-arrow-right"></i></a>
+      <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-11 px-6 rounded-full bg-brand text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_12px_28px_rgba(28,79,214,.25)] hover:-translate-y-0.5 transition">Get In Touch <i class="fas fa-arrow-right"></i></a>
     </div>
   </section>
 
@@ -454,7 +453,7 @@ ts_layout(
         "path" => "/",
         "bodyClass" => "page-home",
         "jsonld" => [ts_services_jsonld()],
-        "extraScripts" => ["/js/home-boulder.js?v=27"],
+        "extraScripts" => ["/js/home-boulder.js?v=28"],
     ]
 );
 ?>

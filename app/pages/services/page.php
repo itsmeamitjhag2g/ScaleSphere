@@ -2,10 +2,10 @@
 $site = ts_site();
 
 $images = [
-    "Online Marketing" => "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80&auto=format&fit=crop",
-    "Development" => "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80&auto=format&fit=crop",
-    "Mobile Apps" => "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=900&q=80&auto=format&fit=crop",
-    "Creative Design" => "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80&auto=format&fit=crop",
+    "Online Marketing" => "/images/stock/photo-1460925895917-afdab827c52f.jpg",
+    "Development" => "/images/stock/photo-1555066931-4365d14bab8c.jpg",
+    "Mobile Apps" => "/images/stock/photo-1512941937669-90a1b58e7e9c.jpg",
+    "Creative Design" => "/images/stock/photo-1561070791-2526d30994b5.jpg",
 ];
 
 $headlines = [
@@ -48,7 +48,7 @@ ob_start();
     .svc{
       --ink:#0F172A;
       --soft:#F6F7F9;
-      --blue:#0066FF;
+      --blue:#1C4FD6;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.12);
       background:var(--soft);
@@ -296,8 +296,8 @@ ob_start();
       margin:0 auto 3.5rem;
       padding:1.6rem 1.4rem;
       border-radius:1.2rem;
-      border:1px solid rgba(0,102,255,.28);
-      background:linear-gradient(135deg, rgba(0,102,255,.1), #fff);
+      border:1px solid rgba(28,79,214,.28);
+      background:linear-gradient(135deg, rgba(28,79,214,.1), #fff);
       display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
     }
     .svc-cta h2{
@@ -312,7 +312,7 @@ ob_start();
       min-height:48px; padding:0 1.3rem; border-radius:999px;
       background:var(--blue); color:#fff; text-decoration:none;
       font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
-      box-shadow:0 12px 28px rgba(0,102,255,.28);
+      box-shadow:0 12px 28px rgba(28,79,214,.28);
     }
   </style>
 
@@ -323,7 +323,7 @@ ob_start();
           <circle cx="400" cy="400" r="70" stroke="rgba(15,23,42,.2)" stroke-width="1"/>
           <circle cx="400" cy="400" r="140" stroke="rgba(15,23,42,.16)" stroke-width="1"/>
           <circle cx="400" cy="400" r="220" stroke="rgba(15,23,42,.13)" stroke-width="1"/>
-          <circle cx="400" cy="400" r="300" stroke="rgba(0,102,255,.35)" stroke-width="1.25"/>
+          <circle cx="400" cy="400" r="300" stroke="rgba(28,79,214,.35)" stroke-width="1.25"/>
           <circle cx="400" cy="400" r="380" stroke="rgba(15,23,42,.1)" stroke-width="1"/>
           <line x1="40" y1="400" x2="760" y2="400" stroke="rgba(15,23,42,.16)" stroke-width="1"/>
           <line x1="400" y1="40" x2="400" y2="760" stroke="rgba(15,23,42,.1)" stroke-width="1"/>
@@ -362,7 +362,7 @@ ob_start();
 
       <div class="svc-finale" data-svc-finale>
         <p>Our approach means every part of your project moves in the same direction — coherent, useful, and easier to take to market.</p>
-      </div>
+    </div>
 
       <div class="svc-mobile">
         <?php foreach ($pillars as $pillar): ?>
@@ -386,13 +386,13 @@ ob_start();
         <?php endforeach; ?>
       </div>
     </div>
-  </div>
+          </div>
 
   <section class="svc-rail" data-svc-rail>
     <div class="svc-rail-head">
       <h2>Every service. One stack.</h2>
       <p>Pick a practice — or go straight to the offering you need. Same mega-menu services, laid out for scrolling.</p>
-    </div>
+        </div>
     <div class="svc-rail-grid">
       <?php foreach ($pillars as $pillar): ?>
       <div class="svc-rail-col tone-<?= ts_h($pillar["tone"]) ?>" data-svc-rail-col>
@@ -430,7 +430,7 @@ ob_start();
   const finale = root.querySelector("[data-svc-finale]");
   const pin = root.querySelector("[data-svc-pin]");
   const ink = "#0F172A";
-  const blue = "#0066FF";
+  const blue = "#1C4FD6";
 
   /* Rail: slide from outside → center */
   const railCols = [...root.querySelectorAll("[data-svc-rail-col]")];

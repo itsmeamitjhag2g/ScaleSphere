@@ -33,6 +33,12 @@ function ts_render_service_hub(string $hubKey): void
         return;
     }
 
+    if ($hubKey === "mobile-apps") {
+        require_once __DIR__ . "/ma-hub-glass.php";
+        ts_render_mobile_apps_hub();
+        return;
+    }
+
     $hub = ts_service_hub($hubKey);
     if (!$hub) {
         http_response_code(404);
@@ -230,6 +236,48 @@ function ts_render_service_detail_dev(array $service): void
 
 function ts_render_service_detail(array $service): void
 {
+    if (($service["slug"] ?? "") === "search-engine-optimization") {
+        require_once __DIR__ . "/seo-page.php";
+        ts_render_seo_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "search-engine-marketing") {
+        require_once __DIR__ . "/sem-page.php";
+        ts_render_sem_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "social-media-marketing") {
+        require_once __DIR__ . "/smm-page.php";
+        ts_render_smm_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "content-marketing") {
+        require_once __DIR__ . "/cm-page.php";
+        ts_render_cm_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "pay-per-click") {
+        require_once __DIR__ . "/ppc-page.php";
+        ts_render_ppc_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "email-campaigns") {
+        require_once __DIR__ . "/email-page.php";
+        ts_render_email_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "analytics-and-reporting") {
+        require_once __DIR__ . "/analytics-page.php";
+        ts_render_analytics_service_page($service);
+        return;
+    }
+
     $content = ts_service_detail_content($service);
     $hubKey = ts_hub_key_for_category($service["category"]);
     $hub = $hubKey ? ts_service_hub($hubKey) : null;

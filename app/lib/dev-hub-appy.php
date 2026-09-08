@@ -28,20 +28,16 @@ function ts_render_development_hub(): void
         "API & Cloud Apps" => ["We make it extend", "APIs and cloud apps that plug into the stack you already trust."],
     ];
 
-    $pool = [
-        "https://images.unsplash.com/photo-1551434678-e076c223a692?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=520&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=520&q=80&auto=format&fit=crop",
+    $svcImages = [
+        "Website Development" => "/images/dev/website-development.jpg",
+        "Software Development" => "/images/dev/software-development.jpg",
+        "CRM Software" => "/images/dev/crm.jpg",
+        "SharePoint Integration" => "/images/dev/sharepoint.jpg",
+        "NetSuite Integration" => "/images/dev/netsuite.jpg",
+        "E-Commerce Platforms" => "/images/dev/ecommerce.jpg",
+        "API & Cloud Apps" => "/images/dev/api-cloud.jpg",
     ];
+    $pool = array_values($svcImages);
 
     $featured = [
         [
@@ -49,39 +45,39 @@ function ts_render_development_hub(): void
             "href" => "/services/website-development",
             "blurb" => "Marketing sites and product platforms that feel sharp and ship clean.",
             "meta" => "Web platforms",
-            "img" => $pool[1],
-            "thumb" => $pool[0],
+            "img" => $svcImages["Website Development"],
+            "thumb" => $svcImages["Software Development"],
         ],
         [
             "label" => "Software Development",
             "href" => "/services/software-development",
             "blurb" => "End-to-end product engineering for teams that need reliability.",
             "meta" => "Custom software",
-            "img" => $pool[2],
-            "thumb" => $pool[5],
+            "img" => $svcImages["Software Development"],
+            "thumb" => $svcImages["CRM Software"],
         ],
         [
             "label" => "E-Commerce Platforms",
             "href" => "/services/e-commerce-platforms",
             "blurb" => "Commerce stacks that checkout smoothly and grow with catalog demand.",
             "meta" => "Commerce",
-            "img" => $pool[3],
-            "thumb" => $pool[7],
+            "img" => $svcImages["E-Commerce Platforms"],
+            "thumb" => $svcImages["API & Cloud Apps"],
         ],
         [
             "label" => "API & Cloud Apps",
             "href" => "/services/api-and-cloud-apps",
             "blurb" => "Cloud-native services and APIs that keep integrations boring — in a good way.",
             "meta" => "Cloud & APIs",
-            "img" => $pool[4],
-            "thumb" => $pool[8],
+            "img" => $svcImages["API & Cloud Apps"],
+            "thumb" => $svcImages["E-Commerce Platforms"],
         ],
     ];
 
     $impacts = [
         ["150+", "Projects delivered across web, software and integrations."],
         ["98%", "Client satisfaction from kickoff through handover."],
-        ["24/7", "Support options when production can’t wait."],
+        ["24/7", "Support options when production can't wait."],
         ["12+", "Years shipping reliable systems for growing teams."],
     ];
 
@@ -96,7 +92,7 @@ function ts_render_development_hub(): void
     .ap{
       --ink:#0F172A;
       --soft:#F6F7F9;
-      --blue:#0066FF;
+      --blue:#1C4FD6;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --white:#fff;
@@ -204,7 +200,7 @@ function ts_render_development_hub(): void
       min-height:46px; padding:0 1.25rem; border-radius:999px;
       background:var(--blue); color:#fff; text-decoration:none;
       font-size:14px; font-weight:600;
-      box-shadow:0 12px 28px rgba(0,102,255,.26);
+      box-shadow:0 12px 28px rgba(28,79,214,.26);
       transition:transform .2s ease, filter .2s ease;
     }
     .ap-btn:hover{ filter:brightness(1.05); transform:translateY(-2px); color:#fff; }
@@ -625,7 +621,7 @@ function ts_render_development_hub(): void
         <div data-ap-reveal>
           <p>AI changed how we build. In a saturated landscape ruled by shipping for speed alone, ScaleSphere helps teams build development work grounded in architecture, clarity and long-term maintainability.</p>
           <p>Not just optimising for delivery — creating systems people trust because they keep working as you scale.</p>
-          <a class="ap-textlink" href="#ap-show">Featured work ↓</a>
+          <a class="ap-textlink" href="#ap-show">Featured work â†“</a>
         </div>
       </div>
     </div>
@@ -683,7 +679,7 @@ function ts_render_development_hub(): void
       <?php foreach ($services as $si => $svc):
           $rich = ts_service_rich($svc);
           $pair = $tags[$svc["label"]] ?? ["We make it work", $rich["lead"]];
-          $img = $pool[$si % count($pool)];
+          $img = $svcImages[$svc["label"]] ?? $pool[$si % count($pool)];
       ?>
       <article class="ap-svc-sticky" data-ap-svc style="z-index:<?= (int) ($si + 1) ?>">
         <div class="ap-wrap ap-svc">

@@ -1,9 +1,7 @@
 (() => {
   const bar = document.getElementById("route-progress");
-  const label = bar?.querySelector("[data-route-label]");
-  const show = (text) => {
+  const show = () => {
     if (!bar) return;
-    if (label && text) label.textContent = text;
     bar.classList.remove("hidden");
     bar.removeAttribute("hidden");
     bar.setAttribute("aria-hidden", "false");
@@ -26,6 +24,6 @@
     if (!href.startsWith("/") || href.startsWith("//") || href.startsWith("/#")) return;
     const url = new URL(href, location.href);
     if (url.pathname === location.pathname && url.search === location.search) return;
-    show("Loading the next page");
+    show();
   }, true);
 })();

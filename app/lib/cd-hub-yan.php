@@ -18,8 +18,8 @@ function ts_render_creative_design_hub(): void
 
     /* Each service = its own folder color (on-brand blues + soft accents) */
     $folderColors = [
-        "#0066FF",
-        "#4D8FE8",
+        "#1C4FD6",
+        "#5B7FE0",
         "#0B1A3A",
         "#6B9BD1",
         "#3D7AE8",
@@ -45,13 +45,13 @@ function ts_render_creative_design_hub(): void
     ];
 
     $images = [
-        "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&q=80&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&q=80&auto=format&fit=crop",
+        "/images/stock/photo-1561070791-2526d30994b5.jpg",
+        "/images/stock/photo-1558655146-d09347e92766.jpg",
+        "/images/stock/photo-1609921212029-bb5a28e60960.jpg",
+        "/images/stock/photo-1581291518857-4e27b48ff24e.jpg",
+        "/images/stock/photo-1618005182384-a83a8bd57fbe.jpg",
+        "/images/stock/photo-1559028012-481c04fa702d.jpg",
+        "/images/stock/photo-1581291518633-83b4ebd1d83e.jpg",
     ];
 
     ob_start();
@@ -66,7 +66,7 @@ function ts_render_creative_design_hub(): void
       --ink:#0F172A;
       --soft:#F6F7F9;
       --paper:#FAF8F5;
-      --blue:#0066FF;
+      --blue:#1C4FD6;
       --deep:#0B1A3A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
@@ -384,8 +384,8 @@ function ts_render_creative_design_hub(): void
       transition:color .2s, border-color .2s, background .2s;
     }
     .yl-tab.is-on{
-      color:var(--blue); border-color:rgba(0,102,255,.35);
-      background:rgba(0,102,255,.08);
+      color:var(--blue); border-color:rgba(28,79,214,.35);
+      background:rgba(28,79,214,.08);
     }
     .yl-window-body{ padding:1.25rem; }
     .yl-grid{
@@ -406,7 +406,7 @@ function ts_render_creative_design_hub(): void
     .yl-file.is-focus{
       outline:2px solid var(--blue);
       outline-offset:2px;
-      box-shadow:0 14px 32px rgba(0,102,255,.15);
+      box-shadow:0 14px 32px rgba(28,79,214,.15);
     }
     .yl-file:hover{
       transform:translateY(-3px);

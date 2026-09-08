@@ -23,12 +23,32 @@ $site = ts_site();
             </div>
 
             <div class="mega-grid mega-grid-desktop">
-              <?php foreach (TS_SERVICE_MEGA as $col): ?>
-              <div class="mega-col mega-<?= ts_h($col["tone"]) ?>">
-                <h3><i class="fas <?= ts_h($col["icon"]) ?>"></i> <?= ts_h($col["title"]) ?></h3>
+              <?php foreach (TS_SERVICE_MEGA as $col):
+                  $catHref = ts_category_href($col["title"]);
+                  $catOn = $path === $catHref;
+                  $itemOnInCol = false;
+                  foreach ($col["items"] as $row) {
+                      if ($path === ts_service_href($row)) {
+                          $itemOnInCol = true;
+                          break;
+                      }
+                  }
+                  $colOn = $catOn || $itemOnInCol;
+              ?>
+              <div class="mega-col mega-<?= ts_h($col["tone"]) ?><?= $colOn ? " is-active" : "" ?>">
+                <h3>
+                  <a href="<?= ts_h($catHref) ?>" class="mega-col-title<?= $catOn ? " is-on" : "" ?>"<?= $catOn ? ' aria-current="page"' : "" ?>>
+                    <i class="fas <?= ts_h($col["icon"]) ?>" aria-hidden="true"></i> <?= ts_h($col["title"]) ?>
+                  </a>
+                </h3>
                 <ul>
-                  <?php foreach ($col["items"] as $row): ?>
-                  <li><a href="<?= ts_h(ts_service_href($row)) ?>"><?= ts_h($row) ?></a></li>
+                  <?php foreach ($col["items"] as $row):
+                      $svcHref = ts_service_href($row);
+                      $svcOn = $path === $svcHref;
+                  ?>
+                  <li>
+                    <a href="<?= ts_h($svcHref) ?>" class="<?= $svcOn ? "is-on" : "" ?>"<?= $svcOn ? ' aria-current="page"' : "" ?>><?= ts_h($row) ?></a>
+                  </li>
                   <?php endforeach; ?>
                 </ul>
               </div>
@@ -36,19 +56,35 @@ $site = ts_site();
             </div>
 
             <div class="mega-accordion" id="servicesAccordion">
-              <?php foreach (TS_SERVICE_MEGA as $ci => $col): ?>
-              <div class="mega-acc-item mega-<?= ts_h($col["tone"]) ?>">
-                <button type="button" class="mega-acc-trigger" aria-expanded="false" data-acc="mega-<?= $ci ?>">
-                  <span class="mega-acc-label"><i class="fas <?= ts_h($col["icon"]) ?>"></i> <?= ts_h($col["title"]) ?></span>
-                  <i class="fas fa-chevron-down mega-acc-caret"></i>
+              <?php foreach (TS_SERVICE_MEGA as $ci => $col):
+                  $catHref = ts_category_href($col["title"]);
+                  $catOn = $path === $catHref;
+                  $itemOnInCol = false;
+                  foreach ($col["items"] as $row) {
+                      if ($path === ts_service_href($row)) {
+                          $itemOnInCol = true;
+                          break;
+                      }
+                  }
+                  $colOn = $catOn || $itemOnInCol;
+              ?>
+              <div class="mega-acc-item mega-<?= ts_h($col["tone"]) ?><?= $colOn ? " is-active open" : "" ?>">
+                <button type="button" class="mega-acc-trigger" aria-expanded="<?= $colOn ? "true" : "false" ?>" data-acc="mega-<?= $ci ?>">
+                  <span class="mega-acc-label"><i class="fas <?= ts_h($col["icon"]) ?>" aria-hidden="true"></i> <?= ts_h($col["title"]) ?></span>
+                  <i class="fas fa-chevron-down mega-acc-caret" aria-hidden="true"></i>
                 </button>
-                <div class="mega-acc-panel" id="mega-<?= $ci ?>" aria-hidden="true">
+                <div class="mega-acc-panel" id="mega-<?= $ci ?>" aria-hidden="<?= $colOn ? "false" : "true" ?>">
                   <ul>
-                    <?php foreach ($col["items"] as $row): ?>
-                    <li><a href="<?= ts_h(ts_service_href($row)) ?>"><?= ts_h($row) ?></a></li>
+                    <?php foreach ($col["items"] as $row):
+                        $svcHref = ts_service_href($row);
+                        $svcOn = $path === $svcHref;
+                    ?>
+                    <li>
+                      <a href="<?= ts_h($svcHref) ?>" class="<?= $svcOn ? "is-on" : "" ?>"<?= $svcOn ? ' aria-current="page"' : "" ?>><?= ts_h($row) ?></a>
+                    </li>
                     <?php endforeach; ?>
                   </ul>
-                  <a href="<?= ts_h(ts_category_href($col["title"])) ?>" class="mega-acc-all">View all <?= ts_h(strtolower($col["title"])) ?> <i class="fas fa-arrow-right"></i></a>
+                  <a href="<?= ts_h($catHref) ?>" class="mega-acc-all<?= $catOn ? " is-on" : "" ?>"<?= $catOn ? ' aria-current="page"' : "" ?>>View all <?= ts_h(strtolower($col["title"])) ?> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                 </div>
               </div>
               <?php endforeach; ?>

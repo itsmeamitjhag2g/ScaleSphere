@@ -2,8 +2,8 @@
 
 .svc-hero-grid{
   background-image:
-    linear-gradient(rgba(0,102,255,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,102,255,.04) 1px, transparent 1px);
+    linear-gradient(rgba(28,79,214,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(28,79,214,.04) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(circle at 50% 40%, #000 0%, transparent 75%);
 }
@@ -50,7 +50,7 @@
 
 /* Hub accordion active state */
 .svc-acc-item.is-active{
-  border-color: rgba(0,102,255,.35);
+  border-color: rgba(28,79,214,.35);
   box-shadow: 0 12px 40px rgba(15,23,42,.08);
 }
 .svc-acc-item.is-active .fa-arrow-right{ opacity: 1; }
