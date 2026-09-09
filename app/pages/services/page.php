@@ -273,8 +273,8 @@ ob_start();
       font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
       color:var(--ink);
     }
-    .svc-rail-col.tone-rose h3{ border-color:#ec4899; }
-    .svc-rail-col.tone-blue h3{ border-color:#0ea5e9; }
+    .svc-rail-col.tone-rose h3{ border-color:#1C4FD6; }
+    .svc-rail-col.tone-blue h3{ border-color:#1C4FD6; }
     .svc-rail-col.tone-green h3{ border-color:#10b981; }
     .svc-rail-col.tone-purple h3{ border-color:#7c3aed; }
     .svc-rail-col ul{ list-style:none; margin:0; padding:0; display:grid; gap:.3rem; }

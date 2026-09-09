@@ -148,7 +148,7 @@ function ts_render_seo_service_page(array $service): void
     }
     body.page-svc-search-engine-optimization,
     body.page-svc-search-engine-optimization main{ background:#F6F7F9 !important; }
-    .seo-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .seo-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .seo-eyebrow{
       display:inline-flex; align-items:center; gap:.45rem;
       font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -314,20 +314,20 @@ function ts_render_seo_service_page(array $service): void
       text-align:center; z-index:5; pointer-events:none;
     }
 
-    /* Process rail */
-    .seo-steps{ display:grid; gap:0; position:relative; }
-    @media (min-width:800px){
-      .seo-steps{ grid-template-columns:1fr 1fr; gap:0 1.5rem; }
-    }
+    /* Single-column vertical timeline process */
+    .seo-steps{ display:grid; gap:0; position:relative; max-width:680px; padding-left:0; }
+    @media (min-width:800px){ .seo-steps{ grid-template-columns:1fr; gap:0; } }
     .seo-step{
       display:grid; grid-template-columns:auto 1fr; gap:.85rem;
-      padding:1rem 0; border-bottom:1px solid var(--seo-line);
+      padding:1.05rem 0; border-bottom:1px solid var(--seo-line);
+      position:relative;
     }
     .seo-step-num{
-      width:44px; height:44px; border-radius:12px;
+      width:44px; height:44px; border-radius:50%;
       display:grid; place-items:center;
       background:var(--seo-blue); color:#fff;
       font-family:Montserrat,system-ui,sans-serif; font-weight:800; font-size:13px;
+      box-shadow:0 0 0 4px rgba(28,79,214,.15);
     }
     .seo-step-when{ display:block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--seo-blue); margin-bottom:.2rem; }
     .seo-step h3{ margin:0 0 .25rem; font-size:1.05rem; font-weight:800; }
@@ -393,26 +393,27 @@ function ts_render_seo_service_page(array $service): void
       font-size:13px; font-weight:700; color:var(--seo-ink);
     }
 
-    /* Packages */
-    .seo-pkgs{
-      display:grid; gap:.85rem;
-      grid-template-columns:1fr;
-    }
-    @media (min-width:850px){ .seo-pkgs{ grid-template-columns:repeat(3,1fr); } }
+    /* Stacked package rows */
+    .seo-pkgs{ display:grid; gap:.7rem; grid-template-columns:1fr; }
+    @media (min-width:850px){ .seo-pkgs{ grid-template-columns:1fr; } }
     .seo-pkg{
-      padding:1.25rem 1.2rem 1.35rem; border-radius:16px;
+      padding:1.15rem 1.25rem; border-radius:14px;
       border:1px solid var(--seo-line); background:#fff;
-      display:flex; flex-direction:column; gap:.75rem;
+      display:grid; gap:.75rem 1.5rem;
+    }
+    @media (min-width:800px){
+      .seo-pkg{ grid-template-columns:140px 1fr auto; align-items:center; }
+      .seo-pkg ul{ grid-template-columns:1fr 1fr; }
     }
     .seo-pkg.is-hot{
       border-color:rgba(28,79,214,.4);
       box-shadow:0 0 0 1px rgba(28,79,214,.12);
-      background:linear-gradient(180deg, rgba(28,79,214,.05), #fff 40%);
+      background:linear-gradient(105deg, rgba(28,79,214,.06), #fff 40%);
     }
-    .seo-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
-    .seo-pkg h3{ margin:0; font-size:1.2rem; font-weight:800; }
+    .seo-pkg-top{ display:flex; flex-direction:column; gap:.25rem; }
+    .seo-pkg h3{ margin:0; font-size:1.15rem; font-weight:800; }
     .seo-pkg-tag{ font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--seo-blue); }
-    .seo-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.4rem; flex:1; }
+    .seo-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.35rem; }
     .seo-pkg li{ font-size:13.5px; color:var(--seo-body); padding-left:1rem; position:relative; }
     .seo-pkg li::before{
       content:""; position:absolute; left:0; top:.55em;
@@ -420,8 +421,9 @@ function ts_render_seo_service_page(array $service): void
     }
     .seo-pkg > p{ margin:0; font-size:12.5px; color:var(--seo-muted); }
 
-    /* FAQ */
-    .seo-faq{ display:grid; gap:.55rem; max-width:720px; }
+    /* Two-column FAQ */
+    .seo-faq{ display:grid; gap:.75rem; max-width:none; }
+    @media (min-width:800px){ .seo-faq{ grid-template-columns:1fr 1fr; } }
     .seo-faq details{
       border:1px solid var(--seo-line); border-radius:14px; background:#fff; overflow:hidden;
     }

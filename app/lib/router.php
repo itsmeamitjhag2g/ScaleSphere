@@ -19,6 +19,10 @@ function ts_web_route(string $path): array
         "/careers" => "/contact",
         "/blog" => "/contact",
         "/become-a-partner" => "/contact",
+        "/services/api-and-cloud-apps" => "/services/development",
+        "/services/development/api-and-cloud-apps" => "/services/development",
+        "/services/app-ui-engineering" => "/services/mobile-apps",
+        "/services/mobile-apps/app-ui-engineering" => "/services/mobile-apps",
     ];
     if (isset($retired[$path])) {
         return ["redirect" => $retired[$path], "status" => 301];
@@ -35,12 +39,30 @@ function ts_web_route(string $path): array
     if (isset($hubs[$path])) {
         return ["file" => "services/hub.php", "vars" => ["hub" => $hubs[$path]], "status" => 200];
     }
-    if (preg_match("#^/services/([a-z0-9-]+)$#", $path, $match)) {
-        $service = ts_service_by_slug($match[1]);
-        if ($service) {
+
+    /* Nested: /services/{category}/{slug} (case-insensitive category → canonical lowercase) */
+    if (preg_match("#^/services/(online-marketing|development|mobile-apps|creative-design)/([a-z0-9-]+)$#i", $path, $match)) {
+        $cat = strtolower($match[1]);
+        $slug = strtolower($match[2]);
+        $canonical = "/services/{$cat}/{$slug}";
+        if ($path !== $canonical) {
+            return ["redirect" => $canonical, "status" => 301];
+        }
+        $service = ts_service_by_slug($slug);
+        if ($service && ($service["categorySlug"] ?? "") === $cat) {
             return ["file" => "services/detail.php", "vars" => ["service" => $service], "status" => 200];
         }
+        return ["file" => "not-found.php", "vars" => [], "status" => 404];
     }
+
+    /* Legacy flat: /services/{slug} → 301 to nested URL */
+    if (preg_match("#^/services/([a-z0-9-]+)$#i", $path, $match)) {
+        $service = ts_service_by_slug(strtolower($match[1]));
+        if ($service) {
+            return ["redirect" => $service["href"], "status" => 301];
+        }
+    }
+
     return ["file" => "not-found.php", "vars" => [], "status" => 404];
 }
 

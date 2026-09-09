@@ -41,7 +41,7 @@ function ts_render_online_marketing_hub(): void
             "tag" => "Organic",
             "body" => "Technical audit shipped. Fixed crawl waste, tightened title patterns, and locked a 90-day content map around buyer-intent clusters.",
             "link" => "Search Engine Optimization",
-            "href" => "/services/search-engine-optimization",
+            "href" => ts_service_href("Search Engine Optimization"),
         ],
         [
             "who" => "Paid Desk",
@@ -49,7 +49,7 @@ function ts_render_online_marketing_hub(): void
             "tag" => "Performance",
             "body" => "Restructured Search + Meta. New negative lists, creative tests, and conversion tracking — ROAS trending up week over week.",
             "link" => "Pay Per Click",
-            "href" => "/services/pay-per-click",
+            "href" => ts_service_href("Pay Per Click"),
         ],
         [
             "who" => "Social Desk",
@@ -57,7 +57,7 @@ function ts_render_online_marketing_hub(): void
             "tag" => "Community",
             "body" => "Calendar live for LinkedIn + Instagram. Process posts, proof points, and soft CTAs — engagement without the reach games.",
             "link" => "Social Media Marketing",
-            "href" => "/services/social-media-marketing",
+            "href" => ts_service_href("Social Media Marketing"),
         ],
     ];
 
@@ -108,7 +108,7 @@ function ts_render_online_marketing_hub(): void
       overflow-x:clip;
     }
     .ok *{ box-sizing:border-box; }
-    .ok-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .ok-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .ok-mono{
       font-family:"IBM Plex Mono",ui-monospace,monospace;
       font-weight:600; letter-spacing:.04em; text-transform:uppercase;
@@ -240,7 +240,7 @@ function ts_render_online_marketing_hub(): void
       background:var(--deep);
     }
     .ok-gallery-grid{
-      width:min(1120px, calc(100% - 2rem));
+      width:min(1320px, calc(100% - 1.25rem));
       margin:0 auto;
       display:grid;
       grid-template-columns:1fr;

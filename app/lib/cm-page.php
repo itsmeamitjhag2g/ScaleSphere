@@ -187,7 +187,7 @@ function ts_render_cm_service_page(array $service): void
     }
     body.page-svc-content-marketing,
     body.page-svc-content-marketing main{ background:#F6F7F9 !important; }
-    .cm-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .cm-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .cm-eyebrow{
       display:inline-flex; align-items:center; gap:.45rem;
       font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -342,55 +342,86 @@ function ts_render_cm_service_page(array $service): void
     .cm-pain p, .cm-tile p, .cm-fun p, .cm-aud p{ margin:0; font-size:13px; line-height:1.45; color:var(--cm-body); }
     .cm-fun .ex{ display:block; margin-top:.35rem; font-size:12px; font-weight:700; color:var(--cm-pink); }
 
-    /* Topic cluster */
+    /* Topic cluster — solar system */
     .cm-cluster{
-      position:relative; min-height:280px;
-      display:grid; place-items:center;
-      margin:0 auto; max-width:520px;
+      position:relative;
+      width:min(100%, 420px);
+      aspect-ratio:1;
+      margin:0 auto;
+      opacity:0;
+      transform:scale(.92);
+      transition:opacity .6s ease, transform .6s ease;
     }
+    .cm-cluster.is-in{ opacity:1; transform:none; }
     .cm-cluster-hub{
-      position:relative; z-index:2;
-      width:120px; height:120px; border-radius:50%;
+      position:absolute; left:50%; top:50%; z-index:5;
+      width:108px; height:108px; border-radius:50%;
       display:grid; place-items:center; text-align:center;
-      background:var(--cm-pink); color:#fff;
+      transform:translate(-50%,-50%);
+      background:
+        radial-gradient(circle at 32% 28%, #6B9BFF 0%, var(--cm-pink) 55%, #1650C8 100%);
+      color:#fff;
       font-family:Montserrat,system-ui,sans-serif; font-size:13px; font-weight:800;
-      box-shadow:0 12px 32px rgba(28,79,214,.35);
+      box-shadow:
+        0 0 0 10px rgba(28,79,214,.08),
+        0 0 0 22px rgba(28,79,214,.05),
+        0 14px 36px rgba(28,79,214,.4);
       line-height:1.25; padding:.5rem;
+      animation:cm-sun-pulse 3.2s ease-in-out infinite;
     }
-    .cm-cluster-svg{
-      position:absolute; inset:0; width:100%; height:100%;
+    .cm-orbit{
+      position:absolute; left:50%; top:50%;
+      border:1px dashed rgba(28,79,214,.28);
+      border-radius:50%;
+      transform:translate(-50%,-50%);
       pointer-events:none;
     }
-    .cm-cluster-svg line{
-      stroke:rgba(28,79,214,.35); stroke-width:1.5;
-      stroke-dasharray:80; stroke-dashoffset:80;
-      transition:stroke-dashoffset .7s ease;
+    .cm-orbit--inner{
+      width:62%; height:62%;
+      animation:cm-orbit-spin 32s linear infinite;
     }
-    .cm-cluster.is-in .cm-cluster-svg line{ stroke-dashoffset:0; }
-    .cm-cluster-svg line:nth-child(1){ transition-delay:.05s; }
-    .cm-cluster-svg line:nth-child(2){ transition-delay:.12s; }
-    .cm-cluster-svg line:nth-child(3){ transition-delay:.19s; }
-    .cm-cluster-svg line:nth-child(4){ transition-delay:.26s; }
-    .cm-cluster-svg line:nth-child(5){ transition-delay:.33s; }
-    .cm-cluster-svg line:nth-child(6){ transition-delay:.4s; }
-    .cm-spoke{
-      position:absolute; z-index:2;
-      padding:.4rem .65rem; border-radius:999px;
+    .cm-orbit--outer{
+      width:92%; height:92%;
+      border-style:dotted;
+      animation:cm-orbit-spin 48s linear infinite reverse;
+    }
+    .cm-slot{
+      position:absolute; inset:0;
+      transform:rotate(var(--a, 0deg));
+      pointer-events:auto;
+    }
+    .cm-planet{
+      position:absolute; top:0; left:50%;
+      transform:translate(-50%,-50%) rotate(calc(var(--a, 0deg) * -1));
+    }
+    .cm-planet span{
+      display:inline-block;
+      padding:.45rem .75rem; border-radius:999px;
       border:1px solid var(--cm-line); background:#fff;
       font-size:11px; font-weight:700; color:var(--cm-ink);
-      white-space:nowrap; max-width:140px; overflow:hidden; text-overflow:ellipsis;
-      opacity:0; transform:scale(.9);
-      transition:opacity .4s ease, transform .4s ease;
+      white-space:nowrap;
+      box-shadow:0 8px 20px rgba(15,23,42,.08);
+      animation:cm-orbit-spin-rev 32s linear infinite;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-    .cm-cluster.is-in .cm-spoke{ opacity:1; transform:none; }
-    .cm-spoke:nth-child(3){ top:8%; left:50%; transform:translateX(-50%) scale(.9); transition-delay:.1s; }
-    .cm-cluster.is-in .cm-spoke:nth-child(3){ transform:translateX(-50%); }
-    .cm-spoke:nth-child(4){ top:28%; right:0; transition-delay:.18s; }
-    .cm-spoke:nth-child(5){ bottom:22%; right:4%; transition-delay:.26s; }
-    .cm-spoke:nth-child(6){ bottom:6%; left:50%; transform:translateX(-50%) scale(.9); transition-delay:.34s; }
-    .cm-cluster.is-in .cm-spoke:nth-child(6){ transform:translateX(-50%); }
-    .cm-spoke:nth-child(7){ bottom:22%; left:4%; transition-delay:.42s; }
-    .cm-spoke:nth-child(8){ top:28%; left:0; transition-delay:.5s; }
+    .cm-orbit--outer .cm-planet span{ animation-duration:48s; animation-direction:reverse; }
+    .cm-planet:hover span{
+      transform:scale(1.06);
+      border-color:rgba(28,79,214,.45);
+      box-shadow:0 10px 24px rgba(28,79,214,.18);
+      color:var(--cm-pink);
+    }
+    @keyframes cm-orbit-spin{ to{ transform:translate(-50%,-50%) rotate(360deg); } }
+    @keyframes cm-orbit-spin-rev{ to{ transform:rotate(-360deg); } }
+    @keyframes cm-sun-pulse{
+      0%,100%{ box-shadow:0 0 0 10px rgba(28,79,214,.08),0 0 0 22px rgba(28,79,214,.05),0 14px 36px rgba(28,79,214,.4); }
+      50%{ box-shadow:0 0 0 14px rgba(28,79,214,.12),0 0 0 28px rgba(28,79,214,.06),0 16px 40px rgba(28,79,214,.48); }
+    }
+    @media (max-width:520px){
+      .cm-cluster{ max-width:300px; }
+      .cm-cluster-hub{ width:88px; height:88px; font-size:11px; }
+      .cm-planet span{ font-size:10px; padding:.35rem .55rem; max-width:110px; overflow:hidden; text-overflow:ellipsis; }
+    }
 
     .cm-cal{
       display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem;
@@ -436,15 +467,24 @@ function ts_render_cm_service_page(array $service): void
     .cm-ba-fake strong{ display:block; font-size:14px; margin-bottom:.35rem; color:var(--cm-ink); }
     .cm-ba-card.bad strong, .cm-ba-card.bad .cm-ba-fake{ color:#94A3B8; }
 
-    .cm-steps{ display:grid; gap:0; }
-    @media (min-width:800px){ .cm-steps{ grid-template-columns:1fr 1fr; gap:0 1.5rem; } }
+    /* Zigzag alternating process */
+    .cm-steps{ display:grid; gap:1rem; max-width:820px; margin:0 auto; }
+    @media (min-width:800px){ .cm-steps{ grid-template-columns:1fr; } }
     .cm-step{
       display:grid; grid-template-columns:auto 1fr; gap:.85rem;
-      padding:1rem 0; border-bottom:1px solid var(--cm-line);
+      padding:1.1rem 1.15rem; border:1px solid var(--cm-line); border-radius:16px; background:#fff;
+      transition:transform .3s;
     }
+    @media (min-width:720px){
+      .cm-step{ width:82%; }
+      .cm-step:nth-child(odd){ border-left:3px solid var(--cm-pink); }
+      .cm-step:nth-child(even){ margin-left:auto; border-right:3px solid var(--cm-pink); }
+    }
+    .cm-step:hover{ transform:translateX(4px); }
+    .cm-step:nth-child(even):hover{ transform:translateX(-4px); }
     .cm-step-num{
-      width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-      background:var(--cm-pink); color:#fff; font-weight:800; font-size:13px;
+      width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+      background:var(--cm-pink); color:#fff; font-weight:800; font-size:12px;
       font-family:Montserrat,system-ui,sans-serif;
     }
     .cm-step-when{ display:block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--cm-pink); margin-bottom:.2rem; }
@@ -488,11 +528,15 @@ function ts_render_cm_service_page(array $service): void
       background:#fff; font-size:13px; font-weight:700;
     }
 
-    .cm-pkg{ display:flex; flex-direction:column; gap:.75rem; }
+    /* Featured strip packages */
+    .cm-pkgs{ display:grid !important; gap:.85rem !important; grid-template-columns:1fr !important; }
+    @media (min-width:860px){ .cm-pkgs{ grid-template-columns:1.2fr .9fr .9fr !important; } }
+    .cm-pkg{ display:flex; flex-direction:column; gap:.75rem; transition:transform .35s; }
+    .cm-pkg:hover{ transform:translateY(-4px); }
     .cm-pkg.is-hot{
       border-color:rgba(28,79,214,.4);
       box-shadow:0 0 0 1px rgba(28,79,214,.1);
-      background:linear-gradient(180deg, rgba(28,79,214,.06), #fff 40%);
+      background:linear-gradient(160deg, rgba(219,39,119,.08), #fff 50%);
     }
     .cm-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
     .cm-pkg h3{ margin:0; font-size:1.2rem; font-weight:800; }
@@ -505,8 +549,11 @@ function ts_render_cm_service_page(array $service): void
     }
     .cm-pkg > p{ margin:0; font-size:12.5px; color:var(--cm-muted); }
 
-    .cm-faq{ display:grid; gap:.55rem; max-width:720px; }
+    /* Two-column FAQ */
+    .cm-faq{ display:grid; gap:.75rem; max-width:none; }
+    @media (min-width:800px){ .cm-faq{ grid-template-columns:1fr 1fr; } }
     .cm-faq details{ border:1px solid var(--cm-line); border-radius:14px; background:#fff; overflow:hidden; }
+    .cm-faq details[open]{ box-shadow:0 10px 28px rgba(219,39,119,.1); }
     .cm-faq summary{
       list-style:none; cursor:pointer; padding:1rem 1.15rem; font-weight:700; font-size:14.5px;
       display:flex; justify-content:space-between; gap:1rem; align-items:center;
@@ -537,8 +584,9 @@ function ts_render_cm_service_page(array $service): void
       .cm-tile:hover, .cm-rel:hover, .cm-btn:hover{ transform:none; }
       .cm-article h3 .cursor{ display:none; }
       .cm-hero h1 em{ background-size:100% 3px; }
-      .cm-cluster-svg line{ stroke-dashoffset:0; transition:none; }
-      .cm-spoke{ opacity:1; transform:none !important; }
+      .cm-cluster{ opacity:1; transform:none; }
+      .cm-cluster-hub, .cm-orbit, .cm-planet span{ animation:none !important; }
+      .cm-planet:hover span{ transform:none; }
       .cm-article-h2s span, .cm-article-cta{ opacity:1; transform:none; transition:none; }
     }
   </style>
@@ -660,18 +708,25 @@ function ts_render_cm_service_page(array $service): void
         </div>
       </div>
       <div class="cm-cluster" data-cm-cluster data-cm-reveal aria-hidden="true">
-        <svg class="cm-cluster-svg" viewBox="0 0 400 280" preserveAspectRatio="xMidYMid meet">
-          <line x1="200" y1="140" x2="200" y2="36"/>
-          <line x1="200" y1="140" x2="340" y2="90"/>
-          <line x1="200" y1="140" x2="340" y2="200"/>
-          <line x1="200" y1="140" x2="200" y2="252"/>
-          <line x1="200" y1="140" x2="60" y2="200"/>
-          <line x1="200" y1="140" x2="60" y2="90"/>
-        </svg>
         <div class="cm-cluster-hub">CRM<br>Pillar</div>
-        <?php foreach ($spokes as $sp): ?>
-        <span class="cm-spoke"><?= ts_h($sp) ?></span>
-        <?php endforeach; ?>
+        <?php
+        $inner = array_slice($spokes, 0, 3);
+        $outer = array_slice($spokes, 3, 3);
+        ?>
+        <div class="cm-orbit cm-orbit--inner">
+          <?php foreach ($inner as $i => $sp): ?>
+          <div class="cm-slot" style="--a:<?= (int)($i * 120) ?>deg">
+            <div class="cm-planet"><span><?= ts_h($sp) ?></span></div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <div class="cm-orbit cm-orbit--outer">
+          <?php foreach ($outer as $i => $sp): ?>
+          <div class="cm-slot" style="--a:<?= (int)(60 + $i * 120) ?>deg">
+            <div class="cm-planet"><span><?= ts_h($sp) ?></span></div>
+          </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>

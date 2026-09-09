@@ -32,9 +32,9 @@
         <h6 class="footer-heading">Services</h6>
         <ul>
           <li><a href="/services/development">Web Development</a></li>
-          <li><a href="/services/search-engine-optimization">Online Marketing</a></li>
+          <li><a href="/services/online-marketing">Online Marketing</a></li>
           <li><a href="/services/mobile-apps">Mobile Apps</a></li>
-          <li><a href="/services/ui-ux-designing">Product Design</a></li>
+          <li><a href="/services/creative-design">Product Design</a></li>
           <li><a href="/services">View All Services</a></li>
         </ul>
       </div>

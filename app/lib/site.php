@@ -58,7 +58,7 @@ const TS_SERVICE_MEGA = [
         "title" => "Development",
         "icon" => "fa-code",
         "tone" => "blue",
-        "lead" => "Websites, enterprise software, CRM, SharePoint, NetSuite, e-commerce and cloud APIs — built to scale.",
+        "lead" => "Websites, enterprise software, CRM, SharePoint, NetSuite and e-commerce — built to scale.",
         "items" => [
             "Website Development",
             "Software Development",
@@ -66,21 +66,19 @@ const TS_SERVICE_MEGA = [
             "SharePoint Integration",
             "NetSuite Integration",
             "E-Commerce Platforms",
-            "API & Cloud Apps",
         ],
     ],
     [
         "title" => "Mobile Apps",
         "icon" => "fa-mobile-alt",
         "tone" => "green",
-        "lead" => "Native and cross-platform mobile apps for Android and iOS with polished UI and long-term support.",
+        "lead" => "Native and cross-platform mobile apps for Android and iOS — polished UI engineering included, with long-term support.",
         "items" => [
             "Android App Development",
             "iOS App Development",
             "React Native Apps",
             "Flutter Apps",
             "Progressive Web Apps",
-            "App UI Engineering",
             "Support & Maintenance",
         ],
     ],
@@ -108,6 +106,64 @@ function ts_slug(string $text): string
     return trim((string) preg_replace("/[^a-z0-9]+/", "-", $text), "-");
 }
 
+/** Category path segment used under /services/{category}/{slug} */
+function ts_category_slug(string $category): string
+{
+    return match ($category) {
+        "Online Marketing" => "online-marketing",
+        "Development" => "development",
+        "Mobile Apps" => "mobile-apps",
+        "Creative Design" => "creative-design",
+        default => ts_slug($category),
+    };
+}
+
+/**
+ * Accent colors matching the Services mega-menu underline per category.
+ *
+ * @return array{hex:string,hexDark:string,soft:string,line:string,rgba:string}
+ */
+function ts_category_accent(string $category): array
+{
+    return match ($category) {
+        "Online Marketing" => [
+            "hex" => "#1C4FD6",
+            "hexDark" => "#163AA8",
+            "soft" => "#EEF3FF",
+            "line" => "#1C4FD6",
+            "rgba" => "28,79,214",
+        ],
+        "Development" => [
+            "hex" => "#1C4FD6",
+            "hexDark" => "#163AA8",
+            "soft" => "#EEF3FF",
+            "line" => "#1C4FD6",
+            "rgba" => "28,79,214",
+        ],
+        "Mobile Apps" => [
+            "hex" => "#10B981",
+            "hexDark" => "#059669",
+            "soft" => "#ECFDF5",
+            "line" => "#34D399",
+            "rgba" => "16,185,129",
+        ],
+        "Creative Design" => [
+            "hex" => "#7C3AED",
+            "hexDark" => "#6D28D9",
+            "soft" => "#F5F3FF",
+            "line" => "#C4B5FD",
+            "rgba" => "124,58,237",
+        ],
+        default => [
+            "hex" => "#1C4FD6",
+            "hexDark" => "#163AA8",
+            "soft" => "#EEF3FF",
+            "line" => "#1C4FD6",
+            "rgba" => "28,79,214",
+        ],
+    };
+}
+
 function ts_service_catalog(): array
 {
     static $catalog = null;
@@ -116,15 +172,17 @@ function ts_service_catalog(): array
     }
     $catalog = [];
     foreach (TS_SERVICE_MEGA as $col) {
+        $catSlug = ts_category_slug($col["title"]);
         foreach ($col["items"] as $label) {
             $slug = ts_slug($label);
             $catalog[$slug] = [
                 "label" => $label,
                 "slug" => $slug,
                 "category" => $col["title"],
+                "categorySlug" => $catSlug,
                 "tone" => $col["tone"],
                 "icon" => $col["icon"],
-                "href" => "/services/" . $slug,
+                "href" => "/services/" . $catSlug . "/" . $slug,
             ];
         }
     }
@@ -139,7 +197,9 @@ function ts_service_by_slug(string $slug): ?array
 
 function ts_service_href(string $label): string
 {
-    return "/services/" . ts_slug($label);
+    $slug = ts_slug($label);
+    $row = ts_service_by_slug($slug);
+    return $row["href"] ?? ("/services/" . $slug);
 }
 
 function ts_category_href(string $category): string

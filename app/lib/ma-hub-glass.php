@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Mobile Apps hub — layout modeled on
  * https://six2eight.com/services/mobile-app-design
- * ScaleSphere palette (#1C4FD6, #0F172A, #F6F7F9, #0B1A3A).
+ * ScaleSphere palette (#10B981, #0F172A, #F6F7F9, #0B1A3A).
  */
 function ts_render_mobile_apps_hub(): void
 {
@@ -36,7 +36,7 @@ function ts_render_mobile_apps_hub(): void
         ["fa-mobile-alt", "Native iOS & Android feel", "Platform patterns so the app feels right on every device."],
         ["fa-bolt", "Fewer taps, faster tasks", "Layouts tuned for speed — smooth, obvious, thumb-friendly."],
         ["fa-redo", "Retention-first UX", "Experiences people return to — useful, enjoyable, sticky."],
-        ["fa-handshake", "Clean design-to-dev handoff", "Organized files and notes — no missing screens for engineers."],
+        ["fa-handshake", "Pixel-perfect UI engineering", "Components, motion and design-dev handoff — built into every app, not a separate add-on."],
         ["fa-rocket", "Store-ready delivery", "Device QA through App Store / Play submission, done right."],
     ];
 
@@ -61,7 +61,7 @@ function ts_render_mobile_apps_hub(): void
     $faqs = [
         ["Do you build for startups and established brands?", "Yes. We tailor scope to your stage — MVP, redesign, or full native/cross-platform delivery — with the same care either way."],
         ["Which platforms do you support?", "Android, iOS, React Native, Flutter and PWAs. We follow platform patterns so the app feels native on each device."],
-        ["Do you only design, or develop too?", "We design and develop. You can take design-only handoff, or we ship the full build through store submission."],
+        ["Do you only design, or develop too?", "We design and develop. Pixel-perfect UI engineering — components, micro-interactions and handoff — is part of every app build, not a separate product."],
         ["How do you keep the app easy to use?", "User journeys, prototypes and device testing. If someone can’t figure it out in seconds, we redesign the flow."],
         ["What if we already have sketches or an old app?", "Perfect — we start from wherever you are, refine the flow, modernize the UI and align with current platform guidelines."],
         ["How long does a typical project take?", "Depends on scope. Many apps move from kickoff to store-ready in a clear sprint plan with early prototypes you can share."],
@@ -104,7 +104,7 @@ function ts_render_mobile_apps_hub(): void
       --s2-card:#FFFFFF;
       --s2-soft:#F4F6FB;
       --s2-royal:#FFFEFA;
-      --s2-lime:#1C4FD6;
+      --s2-lime:#10B981;
       --s2-muted:rgba(15,23,42,.62);
       --s2-dim:rgba(15,23,42,.58);
       --s2-white:#FFFEFA;
@@ -120,13 +120,13 @@ function ts_render_mobile_apps_hub(): void
       background-color:#FFFEFA !important;
     }
     .s2 *{ box-sizing:border-box; }
-    .s2-wrap{ width:min(1200px, calc(100% - 2rem)); margin:0 auto; }
-    .s2-wrap-sm{ width:min(1020px, calc(100% - 2rem)); margin:0 auto; }
+    .s2-wrap{ width:min(1360px, calc(100% - 1.25rem)); margin:0 auto; }
+    .s2-wrap-sm{ width:min(1240px, calc(100% - 1.25rem)); margin:0 auto; }
 
     .s2-eyebrow{
       display:inline-flex; align-items:center; gap:.75rem;
       padding:.5rem 1rem; border-radius:40px;
-      background:rgba(28,79,214,.1); color:#0F172A;
+      background:rgba(16,185,129,.1); color:#0F172A;
       font-size:15px; font-weight:600; line-height:1.5;
     }
     .s2-eyebrow i{
@@ -139,7 +139,7 @@ function ts_render_mobile_apps_hub(): void
       min-height:48px; padding:0 1.5rem; border-radius:999px;
       background:var(--s2-lime); color:#fff; text-decoration:none;
       font-size:16px; font-weight:600; overflow:hidden;
-      box-shadow:0 12px 28px rgba(28,79,214,.28);
+      box-shadow:0 12px 28px rgba(16,185,129,.28);
       transition:transform .25s ease, filter .25s ease;
     }
     .s2-btn:hover{ filter:brightness(1.06); transform:translateY(-1px); color:#fff; }
@@ -189,7 +189,7 @@ function ts_render_mobile_apps_hub(): void
     .s2-hero-vignette{
       position:absolute; inset:0; z-index:1; pointer-events:none;
       background:
-        radial-gradient(ellipse 65% 50% at 50% 36%, rgba(28,79,214,.05), transparent 72%);
+        radial-gradient(ellipse 65% 50% at 50% 36%, rgba(16,185,129,.05), transparent 72%);
     }
     .s2-hero-content{
       position:relative; z-index:3;
@@ -267,7 +267,7 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-hero-title .accent,
     .s2-hero-title .accent .char{
-      background-image:linear-gradient(100deg, #3D6BE8 10%, #1C4FD6 55%, #6B8FF0 95%);
+      background-image:linear-gradient(100deg, #34D399 10%, #10B981 55%, #6EE7B7 95%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
@@ -299,8 +299,8 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-hero-store:hover{
       transform:translateY(-3px);
-      border-color:rgba(28,79,214,.35);
-      box-shadow:0 16px 44px rgba(28,79,214,.22);
+      border-color:rgba(16,185,129,.35);
+      box-shadow:0 16px 44px rgba(16,185,129,.22);
       color:#fff;
     }
     .s2-hero-store i{
@@ -384,11 +384,11 @@ function ts_render_mobile_apps_hub(): void
       aspect-ratio:1;
       border-radius:28px;
       background:
-        repeating-radial-gradient(circle at 50% 50%, transparent 0 10px, rgba(28,79,214,.14) 10px 12px),
-        linear-gradient(145deg, #1C4FD6, #3D6BE8 55%, #0B1A3A);
+        repeating-radial-gradient(circle at 50% 50%, transparent 0 10px, rgba(16,185,129,.14) 10px 12px),
+        linear-gradient(145deg, #10B981, #34D399 55%, #064E3B);
       transform:rotate(-8deg);
       transition:background .45s ease, transform .45s ease;
-      box-shadow:0 30px 80px rgba(28,79,214,.22);
+      box-shadow:0 30px 80px rgba(16,185,129,.22);
     }
     .s2-stage-device{
       position:relative; z-index:2;
@@ -420,7 +420,7 @@ function ts_render_mobile_apps_hub(): void
       left:4%; bottom:6%;
       font-size:clamp(3rem,10vw,7rem);
       font-weight:800; letter-spacing:-.05em;
-      color:rgba(28,79,214,.18);
+      color:rgba(16,185,129,.18);
       text-transform:lowercase;
       pointer-events:none; z-index:0;
       transition:opacity .3s ease;
@@ -438,7 +438,7 @@ function ts_render_mobile_apps_hub(): void
       transition:color .2s ease, transform .2s ease;
     }
     .s2-stage-nav button.is-on{
-      color:#1C4FD6;
+      color:#10B981;
       transform:translateX(6px);
     }
     .s2-stage-nav button:hover{ color:#0F172A; }
@@ -454,7 +454,7 @@ function ts_render_mobile_apps_hub(): void
       padding:clamp(4rem,10vw,8rem) 0;
       overflow:hidden;
     }
-    .s2-subs .s2-eyebrow{ color:#0F172A; background:rgba(28,79,214,.1); }
+    .s2-subs .s2-eyebrow{ color:#0F172A; background:rgba(16,185,129,.1); }
     .s2-subs-head{
       text-align:center; max-width:920px; margin:0 auto 2.5rem;
     }
@@ -481,7 +481,7 @@ function ts_render_mobile_apps_hub(): void
       border:1px solid rgba(15,23,42,.08);
       box-shadow:0 16px 40px rgba(15,23,42,.08);
     }
-    .s2-svc:hover{ transform:translateY(-6px); box-shadow:0 24px 48px rgba(28,79,214,.16); }
+    .s2-svc:hover{ transform:translateY(-6px); box-shadow:0 24px 48px rgba(16,185,129,.16); }
     .s2-svc::before{
       content:""; position:absolute; inset:0; z-index:1;
       background:linear-gradient(180deg, transparent 35%, rgba(11,26,58,.92));
@@ -526,8 +526,8 @@ function ts_render_mobile_apps_hub(): void
       display:inline-flex; align-items:center;
       padding:.6rem 1.15rem;
       border-radius:999px;
-      border:1px solid rgba(28,79,214,.2);
-      background:rgba(28,79,214,.07);
+      border:1px solid rgba(16,185,129,.2);
+      background:rgba(16,185,129,.07);
       font-size:clamp(1.1rem,2vw,1.4rem);
       font-weight:700;
       letter-spacing:-.015em;
@@ -564,7 +564,7 @@ function ts_render_mobile_apps_hub(): void
       box-shadow:0 12px 32px rgba(15,23,42,.06);
       transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease;
     }
-    .s2-work-card:hover{ transform:translateY(-5px); color:#0F172A; box-shadow:0 22px 48px rgba(28,79,214,.12); }
+    .s2-work-card:hover{ transform:translateY(-5px); color:#0F172A; box-shadow:0 22px 48px rgba(16,185,129,.12); }
     .s2-work-card img{
       width:100%; aspect-ratio:16/11; object-fit:cover; display:block;
       transition:transform .5s ease;
@@ -578,7 +578,7 @@ function ts_render_mobile_apps_hub(): void
     .s2-feat{
       position:relative;
       background:
-        linear-gradient(180deg, rgba(28,79,214,0), rgba(28,79,214,.045) 22%, rgba(28,79,214,.045) 78%, rgba(28,79,214,0)),
+        linear-gradient(180deg, rgba(16,185,129,0), rgba(16,185,129,.045) 22%, rgba(16,185,129,.045) 78%, rgba(16,185,129,0)),
         rgba(255,254,250,.72);
       padding:clamp(4rem,9vw,6.5rem) 1.25rem;
       border-top:1px solid var(--s2-line);
@@ -591,11 +591,11 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-feat-glow.left{
       left:-56px;
-      background:radial-gradient(rgba(28,79,214,.45), transparent 70%);
+      background:radial-gradient(rgba(16,185,129,.45), transparent 70%);
     }
     .s2-feat-glow.right{
       right:-56px;
-      background:radial-gradient(rgba(28,79,214,.45), transparent 70%);
+      background:radial-gradient(rgba(16,185,129,.45), transparent 70%);
     }
     .s2-feat-title{
       position:relative; z-index:1;
@@ -636,15 +636,15 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-f-card:hover{
       transform:translateY(-4px);
-      border-color:rgba(28,79,214,.35);
-      box-shadow:0 16px 50px rgba(28,79,214,.14);
+      border-color:rgba(16,185,129,.35);
+      box-shadow:0 16px 50px rgba(16,185,129,.14);
     }
     .s2-f-card .ico{
       width:44px; height:44px; flex:0 0 auto;
       border-radius:12px;
       display:grid; place-items:center;
-      background:rgba(28,79,214,.1);
-      color:#1C4FD6;
+      background:rgba(16,185,129,.1);
+      color:#10B981;
       font-size:1.15rem;
     }
     .s2-f-card h3{
@@ -667,19 +667,19 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-feat-net path{
       fill:none;
-      stroke:rgba(28,79,214,.4);
+      stroke:rgba(16,185,129,.4);
       stroke-width:3;
       vector-effect:non-scaling-stroke;
       stroke-linecap:round;
     }
     .s2-feat-net path.spine{
-      stroke:rgba(28,79,214,.55);
+      stroke:rgba(16,185,129,.55);
       stroke-width:3.4;
     }
     .s2-feat-net path[data-s2-fpulse]{
-      stroke:#6BA3FF;
+      stroke:#34D399;
       stroke-width:4.5;
-      filter:drop-shadow(0 0 8px rgba(28,79,214,.5));
+      filter:drop-shadow(0 0 8px rgba(16,185,129,.5));
       opacity:.95;
     }
     .s2-feat-chip{
@@ -689,12 +689,12 @@ function ts_render_mobile_apps_hub(): void
       width:clamp(92px,10vw,118px);
       aspect-ratio:1;
       border-radius:26%;
-      background:linear-gradient(145deg, #6B8FF0 0%, #1C4FD6 48%, #1439A0 100%);
+      background:linear-gradient(145deg, #6EE7B7 0%, #10B981 48%, #047857 100%);
       border:1px solid rgba(255,255,255,.35);
       box-shadow:
         inset 0 2px 6px rgba(255,255,255,.4),
-        inset 0 -6px 14px rgba(0,60,160,.35),
-        0 0 44px rgba(28,79,214,.35),
+        inset 0 -6px 14px rgba(4,120,87,.35),
+        0 0 44px rgba(16,185,129,.35),
         0 18px 40px rgba(15,23,42,.18);
       display:flex; align-items:center; justify-content:center;
       overflow:hidden;
@@ -724,8 +724,8 @@ function ts_render_mobile_apps_hub(): void
     .s2-feat-chip-mark span:first-child{ transform:rotate(-2.5deg); }
     .s2-feat-chip-mark span:last-child{ transform:rotate(1.8deg); margin-top:-.06em; }
     @keyframes s2-chip-breath{
-      0%,100%{ box-shadow:inset 0 2px 6px rgba(255,255,255,.4), inset 0 -6px 14px rgba(0,60,160,.35), 0 0 36px rgba(28,79,214,.3), 0 18px 40px rgba(15,23,42,.16); }
-      50%{ box-shadow:inset 0 2px 6px rgba(255,255,255,.5), inset 0 -6px 14px rgba(0,60,160,.28), 0 0 56px rgba(28,79,214,.48), 0 20px 44px rgba(15,23,42,.18); }
+      0%,100%{ box-shadow:inset 0 2px 6px rgba(255,255,255,.4), inset 0 -6px 14px rgba(4,120,87,.35), 0 0 36px rgba(16,185,129,.3), 0 18px 40px rgba(15,23,42,.16); }
+      50%{ box-shadow:inset 0 2px 6px rgba(255,255,255,.5), inset 0 -6px 14px rgba(4,120,87,.28), 0 0 56px rgba(16,185,129,.48), 0 20px 44px rgba(15,23,42,.18); }
     }
     @keyframes s2-logo-breath{
       0%,100%{ transform:scale(1); }
@@ -783,7 +783,7 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-process-shell{
       position:relative;
-      width:min(1070px, calc(100% - 2rem));
+      width:min(1320px, calc(100% - 1.25rem));
       margin:0 auto;
       padding:0 0 clamp(4rem,8vw,6rem);
     }
@@ -832,7 +832,7 @@ function ts_render_mobile_apps_hub(): void
       font-size:clamp(3.75rem, 12vw, 9.75rem);
       font-weight:700;
       line-height:.75;
-      color:rgba(28,79,214,.1);
+      color:rgba(16,185,129,.1);
       pointer-events:none;
       user-select:none;
     }
@@ -887,12 +887,12 @@ function ts_render_mobile_apps_hub(): void
     .s2-usp-card:hover{
       transform:none;
       box-shadow:none;
-      border-color:rgba(28,79,214,.35);
+      border-color:rgba(16,185,129,.35);
     }
     .s2-usp-card strong{
       display:block;
       font-size:clamp(1.45rem,2.4vw,2rem); font-weight:600; line-height:1.1;
-      color:#1C4FD6;
+      color:#10B981;
     }
     .s2-usp-card span{ color:var(--s2-body); font-size:14px; line-height:1.45; }
 
@@ -917,7 +917,7 @@ function ts_render_mobile_apps_hub(): void
       box-shadow:0 8px 28px rgba(15,23,42,.04);
       transition:transform .3s ease, box-shadow .3s ease;
     }
-    .s2-quote:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(28,79,214,.1); }
+    .s2-quote:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(16,185,129,.1); }
     .s2-quote p{ margin:0 0 1rem; font-size:15px; line-height:1.55; color:#334155; }
     .s2-quote strong{ display:block; font-size:14px; color:#0F172A; }
     .s2-quote span{ font-size:13px; color:var(--s2-dim); }
@@ -947,14 +947,14 @@ function ts_render_mobile_apps_hub(): void
       display:inline-flex; align-items:center; justify-content:center;
       min-height:44px; padding:0 1rem; border-radius:999px;
       background:#fff; color:#0F172A; font-size:13px; font-weight:600;
-      border:1px solid rgba(28,79,214,.2);
+      border:1px solid rgba(16,185,129,.2);
       box-shadow:0 6px 16px rgba(15,23,42,.04);
       transition:transform .25s ease, border-color .25s ease, color .25s ease;
     }
     .s2-techs span:hover{
       transform:translateY(-2px);
-      border-color:#1C4FD6;
-      color:#1C4FD6;
+      border-color:#10B981;
+      color:#10B981;
     }
 
     /* ===== FAQ ===== */
@@ -983,7 +983,7 @@ function ts_render_mobile_apps_hub(): void
       font:inherit; font-size:1.05rem; font-weight:600; color:#111;
       transition:color .2s ease;
     }
-    .s2-acc-item button:hover{ color:#1C4FD6; }
+    .s2-acc-item button:hover{ color:#10B981; }
     .s2-acc-item button span{
       width:28px; height:28px; border-radius:50%; flex:0 0 auto;
       display:grid; place-items:center; background:#0F172A; color:#fff; font-size:18px; line-height:1;
@@ -1072,21 +1072,21 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-statement-net path{
       fill:none;
-      stroke:rgba(28,79,214,.42);
+      stroke:rgba(16,185,129,.42);
       stroke-width:3;
       vector-effect:non-scaling-stroke;
       stroke-linecap:round;
     }
     .s2-statement-net path.spine{
-      stroke:rgba(28,79,214,.55);
+      stroke:rgba(16,185,129,.55);
       stroke-width:3.4;
     }
     .s2-statement-net path.s-pulse{
-      stroke:#6BA3FF;
+      stroke:#34D399;
       stroke-width:4.5;
       vector-effect:non-scaling-stroke;
       stroke-linecap:round;
-      filter:drop-shadow(0 0 8px rgba(28,79,214,.55));
+      filter:drop-shadow(0 0 8px rgba(16,185,129,.55));
       opacity:0;
     }
     .s2-statement-text{
@@ -1113,7 +1113,7 @@ function ts_render_mobile_apps_hub(): void
     .s2-steps{
       position:relative;
       background:
-        linear-gradient(180deg, rgba(28,79,214,0), rgba(28,79,214,.05) 20%, rgba(28,79,214,.05) 80%, rgba(28,79,214,0)),
+        linear-gradient(180deg, rgba(16,185,129,0), rgba(16,185,129,.05) 20%, rgba(16,185,129,.05) 80%, rgba(16,185,129,0)),
         rgba(255,254,250,.7);
       color:#0F172A;
       overflow:hidden;
@@ -1133,7 +1133,7 @@ function ts_render_mobile_apps_hub(): void
       font-size:clamp(.85rem,1.4vw,1rem);
       font-weight:700;
       letter-spacing:.34em;
-      color:#1C4FD6;
+      color:#10B981;
       margin:0 0 1.5rem;
     }
     .s2-steps-head h2{
@@ -1168,9 +1168,9 @@ function ts_render_mobile_apps_hub(): void
     .s2-steps-rail-fill{
       position:absolute; top:0; left:0;
       width:100%; height:0%;
-      background:linear-gradient(180deg, #1C4FD6, #6B8FF0);
+      background:linear-gradient(180deg, #10B981, #6EE7B7);
       border-radius:3px;
-      box-shadow:0 0 14px rgba(28,79,214,.45);
+      box-shadow:0 0 14px rgba(16,185,129,.45);
     }
     .s2-steps-rail-dot{
       position:absolute;
@@ -1179,7 +1179,7 @@ function ts_render_mobile_apps_hub(): void
       border-radius:50%;
       transform:translate(-50%,-50%);
       background:#EAF1FF;
-      box-shadow:0 0 0 4px rgba(28,79,214,.25), 0 0 18px rgba(28,79,214,.55);
+      box-shadow:0 0 0 4px rgba(16,185,129,.25), 0 0 18px rgba(16,185,129,.55);
     }
     .s2-steps-counter{
       position:absolute; right:0; top:-8px;
@@ -1188,7 +1188,7 @@ function ts_render_mobile_apps_hub(): void
       font-variant-numeric:tabular-nums;
     }
     .s2-steps-counter strong{
-      font-size:30px; font-weight:500; color:#1C4FD6;
+      font-size:30px; font-weight:500; color:#10B981;
     }
     .s2-steps-dots{
       display:none; gap:8px; justify-content:center;
@@ -1206,8 +1206,8 @@ function ts_render_mobile_apps_hub(): void
     .s2-steps-dots button.is-active,
     .s2-steps-dots button:hover{
       color:#0F172A;
-      border-color:#1C4FD6;
-      background:rgba(28,79,214,.08);
+      border-color:#10B981;
+      background:rgba(16,185,129,.08);
     }
     .s2-step-item{
       padding:1.15rem 0;
@@ -1224,7 +1224,7 @@ function ts_render_mobile_apps_hub(): void
     }
     .s2-step-num{
       font-size:12px; letter-spacing:.35em;
-      color:#1C4FD6; margin-bottom:8px;
+      color:#10B981; margin-bottom:8px;
     }
     .s2-step-item h3{
       margin:0 0 .45rem;
@@ -1247,8 +1247,8 @@ function ts_render_mobile_apps_hub(): void
     .s2-step-item.is-active .s2-step-line{ opacity:1; }
     .s2-step-line-fill{
       height:100%; width:0%;
-      background:linear-gradient(90deg, #1C4FD6, #6B8FF0);
-      box-shadow:0 0 10px rgba(28,79,214,.45);
+      background:linear-gradient(90deg, #10B981, #6EE7B7);
+      box-shadow:0 0 10px rgba(16,185,129,.45);
     }
     .s2-steps-phone{
       position:relative;
@@ -1257,7 +1257,7 @@ function ts_render_mobile_apps_hub(): void
     .s2-steps-phone-glow{
       position:absolute; inset:-12%; z-index:0;
       border-radius:50%;
-      background:radial-gradient(circle, rgba(28,79,214,.2), transparent 65%);
+      background:radial-gradient(circle, rgba(16,185,129,.2), transparent 65%);
       filter:blur(30px);
     }
     .s2-steps-phone-frame{
@@ -1576,7 +1576,7 @@ function ts_render_mobile_apps_hub(): void
         <svg width="723" height="811" viewBox="0 0 723 811" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M714.581 856.419C683.581 775.419 214.578 821.419 167.578 690.919C120.578 560.419 706.578 542.919 680.578 452.919C654.578 362.919 174.078 500.419 167.578 350.419C161.099 200.885 731.016 178.06 695.429 106.589C695.227 106.183 695.047 105.707 694.96 105.261C690.092 80.2739 637.248 34.6274 462.394 46.9188C241.894 62.4188 42.3936 18.9189 0.393555 0.918945" stroke="#0F172A" stroke-opacity="0.18" stroke-width="2" stroke-dasharray="8 8"></path>
           <g data-s2-arrow>
-            <path d="M526.71 403.601L508.197 392.072C507.978 391.934 507.688 392 507.551 392.22C507.463 392.359 507.455 392.534 507.53 392.681L513.19 403.999L507.527 415.319C507.41 415.55 507.502 415.832 507.733 415.949C507.88 416.024 508.055 416.016 508.194 415.928L526.707 404.399C526.927 404.263 526.995 403.974 526.859 403.754C526.821 403.692 526.769 403.64 526.707 403.602L526.71 403.601Z" fill="#1C4FD6"></path>
+            <path d="M526.71 403.601L508.197 392.072C507.978 391.934 507.688 392 507.551 392.22C507.463 392.359 507.455 392.534 507.53 392.681L513.19 403.999L507.527 415.319C507.41 415.55 507.502 415.832 507.733 415.949C507.88 416.024 508.055 416.016 508.194 415.928L526.707 404.399C526.927 404.263 526.995 403.974 526.859 403.754C526.821 403.692 526.769 403.64 526.707 403.602L526.71 403.601Z" fill="#10B981"></path>
           </g>
         </svg>
       </div>
@@ -1840,9 +1840,9 @@ function ts_render_mobile_apps_hub(): void
         uAmp: { value: 0.34 },
         uAlpha: { value: 0.92 },
         uPulse: { value: 1 },
-        uColA: { value: new THREE.Color("#1848C4") },
-        uColB: { value: new THREE.Color("#1C4FD6") },
-        uColC: { value: new THREE.Color("#1E7AFF") },
+        uColA: { value: new THREE.Color("#059669") },
+        uColB: { value: new THREE.Color("#10B981") },
+        uColC: { value: new THREE.Color("#34D399") },
         uMouse: { value: new THREE.Vector3(0, 0, 1) },
         uMouseStr: { value: 0 },
         uClickDir: { value: new THREE.Vector3(0, 0, 1) },
@@ -2000,8 +2000,8 @@ function ts_render_mobile_apps_hub(): void
         transparent: true, depthWrite: false, blending: THREE.NormalBlending,
         uniforms: {
           uTime: { value: 0 },
-          uColA: { value: new THREE.Color("#5B9BFF") },
-          uColB: { value: new THREE.Color("#1C4FD6") },
+          uColA: { value: new THREE.Color("#6EE7B7") },
+          uColB: { value: new THREE.Color("#10B981") },
         },
         vertexShader: `
           attribute float aRnd;
@@ -2380,10 +2380,10 @@ function ts_render_mobile_apps_hub(): void
   const stageLink = root.querySelector("[data-s2-stage-link]");
   const device = root.querySelector("[data-s2-device]");
   const accents = [
-    "linear-gradient(145deg, #1C4FD6, #3D6BE8 55%, #0B1A3A)",
-    "linear-gradient(145deg, #3D6BE8, #1C4FD6 50%, #0F172A)",
-    "linear-gradient(145deg, #0B1A3A, #1C4FD6 60%, #13233f)",
-    "linear-gradient(145deg, #5B7FE0, #1C4FD6 45%, #0B1A3A)",
+    "linear-gradient(145deg, #10B981, #34D399 55%, #064E3B)",
+    "linear-gradient(145deg, #34D399, #10B981 50%, #047857)",
+    "linear-gradient(145deg, #059669, #10B981 60%, #064E3B)",
+    "linear-gradient(145deg, #6EE7B7, #10B981 45%, #047857)",
   ];
   tabs.forEach((btn, i) => {
     btn.addEventListener("click", () => {

@@ -236,6 +236,120 @@ function ts_render_service_detail_dev(array $service): void
 
 function ts_render_service_detail(array $service): void
 {
+    if (($service["slug"] ?? "") === "website-development") {
+        require_once __DIR__ . "/wd-page.php";
+        ts_render_wd_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "software-development") {
+        require_once __DIR__ . "/sd-page.php";
+        ts_render_sd_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "crm-software") {
+        require_once __DIR__ . "/crm-page.php";
+        ts_render_crm_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "sharepoint-integration") {
+        require_once __DIR__ . "/sp-page.php";
+        ts_render_sp_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "netsuite-integration") {
+        require_once __DIR__ . "/ns-page.php";
+        ts_render_ns_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "e-commerce-platforms") {
+        require_once __DIR__ . "/ec-page.php";
+        ts_render_ec_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "android-app-development") {
+        require_once __DIR__ . "/android-page.php";
+        ts_render_android_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "ios-app-development") {
+        require_once __DIR__ . "/ios-page.php";
+        ts_render_ios_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "react-native-apps") {
+        require_once __DIR__ . "/rn-page.php";
+        ts_render_rn_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "flutter-apps") {
+        require_once __DIR__ . "/flutter-page.php";
+        ts_render_flutter_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "progressive-web-apps") {
+        require_once __DIR__ . "/pwa-page.php";
+        ts_render_pwa_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "support-and-maintenance") {
+        require_once __DIR__ . "/support-page.php";
+        ts_render_support_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "ui-ux-designing") {
+        require_once __DIR__ . "/uiux-page.php";
+        ts_render_uiux_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "brand-identity") {
+        require_once __DIR__ . "/brand-page.php";
+        ts_render_brand_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "logo-and-visual-design") {
+        require_once __DIR__ . "/logo-page.php";
+        ts_render_logo_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "design-systems") {
+        require_once __DIR__ . "/ds-page.php";
+        ts_render_ds_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "motion-graphics") {
+        require_once __DIR__ . "/motion-page.php";
+        ts_render_motion_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "product-design") {
+        require_once __DIR__ . "/pd-page.php";
+        ts_render_pd_service_page($service);
+        return;
+    }
+
+    if (($service["slug"] ?? "") === "interactive-prototypes") {
+        require_once __DIR__ . "/proto-page.php";
+        ts_render_proto_service_page($service);
+        return;
+    }
+
     if (($service["slug"] ?? "") === "search-engine-optimization") {
         require_once __DIR__ . "/seo-page.php";
         ts_render_seo_service_page($service);

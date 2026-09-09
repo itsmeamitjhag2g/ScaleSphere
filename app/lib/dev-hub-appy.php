@@ -25,7 +25,6 @@ function ts_render_development_hub(): void
         "SharePoint Integration" => ["We make it connected", "Document workflows and permissions that keep teams in sync."],
         "NetSuite Integration" => ["We make it operate", "ERP connectors and process automation without the chaos."],
         "E-Commerce Platforms" => ["We make it convert", "Stores, payments and inventory wired for revenue — not vanity."],
-        "API & Cloud Apps" => ["We make it extend", "APIs and cloud apps that plug into the stack you already trust."],
     ];
 
     $svcImages = [
@@ -35,14 +34,13 @@ function ts_render_development_hub(): void
         "SharePoint Integration" => "/images/dev/sharepoint.jpg",
         "NetSuite Integration" => "/images/dev/netsuite.jpg",
         "E-Commerce Platforms" => "/images/dev/ecommerce.jpg",
-        "API & Cloud Apps" => "/images/dev/api-cloud.jpg",
     ];
     $pool = array_values($svcImages);
 
     $featured = [
         [
             "label" => "Website Development",
-            "href" => "/services/website-development",
+            "href" => ts_service_href("Website Development"),
             "blurb" => "Marketing sites and product platforms that feel sharp and ship clean.",
             "meta" => "Web platforms",
             "img" => $svcImages["Website Development"],
@@ -50,7 +48,7 @@ function ts_render_development_hub(): void
         ],
         [
             "label" => "Software Development",
-            "href" => "/services/software-development",
+            "href" => ts_service_href("Software Development"),
             "blurb" => "End-to-end product engineering for teams that need reliability.",
             "meta" => "Custom software",
             "img" => $svcImages["Software Development"],
@@ -58,18 +56,18 @@ function ts_render_development_hub(): void
         ],
         [
             "label" => "E-Commerce Platforms",
-            "href" => "/services/e-commerce-platforms",
+            "href" => ts_service_href("E-Commerce Platforms"),
             "blurb" => "Commerce stacks that checkout smoothly and grow with catalog demand.",
             "meta" => "Commerce",
             "img" => $svcImages["E-Commerce Platforms"],
-            "thumb" => $svcImages["API & Cloud Apps"],
+            "thumb" => $svcImages["NetSuite Integration"],
         ],
         [
-            "label" => "API & Cloud Apps",
-            "href" => "/services/api-and-cloud-apps",
-            "blurb" => "Cloud-native services and APIs that keep integrations boring — in a good way.",
-            "meta" => "Cloud & APIs",
-            "img" => $svcImages["API & Cloud Apps"],
+            "label" => "NetSuite Integration",
+            "href" => ts_service_href("NetSuite Integration"),
+            "blurb" => "ERP sync and SuiteScript so orders, inventory and finance stay reconciled.",
+            "meta" => "ERP & sync",
+            "img" => $svcImages["NetSuite Integration"],
             "thumb" => $svcImages["E-Commerce Platforms"],
         ],
     ];
@@ -105,7 +103,7 @@ function ts_render_development_hub(): void
       overflow-x:visible !important;
     }
     .ap *{ box-sizing:border-box; }
-    .ap-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .ap-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
 
     /* ===== HERO — WEB APP letter reveal + light motion ===== */
     .ap-hero{
@@ -263,7 +261,7 @@ function ts_render_development_hub(): void
       top:calc(var(--header-h, 72px) + .85rem);
       left:0; right:0;
       z-index:5;
-      width:min(1120px, calc(100% - 2rem));
+      width:min(1320px, calc(100% - 1.25rem));
       margin:0 auto;
       display:flex;
       justify-content:space-between;
@@ -459,7 +457,7 @@ function ts_render_development_hub(): void
       gap:1.35rem;
       align-items:start;
       /* keep .ap-wrap max-width — do not stretch full bleed */
-      width:min(1120px, calc(100% - 2rem));
+      width:min(1320px, calc(100% - 1.25rem));
       margin-left:auto;
       margin-right:auto;
     }

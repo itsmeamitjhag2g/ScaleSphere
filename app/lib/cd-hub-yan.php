@@ -16,15 +16,15 @@ function ts_render_creative_design_hub(): void
 
     $services = ts_services_in_category("Creative Design");
 
-    /* Each service = its own folder color (on-brand blues + soft accents) */
+    /* Each service = its own folder color (Creative Design purple family) */
     $folderColors = [
-        "#1C4FD6",
-        "#5B7FE0",
-        "#0B1A3A",
-        "#6B9BD1",
-        "#3D7AE8",
-        "#8BB4E8",
-        "#1E4FD6",
+        "#7C3AED",
+        "#8B5CF6",
+        "#6D28D9",
+        "#A78BFA",
+        "#7C3AED",
+        "#C4B5FD",
+        "#5B21B6",
     ];
 
     $deskCards = [
@@ -66,8 +66,8 @@ function ts_render_creative_design_hub(): void
       --ink:#0F172A;
       --soft:#F6F7F9;
       --paper:#FAF8F5;
-      --blue:#1C4FD6;
-      --deep:#0B1A3A;
+      --blue:#7C3AED;
+      --deep:#4C1D95;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -75,7 +75,7 @@ function ts_render_creative_design_hub(): void
       color:var(--ink);
       overflow-x:clip;
     }
-    .yl-wrap{ width:min(1100px, calc(100% - 2rem)); margin:0 auto; }
+    .yl-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .yl-mono{ font-family:"IBM Plex Mono",ui-monospace,monospace; }
     .yl-serif{ font-family:"Instrument Serif",Georgia,serif; }
 
@@ -91,7 +91,7 @@ function ts_render_creative_design_hub(): void
       background-size:36px 36px, 36px 36px, auto;
     }
     .yl-desk-inner{
-      width:min(1100px,100%);
+      width:min(1320px,100%);
       margin:0 auto;
       position:relative;
       z-index:1;
@@ -384,8 +384,8 @@ function ts_render_creative_design_hub(): void
       transition:color .2s, border-color .2s, background .2s;
     }
     .yl-tab.is-on{
-      color:var(--blue); border-color:rgba(28,79,214,.35);
-      background:rgba(28,79,214,.08);
+      color:var(--blue); border-color:rgba(124,58,237,.35);
+      background:rgba(124,58,237,.08);
     }
     .yl-window-body{ padding:1.25rem; }
     .yl-grid{
@@ -406,7 +406,7 @@ function ts_render_creative_design_hub(): void
     .yl-file.is-focus{
       outline:2px solid var(--blue);
       outline-offset:2px;
-      box-shadow:0 14px 32px rgba(28,79,214,.15);
+      box-shadow:0 14px 32px rgba(124,58,237,.15);
     }
     .yl-file:hover{
       transform:translateY(-3px);

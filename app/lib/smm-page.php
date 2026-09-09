@@ -184,7 +184,7 @@ function ts_render_smm_service_page(array $service): void
     }
     body.page-svc-social-media-marketing,
     body.page-svc-social-media-marketing main{ background:#F6F7F9 !important; }
-    .smm-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .smm-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .smm-eyebrow{
       display:inline-flex; align-items:center; gap:.45rem;
       font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -401,20 +401,26 @@ function ts_render_smm_service_page(array $service): void
       .smm-loop-step:not(:last-child) i.arr{ display:block; }
     }
 
-    .smm-steps{ display:grid; gap:0; }
-    @media (min-width:800px){ .smm-steps{ grid-template-columns:1fr 1fr; gap:0 1.5rem; } }
-    .smm-step{
-      display:grid; grid-template-columns:auto 1fr; gap:.85rem;
-      padding:1rem 0; border-bottom:1px solid var(--smm-line);
+    /* Kanban process columns */
+    .smm-steps{
+      display:grid; gap:.75rem; grid-template-columns:1fr;
     }
+    @media (min-width:800px){ .smm-steps{ grid-template-columns:repeat(3, 1fr); gap:.85rem; } }
+    .smm-step{
+      display:grid; grid-template-columns:auto 1fr; gap:.75rem; align-items:start;
+      padding:1.1rem 1rem; border:1px dashed rgba(219,39,119,.35); border-radius:14px;
+      background:#FDF2F8; border-bottom:1px dashed rgba(219,39,119,.35);
+      transition:border-style .25s, transform .3s;
+    }
+    .smm-step:hover{ border-style:solid; transform:translateY(-3px); }
     .smm-step-num{
-      width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-      background:var(--smm-pink); color:#fff; font-weight:800; font-size:13px;
+      width:36px; height:36px; border-radius:8px; display:grid; place-items:center;
+      background:var(--smm-pink); color:#fff; font-weight:800; font-size:12px;
       font-family:Montserrat,system-ui,sans-serif;
     }
-    .smm-step-when{ display:block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--smm-pink); margin-bottom:.2rem; }
-    .smm-step h3{ margin:0 0 .25rem; font-size:1.05rem; font-weight:800; }
-    .smm-step p{ margin:0; font-size:13.5px; color:var(--smm-body); line-height:1.5; }
+    .smm-step-when{ display:block; font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--smm-pink); margin-bottom:.2rem; }
+    .smm-step h3{ margin:0 0 .25rem; font-size:1rem; font-weight:800; }
+    .smm-step p{ margin:0; font-size:13px; color:var(--smm-body); line-height:1.5; }
 
     .smm-split{ display:grid; gap:1.5rem; }
     @media (min-width:900px){ .smm-split{ grid-template-columns:1fr 1fr; gap:2rem; } }
@@ -459,16 +465,25 @@ function ts_render_smm_service_page(array $service): void
       background:#fff; font-size:13px; font-weight:700;
     }
 
-    .smm-pkg{ display:flex; flex-direction:column; gap:.75rem; }
+    /* Stacked package rows */
+    .smm-pkgs{ display:grid !important; gap:.7rem !important; grid-template-columns:1fr !important; }
+    .smm-pkg{
+      display:grid !important; gap:.7rem 1.5rem; flex-direction:unset;
+      border-radius:14px;
+    }
+    @media (min-width:800px){
+      .smm-pkg{ grid-template-columns:140px 1fr auto; align-items:center; }
+      .smm-pkg ul{ grid-template-columns:1fr 1fr; }
+    }
     .smm-pkg.is-hot{
       border-color:rgba(28,79,214,.4);
       box-shadow:0 0 0 1px rgba(28,79,214,.1);
-      background:linear-gradient(180deg, rgba(28,79,214,.06), #fff 40%);
+      background:linear-gradient(105deg, rgba(219,39,119,.06), #fff 40%);
     }
-    .smm-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
-    .smm-pkg h3{ margin:0; font-size:1.2rem; font-weight:800; }
+    .smm-pkg-top{ display:flex; flex-direction:column; gap:.2rem; }
+    .smm-pkg h3{ margin:0; font-size:1.15rem; font-weight:800; }
     .smm-pkg-tag{ font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--smm-pink); }
-    .smm-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.4rem; flex:1; }
+    .smm-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.35rem; flex:1; }
     .smm-pkg li{ font-size:13.5px; color:var(--smm-body); padding-left:1rem; position:relative; }
     .smm-pkg li::before{
       content:""; position:absolute; left:0; top:.55em;
@@ -476,16 +491,52 @@ function ts_render_smm_service_page(array $service): void
     }
     .smm-pkg > p{ margin:0; font-size:12.5px; color:var(--smm-muted); }
 
-    .smm-faq{ display:grid; gap:.55rem; max-width:720px; }
-    .smm-faq details{ border:1px solid var(--smm-line); border-radius:14px; background:#fff; overflow:hidden; }
-    .smm-faq summary{
-      list-style:none; cursor:pointer; padding:1rem 1.15rem; font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem; align-items:center;
+    /* FAQ — padded pills + animated +/- */
+    .smm-faq{ display:grid; gap:.75rem; max-width:720px; }
+    .smm-faq details{
+      border:1px solid var(--smm-line); border-radius:999px; background:#fff;
+      overflow:hidden; box-shadow:3px 3px 0 rgba(15,23,42,.08);
+      transition:border-radius .25s ease, box-shadow .25s ease;
     }
+    .smm-faq details[open]{
+      border-radius:22px; box-shadow:4px 4px 0 rgba(28,79,214,.12);
+      border-color:rgba(28,79,214,.35);
+    }
+    .smm-faq summary{
+      list-style:none; cursor:pointer;
+      padding:1rem 1.15rem 1rem 1.35rem;
+      font-weight:700; font-size:14.5px; line-height:1.35;
+      display:flex; justify-content:space-between; gap:1rem; align-items:center;
+      color:var(--smm-ink); transition:color .25s;
+    }
+    .smm-faq details[open] summary{ color:var(--smm-pink); }
     .smm-faq summary::-webkit-details-marker{ display:none; }
-    .smm-faq summary i{ font-size:11px; color:var(--smm-muted); transition:transform .2s ease; }
-    .smm-faq details[open] summary i{ transform:rotate(180deg); color:var(--smm-pink); }
-    .smm-faq details p{ margin:0; padding:0 1.15rem 1.1rem; font-size:14px; line-height:1.55; color:var(--smm-body); }
+    .smm-faq-toggle{
+      position:relative; flex-shrink:0;
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(28,79,214,.08); border:1px solid rgba(28,79,214,.2);
+      transition:background .25s, border-color .25s, transform .25s;
+    }
+    .smm-faq-toggle::before,
+    .smm-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--smm-pink); border-radius:1px;
+      transition:transform .28s ease, opacity .28s ease;
+    }
+    .smm-faq-toggle::before{ width:12px; height:2px; transform:translate(-50%,-50%); }
+    .smm-faq-toggle::after{ width:2px; height:12px; transform:translate(-50%,-50%); }
+    .smm-faq details[open] .smm-faq-toggle{
+      background:var(--smm-pink); border-color:var(--smm-pink); transform:rotate(180deg);
+    }
+    .smm-faq details[open] .smm-faq-toggle::before{ background:#fff; }
+    .smm-faq details[open] .smm-faq-toggle::after{
+      background:#fff; transform:translate(-50%,-50%) rotate(90deg) scaleY(0);
+      opacity:0;
+    }
+    .smm-faq details p{
+      margin:0; padding:0 1.35rem 1.15rem;
+      font-size:14px; line-height:1.55; color:var(--smm-body);
+    }
 
     .smm-rel{
       display:flex; align-items:center; gap:.75rem;
@@ -836,7 +887,7 @@ function ts_render_smm_service_page(array $service): void
       <div class="smm-faq">
         <?php foreach ($faqs as $faq): ?>
         <details data-smm-reveal>
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <summary><?= ts_h($faq[0]) ?> <span class="smm-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>

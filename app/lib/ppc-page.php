@@ -26,7 +26,7 @@ function ts_render_ppc_service_page(array $service): void
         return ($rank[$a["slug"]] ?? 9) <=> ($rank[$b["slug"]] ?? 9);
     });
 
-    $semHref = "/services/search-engine-marketing";
+    $semHref = ts_service_href("Search Engine Marketing");
     foreach ($related as $r) {
         if (($r["slug"] ?? "") === "search-engine-marketing") {
             $semHref = $r["href"];
@@ -192,7 +192,7 @@ function ts_render_ppc_service_page(array $service): void
     }
     body.page-svc-pay-per-click,
     body.page-svc-pay-per-click main{ background:#F6F7F9 !important; }
-    .ppc-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .ppc-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .ppc-eyebrow{
       display:inline-flex; align-items:center; gap:.45rem;
       font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -392,20 +392,89 @@ function ts_render_ppc_service_page(array $service): void
     }
     .ppc-funnel-note{ font-size:12px; color:var(--ppc-muted); margin-top:.15rem; }
 
-    .ppc-steps{ display:grid; gap:0; }
-    @media (min-width:800px){ .ppc-steps{ grid-template-columns:1fr 1fr; gap:0 1.5rem; } }
-    .ppc-step{
-      display:grid; grid-template-columns:auto 1fr; gap:.85rem;
-      padding:1rem 0; border-bottom:1px solid var(--ppc-line);
+    /* Process — animated pulse flow */
+    .ppc-flow{
+      position:relative;
+      margin-top:.25rem;
     }
-    .ppc-step-num{
-      width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-      background:var(--ppc-pink); color:#fff; font-weight:800; font-size:13px;
+    .ppc-flow-track{
+      display:none;
+      position:absolute; left:8%; right:8%; top:28px; height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(28,79,214,.12), rgba(28,79,214,.28), rgba(28,79,214,.12));
+      overflow:hidden; z-index:0;
+    }
+    .ppc-flow-pulse{
+      position:absolute; top:0; left:0; height:100%; width:28%;
+      border-radius:inherit;
+      background:linear-gradient(90deg, transparent, var(--ppc-pink), #6B8FF0, transparent);
+      animation:ppc-pulse-run 2.8s ease-in-out infinite;
+    }
+    @keyframes ppc-pulse-run{
+      0%{ transform:translateX(-120%); opacity:.4; }
+      40%{ opacity:1; }
+      100%{ transform:translateX(380%); opacity:.4; }
+    }
+    .ppc-flow-steps{
+      display:grid; gap:.85rem;
+      grid-template-columns:1fr;
+      position:relative; z-index:1;
+    }
+    @media (min-width:700px){
+      .ppc-flow-steps{ grid-template-columns:repeat(2, 1fr); }
+    }
+    @media (min-width:1100px){
+      .ppc-flow-track{ display:block; }
+      .ppc-flow-steps{ grid-template-columns:repeat(6, 1fr); gap:.65rem; }
+    }
+    .ppc-flow-step{
+      text-align:center;
+      padding:1.15rem .85rem 1.2rem;
+      border:1px solid var(--ppc-line);
+      border-radius:18px;
+      background:#fff;
+      transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+      min-width:0;
+    }
+    .ppc-flow-step:hover{
+      transform:translateY(-4px);
+      border-color:rgba(28,79,214,.35);
+      box-shadow:0 14px 32px rgba(28,79,214,.12);
+    }
+    .ppc-flow-node{
+      width:56px; height:56px; margin:0 auto .85rem;
+      border-radius:50%;
+      display:grid; place-items:center;
+      position:relative;
+      background:
+        radial-gradient(circle at 30% 28%, #6B9BFF 0%, var(--ppc-pink) 58%, var(--ppc-pink-d) 100%);
+      color:#fff;
       font-family:Montserrat,system-ui,sans-serif;
+      font-size:14px; font-weight:800; letter-spacing:.02em;
+      box-shadow:
+        0 0 0 6px rgba(28,79,214,.08),
+        0 10px 22px rgba(28,79,214,.28);
+      animation:ppc-node-breathe 3.2s ease-in-out infinite;
     }
-    .ppc-step-when{ display:block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--ppc-pink); margin-bottom:.2rem; }
-    .ppc-step h3{ margin:0 0 .25rem; font-size:1.05rem; font-weight:800; }
-    .ppc-step p{ margin:0; font-size:13.5px; color:var(--ppc-body); line-height:1.5; }
+    .ppc-flow-step:nth-child(2) .ppc-flow-node{ animation-delay:.25s; }
+    .ppc-flow-step:nth-child(3) .ppc-flow-node{ animation-delay:.5s; }
+    .ppc-flow-step:nth-child(4) .ppc-flow-node{ animation-delay:.75s; }
+    .ppc-flow-step:nth-child(5) .ppc-flow-node{ animation-delay:1s; }
+    .ppc-flow-step:nth-child(6) .ppc-flow-node{ animation-delay:1.25s; }
+    @keyframes ppc-node-breathe{
+      0%,100%{ box-shadow:0 0 0 6px rgba(28,79,214,.08),0 10px 22px rgba(28,79,214,.28); transform:scale(1); }
+      50%{ box-shadow:0 0 0 10px rgba(28,79,214,.14),0 12px 26px rgba(28,79,214,.36); transform:scale(1.04); }
+    }
+    .ppc-flow-when{
+      display:block; font-size:10px; font-weight:800; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--ppc-pink); margin-bottom:.3rem;
+    }
+    .ppc-flow-step h3{
+      margin:0 0 .35rem; font-size:1rem; font-weight:800; line-height:1.25;
+    }
+    .ppc-flow-step p{
+      margin:0; font-size:12.5px; color:var(--ppc-body); line-height:1.45;
+    }
 
     .ppc-split{ display:grid; gap:1.5rem; }
     @media (min-width:900px){ .ppc-split{ grid-template-columns:1fr 1fr; gap:2rem; } }
@@ -463,11 +532,24 @@ function ts_render_ppc_service_page(array $service): void
       background:#fff; font-size:13px; font-weight:700;
     }
 
-    .ppc-pkg{ display:flex; flex-direction:column; gap:.75rem; }
+    /* Comparison strip packages */
+    .ppc-pkgs{
+      display:grid !important; gap:0 !important; border:1px solid var(--ppc-line); border-radius:18px; overflow:hidden;
+      grid-template-columns:1fr !important;
+    }
+    @media (min-width:900px){ .ppc-pkgs{ grid-template-columns:repeat(3,1fr) !important; } }
+    .ppc-pkg{
+      display:flex; flex-direction:column; gap:.75rem;
+      border-radius:0 !important; border:none !important; border-bottom:1px solid var(--ppc-line) !important;
+    }
+    @media (min-width:900px){
+      .ppc-pkg{ border-bottom:none !important; border-right:1px solid var(--ppc-line) !important; }
+      .ppc-pkg:last-child{ border-right:none !important; }
+    }
     .ppc-pkg.is-hot{
-      border-color:rgba(28,79,214,.4);
-      box-shadow:0 0 0 1px rgba(28,79,214,.1);
-      background:linear-gradient(180deg, rgba(28,79,214,.06), #fff 40%);
+      border-color:transparent;
+      box-shadow:inset 0 3px 0 var(--ppc-pink);
+      background:linear-gradient(180deg, rgba(219,39,119,.06), #fff 40%);
     }
     .ppc-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
     .ppc-pkg h3{ margin:0; font-size:1.2rem; font-weight:800; }
@@ -480,16 +562,52 @@ function ts_render_ppc_service_page(array $service): void
     }
     .ppc-pkg > p{ margin:0; font-size:12.5px; color:var(--ppc-muted); }
 
-    .ppc-faq{ display:grid; gap:.55rem; max-width:720px; }
-    .ppc-faq details{ border:1px solid var(--ppc-line); border-radius:14px; background:#fff; overflow:hidden; }
-    .ppc-faq summary{
-      list-style:none; cursor:pointer; padding:1rem 1.15rem; font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem; align-items:center;
+    /* FAQ — padded pills + animated +/- */
+    .ppc-faq{ display:grid; gap:.75rem; max-width:720px; }
+    .ppc-faq details{
+      border:1px solid var(--ppc-line); border-radius:999px; background:#fff;
+      overflow:hidden; box-shadow:3px 3px 0 rgba(15,23,42,.08);
+      transition:border-radius .25s ease, box-shadow .25s ease;
     }
+    .ppc-faq details[open]{
+      border-radius:22px; box-shadow:4px 4px 0 rgba(28,79,214,.12);
+      border-color:rgba(28,79,214,.35);
+    }
+    .ppc-faq summary{
+      list-style:none; cursor:pointer;
+      padding:1rem 1.15rem 1rem 1.35rem;
+      font-weight:700; font-size:14.5px; line-height:1.35;
+      display:flex; justify-content:space-between; gap:1rem; align-items:center;
+      color:var(--ppc-ink); transition:color .25s; text-align:left;
+    }
+    .ppc-faq details[open] summary{ color:var(--ppc-pink); }
     .ppc-faq summary::-webkit-details-marker{ display:none; }
-    .ppc-faq summary i{ font-size:11px; color:var(--ppc-muted); transition:transform .2s ease; }
-    .ppc-faq details[open] summary i{ transform:rotate(180deg); color:var(--ppc-pink); }
-    .ppc-faq details p{ margin:0; padding:0 1.15rem 1.1rem; font-size:14px; line-height:1.55; color:var(--ppc-body); }
+    .ppc-faq-toggle{
+      position:relative; flex-shrink:0;
+      width:28px; height:28px; border-radius:50%;
+      background:rgba(28,79,214,.08); border:1px solid rgba(28,79,214,.2);
+      transition:background .25s, border-color .25s, transform .25s;
+    }
+    .ppc-faq-toggle::before,
+    .ppc-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--ppc-pink); border-radius:1px;
+      transition:transform .28s ease, opacity .28s ease;
+    }
+    .ppc-faq-toggle::before{ width:12px; height:2px; transform:translate(-50%,-50%); }
+    .ppc-faq-toggle::after{ width:2px; height:12px; transform:translate(-50%,-50%); }
+    .ppc-faq details[open] .ppc-faq-toggle{
+      background:var(--ppc-pink); border-color:var(--ppc-pink); transform:rotate(180deg);
+    }
+    .ppc-faq details[open] .ppc-faq-toggle::before{ background:#fff; }
+    .ppc-faq details[open] .ppc-faq-toggle::after{
+      background:#fff; transform:translate(-50%,-50%) rotate(90deg) scaleY(0);
+      opacity:0;
+    }
+    .ppc-faq details p{
+      margin:0; padding:0 1.35rem 1.15rem;
+      font-size:14px; line-height:1.55; color:var(--ppc-body); text-align:left;
+    }
 
     .ppc-rel{
       display:flex; align-items:center; gap:.75rem;
@@ -509,6 +627,8 @@ function ts_render_ppc_service_page(array $service): void
     [data-ppc-reveal].is-in{ opacity:1; transform:none; }
     @media (prefers-reduced-motion: reduce){
       [data-ppc-reveal], [data-ppc-reveal].is-in{ opacity:1; transform:none; transition:none; }
+      .ppc-flow-pulse, .ppc-flow-node{ animation:none !important; }
+      .ppc-flow-step:hover{ transform:none; }
       .ppc-tile:hover, .ppc-rel:hover, .ppc-chan:hover, .ppc-btn:hover, .ppc-dash-card:hover{ transform:none; }
       .ppc-dash-bar i{ width:59%; transition:none; }
     }
@@ -700,17 +820,18 @@ function ts_render_ppc_service_page(array $service): void
         <h2>Audit → track → build → launch → weekly optimize</h2>
         <p class="ppc-lead">You always know the rhythm — and the north-star KPI we’re optimizing toward.</p>
       </div>
-      <div class="ppc-steps">
-        <?php foreach ($steps as $step): ?>
-        <article class="ppc-step" data-ppc-reveal>
-          <span class="ppc-step-num" aria-hidden="true"><?= ts_h($step[0]) ?></span>
-          <div>
-            <span class="ppc-step-when"><?= ts_h($step[1]) ?></span>
+      <div class="ppc-flow" data-ppc-flow>
+        <div class="ppc-flow-track" aria-hidden="true"><span class="ppc-flow-pulse"></span></div>
+        <div class="ppc-flow-steps">
+          <?php foreach ($steps as $step): ?>
+          <article class="ppc-flow-step" data-ppc-reveal>
+            <div class="ppc-flow-node" aria-hidden="true"><?= ts_h($step[0]) ?></div>
+            <span class="ppc-flow-when"><?= ts_h($step[1]) ?></span>
             <h3><?= ts_h($step[2]) ?></h3>
             <p><?= ts_h($step[3]) ?></p>
-          </div>
-        </article>
-        <?php endforeach; ?>
+          </article>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>
@@ -855,7 +976,7 @@ function ts_render_ppc_service_page(array $service): void
       <div class="ppc-faq">
         <?php foreach ($faqs as $faq): ?>
         <details data-ppc-reveal>
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <summary><?= ts_h($faq[0]) ?> <span class="ppc-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>

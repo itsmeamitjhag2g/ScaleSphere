@@ -236,24 +236,6 @@ const TS_SERVICE_PAGES = [
         "use_cases" => ["D2C brands launching first online store", "Retailers migrating from legacy platforms", "B2B wholesale ordering portals"],
         "technologies" => ["Shopify", "WooCommerce", "Stripe", "Magento", "React"],
     ],
-    "api-and-cloud-apps" => [
-        "lead" => "Build secure REST and GraphQL APIs plus cloud-native apps on AWS, Azure or GCP.",
-        "overview" => "APIs are the backbone of modern products. We design contracts, implement authentication, deploy to cloud infrastructure and document endpoints so partners and internal teams integrate quickly and safely.",
-        "features" => [
-            ["API Design", "RESTful or GraphQL schemas with versioning strategy."],
-            ["Auth & Security", "OAuth, JWT, rate limiting and input validation."],
-            ["Cloud Deployment", "Containers, serverless or managed services with monitoring."],
-            ["Developer Docs", "OpenAPI specs, SDKs and sandbox environments."],
-        ],
-        "benefits" => [
-            ["Integration Speed", "Partners connect in days with clear documentation."],
-            ["Scalability", "Auto-scaling infrastructure handles traffic spikes."],
-            ["Reliability", "Health checks, logging and alerting built in."],
-            ["Future-Proof", "Modular services easy to extend and replace."],
-        ],
-        "use_cases" => ["Mobile apps needing backend APIs", "Partner ecosystems and marketplaces", "Microservices modernization"],
-        "technologies" => ["Node.js", "Laravel", "AWS Lambda", "Docker", "Kubernetes", "Postman"],
-    ],
     "android-app-development" => [
         "lead" => "Native Android apps with Material Design, smooth performance and Play Store-ready delivery.",
         "overview" => "We build Android applications in Kotlin with modern architecture components, offline support and secure API integration. From MVPs to enterprise apps, our process covers design, development, testing and Play Store submission.",
@@ -344,24 +326,6 @@ const TS_SERVICE_PAGES = [
         "use_cases" => ["Retail and news sites wanting app-like UX", "Emerging markets with limited storage", "Internal tools for distributed teams"],
         "technologies" => ["React", "Vue", "Workbox", "Lighthouse", "Web Push API"],
     ],
-    "app-ui-engineering" => [
-        "lead" => "Pixel-perfect mobile UI implementation — components, animations and design-dev handoff done right.",
-        "overview" => "Great design fails without great implementation. Our UI engineers translate Figma specs into production-ready screens with micro-interactions, accessibility and performance tuned for 60fps scroll and transitions.",
-        "features" => [
-            ["Design System Implementation", "Reusable components matching design tokens."],
-            ["Micro-Interactions", "Gestures, haptics and motion that delight users."],
-            ["Cross-Platform Parity", "Consistent UI on iOS and Android from one spec."],
-            ["Handoff Documentation", "Specs, redlines and component usage guides."],
-        ],
-        "benefits" => [
-            ["Design Fidelity", "What you approved is what users see."],
-            ["Faster Dev Cycles", "Component library reduces duplicate work."],
-            ["Better UX Scores", "Smooth interactions improve retention."],
-            ["Designer-Dev Bridge", "Fewer back-and-forth rounds on visuals."],
-        ],
-        "use_cases" => ["Teams with designs ready but needing implementation", "Apps undergoing UI refresh without backend rewrite", "Design system rollout across product suite"],
-        "technologies" => ["Figma", "React Native", "Flutter", "Lottie", "Storybook"],
-    ],
     "support-and-maintenance" => [
         "lead" => "Keep your app healthy with bug fixes, OS updates, monitoring and feature enhancements on retainer.",
         "overview" => "Launch is just the beginning. We provide SLA-backed support, crash monitoring, compatibility updates for new iOS/Android releases and a backlog pipeline for iterative improvements your users request.",
@@ -381,7 +345,7 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Firebase Crashlytics", "Sentry", "Fastlane", "GitHub Actions", "App Store Connect"],
     ],
     "ui-ux-designing" => [
-        "lead" => "User-centered UI/UX design — research, wireframes and high-fidelity screens that improve conversion and satisfaction.",
+        "lead" => "UI/UX design for web and mobile — research, wireframes, polished interfaces and usability testing that improve clarity and conversion.",
         "overview" => "We start with understanding users through interviews and analytics, then map journeys and wireframes before crafting polished interfaces. Usability testing validates decisions before development begins, saving rework cost.",
         "features" => [
             ["User Research", "Interviews, surveys and heuristic evaluations."],
@@ -399,7 +363,7 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Figma", "Maze", "Hotjar", "FigJam", "Principle"],
     ],
     "brand-identity" => [
-        "lead" => "Define your brand with logo, color palette, typography and guidelines that scale across every channel.",
+        "lead" => "Brand identity systems — strategy, logo suite, colour, typography and guidelines that stay consistent across every channel.",
         "overview" => "Brand identity is more than a logo — it is how customers recognize and trust you. We develop strategic positioning, visual systems and comprehensive brand books so internal teams and partners stay on brand.",
         "features" => [
             ["Brand Strategy", "Positioning, voice and audience definition workshops."],
@@ -417,8 +381,8 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Illustrator", "Figma", "InDesign", "Brandfolder", "Canva"],
     ],
     "logo-and-visual-design" => [
-        "lead" => "Distinctive logos and visual assets for digital, print and social — delivered in every format you need.",
-        "overview" => "We explore multiple logo concepts, refine based on feedback and deliver master files plus variants for dark mode, favicons and social profiles. Supporting visuals reinforce your message across campaigns.",
+        "lead" => "Marks that hold from favicon to signage — logos, lockups and campaign visuals in every format your team needs.",
+        "overview" => "We explore a few strong logo directions with clear rationale, refine geometry and personality, then deliver masters plus mono, reverse, favicon and social kits. Supporting visuals keep launches and campaigns on-brand.",
         "features" => [
             ["Concept Exploration", "Multiple directions with rationale for each."],
             ["Refinement Rounds", "Iterative polish until the mark feels right."],
@@ -435,7 +399,7 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Illustrator", "Photoshop", "Figma", "Affinity Designer"],
     ],
     "design-systems" => [
-        "lead" => "Unified design systems with components, tokens and documentation — ship features faster with consistency.",
+        "lead" => "Design systems that connect Figma and code — tokens, components, docs and adoption so every squad ships the same UI language.",
         "overview" => "Design systems reduce inconsistency and speed up product teams. We audit existing UI, define tokens, build component libraries in Figma and sync with Storybook or code so designers and developers speak one language.",
         "features" => [
             ["UI Audit", "Inventory of patterns, gaps and inconsistencies."],
@@ -453,7 +417,7 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Figma", "Storybook", "Tailwind", "Style Dictionary", "Chromatic"],
     ],
     "motion-graphics" => [
-        "lead" => "Engaging motion graphics for explainers, social ads, UI animations and brand storytelling.",
+        "lead" => "Motion that stops the scroll — explainers, social cuts and UI micro-animations storyboarded for every channel.",
         "overview" => "Motion captures attention and explains complex ideas quickly. We storyboard, animate and export for web, social and app contexts — including Lottie files for lightweight UI micro-animations.",
         "features" => [
             ["Storyboarding", "Scripts and frames aligned to message and brand."],
@@ -471,8 +435,8 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["After Effects", "Lottie", "Premiere Pro", "Cinema 4D", "Rive"],
     ],
     "product-design" => [
-        "lead" => "End-to-end product design from discovery to developer handoff — UX strategy, UI and design sprints.",
-        "overview" => "Product design spans the full lifecycle. We facilitate design sprints, validate ideas with prototypes and deliver specs developers can build without guesswork — keeping user needs and business goals aligned.",
+        "lead" => "Product design from discovery to handoff — journeys, UI and validated prototypes so you build the right experience.",
+        "overview" => "Product design spans the full lifecycle. We facilitate discovery and design sprints, validate ideas with prototypes and deliver specs developers can build without guesswork — keeping user needs and business goals aligned.",
         "features" => [
             ["Product Discovery", "Problem framing, opportunity mapping and prioritization."],
             ["Design Sprints", "Five-day cycles from challenge to tested prototype."],
@@ -489,7 +453,7 @@ const TS_SERVICE_PAGES = [
         "technologies" => ["Figma", "FigJam", "Maze", "Notion", "Jira"],
     ],
     "interactive-prototypes" => [
-        "lead" => "Clickable prototypes for user testing, investor pitches and dev alignment — before writing production code.",
+        "lead" => "Clickable prototypes for demos, usability tests and developer alignment — feel the product before you build it.",
         "overview" => "Prototypes make ideas tangible. We build high-fidelity interactive flows in Figma or Framer, run test scripts with real users and iterate until the experience feels right — saving months of potential rework.",
         "features" => [
             ["Clickable Flows", "Multi-screen journeys with realistic interactions."],

@@ -155,7 +155,7 @@ function ts_render_sem_service_page(array $service): void
     }
     body.page-svc-search-engine-marketing,
     body.page-svc-search-engine-marketing main{ background:#F6F7F9 !important; }
-    .sem-wrap{ width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
+    .sem-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
     .sem-eyebrow{
       display:inline-flex; align-items:center; gap:.45rem;
       font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
@@ -288,20 +288,29 @@ function ts_render_sem_service_page(array $service): void
     .sem-tile h3{ font-size:1.05rem; }
     .sem-pain p, .sem-tile p{ margin:0; font-size:13px; line-height:1.45; color:var(--sem-body); }
 
-    .sem-steps{ display:grid; gap:0; }
-    @media (min-width:800px){ .sem-steps{ grid-template-columns:1fr 1fr; gap:0 1.5rem; } }
+    /* Process grid — all steps visible, no horizontal scroll */
+    .sem-steps{
+      display:grid; gap:.85rem;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:640px){ .sem-steps{ grid-template-columns:repeat(2, 1fr); } }
+    @media (min-width:1100px){ .sem-steps{ grid-template-columns:repeat(5, 1fr); } }
     .sem-step{
       display:grid; grid-template-columns:auto 1fr; gap:.85rem;
-      padding:1rem 0; border-bottom:1px solid var(--sem-line);
+      padding:1.1rem 1.05rem; border:1px solid var(--sem-line); border-radius:16px;
+      background:#fff; border-bottom:1px solid var(--sem-line);
+      border-top:3px solid var(--sem-pink);
+      transition:transform .3s; min-width:0;
     }
+    .sem-step:hover{ transform:translateY(-4px); }
     .sem-step-num{
-      width:44px; height:44px; border-radius:12px; display:grid; place-items:center;
-      background:var(--sem-pink); color:#fff; font-weight:800; font-size:13px;
+      width:40px; height:40px; border-radius:10px; display:grid; place-items:center;
+      background:var(--sem-pink); color:#fff; font-weight:800; font-size:12px;
       font-family:Montserrat,system-ui,sans-serif;
     }
     .sem-step-when{ display:block; font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--sem-pink); margin-bottom:.2rem; }
-    .sem-step h3{ margin:0 0 .25rem; font-size:1.05rem; font-weight:800; }
-    .sem-step p{ margin:0; font-size:13.5px; color:var(--sem-body); line-height:1.5; }
+    .sem-step h3{ margin:0 0 .25rem; font-size:1.02rem; font-weight:800; }
+    .sem-step p{ margin:0; font-size:13px; color:var(--sem-body); line-height:1.5; }
 
     .sem-split{ display:grid; gap:1.5rem; }
     @media (min-width:900px){ .sem-split{ grid-template-columns:1fr 1fr; gap:2rem; } }
@@ -379,9 +388,21 @@ function ts_render_sem_service_page(array $service): void
     }
 
     .sem-pkg{ display:flex; flex-direction:column; gap:.75rem; }
+    .sem-pkgs{
+      display:grid !important; gap:0 !important; border:1px solid var(--sem-line);
+      border-radius:18px; overflow:hidden; grid-template-columns:1fr !important;
+    }
+    @media (min-width:900px){ .sem-pkgs{ grid-template-columns:repeat(3,1fr) !important; } }
+    .sem-pkgs .sem-pkg{
+      border-radius:0 !important; border:none !important; border-bottom:1px solid var(--sem-line) !important;
+    }
+    @media (min-width:900px){
+      .sem-pkgs .sem-pkg{ border-bottom:none !important; border-right:1px solid var(--sem-line) !important; }
+      .sem-pkgs .sem-pkg:last-child{ border-right:none !important; }
+    }
     .sem-pkg.is-hot{
-      border-color:rgba(28,79,214,.4);
-      box-shadow:0 0 0 1px rgba(28,79,214,.1);
+      border-color:transparent;
+      box-shadow:inset 0 3px 0 var(--sem-pink);
       background:linear-gradient(180deg, rgba(28,79,214,.06), #fff 40%);
     }
     .sem-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
@@ -402,8 +423,12 @@ function ts_render_sem_service_page(array $service): void
     }
     .sem-vs strong{ color:var(--sem-ink); }
 
-    .sem-faq{ display:grid; gap:.55rem; max-width:720px; }
-    .sem-faq details{ border:1px solid var(--sem-line); border-radius:14px; background:#fff; overflow:hidden; }
+    .sem-faq{ display:grid; gap:.75rem; max-width:880px; }
+    .sem-faq details{
+      border:1px solid var(--sem-line); border-radius:0; border-left:3px solid var(--sem-pink);
+      background:#fff; overflow:hidden;
+    }
+    .sem-faq details[open]{ background:rgba(219,39,119,.04); }
     .sem-faq summary{
       list-style:none; cursor:pointer; padding:1rem 1.15rem; font-weight:700; font-size:14.5px;
       display:flex; justify-content:space-between; gap:1rem; align-items:center;
