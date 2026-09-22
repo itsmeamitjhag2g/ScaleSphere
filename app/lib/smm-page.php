@@ -253,55 +253,88 @@ function ts_render_smm_service_page(array $service): void
     }
     .smm-proof-line span{ color:var(--smm-pink); }
 
-    /* Phone feed mock */
+    /* Phone feed mock — real IG-style profile */
     .smm-phone{
-      width:min(280px, 100%);
+      width:min(300px, 100%);
       margin:0 auto;
       background:#fff;
       border:1px solid var(--smm-line);
       border-radius:28px;
-      padding:12px 12px 16px;
+      padding:10px 10px 14px;
       box-shadow:0 22px 50px rgba(15,23,42,.1);
       position:relative;
     }
     .smm-phone-notch{
       width:88px; height:8px; border-radius:999px; background:#E2E8F0;
-      margin:4px auto 12px;
+      margin:2px auto 10px;
     }
     .smm-phone-head{
-      display:flex; align-items:center; gap:.65rem; margin-bottom:.85rem; padding:0 .25rem;
+      display:flex; align-items:center; gap:.7rem; margin-bottom:.75rem; padding:0 .2rem;
     }
     .smm-phone-av{
-      width:40px; height:40px; border-radius:50%;
-      background:conic-gradient(from 210deg, var(--smm-pink), #7EB6FF, var(--smm-pink));
+      width:44px; height:44px; border-radius:50%; flex-shrink:0;
+      background:conic-gradient(from 210deg, var(--smm-pink), #7EB6FF, #F472B6, var(--smm-pink));
       padding:2px;
     }
-    .smm-phone-av span{
-      display:block; width:100%; height:100%; border-radius:50%; background:#fff;
-      background-image:linear-gradient(135deg, #EEF3FF, #fff);
+    .smm-phone-av img{
+      display:block; width:100%; height:100%; border-radius:50%;
+      object-fit:cover; background:#fff; border:2px solid #fff;
     }
-    .smm-phone-head strong{ display:block; font-size:13px; font-weight:800; }
+    .smm-phone-head strong{ display:block; font-size:13px; font-weight:800; letter-spacing:-.01em; }
     .smm-phone-head small{ color:var(--smm-muted); font-size:11px; }
+    .smm-phone-stats{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:.35rem;
+      margin:0 0 .75rem; padding:.55rem .35rem;
+      border-top:1px solid #F1F5F9; border-bottom:1px solid #F1F5F9;
+      text-align:center;
+    }
+    .smm-phone-stats b{ display:block; font-size:13px; font-weight:800; color:var(--smm-ink); line-height:1.2; }
+    .smm-phone-stats span{ font-size:10px; font-weight:600; color:var(--smm-muted); text-transform:uppercase; letter-spacing:.04em; }
     .smm-phone-grid{
-      display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px;
-      border-radius:10px; overflow:hidden;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+      border-radius:8px; overflow:hidden; background:#E2E8F0;
     }
     .smm-phone-cell{
-      aspect-ratio:1; background:#F1F5F9; position:relative;
-      display:grid; place-items:center; font-size:10px; font-weight:800;
-      color:var(--smm-muted); letter-spacing:.04em; text-transform:uppercase;
+      position:relative; aspect-ratio:1; margin:0; overflow:hidden; background:#F1F5F9;
     }
-    .smm-phone-cell.is-reel{
-      background:linear-gradient(160deg, rgba(28,79,214,.85), #6B8FF0);
-      color:#fff; grid-column:span 2; aspect-ratio:auto; min-height:110px;
+    .smm-phone-cell img{
+      display:block; width:100%; height:100%; object-fit:cover;
     }
-    .smm-phone-cell.is-reel i{ font-size:22px; margin-bottom:.25rem; opacity:.95; }
-    .smm-phone-cell.is-pink{ background:linear-gradient(160deg, #EEF3FF, #fff); color:var(--smm-pink); }
+    .smm-phone-cell .badge{
+      position:absolute; top:5px; right:5px; z-index:1;
+      width:18px; height:18px; border-radius:50%;
+      display:grid; place-items:center;
+      background:rgba(15,23,42,.55); color:#fff; font-size:7px;
+      backdrop-filter:blur(2px);
+    }
+    .smm-phone-cell.is-reel .badge{
+      top:auto; right:auto; left:50%; bottom:50%;
+      width:28px; height:28px; font-size:10px;
+      transform:translate(-50%, 50%);
+      background:rgba(15,23,42,.45); border:1.5px solid rgba(255,255,255,.85);
+    }
+    .smm-phone-cell.is-reel::after{
+      content:""; position:absolute; inset:0; z-index:0;
+      background:linear-gradient(to top, rgba(15,23,42,.28), transparent 50%);
+      pointer-events:none;
+    }
+    .smm-phone-cell.is-reel,
+    [data-om-detail] .smm-phone-cell.is-reel{
+      background:transparent !important;
+      background-image:none !important;
+      min-height:0 !important;
+      aspect-ratio:1 !important;
+      grid-column:auto !important;
+      color:inherit !important;
+    }
+    .smm-phone-cell.is-reel img{ position:relative; z-index:0; }
+    .smm-phone-cell.is-reel .badge{ z-index:2; }
     .smm-phone-meta{
-      display:flex; justify-content:space-between; margin-top:.75rem;
-      padding:0 .35rem; font-size:11px; font-weight:700; color:var(--smm-muted);
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:.7rem; padding:0 .25rem;
+      font-size:10.5px; font-weight:700; color:var(--smm-muted); gap:.35rem;
     }
-    .smm-phone-meta span{ color:var(--smm-pink); }
+    .smm-phone-meta span{ color:var(--smm-pink); white-space:nowrap; }
 
     .smm-sec{ padding:clamp(2.25rem,5vw,3.5rem) 0; border-top:1px solid var(--smm-line); }
     .smm-sec-head{ margin-bottom:1.35rem; }
@@ -365,20 +398,35 @@ function ts_render_smm_service_page(array $service): void
     .smm-cal-day em{ display:block; font-style:normal; font-size:11px; color:var(--smm-muted); margin-top:.15rem; }
 
     .smm-frame{
-      min-height:140px; display:flex; flex-direction:column; justify-content:flex-end;
-      background:linear-gradient(165deg, #EEF3FF, #fff 55%);
-      position:relative; overflow:hidden;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+      gap:.2rem;
+      padding:.9rem 1rem !important;
+      background:#fff;
+      position:relative;
+      overflow:hidden;
+      border-bottom:3px solid #0F172A;
+      box-shadow:0 6px 18px rgba(15,23,42,.04);
     }
-    .smm-frame::before{
-      content:""; position:absolute; top:12px; right:12px; width:36px; height:36px;
-      border-radius:50%; background:var(--smm-soft); border:2px solid rgba(28,79,214,.2);
-    }
+    .smm-frame::before{ display:none !important; content:none !important; }
     .smm-frame .tag{
       font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-      color:var(--smm-pink); margin-bottom:.35rem;
+      color:var(--smm-pink); margin:0 0 .15rem;
     }
-    .smm-frame h3{ margin:0 0 .2rem; font-size:15px; font-weight:800; }
-    .smm-frame p{ margin:0; font-size:12px; color:var(--smm-muted); }
+    .smm-frame h3{ margin:0; font-size:clamp(14px, 2.2vw, 15.5px); font-weight:800; line-height:1.25; }
+    .smm-frame p{ margin:0; font-size:12px; color:var(--smm-muted); line-height:1.4; }
+    @media (max-width:699px){
+      .smm-gallery{ gap:.65rem !important; }
+      .smm-frame{ padding:.85rem .9rem !important; }
+    }
+    @media (min-width:700px) and (max-width:999px){
+      .smm-gallery{ gap:.85rem !important; }
+    }
+    @media (min-width:1000px){
+      .smm-gallery{ gap:1rem !important; }
+    }
 
     .smm-loop{
       display:grid; gap:.55rem; grid-template-columns:1fr;
@@ -465,31 +513,92 @@ function ts_render_smm_service_page(array $service): void
       background:#fff; font-size:13px; font-weight:700;
     }
 
-    /* Stacked package rows */
-    .smm-pkgs{ display:grid !important; gap:.7rem !important; grid-template-columns:1fr !important; }
-    .smm-pkg{
-      display:grid !important; gap:.7rem 1.5rem; flex-direction:unset;
-      border-radius:14px;
+    /* Package cards — compact vertical tiles, no stretched rows */
+    .smm-pkgs{
+      display:grid !important;
+      grid-template-columns:1fr !important;
+      gap:1rem !important;
+      width:100%;
+      align-items:stretch;
     }
-    @media (min-width:800px){
-      .smm-pkg{ grid-template-columns:140px 1fr auto; align-items:center; }
-      .smm-pkg ul{ grid-template-columns:1fr 1fr; }
+    @media (min-width:700px){
+      .smm-pkgs{ grid-template-columns:repeat(2, minmax(0,1fr)) !important; gap:1.1rem !important; }
+    }
+    @media (min-width:1024px){
+      .smm-pkgs{ grid-template-columns:repeat(3, minmax(0,1fr)) !important; gap:1.2rem !important; }
+    }
+    .smm-pkg{
+      display:flex !important;
+      flex-direction:column !important;
+      gap:.7rem !important;
+      min-width:0;
+      height:100%;
+      padding:1.15rem 1.1rem 1.2rem !important;
+      border-radius:16px !important;
+      border:1px solid var(--smm-line) !important;
+      border-bottom:4px solid #0F172A !important;
+      background:#fff !important;
+      box-shadow:0 8px 22px rgba(15,23,42,.05);
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .smm-pkg:hover{
+      transform:translateY(-5px);
+      box-shadow:0 16px 36px rgba(15,23,42,.1);
+      border-color:rgba(28,79,214,.28) !important;
     }
     .smm-pkg.is-hot{
-      border-color:rgba(28,79,214,.4);
-      box-shadow:0 0 0 1px rgba(28,79,214,.1);
-      background:linear-gradient(105deg, rgba(219,39,119,.06), #fff 40%);
+      border-color:rgba(28,79,214,.4) !important;
+      border-bottom-color:#1C4FD6 !important;
+      background:linear-gradient(180deg, rgba(28,79,214,.08), #fff 48%) !important;
+      box-shadow:0 12px 30px rgba(28,79,214,.12);
     }
-    .smm-pkg-top{ display:flex; flex-direction:column; gap:.2rem; }
-    .smm-pkg h3{ margin:0; font-size:1.15rem; font-weight:800; }
-    .smm-pkg-tag{ font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--smm-pink); }
-    .smm-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.35rem; flex:1; }
-    .smm-pkg li{ font-size:13.5px; color:var(--smm-body); padding-left:1rem; position:relative; }
+    .smm-pkg.is-hot:hover{
+      box-shadow:0 18px 40px rgba(28,79,214,.18);
+    }
+    .smm-pkg-top{
+      display:flex; flex-direction:column; gap:.25rem;
+    }
+    .smm-pkg h3{ margin:0; font-size:clamp(1.1rem, 2.5vw, 1.25rem); font-weight:800; line-height:1.15; }
+    .smm-pkg-tag{
+      font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--smm-pink); line-height:1.3;
+    }
+    .smm-pkg ul{
+      margin:0; padding:0; list-style:none;
+      display:grid !important; grid-template-columns:1fr !important;
+      gap:.4rem; flex:1;
+    }
+    .smm-pkg li{
+      font-size:13.5px; color:var(--smm-body); padding-left:1rem; position:relative; line-height:1.4;
+    }
     .smm-pkg li::before{
       content:""; position:absolute; left:0; top:.55em;
       width:6px; height:6px; border-radius:50%; background:var(--smm-pink);
     }
-    .smm-pkg > p{ margin:0; font-size:12.5px; color:var(--smm-muted); }
+    .smm-pkg > p{
+      margin:0; font-size:12.5px; color:var(--smm-muted); line-height:1.45;
+    }
+    .smm-pkgs .smm-btn{
+      width:100%;
+      margin-top:auto;
+      justify-content:center;
+      min-height:44px;
+      box-sizing:border-box;
+      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .smm-pkgs .smm-btn:hover{ transform:translateY(-2px); }
+    .smm-pkgs .smm-pkg[data-smm-reveal]{ transition:opacity .55s ease, transform .55s ease; }
+    .smm-pkgs .smm-pkg[data-smm-reveal]:nth-child(1){ transition-delay:.05s; }
+    .smm-pkgs .smm-pkg[data-smm-reveal]:nth-child(2){ transition-delay:.12s; }
+    .smm-pkgs .smm-pkg[data-smm-reveal]:nth-child(3){ transition-delay:.2s; }
+    @media (max-width:699px){
+      .smm-pkg{ padding:1.05rem 1rem 1.1rem !important; }
+      .smm-sec-head .smm-lead{ max-width:none; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .smm-pkg:hover, .smm-pkgs .smm-btn:hover{ transform:none; }
+      .smm-pkgs .smm-pkg[data-smm-reveal]{ transition:none; transition-delay:0s !important; }
+    }
 
     /* FAQ — padded pills + animated +/- */
     .smm-faq{ display:grid; gap:.75rem; max-width:720px; }
@@ -583,23 +692,56 @@ function ts_render_smm_service_page(array $service): void
       <div class="smm-phone" aria-hidden="true">
         <div class="smm-phone-notch"></div>
         <div class="smm-phone-head">
-          <div class="smm-phone-av"><span></span></div>
+          <div class="smm-phone-av">
+            <img src="/images/stock/photo-1600880292203-757bb62b4baf.jpg" alt="" width="44" height="44" loading="eager">
+          </div>
           <div>
-            <strong>@yourbrand</strong>
-            <small>Pillar-led · on-brand</small>
+            <strong>@scalesphere</strong>
+            <small>Brand · content · community</small>
           </div>
         </div>
+        <div class="smm-phone-stats">
+          <div><b>48</b><span>Posts</span></div>
+          <div><b>12.4k</b><span>Followers</span></div>
+          <div><b>186</b><span>Following</span></div>
+        </div>
         <div class="smm-phone-grid">
-          <div class="smm-phone-cell is-reel"><div style="text-align:center"><i class="fas fa-play"></i><div>Reel</div></div></div>
-          <div class="smm-phone-cell is-pink">Caro</div>
-          <div class="smm-phone-cell">Proof</div>
-          <div class="smm-phone-cell is-pink">Story</div>
-          <div class="smm-phone-cell">Edu</div>
+          <figure class="smm-phone-cell is-reel">
+            <img src="/images/stock/photo-1557838923-2985c318be48.jpg" alt="" width="120" height="120" loading="eager">
+            <span class="badge" aria-hidden="true"><i class="fas fa-play"></i></span>
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1558655146-d09347e92766.jpg" alt="" width="120" height="120" loading="eager">
+            <span class="badge" aria-hidden="true"><i class="fas fa-clone"></i></span>
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/ec/headphones.jpg" alt="" width="120" height="120" loading="lazy">
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1551836022-d5d88e9218df.jpg" alt="" width="120" height="120" loading="lazy">
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1516321318423-f06f85e504b3.jpg" alt="" width="120" height="120" loading="lazy">
+            <span class="badge" aria-hidden="true"><i class="fas fa-play"></i></span>
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1460925895917-afdab827c52f.jpg" alt="" width="120" height="120" loading="lazy">
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/ec/tee.jpg" alt="" width="120" height="120" loading="lazy">
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1522071820081-009f0129c71c.jpg" alt="" width="120" height="120" loading="lazy">
+            <span class="badge" aria-hidden="true"><i class="fas fa-clone"></i></span>
+          </figure>
+          <figure class="smm-phone-cell">
+            <img src="/images/stock/photo-1559028012-481c04fa702d.jpg" alt="" width="120" height="120" loading="lazy">
+          </figure>
         </div>
         <div class="smm-phone-meta">
-          <span>Saves ↑</span>
-          <span>DMs open</span>
-          <span>No bots</span>
+          <span>Saves ↑ 2.4×</span>
+          <span>DMs answered</span>
+          <span>Real reach</span>
         </div>
       </div>
     </div>
@@ -871,7 +1013,7 @@ function ts_render_smm_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p><?= ts_h($pkg[3]) ?></p>
-          <a class="smm-btn <?= $hot ? "smm-btn-fill" : "smm-btn-line" ?>" href="/contact" style="justify-content:center">Get started</a>
+          <a class="smm-btn <?= $hot ? "smm-btn-fill" : "smm-btn-line" ?>" href="/contact">Get started</a>
         </article>
         <?php endforeach; ?>
       </div>

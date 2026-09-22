@@ -155,7 +155,6 @@ const TS_SERVICE_DELIVERABLES = [
     "ios-app-development" => ["Native iOS app", "Human Interface UI", "App Store submission", "TestFlight beta"],
     "react-native-apps" => ["Cross-platform app", "Shared codebase", "Native modules", "Store deployment"],
     "flutter-apps" => ["Flutter application", "Custom widgets", "Platform channels", "Performance tuning"],
-    "progressive-web-apps" => ["Installable PWA", "Offline support", "Push notifications", "Lighthouse optimization"],
     "support-and-maintenance" => ["Bug fixes & patches", "OS compatibility updates", "Performance monitoring", "Feature enhancements"],
     "ui-ux-designing" => ["User research report", "Wireframes & user flows", "High-fidelity UI screens", "Usability test results"],
     "brand-identity" => ["Logo & visual identity", "Brand guidelines", "Color & typography system", "Stationery templates"],

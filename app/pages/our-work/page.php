@@ -2,7 +2,6 @@
 $site = ts_site();
 $copy = ts_work_page_copy();
 $projects = ts_work_projects();
-
 ob_start();
 ?>
 <div class="nomu-work relative font-body text-[#1a1a1a] overflow-x-clip" data-work-page>
@@ -73,10 +72,8 @@ ob_start();
     .nomu-work .nw-sketch-letter:nth-child(even).is-drawn{ transform:translateY(0) rotate(0.3deg); }
     .nomu-work .nw-sketch-letter:nth-child(3n).is-drawn{ transform:translateY(0) rotate(-0.4deg); }
   </style>
-
   <div class="pointer-events-none absolute inset-0 z-0" aria-hidden="true"
        style="background-color:#F7F4EF;background-image:linear-gradient(rgba(15,23,42,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(15,23,42,.05) 1px,transparent 1px);background-size:56px 56px"></div>
-
   <!-- ========== HERO ========== -->
   <section class="relative z-[1] pt-[5.5rem] sm:pt-28 lg:pt-32 pb-8 sm:pb-10 text-center">
     <div class="nw-shell">
@@ -84,11 +81,9 @@ ob_start();
         <span class="w-2 h-2 rounded-full bg-brand shrink-0"></span>
         <?= ts_h($copy["badge"]) ?>
       </div>
-
       <h1 class="nw-rise m-0 mt-5 sm:mt-6 mx-auto max-w-[14ch] xs:max-w-none text-[clamp(2.35rem,7.5vw,4.75rem)] font-extrabold tracking-[-0.05em] leading-[1.02] text-[#111]" data-nw data-nw-d="1">
         <?= ts_h($copy["heroLine1"]) ?>
       </h1>
-
       <div class="nw-rise mt-3.5 sm:mt-4 flex justify-center" data-nw data-nw-d="2">
         <span class="nw-hero-pill relative inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#111] text-white text-[clamp(1.35rem,5.2vw,3rem)] font-extrabold tracking-[-0.04em] leading-none shadow-[0_14px_36px_rgba(0,0,0,.18)]">
           <span class="absolute left-3 sm:left-4 top-2 text-brand text-[10px] sm:text-sm" aria-hidden="true">✦</span>
@@ -96,11 +91,9 @@ ob_start();
           <?= ts_h($copy["heroHighlight"]) ?>
         </span>
       </div>
-
       <p class="nw-rise m-0 mt-5 sm:mt-6 mx-auto max-w-2xl text-[14px] sm:text-[16px] leading-relaxed text-[#555] px-1" data-nw data-nw-d="3">
         <?= ts_h($copy["heroLead"]) ?>
       </p>
-
       <div class="nw-rise mt-6 sm:mt-7 flex flex-wrap justify-center gap-2.5 sm:gap-3" data-nw data-nw-d="4">
         <a href="/contact" class="nw-cta inline-flex items-center gap-2 min-h-[48px] sm:min-h-[52px] px-6 sm:px-7 rounded-full bg-brand text-white text-[14px] sm:text-[15px] font-bold no-underline shadow-[0_12px_28px_rgba(28,79,214,.3)] hover:brightness-105 transition">
           <?= ts_h($copy["ctaPrimary"]) ?> <span aria-hidden="true">↗</span>
@@ -111,7 +104,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== LOGO MARQUEE ========== -->
   <section class="relative z-[1] nw-sec-sm overflow-hidden">
     <p class="m-0 mb-4 sm:mb-5 text-center text-[12px] sm:text-[14px] font-semibold text-[#8a8a8a]"><?= ts_h($copy["supportedBy"]) ?></p>
@@ -125,7 +117,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== GROW STATEMENT ========== -->
   <section class="relative z-[1] nw-sec text-center">
     <div class="nw-shell">
@@ -153,14 +144,12 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== CAPABILITY CARDS ========== -->
   <section class="relative z-[1] nw-sec">
     <div class="nw-shell">
       <h2 class="nw-rise m-0 mb-5 sm:mb-7 text-center text-[clamp(1.75rem,4.5vw,3rem)] font-extrabold tracking-[-0.045em] leading-[1.1] text-[#111]" data-nw>
         <?= ts_h($copy["seeTitle"]) ?><br><?= ts_h($copy["seeTitleLine2"]) ?>
       </h2>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 lg:gap-5">
         <?php foreach ($copy["capabilities"] as $i => $cap): ?>
         <article class="nw-rise group rounded-[1.35rem] sm:rounded-[1.75rem] lg:rounded-[2rem] bg-white border-[5px] sm:border-[7px] border-white shadow-[0_14px_40px_rgba(15,23,42,.08)] overflow-hidden" data-nw data-nw-d="<?= min($i + 1, 4) ?>">
@@ -187,7 +176,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== EXTRAS RAIL ========== -->
   <section class="relative z-[1] nw-sec overflow-hidden">
     <div class="nw-shell mb-5 sm:mb-6">
@@ -211,14 +199,12 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== SELECTED WORK ========== -->
   <section class="relative z-[1] nw-sec" id="nw-gallery">
     <div class="nw-shell mb-5 sm:mb-6 text-center">
       <h2 class="nw-rise m-0 text-[clamp(1.75rem,4.5vw,3rem)] font-extrabold tracking-[-0.045em] text-[#111]" data-nw><?= ts_h($copy["galleryTitle"]) ?></h2>
       <p class="nw-rise m-0 mt-2 sm:mt-2.5 text-[13px] sm:text-[15px] text-[#666] max-w-xl mx-auto" data-nw data-nw-d="1"><?= ts_h($copy["galleryLead"]) ?></p>
     </div>
-
     <div class="overflow-hidden" style="mask-image:linear-gradient(90deg,transparent,black 2%,black 98%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,black 2%,black 98%,transparent)">
       <div class="flex w-max gap-3 sm:gap-4 px-3 sm:px-4 will-change-transform" data-nw-rail>
         <?php for ($loop = 0; $loop < 2; $loop++): ?>
@@ -237,7 +223,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== PROMO BAND ========== -->
   <section class="relative z-[1] nw-sec">
     <div class="nw-shell">
@@ -260,7 +245,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== OPS + STATS ========== -->
   <section class="relative z-[1] nw-sec">
     <div class="nw-shell grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-3.5 sm:gap-4">
@@ -279,7 +263,6 @@ ob_start();
           <?= ts_h($copy["ctaDemo"]) ?> <span aria-hidden="true">↗</span>
         </a>
       </div>
-
       <div class="nw-rise rounded-[1.35rem] sm:rounded-[2rem] bg-[#111] text-white p-5 sm:p-8 lg:p-9 shadow-[0_12px_36px_rgba(0,0,0,.18)]" data-nw data-nw-d="2">
         <h3 class="m-0 text-[11px] sm:text-[12px] font-bold tracking-[0.14em] uppercase text-[#9ec5ff]"><?= ts_h($copy["statsTitle"]) ?></h3>
         <div class="mt-5 sm:mt-6 grid grid-cols-3 lg:grid-cols-1 gap-4 lg:gap-6 lg:space-y-0">
@@ -293,7 +276,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== FAQ ========== -->
   <section class="relative z-[1] nw-sec">
     <div class="nw-shell">
@@ -315,7 +297,6 @@ ob_start();
       </div>
     </div>
   </section>
-
   <!-- ========== SPLIT CTA ========== -->
   <section class="relative z-[1] nw-sec pb-10 sm:pb-14">
     <div class="nw-shell grid grid-cols-1 lg:grid-cols-2 gap-7 lg:gap-8 items-start">
@@ -334,30 +315,23 @@ ob_start();
           <?php endforeach; ?>
         </ul>
       </div>
-
       <div class="nw-rise rounded-[1.35rem] sm:rounded-[1.75rem] bg-white border border-black/[0.05] shadow-[0_14px_40px_rgba(15,23,42,.07)] p-5 sm:p-7" data-nw data-nw-d="2">
         <p class="m-0 text-[13px] sm:text-[15px] text-[#666]"><?= ts_h($copy["ctaBody"]) ?></p>
         <form class="mt-4 flex flex-col sm:flex-row gap-2.5" action="/contact" method="get">
-          <label class="sr-only" for="nwEmail">Email</label>
-          <input id="nwEmail" name="email" type="email" required placeholder="Enter your email"
-                 class="flex-1 min-h-[48px] w-full px-4 sm:px-5 rounded-full border border-black/[0.08] bg-[#F7F4EF] text-[14px] outline-none focus:border-brand">
-          <button type="submit" class="min-h-[48px] px-5 sm:px-6 rounded-full bg-brand text-white text-[13px] sm:text-[14px] font-bold border-0 cursor-pointer shadow-[0_10px_24px_rgba(28,79,214,.25)] shrink-0">
+          <a href="/contact" class="min-h-[48px] px-5 sm:px-6 rounded-full bg-brand text-white text-[13px] sm:text-[14px] font-bold no-underline inline-flex items-center justify-center shadow-[0_10px_24px_rgba(28,79,214,.25)] shrink-0">
             <?= ts_h($copy["ctaButton"]) ?>
-          </button>
+          </a>
         </form>
         <a href="/about-us" class="inline-flex mt-4 text-[12px] sm:text-[13px] font-semibold text-brand no-underline">About ScaleSphere →</a>
       </div>
     </div>
   </section>
-
 </div>
-
 <script>
 (() => {
   const root = document.querySelector("[data-work-page]");
   if (!root) return;
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   const items = [...root.querySelectorAll("[data-nw]")];
   items.forEach((el) => {
     const d = el.getAttribute("data-nw-d");
@@ -392,21 +366,16 @@ ob_start();
       });
     });
   }
-
   const writeWrap = root.querySelector("[data-nw-write-wrap]");
   const letters = writeWrap ? [...writeWrap.querySelectorAll("[data-nw-letter]")] : [];
-
   const playWrite = () => {
     if (!writeWrap || writeWrap.dataset.played === "1") return;
     writeWrap.dataset.played = "1";
-
     if (reduce) {
       letters.forEach((el) => el.classList.add("is-drawn"));
       return;
     }
-
     letters.forEach((el) => el.classList.remove("is-drawn"));
-
     /* Pencil sketch: one letter at a time */
     const step = 160;
     letters.forEach((el, i) => {
@@ -415,7 +384,6 @@ ob_start();
       }, 80 + i * step);
     });
   };
-
   if (writeWrap) {
     if ("IntersectionObserver" in window) {
       const wio = new IntersectionObserver((entries) => {
@@ -430,7 +398,6 @@ ob_start();
       playWrite();
     }
   }
-
   const gsapOk = !!(window.gsap && !reduce);
   const marquee = root.querySelector("[data-nw-marquee]");
   if (marquee && gsapOk) {
@@ -444,7 +411,6 @@ ob_start();
   if (rail && gsapOk) {
     gsap.to(rail, { x: -(rail.scrollWidth / 2), duration: 58, ease: "none", repeat: -1 });
   }
-
   root.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener("click", (e) => {
       const id = a.getAttribute("href");
@@ -460,7 +426,19 @@ ob_start();
 </script>
 <?php
 ts_layout("Our Work", ob_get_clean(), [
-    "description" => "Selected ScaleSphere work — platforms, apps and growth systems that ship. Edit projects in work-content.php.",
+    "description" => "Selected ScaleSphere work — platforms, apps and growth systems that ship for marketing, product and mobile teams.",
     "path" => "/our-work",
     "bodyClass" => "page-work",
+    "jsonld" => [
+        ts_webpage_jsonld(
+            "Our Work",
+            "Selected ScaleSphere work — platforms, apps and growth systems that ship for marketing, product and mobile teams.",
+            "/our-work",
+            "CollectionPage"
+        ),
+        ts_breadcrumb_jsonld([
+            ["name" => "Home", "path" => "/"],
+            ["name" => "Our Work", "path" => "/our-work"],
+        ]),
+    ],
 ]);

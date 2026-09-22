@@ -4,3 +4,4 @@ storage/*.json
 /vendor/
 composer.lock
 .vscode/
+/node_modules/

@@ -488,6 +488,16 @@ function ts_render_creative_design_hub(): void
       margin:0 auto 1.5rem; max-width:32rem;
       color:var(--muted); font-size:15px; line-height:1.55;
     }
+    @media (max-width:768px){
+      .yl-hero h1{
+        font-size:clamp(1.75rem, 8vw, 2.6rem);
+        max-width:100%;
+        overflow-wrap:anywhere;
+      }
+      .yl-hero > p{ font-size:14px; margin-bottom:1.15rem; }
+      .yl-wrap{ width:min(100%, calc(100% - 1.1rem)); }
+      .yl-hero{ padding:4.5rem 0.85rem 2rem; }
+    }
   </style>
 
   <section class="yl-desk">
@@ -495,7 +505,7 @@ function ts_render_creative_design_hub(): void
       <div class="yl-hero">
         <span class="yl-hero-badge"><i class="fas fa-palette" aria-hidden="true"></i> Creative Design</span>
         <h1>We craft, then we <em>ship.</em></h1>
-        <p><?= ts_h($hub["lead"]) ?></p>
+        <p><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></p>
         <div class="yl-hero-actions">
           <a class="yl-btn yl-btn-solid" href="/contact">Start a project <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
           <a class="yl-btn yl-btn-ghost" href="#yl-folders">Open folders</a>

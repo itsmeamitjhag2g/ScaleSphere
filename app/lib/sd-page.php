@@ -96,12 +96,12 @@ function ts_render_sd_service_page(array $service): void
     ];
 
     $faqs = [
-        ["Build vs buy — how do you decide?", "In discovery we map uniqueness, integrations and total cost of ownership. If a SaaS fits, we’ll say so. Custom when your process or product is the advantage."],
-        ["What stacks do you work in?", "Node, Laravel/PHP, Python, TypeScript/React/Next, PostgreSQL and cloud (AWS/Azure). We pick for the problem — not fashion."],
-        ["How do sprints work with us?", "Two-week cycles: planned backlog, mid-sprint check-ins, demo at the end. You always see working software."],
-        ["Who owns IP and code?", "You do. We work in your repos and cloud accounts whenever possible."],
-        ["Can you modernize a legacy system?", "Yes — phased strangler patterns so you don’t freeze the business for a rewrite."],
-        ["What’s a realistic timeline?", "Focused MVPs often land in 8–14 weeks. Larger platforms are milestone-based after discovery. You get a written plan before build."],
+        ["Build vs buy — how do you decide?", "In discovery we map uniqueness, integrations and total cost of ownership. If a SaaS fits, we’ll say so. Custom when your process or product is the advantage.", "Strategy", "fa-balance-scale"],
+        ["What stacks do you work in?", "Node, Laravel/PHP, Python, TypeScript/React/Next, PostgreSQL and cloud (AWS/Azure). We pick for the problem — not fashion.", "Stack", "fa-layer-group"],
+        ["How do sprints work with us?", "Two-week cycles: planned backlog, mid-sprint check-ins, demo at the end. You always see working software.", "Delivery", "fa-bolt"],
+        ["Who owns IP and code?", "You do. We work in your repos and cloud accounts whenever possible.", "Ownership", "fa-code-branch"],
+        ["Can you modernize a legacy system?", "Yes — phased strangler patterns so you don’t freeze the business for a rewrite.", "Modernize", "fa-recycle"],
+        ["What’s a realistic timeline?", "Focused MVPs often land in 8–14 weeks. Larger platforms are milestone-based after discovery. You get a written plan before build.", "Timeline", "fa-clock"],
     ];
 
     $pageTitle = "Custom Software Development | SaaS, Tools & Modernization — ScaleSphere";
@@ -492,24 +492,155 @@ function ts_render_sd_service_page(array $service): void
     }
     .apsd-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); font-weight:300; }
 
-    /* Underline FAQ */
-    .apsd-faq{ display:grid; gap:0; max-width:720px; }
-    .apsd-faq details{
-      border:none; border-radius:0; background:transparent; overflow:visible;
+    /* FAQ — interactive Q index + answer stage */
+    .apsd-faq-sec{ position:relative; overflow:hidden; }
+    .apsd-faq-sec::before{
+      content:""; position:absolute; inset:auto -10% -20% auto; width:min(420px,55vw); height:min(420px,55vw);
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(28,79,214,.12), transparent 70%);
+      pointer-events:none;
+    }
+    .apsd-faq-head{
+      display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:1rem;
+      margin-bottom:1.75rem;
+    }
+    .apsd-faq-head h2{ margin:0; }
+    .apsd-faq-hint{
+      margin:0; max-width:28ch;
+      font-size:13px; line-height:1.45; color:var(--muted); font-weight:300;
+    }
+    .apsd-faq-board{
+      display:grid; gap:1rem;
+      position:relative;
+    }
+    @media (min-width:900px){
+      .apsd-faq-board{
+        grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);
+        gap:1.25rem; align-items:stretch; min-height:420px;
+      }
+    }
+    .apsd-faq-index{
+      display:grid; gap:.45rem;
+      align-content:start;
+    }
+    .apsd-faq-q{
+      display:grid; grid-template-columns:auto 1fr auto; gap:.75rem; align-items:center;
+      width:100%; text-align:left;
+      margin:0; padding:.85rem 1rem;
+      border:1px solid var(--line); border-radius:14px;
+      background:#fff; color:var(--ink);
+      cursor:pointer; font:inherit;
+      transition:border-color .25s, background .25s, transform .25s, box-shadow .25s;
+    }
+    .apsd-faq-q:hover{
+      border-color:rgba(28,79,214,.35);
+      transform:translateX(3px);
+    }
+    .apsd-faq-q.is-on{
+      background:linear-gradient(135deg, #EEF3FF, #fff);
+      border-color:rgba(28,79,214,.45);
+      box-shadow:0 10px 28px rgba(28,79,214,.1);
+      transform:translateX(4px);
+    }
+    .apsd-faq-q .ix{
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:11px; font-weight:600; letter-spacing:.06em;
+      color:var(--blue);
+      min-width:1.6rem;
+    }
+    .apsd-faq-q .qt{
+      font-size:14px; font-weight:500; line-height:1.35;
+    }
+    .apsd-faq-q .tag{
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:10px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+      color:var(--muted); white-space:nowrap;
+    }
+    .apsd-faq-q.is-on .tag{ color:var(--blue); }
+    .apsd-faq-stage{
+      position:relative;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(160deg, rgba(28,79,214,.06), transparent 42%),
+        #fff;
+      box-shadow:0 18px 44px rgba(15,23,42,.07);
+      overflow:hidden;
+      min-height:280px;
+      display:flex; flex-direction:column;
+    }
+    .apsd-faq-stage-bar{
+      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+      padding:.85rem 1.15rem;
       border-bottom:1px solid var(--line);
+      background:rgba(246,247,249,.7);
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:11px; color:var(--muted);
     }
-    .apsd-faq summary{
-      cursor:pointer; list-style:none; padding:1.05rem 0;
-      font-weight:500; font-size:15px; display:flex; justify-content:space-between; gap:1rem;
-      border-bottom:2px solid transparent; transition:border-color .25s, color .25s;
+    .apsd-faq-stage-bar b{ color:var(--blue); font-weight:600; }
+    .apsd-faq-stage-dots{ display:flex; gap:.35rem; }
+    .apsd-faq-stage-dots i{
+      width:8px; height:8px; border-radius:50%; background:rgba(15,23,42,.15); display:block;
     }
-    .apsd-faq details[open] summary{ border-bottom-color:var(--blue); color:var(--blue); }
-    .apsd-faq summary::-webkit-details-marker{ display:none; }
-    .apsd-faq summary i{ color:var(--muted); transition:transform .25s, color .25s; }
-    .apsd-faq details[open] summary i{ transform:rotate(180deg); color:var(--blue); }
-    .apsd-faq details p{
-      margin:0; padding:0 0 1.1rem;
-      font-size:14px; line-height:1.6; color:var(--muted); font-weight:300;
+    .apsd-faq-stage-dots i:nth-child(1){ background:#FF5F57; }
+    .apsd-faq-stage-dots i:nth-child(2){ background:#FEBC2E; }
+    .apsd-faq-stage-dots i:nth-child(3){ background:#28C840; }
+    .apsd-faq-panel{
+      position:relative; flex:1;
+      padding:1.35rem 1.35rem 1.5rem;
+    }
+    .apsd-faq-panel-card{
+      display:none;
+      opacity:0;
+      transform:translateY(16px);
+    }
+    .apsd-faq-panel-card.is-active{
+      display:block;
+      animation:apsdFaqIn .45s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes apsdFaqIn{
+      from{ opacity:0; transform:translateY(16px); }
+      to{ opacity:1; transform:none; }
+    }
+    .apsd-faq-ico{
+      width:44px; height:44px; border-radius:12px;
+      display:grid; place-items:center;
+      background:rgba(28,79,214,.1); color:var(--blue);
+      margin-bottom:.9rem; font-size:16px;
+    }
+    .apsd-faq-panel-card .eyebrow{
+      margin:0 0 .45rem;
+      font-family:"IBM Plex Mono",ui-monospace,monospace;
+      font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--blue);
+    }
+    .apsd-faq-panel-card h3{
+      margin:0 0 .7rem;
+      font-size:clamp(1.15rem,2.4vw,1.45rem); font-weight:500; letter-spacing:-.02em; line-height:1.25;
+    }
+    .apsd-faq-panel-card p{
+      margin:0; font-size:15px; line-height:1.65; color:var(--muted); font-weight:300;
+    }
+    .apsd-faq-progress{
+      display:flex; gap:.35rem; padding:0 1.15rem 1.1rem; margin-top:auto;
+    }
+    .apsd-faq-progress span{
+      flex:1; height:3px; border-radius:999px; background:rgba(15,23,42,.08);
+      overflow:hidden;
+    }
+    .apsd-faq-progress span i{
+      display:block; height:100%; width:0; background:var(--blue);
+      transition:width .35s ease;
+    }
+    .apsd-faq-progress span.is-on i{ width:100%; }
+    @media (max-width:640px){
+      .apsd-faq-q .tag{ display:none; }
+      .apsd-faq-q{ grid-template-columns:auto 1fr; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .apsd-faq-q{ transition:none; }
+      .apsd-faq-q:hover, .apsd-faq-q.is-on{ transform:none; }
+      .apsd-faq-panel-card.is-active{ animation:none; opacity:1; transform:none; }
     }
 
     .apsd-related{
@@ -753,17 +884,62 @@ function ts_render_sd_service_page(array $service): void
     </div>
   </section>
 
-  <section class="apsd-sec">
+  <section class="apsd-sec apsd-faq-sec">
     <div class="apsd-wrap">
-      <div class="apsd-kicker" data-apsd-reveal><strong>07 — FAQ</strong><span>Objections we hear</span></div>
-      <h2 data-apsd-reveal>Common <em>questions</em></h2>
-      <div class="apsd-faq">
-        <?php foreach ($faqs as $faq): ?>
-        <details data-apsd-reveal>
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
-          <p><?= ts_h($faq[1]) ?></p>
-        </details>
-        <?php endforeach; ?>
+      <div class="apsd-faq-head" data-apsd-reveal>
+        <div>
+          <div class="apsd-kicker"><strong>07 — FAQ</strong><span>Objections we hear</span></div>
+          <h2>Common <em>questions</em></h2>
+        </div>
+        <p class="apsd-faq-hint">Pick a question — answers swap on the right like a live brief, not a buried accordion.</p>
+      </div>
+      <div class="apsd-faq-board" data-apsd-faq data-apsd-reveal>
+        <div class="apsd-faq-index" role="tablist" aria-label="FAQ questions">
+          <?php foreach ($faqs as $i => $faq): ?>
+          <button
+            type="button"
+            class="apsd-faq-q<?= $i === 0 ? " is-on" : "" ?>"
+            role="tab"
+            id="apsd-faq-tab-<?= $i ?>"
+            aria-selected="<?= $i === 0 ? "true" : "false" ?>"
+            aria-controls="apsd-faq-panel-<?= $i ?>"
+            data-apsd-faq-goto="<?= $i ?>"
+          >
+            <span class="ix"><?= str_pad((string)($i + 1), 2, "0", STR_PAD_LEFT) ?></span>
+            <span class="qt"><?= ts_h($faq[0]) ?></span>
+            <span class="tag"><?= ts_h($faq[2]) ?></span>
+          </button>
+          <?php endforeach; ?>
+        </div>
+        <div class="apsd-faq-stage">
+          <div class="apsd-faq-stage-bar" aria-hidden="true">
+            <span class="apsd-faq-stage-dots"><i></i><i></i><i></i></span>
+            <span>faq · <b data-apsd-faq-file>01-strategy.md</b></span>
+          </div>
+          <div class="apsd-faq-panel" aria-live="polite">
+            <?php foreach ($faqs as $i => $faq): ?>
+            <article
+              class="apsd-faq-panel-card<?= $i === 0 ? " is-active" : "" ?>"
+              id="apsd-faq-panel-<?= $i ?>"
+              role="tabpanel"
+              aria-labelledby="apsd-faq-tab-<?= $i ?>"
+              data-apsd-faq-panel="<?= $i ?>"
+              data-apsd-faq-slug="<?= ts_h(strtolower(preg_replace('/[^a-z0-9]+/i', '-', $faq[2]))) ?>"
+              <?= $i === 0 ? "" : "hidden" ?>
+            >
+              <div class="apsd-faq-ico" aria-hidden="true"><i class="fas <?= ts_h($faq[3]) ?>"></i></div>
+              <p class="eyebrow"><?= ts_h($faq[2]) ?></p>
+              <h3><?= ts_h($faq[0]) ?></h3>
+              <p><?= ts_h($faq[1]) ?></p>
+            </article>
+            <?php endforeach; ?>
+          </div>
+          <div class="apsd-faq-progress" aria-hidden="true">
+            <?php foreach ($faqs as $i => $faq): ?>
+            <span class="<?= $i === 0 ? "is-on" : "" ?>" data-apsd-faq-dot="<?= $i ?>"><i></i></span>
+            <?php endforeach; ?>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -872,6 +1048,64 @@ function ts_render_sd_service_page(array $service): void
       chips[(c + 1) % chips.length].classList.add("is-on");
       c = (c + 1) % chips.length;
     }, 900);
+  }
+
+  /* FAQ explorer — left index ↔ right answer stage */
+  const faqBoard = root.querySelector("[data-apsd-faq]");
+  if (faqBoard) {
+    const tabs = [...faqBoard.querySelectorAll("[data-apsd-faq-goto]")];
+    const panels = [...faqBoard.querySelectorAll("[data-apsd-faq-panel]")];
+    const dots = [...faqBoard.querySelectorAll("[data-apsd-faq-dot]")];
+    const fileEl = faqBoard.querySelector("[data-apsd-faq-file]");
+    let fi = 0;
+    let fTimer = null;
+    const goFaq = (idx) => {
+      if (!tabs.length) return;
+      fi = ((idx % tabs.length) + tabs.length) % tabs.length;
+      tabs.forEach((t, k) => {
+        const on = k === fi;
+        t.classList.toggle("is-on", on);
+        t.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      panels.forEach((p, k) => {
+        const on = k === fi;
+        p.classList.remove("is-active");
+        if (on) {
+          p.removeAttribute("hidden");
+          // restart enter animation
+          void p.offsetWidth;
+          p.classList.add("is-active");
+        } else {
+          p.setAttribute("hidden", "");
+        }
+      });
+      dots.forEach((d, k) => d.classList.toggle("is-on", k === fi));
+      if (fileEl) {
+        const slug = panels[fi]?.getAttribute("data-apsd-faq-slug") || "answer";
+        const n = String(fi + 1).padStart(2, "0");
+        fileEl.textContent = `${n}-${slug}.md`;
+      }
+    };
+    const startFaq = () => {
+      if (reduce || tabs.length < 2) return;
+      stopFaq();
+      fTimer = window.setInterval(() => goFaq(fi + 1), 5200);
+    };
+    const stopFaq = () => { if (fTimer) window.clearInterval(fTimer); fTimer = null; };
+    tabs.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        goFaq(parseInt(btn.getAttribute("data-apsd-faq-goto") || "0", 10));
+        startFaq();
+      });
+    });
+    faqBoard.addEventListener("mouseenter", stopFaq);
+    faqBoard.addEventListener("mouseleave", startFaq);
+    faqBoard.addEventListener("focusin", stopFaq);
+    faqBoard.addEventListener("focusout", (e) => {
+      if (!faqBoard.contains(e.relatedTarget)) startFaq();
+    });
+    goFaq(0);
+    startFaq();
   }
 
   if (!window.gsap) return;

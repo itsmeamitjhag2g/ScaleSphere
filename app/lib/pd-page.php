@@ -906,28 +906,87 @@ function ts_render_pd_service_page(array $service): void
       background:var(--paper);
       border-top:1px solid var(--line);
     }
-    .yl-pd .yl-faq h2{
+    .yl-pd .yl-faq-split{
+      display:grid; gap:1.75rem;
+      align-items:start;
+    }
+    @media (min-width:900px){
+      .yl-pd .yl-faq-split{
+        grid-template-columns:minmax(220px, .75fr) minmax(0, 1.35fr);
+        gap:2.25rem;
+      }
+    }
+    .yl-pd .yl-faq-intro h2{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-pd .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
-    .yl-pd .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
+    .yl-pd .yl-faq-intro .lead{
+      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+    }
+    .yl-pd .yl-faq-intro .hint{
+      display:none;
+      padding:1rem 1.1rem;
+      border-radius:1rem;
+      border:1px dashed rgba(124,58,237,.35);
+      background:rgba(124,58,237,.05);
+      font-size:13px; color:var(--muted); line-height:1.5;
+    }
+    @media (min-width:900px){
+      .yl-pd .yl-faq-intro .hint{ display:block; }
+      .yl-pd .yl-faq-intro{ position:sticky; top:5.5rem; }
+    }
+    .yl-pd .yl-faq-intro .hint strong{
+      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+    }
+    .yl-pd .yl-faq-list{
+      display:grid; gap:.75rem;
+      max-width:none; width:100%;
+      align-content:start;
+    }
     .yl-pd details{
       background:#fff; border:1px solid var(--line);
       border-radius:1rem; overflow:hidden;
+      transition:box-shadow .3s ease, border-color .3s ease;
+      align-self:start;
+    }
+    .yl-pd details[open]{
+      box-shadow:0 14px 34px rgba(124,58,237,.12);
+      border-color:rgba(124,58,237,.35);
     }
     .yl-pd summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
       font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      color:var(--ink);
     }
     .yl-pd summary::-webkit-details-marker{ display:none; }
-    .yl-pd summary i{ color:var(--muted); transition:transform .2s, color .2s; }
-    .yl-pd details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
+    .yl-pd details[open] summary{ color:var(--blue); }
+    .yl-pd .yl-faq-toggle{
+      flex:0 0 auto;
+      width:28px; height:28px; border-radius:999px;
+      background:var(--soft); border:1px solid var(--line);
+      position:relative;
+      transition:background .25s ease, border-color .25s ease;
+    }
+    .yl-pd .yl-faq-toggle::before,
+    .yl-pd .yl-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--muted);
+      transition:transform .3s ease, background .25s ease, opacity .25s ease;
+    }
+    .yl-pd .yl-faq-toggle::before{ width:11px; height:2px; transform:translate(-50%,-50%); }
+    .yl-pd .yl-faq-toggle::after{ width:2px; height:11px; transform:translate(-50%,-50%); }
+    .yl-pd details[open] .yl-faq-toggle{
+      background:var(--blue); border-color:var(--deep);
+    }
+    .yl-pd details[open] .yl-faq-toggle::before{ background:#fff; }
+    .yl-pd details[open] .yl-faq-toggle::after{
+      background:#fff; opacity:0; transform:translate(-50%,-50%) scaleY(0);
+    }
     .yl-pd details p{
-      margin:0; padding:0 1.15rem 1.1rem;
+      margin:0; padding:0 1.15rem 1.15rem;
       font-size:14px; line-height:1.65; color:var(--muted);
     }
 
@@ -1284,13 +1343,19 @@ function ts_render_pd_service_page(array $service): void
   </section>
 
   <section class="yl-faq">
-    <div class="yl-wrap">
-      <h2 class="yl-reveal">Questions before you enquire</h2>
-      <p class="lead yl-reveal d1">Straight answers so you can decide if we are the right fit.</p>
-      <div class="yl-faq-list">
-        <?php foreach ($faqs as $faq): ?>
-        <details class="yl-reveal">
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+    <div class="yl-wrap yl-faq-split">
+      <div class="yl-faq-intro yl-reveal">
+        <h2>Questions before you enquire</h2>
+        <p class="lead">Straight answers so you can decide if we are the right fit.</p>
+        <div class="hint">
+          <strong>Still mapping the problem?</strong>
+          Send a brief or current screens on contact — we’ll suggest discovery depth and a first milestone.
+        </div>
+      </div>
+      <div class="yl-faq-list" data-pd-faq>
+        <?php foreach ($faqs as $i => $faq): ?>
+        <details class="yl-reveal"<?= $i === 0 ? ' open' : '' ?>>
+          <summary><?= ts_h($faq[0]) ?> <span class="yl-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
@@ -1346,6 +1411,21 @@ function ts_render_pd_service_page(array $service): void
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   nodes.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var faq = document.querySelector("[data-pd-faq]");
+  if (!faq) return;
+  var items = Array.prototype.slice.call(faq.querySelectorAll("details"));
+  items.forEach(function (item) {
+    item.addEventListener("toggle", function () {
+      if (!item.open) return;
+      items.forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
 })();
 </script>
 

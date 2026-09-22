@@ -23,7 +23,7 @@ function ts_render_android_service_page(array $service): void
     $vsRows = [
         ["Reach", "Browser + SEO", "Play Store + install"],
         ["Feel", "Responsive website", "Native gestures & Material"],
-        ["Offline", "Limited / PWA only", "True offline-first storage"],
+        ["Offline", "Limited / browser cache", "True offline-first storage"],
         ["Push", "Web push (spotty)", "Reliable FCM notifications"],
         ["Hardware", "Camera / GPS via browser", "Full device APIs"],
         ["Updates", "Instant deploy", "Store review + staged rollouts"],

@@ -11,7 +11,7 @@ function ts_site(): array
     $phone = (string) (ts_env("SITE_PHONE", "+91 8884 739 988") ?? "+91 8884 739 988");
     $site = [
         "name" => (string) (ts_env("SITE_NAME", "ScaleSphere") ?? "ScaleSphere"),
-        "tagline" => (string) (ts_env("SITE_TAGLINE", "Scale Smarter. Grow Further.") ?? "Scale Smarter. Grow Further."),
+        "tagline" => (string) (ts_env("SITE_TAGLINE", "Your dedicated Virtual Assistant for digital growth.") ?? "Your dedicated Virtual Assistant for digital growth."),
         "url" => $url,
         "host" => preg_replace("#^https?://#", "", $url) ?: "scalesphere.com",
         "email" => $email,
@@ -30,11 +30,77 @@ function ts_site(): array
     return $site;
 }
 
+/** Short line used on hub heroes and service intros. */
+function ts_va_note(): string
+{
+    return "Delivered through your dedicated Virtual Assistant — a real daily contact backed by designers, developers and strategists.";
+}
+
+/** Three core VA benefits (Welohan-style). */
+function ts_va_benefits(): array
+{
+    return [
+        [
+            "title" => "They talk to you directly",
+            "copy" => "No ticket queues or call centres — message your Virtual Assistant anytime and get a real reply from someone who knows your brand, goals and active work.",
+            "icon" => "fa-comments",
+        ],
+        [
+            "title" => "They run your daily work",
+            "copy" => "Campaigns, builds, design reviews and release cadence — your assistant keeps every moving part on track so nothing slips through the cracks.",
+            "icon" => "fa-tasks",
+        ],
+        [
+            "title" => "Backed by a full team",
+            "copy" => "Developers, designers, strategists and ad specialists support your assistant behind the scenes — one point of contact, full agency power.",
+            "icon" => "fa-users",
+        ],
+    ];
+}
+
+/** Client journey from contact form to ongoing delivery. */
+function ts_va_steps(): array
+{
+    return [
+        [
+            "num" => "01",
+            "title" => "Book your appointment",
+            "copy" => "Fill out the contact form — pick the service you need and tell us your goals. Your request goes straight to our team.",
+            "icon" => "fa-calendar-check",
+        ],
+        [
+            "num" => "02",
+            "title" => "Your Virtual Assistant contacts you",
+            "copy" => "A dedicated Virtual Assistant reaches out personally — by call, email or WhatsApp. Real person, not a bot or ticket queue.",
+            "icon" => "fa-headset",
+        ],
+        [
+            "num" => "03",
+            "title" => "Service consultation",
+            "copy" => "Your VA learns your business and walks through what you need — SEO, web development, mobile apps, design, or a full stack working together.",
+            "icon" => "fa-comments",
+        ],
+        [
+            "num" => "04",
+            "title" => "Strategy & execution",
+            "copy" => "We map timelines, bring in specialists and your VA coordinates everything daily — campaigns, builds, design reviews and launches.",
+            "icon" => "fa-rocket",
+        ],
+        [
+            "num" => "05",
+            "title" => "Grow & optimize",
+            "copy" => "Monthly reports, quick replies and continuous improvement. Your assistant keeps every channel aligned as your business scales.",
+            "icon" => "fa-chart-line",
+        ],
+    ];
+}
+
 const TS_MAIN_NAV = [
     ["href" => "/", "label" => "Home"],
     ["href" => "/about-us", "label" => "About Us"],
     ["href" => "/services", "label" => "Services", "mega" => true],
     ["href" => "/our-work", "label" => "Our Work"],
+    ["href" => "/blog", "label" => "Blog"],
     ["href" => "/contact", "label" => "Contact Us"],
 ];
 
@@ -58,13 +124,11 @@ const TS_SERVICE_MEGA = [
         "title" => "Development",
         "icon" => "fa-code",
         "tone" => "blue",
-        "lead" => "Websites, enterprise software, CRM, SharePoint, NetSuite and e-commerce — built to scale.",
+        "lead" => "Websites, enterprise software, CRM and e-commerce — built to scale.",
         "items" => [
             "Website Development",
             "Software Development",
             "CRM Software",
-            "SharePoint Integration",
-            "NetSuite Integration",
             "E-Commerce Platforms",
         ],
     ],
@@ -78,7 +142,6 @@ const TS_SERVICE_MEGA = [
             "iOS App Development",
             "React Native Apps",
             "Flutter Apps",
-            "Progressive Web Apps",
             "Support & Maintenance",
         ],
     ],

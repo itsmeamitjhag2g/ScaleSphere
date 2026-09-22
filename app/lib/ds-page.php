@@ -59,12 +59,19 @@ function ts_render_ds_service_page(array $service): void
     ];
 
     $process = [
-        ["01", "Audit", "Inventory screens, components and token debt."],
-        ["02", "Foundations", "Principles, a11y baseline and naming locked with you."],
-        ["03", "Tokens", "Scales defined and wired into Figma variables."],
-        ["04", "Build", "Core components + states; then patterns."],
-        ["05", "Document", "Usage, do’s / don’ts and handoff to code."],
-        ["06", "Adopt", "Pilot migration + training so the system actually gets used."],
+        ["01", "Audit", "Inventory screens, components and token debt.", "/images/mobile/ux-research.webp"],
+        ["02", "Foundations", "Principles, a11y baseline and naming locked with you.", "/images/mobile/design-system-creation.webp"],
+        ["03", "Tokens", "Scales defined and wired into Figma variables.", "/images/stock/photo-1558655146-d09347e92766.jpg"],
+        ["04", "Build", "Core components + states; then patterns.", "/images/mobile/UiDesign.webp"],
+        ["05", "Document", "Usage, do’s / don’ts and handoff to code.", "/images/mobile/DesignDeliver.webp"],
+        ["06", "Adopt", "Pilot migration + training so the system actually gets used.", "/images/mobile/UsabilityTesting.webp"],
+    ];
+
+    $shelf = [
+        ["Button", "Action variants", "Primary, secondary, ghost — with focus rings that pass a11y.", "/images/mobile/UiDesign.webp"],
+        ["Form", "Input patterns", "Labels, helper text, errors and success — one consistent model.", "/images/stock/photo-1559028012-481c04fa702d.jpg"],
+        ["Navigation", "Shells & chrome", "Headers, sidebars and tabs that match across products.", "/images/mobile/AppDesign.webp"],
+        ["Data", "Tables & lists", "Dense UI that stays readable — spacing from the token scale.", "/images/stock/photo-1551288049-bebda4e38f71.jpg"],
     ];
 
     $packages = [
@@ -580,78 +587,66 @@ function ts_render_ds_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-ds .yl-shelf .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.75rem; color:var(--muted); font-size:15px; max-width:46rem; line-height:1.55;
     }
     .yl-ds .yl-shelf-grid{
-      display:grid; gap:1rem;
-      grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+      display:grid; gap:1.15rem;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+    @media (min-width:960px){
+      .yl-ds .yl-shelf-grid{ grid-template-columns:repeat(4, minmax(0, 1fr)); gap:1.25rem; }
     }
     .yl-ds .yl-shelf-card{
       background:#fff;
       border:1px solid var(--line);
-      border-radius:1.1rem;
-      padding:1.15rem;
-      box-shadow:0 12px 30px rgba(15,23,42,.05);
+      border-radius:1.15rem;
+      overflow:hidden;
+      box-shadow:0 14px 34px rgba(15,23,42,.06);
+      transition:transform .35s ease, box-shadow .35s ease;
+    }
+    .yl-ds .yl-shelf-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 44px rgba(124,58,237,.14);
     }
     .yl-ds .yl-shelf-card .prev{
-      aspect-ratio:1.4 / 1;
-      border-radius:.75rem;
-      margin-bottom:.85rem;
-      border:1px solid var(--line);
+      position:relative;
+      aspect-ratio:1.15 / 1;
+      overflow:hidden;
       background:var(--soft);
-      display:grid; place-items:center;
-      padding:.75rem;
+      isolation:isolate;
     }
+    .yl-ds .yl-shelf-card .prev img{
+      width:100%; height:100%; object-fit:cover;
+      transform:scale(1.06);
+      transition:transform .8s ease;
+      animation:yl-ds-ken 14s ease-in-out infinite alternate;
+    }
+    .yl-ds .yl-shelf-card:hover .prev img{ transform:scale(1.12); }
+    .yl-ds .yl-shelf-card .prev::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, transparent 45%, rgba(15,23,42,.45) 100%);
+      pointer-events:none;
+    }
+    .yl-ds .yl-shelf-card .body{ padding:1rem 1.1rem 1.2rem; }
     .yl-ds .yl-shelf-card strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:14.5px; font-weight:800; margin-bottom:.3rem; color:var(--ink);
     }
-    .yl-ds .yl-shelf-card span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-ds .yl-shelf-card span{ font-size:12.5px; color:var(--muted); line-height:1.5; display:block; }
     .yl-ds .yl-shelf-card .tag{
       font-family:"IBM Plex Mono",monospace;
       font-size:10px; letter-spacing:.1em; text-transform:uppercase;
-      color:var(--blue); margin-bottom:.3rem;
+      color:var(--blue); margin-bottom:.35rem;
     }
-
-    .yl-ds .yl-btn-states{ display:flex; flex-wrap:wrap; gap:.4rem; justify-content:center; }
-    .yl-ds .yl-btn-states span{
-      height:28px; padding:0 .7rem; border-radius:999px;
-      font-size:10px; font-weight:700; display:inline-flex; align-items:center;
+    @keyframes yl-ds-ken{
+      from{ transform:scale(1.05) translate(0,0); }
+      to{ transform:scale(1.14) translate(-2%, -1.5%); }
     }
-    .yl-ds .yl-btn-states .p{ background:var(--blue); color:#fff; }
-    .yl-ds .yl-btn-states .h{ background:var(--deep); color:#fff; }
-    .yl-ds .yl-btn-states .f{ background:var(--blue); color:#fff; box-shadow:0 0 0 3px rgba(124,58,237,.3); }
-    .yl-ds .yl-btn-states .d{ background:#E2E8F0; color:#94A3B8; }
-
-    .yl-ds .yl-form-demo{ width:100%; display:grid; gap:.4rem; }
-    .yl-ds .yl-form-demo i{
-      display:block; height:28px; border-radius:.5rem;
-      background:#fff; border:1.5px solid var(--line);
+    @media (prefers-reduced-motion:reduce){
+      .yl-ds .yl-shelf-card .prev img,
+      .yl-ds .yl-proc-media img{ animation:none !important; }
     }
-    .yl-ds .yl-form-demo i:last-child{
-      height:32px; border-radius:999px;
-      background:var(--blue); border-color:var(--deep);
-    }
-
-    .yl-ds .yl-nav-demo{
-      width:100%; display:flex; gap:.35rem; align-items:center;
-    }
-    .yl-ds .yl-nav-demo b{
-      width:28px; height:28px; border-radius:.55rem;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
-    }
-    .yl-ds .yl-nav-demo i{
-      height:8px; flex:1; border-radius:999px; background:#CBD5E1;
-    }
-    .yl-ds .yl-nav-demo i:nth-child(2){ background:var(--blue); flex:.7; }
-
-    .yl-ds .yl-table-demo{ width:100%; display:grid; gap:.3rem; }
-    .yl-ds .yl-table-demo i{
-      display:block; height:10px; border-radius:999px; background:#E2E8F0;
-    }
-    .yl-ds .yl-table-demo i:first-child{ background:rgba(124,58,237,.25); }
-    .yl-ds .yl-table-demo i:nth-child(odd){ width:100%; }
-    .yl-ds .yl-table-demo i:nth-child(even){ width:78%; }
 
     .yl-ds .yl-gallery{
       padding:3.5rem 0;
@@ -699,42 +694,107 @@ function ts_render_ds_service_page(array $service): void
       font-size:clamp(1.6rem,3.5vw,2.2rem); font-weight:800;
     }
     .yl-ds .yl-process .sub{
-      margin:0 0 1.5rem; max-width:34rem;
+      margin:0 0 1.75rem; max-width:42rem;
       font-size:14px; color:var(--muted); line-height:1.5;
+    }
+    .yl-ds .yl-proc-deck{
+      display:grid; gap:1.35rem;
+      align-items:stretch;
+    }
+    @media (min-width:900px){
+      .yl-ds .yl-proc-deck{
+        grid-template-columns:minmax(300px, .95fr) minmax(0, 1.25fr);
+        gap:1.5rem;
+      }
     }
     .yl-ds .yl-proc-list{
       list-style:none; margin:0; padding:0;
-      display:grid; gap:0;
-      max-width:720px;
-      border:1px solid var(--line);
-      border-radius:.75rem;
-      overflow:hidden;
-      background:#fff;
+      display:grid; gap:.45rem;
     }
     .yl-ds .yl-proc-item{
-      display:grid;
-      gap:.35rem .85rem;
-      padding:1rem 1.15rem 1rem 1.25rem;
-      border-bottom:1px solid var(--line);
-      border-left:3px solid var(--blue);
-      background:linear-gradient(90deg, rgba(124,58,237,.04), transparent 40%);
+      margin:0; padding:0; border:0; background:transparent;
     }
-    .yl-ds .yl-proc-item:last-child{ border-bottom:0; }
-    .yl-ds .yl-proc-item .code{
+    .yl-ds .yl-proc-btn{
+      width:100%;
+      text-align:left;
+      cursor:pointer;
+      display:grid;
+      gap:.15rem;
+      padding:.72rem .95rem .75rem 1rem;
+      border:1px solid var(--line);
+      border-radius:.85rem;
+      border-left:3px solid transparent;
+      background:#fff;
+      box-shadow:0 8px 22px rgba(15,23,42,.04);
+      transition:border-color .25s ease, background .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    .yl-ds .yl-proc-btn:hover{
+      border-color:rgba(124,58,237,.35);
+      transform:translateX(2px);
+    }
+    .yl-ds .yl-proc-btn.is-on{
+      border-left-color:var(--blue);
+      border-color:rgba(124,58,237,.4);
+      background:linear-gradient(90deg, rgba(124,58,237,.08), #fff 55%);
+      box-shadow:0 14px 32px rgba(124,58,237,.12);
+    }
+    .yl-ds .yl-proc-btn .code{
       font-family:"IBM Plex Mono",monospace;
-      font-size:13px; font-weight:600;
+      font-size:12.5px; font-weight:700;
       color:var(--ink); letter-spacing:.02em;
     }
-    .yl-ds .yl-proc-item p{
-      margin:0; font-size:13.5px; line-height:1.5; color:var(--muted);
-      grid-column:1 / -1;
+    .yl-ds .yl-proc-btn.is-on .code{ color:var(--blue); }
+    .yl-ds .yl-proc-btn p{
+      margin:0; font-size:13px; line-height:1.45; color:var(--muted);
     }
-    @media (min-width:640px){
-      .yl-ds .yl-proc-item{
-        grid-template-columns:minmax(140px,180px) 1fr;
-        align-items:baseline;
+    .yl-ds .yl-proc-media{
+      position:relative;
+      align-self:start;
+      border-radius:1.25rem;
+      overflow:hidden;
+      min-height:360px;
+      aspect-ratio:4 / 3;
+      border:1px solid var(--line);
+      background:#0f172a;
+      box-shadow:0 22px 48px rgba(15,23,42,.14);
+    }
+    @media (min-width:900px){
+      .yl-ds .yl-proc-media{
+        position:sticky;
+        top:5.5rem;
+        min-height:480px;
+        height:min(560px, 70vh);
+        aspect-ratio:auto;
       }
-      .yl-ds .yl-proc-item p{ grid-column:2; }
+    }
+    .yl-ds .yl-proc-media figure{
+      position:absolute; inset:0;
+      margin:0;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .55s ease, visibility .55s ease;
+    }
+    .yl-ds .yl-proc-media figure.is-on{
+      opacity:1; visibility:visible; z-index:1;
+    }
+    .yl-ds .yl-proc-media img{
+      width:100%; height:100%; object-fit:cover;
+      animation:yl-ds-ken 16s ease-in-out infinite alternate;
+    }
+    .yl-ds .yl-proc-media figcaption{
+      position:absolute; left:0; right:0; bottom:0;
+      padding:1.35rem 1.25rem 1.2rem;
+      background:linear-gradient(180deg, transparent, rgba(15,23,42,.78));
+      color:#fff;
+      z-index:2;
+    }
+    .yl-ds .yl-proc-media figcaption strong{
+      display:block;
+      font-family:Montserrat,sans-serif;
+      font-size:1.05rem; font-weight:800; margin-bottom:.25rem;
+    }
+    .yl-ds .yl-proc-media figcaption span{
+      font-size:13px; line-height:1.45; opacity:.9;
     }
 
     .yl-ds .yl-pkgs{
@@ -802,35 +862,72 @@ function ts_render_ds_service_page(array $service): void
       background:var(--paper);
       border-top:1px solid var(--line);
     }
+    .yl-ds .yl-faq-split{
+      display:grid; gap:1.5rem; align-items:start;
+    }
+    @media (min-width:900px){
+      .yl-ds .yl-faq-split{ grid-template-columns:.85fr 1.25fr; gap:2.5rem; }
+    }
     .yl-ds .yl-faq h2{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-ds .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
+    .yl-ds .yl-faq .lead{
+      margin:0; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+    }
     .yl-ds .yl-faq-list{
       display:grid; gap:.65rem;
-      max-width:none;
+      max-width:none; width:100%;
+      align-items:start;
     }
-    @media (min-width:900px){
-      .yl-ds .yl-faq-list{ grid-template-columns:1fr 1fr; gap:.75rem; }
+    @media (min-width:700px){
+      .yl-ds .yl-faq-list{ grid-template-columns:1fr 1fr; gap:.7rem; }
     }
     .yl-ds details{
       background:#fff; border:1px solid var(--line);
       border-radius:1rem; overflow:hidden;
+      height:auto; align-self:start; min-height:0;
+      transition:border-color .25s, box-shadow .25s;
+    }
+    .yl-ds details[open]{
+      border-color:rgba(124,58,237,.35);
+      box-shadow:0 10px 28px rgba(124,58,237,.1);
     }
     .yl-ds summary{
       cursor:pointer; list-style:none;
-      padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem;
+      padding:1rem 1.1rem;
+      font-weight:700; font-size:14.5px; line-height:1.35;
+      display:flex; justify-content:space-between; align-items:center; gap:.85rem;
+      color:var(--ink); transition:color .25s; text-align:left;
     }
+    .yl-ds details[open] summary{ color:var(--blue); }
     .yl-ds summary::-webkit-details-marker{ display:none; }
-    .yl-ds summary i{ color:var(--muted); transition:transform .2s, color .2s; }
-    .yl-ds details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
+    .yl-ds .yl-faq-toggle{
+      position:relative; flex-shrink:0;
+      width:26px; height:26px; border-radius:50%;
+      background:rgba(124,58,237,.08); border:1px solid rgba(124,58,237,.22);
+      transition:background .25s, border-color .25s, transform .25s;
+    }
+    .yl-ds .yl-faq-toggle::before,
+    .yl-ds .yl-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--blue); border-radius:1px;
+      transition:transform .28s ease, opacity .28s ease;
+    }
+    .yl-ds .yl-faq-toggle::before{ width:11px; height:2px; transform:translate(-50%,-50%); }
+    .yl-ds .yl-faq-toggle::after{ width:2px; height:11px; transform:translate(-50%,-50%); }
+    .yl-ds details[open] .yl-faq-toggle{
+      background:var(--blue); border-color:var(--blue); transform:rotate(180deg);
+    }
+    .yl-ds details[open] .yl-faq-toggle::before{ background:#fff; }
+    .yl-ds details[open] .yl-faq-toggle::after{
+      background:#fff; transform:translate(-50%,-50%) rotate(90deg) scaleY(0); opacity:0;
+    }
     .yl-ds details p{
-      margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      margin:0; padding:0 1.1rem 1.05rem;
+      font-size:14px; line-height:1.65; color:var(--muted); text-align:left;
+      user-select:text;
     }
 
     .yl-ds .yl-related{
@@ -1036,43 +1133,18 @@ function ts_render_ds_service_page(array $service): void
       <h2>States, not just pretty defaults</h2>
       <p class="lead">Every component ships with hover, focus, disabled and error thinking — the stuff that usually gets invented mid-sprint.</p>
       <div class="yl-shelf-grid">
+        <?php foreach ($shelf as $card): ?>
         <article class="yl-shelf-card">
           <div class="prev">
-            <div class="yl-btn-states">
-              <span class="p">Default</span>
-              <span class="h">Hover</span>
-              <span class="f">Focus</span>
-              <span class="d">Off</span>
-            </div>
+            <img src="<?= ts_h($card[3]) ?>" alt="<?= ts_h($card[1]) ?>" width="640" height="560" loading="lazy">
           </div>
-          <div class="tag">Button</div>
-          <strong>Action variants</strong>
-          <span>Primary, secondary, ghost — with focus rings that pass a11y.</span>
-        </article>
-        <article class="yl-shelf-card">
-          <div class="prev">
-            <div class="yl-form-demo"><i></i><i></i><i></i></div>
+          <div class="body">
+            <div class="tag"><?= ts_h($card[0]) ?></div>
+            <strong><?= ts_h($card[1]) ?></strong>
+            <span><?= ts_h($card[2]) ?></span>
           </div>
-          <div class="tag">Form</div>
-          <strong>Input patterns</strong>
-          <span>Labels, helper text, errors and success — one consistent model.</span>
         </article>
-        <article class="yl-shelf-card">
-          <div class="prev">
-            <div class="yl-nav-demo"><b></b><i></i><i></i><i></i></div>
-          </div>
-          <div class="tag">Navigation</div>
-          <strong>Shells &amp; chrome</strong>
-          <span>Headers, sidebars and tabs that match across products.</span>
-        </article>
-        <article class="yl-shelf-card">
-          <div class="prev">
-            <div class="yl-table-demo"><i></i><i></i><i></i><i></i><i></i></div>
-          </div>
-          <div class="tag">Data</div>
-          <strong>Tables &amp; lists</strong>
-          <span>Dense UI that stays readable — spacing from the token scale.</span>
-        </article>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -1127,14 +1199,29 @@ function ts_render_ds_service_page(array $service): void
     <div class="yl-wrap">
       <h2>How a system project runs</h2>
       <p class="sub">Audit → foundations → tokens → components → docs → adoption. You approve each layer.</p>
-      <ol class="yl-proc-list">
-        <?php foreach ($process as $step): ?>
-        <li class="yl-proc-item">
-          <span class="code"><?= ts_h($step[0]) ?> — <?= ts_h($step[1]) ?></span>
-          <p><?= ts_h($step[2]) ?></p>
-        </li>
-        <?php endforeach; ?>
-      </ol>
+      <div class="yl-proc-deck" data-proc-deck>
+        <ol class="yl-proc-list">
+          <?php foreach ($process as $i => $step): ?>
+          <li class="yl-proc-item">
+            <button type="button" class="yl-proc-btn<?= $i === 0 ? ' is-on' : '' ?>" data-proc="<?= (int) $i ?>" aria-pressed="<?= $i === 0 ? 'true' : 'false' ?>">
+              <span class="code"><?= ts_h($step[0]) ?> — <?= ts_h($step[1]) ?></span>
+              <p><?= ts_h($step[2]) ?></p>
+            </button>
+          </li>
+          <?php endforeach; ?>
+        </ol>
+        <div class="yl-proc-media" aria-live="polite">
+          <?php foreach ($process as $i => $step): ?>
+          <figure class="<?= $i === 0 ? 'is-on' : '' ?>" data-proc-panel="<?= (int) $i ?>">
+            <img src="<?= ts_h($step[3]) ?>" alt="<?= ts_h($step[1]) ?>" width="960" height="720" loading="<?= $i === 0 ? 'eager' : 'lazy' ?>">
+            <figcaption>
+              <strong><?= ts_h($step[0]) ?> — <?= ts_h($step[1]) ?></strong>
+              <span><?= ts_h($step[2]) ?></span>
+            </figcaption>
+          </figure>
+          <?php endforeach; ?>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1196,13 +1283,15 @@ function ts_render_ds_service_page(array $service): void
   </section>
 
   <section class="yl-faq">
-    <div class="yl-wrap">
-      <h2>Questions before you enquire</h2>
-      <p class="lead">Straight answers so you can decide if we are the right fit.</p>
+    <div class="yl-wrap yl-faq-split">
+      <div>
+        <h2>Questions before you enquire</h2>
+        <p class="lead">Straight answers so you can decide if we are the right fit.</p>
+      </div>
       <div class="yl-faq-list">
         <?php foreach ($faqs as $faq): ?>
         <details>
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <summary><?= ts_h($faq[0]) ?> <span class="yl-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
@@ -1238,6 +1327,56 @@ function ts_render_ds_service_page(array $service): void
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script>
+(function () {
+  var root = document.querySelector(".yl-ds [data-proc-deck]");
+  if (!root) return;
+  var steps = Array.prototype.slice.call(root.querySelectorAll("[data-proc]"));
+  var panels = Array.prototype.slice.call(root.querySelectorAll("[data-proc-panel]"));
+  if (!steps.length || steps.length !== panels.length) return;
+  var i = 0;
+  var timer = null;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function show(n) {
+    i = ((n % steps.length) + steps.length) % steps.length;
+    steps.forEach(function (el, idx) {
+      var on = idx === i;
+      el.classList.toggle("is-on", on);
+      el.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    panels.forEach(function (el, idx) {
+      el.classList.toggle("is-on", idx === i);
+    });
+  }
+
+  function arm() {
+    if (reduce || timer) return;
+    timer = window.setInterval(function () {
+      show(i + 1);
+    }, 4200);
+  }
+
+  function disarm() {
+    if (!timer) return;
+    window.clearInterval(timer);
+    timer = null;
+  }
+
+  steps.forEach(function (el, idx) {
+    el.addEventListener("click", function () {
+      show(idx);
+      disarm();
+      arm();
+    });
+  });
+
+  root.addEventListener("mouseenter", disarm);
+  root.addEventListener("mouseleave", arm);
+  show(0);
+  arm();
+})();
+</script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,

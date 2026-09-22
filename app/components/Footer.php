@@ -7,7 +7,7 @@
         <a href="/" class="logo">
           <img src="<?= ts_h(ts_logo()) ?>" alt="<?= ts_h($site["name"]) ?>" width="160" height="44" class="footer-logo">
         </a>
-        <p class="footer-tagline">We build digital experiences that scale — from marketing and development to mobile apps and product design.</p>
+        <p class="footer-tagline">Your dedicated Virtual Assistant for marketing, development, mobile apps and design — one contact, full agency power.</p>
         <div class="social-row">
           <a href="<?= ts_h($site["facebook"]) ?>" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="<?= ts_h($site["twitter"]) ?>" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
@@ -24,6 +24,7 @@
           <li><a href="/about-us">About Us</a></li>
           <li><a href="/services">Services</a></li>
           <li><a href="/our-work">Our Work</a></li>
+          <li><a href="/blog">Blog</a></li>
           <li><a href="/contact">Contact Us</a></li>
         </ul>
       </div>
@@ -31,10 +32,10 @@
       <div class="footer-col">
         <h6 class="footer-heading">Services</h6>
         <ul>
-          <li><a href="/services/development">Web Development</a></li>
           <li><a href="/services/online-marketing">Online Marketing</a></li>
+          <li><a href="/services/development">Development</a></li>
           <li><a href="/services/mobile-apps">Mobile Apps</a></li>
-          <li><a href="/services/creative-design">Product Design</a></li>
+          <li><a href="/services/creative-design">Creative Design</a></li>
           <li><a href="/services">View All Services</a></li>
         </ul>
       </div>

@@ -12,6 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const megaLink = document.getElementById('servicesMegaLink');
   const megaDrop = document.getElementById('servicesMegaDrop');
   const isMobileNav = () => window.matchMedia('(max-width: 1080px)').matches;
+  const navHome = mainNav?.parentElement || null;
+  const headerActions = document.querySelector('.header-actions');
+
+  /* Backdrop so drawer is obvious + tap-outside closes */
+  let navBackdrop = document.getElementById('navBackdrop');
+  if (!navBackdrop) {
+    navBackdrop = document.createElement('div');
+    navBackdrop.id = 'navBackdrop';
+    navBackdrop.className = 'nav-backdrop';
+    navBackdrop.hidden = true;
+    navBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(navBackdrop);
+  }
+
+  const placeNavForViewport = () => {
+    if (!mainNav) return;
+    if (isMobileNav()) {
+      /* Escape sticky header containing-block (backdrop-filter) */
+      if (mainNav.parentElement !== document.body) {
+        document.body.appendChild(mainNav);
+      }
+    } else if (navHome && mainNav.parentElement !== navHome) {
+      if (headerActions && headerActions.parentElement === navHome) {
+        navHome.insertBefore(mainNav, headerActions);
+      } else {
+        navHome.appendChild(mainNav);
+      }
+    }
+  };
 
   const setMegaOpen = (open) => {
     if (!megaItem || !megaLink) return;
@@ -22,9 +51,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeMega = () => setMegaOpen(false);
 
+  const closeAllPracticeAccordions = () => {
+    document.querySelectorAll('.mega-acc-item').forEach((el) => {
+      el.classList.remove('open');
+      const p = el.querySelector('.mega-acc-panel');
+      const t = el.querySelector('.mega-acc-trigger');
+      if (p) p.setAttribute('aria-hidden', 'true');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  };
+
+  const setDrawerOpen = (open) => {
+    if (!mainNav || !navToggle) return;
+    placeNavForViewport();
+    mainNav.classList.toggle('open', open);
+    navToggle.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    header?.classList.toggle('nav-open', open);
+    document.documentElement.classList.toggle('nav-drawer-open', open);
+    document.body.classList.toggle('nav-drawer-open', open);
+    navBackdrop.hidden = !open;
+    navBackdrop.classList.toggle('is-on', open);
+    navBackdrop.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (open) {
+      setMegaOpen(true);
+      closeAllPracticeAccordions();
+    } else {
+      closeMega();
+      closeAllPracticeAccordions();
+    }
+  };
+
+  const toggleDrawer = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!isMobileNav()) return;
+    setDrawerOpen(!mainNav.classList.contains('open'));
+  };
+
   if (megaLink && megaItem) {
-    /* Desktop: hover opens mega; click navigates to /services.
-       Mobile: tap Services goes to /services (no preventDefault). */
     megaItem.addEventListener('mouseenter', () => {
       if (isMobileNav()) return;
       clearTimeout(megaItem._leaveTimer);
@@ -35,43 +102,63 @@ document.addEventListener('DOMContentLoaded', () => {
       megaItem._leaveTimer = setTimeout(() => closeMega(), 200);
     });
 
+    megaLink.addEventListener('click', (e) => {
+      if (!isMobileNav()) return;
+      /* The Services label is a real page link on mobile too. Practice
+         accordions below it remain available for direct service navigation. */
+      closeMobileNav();
+    });
+
     megaDrop?.addEventListener('mousedown', (e) => e.stopPropagation());
 
     document.addEventListener('click', (e) => {
+      if (isMobileNav()) return;
       if (!megaItem.classList.contains('open')) return;
       if (megaItem.contains(e.target)) return;
       closeMega();
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMega();
+      if (e.key !== 'Escape') return;
+      closeMega();
+      if (isMobileNav() && mainNav?.classList.contains('open')) {
+        setDrawerOpen(false);
+      }
     });
   }
 
   if (navToggle && mainNav) {
-    navToggle.addEventListener('click', () => {
-      const open = mainNav.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', open);
-      if (!open) closeMega();
-    });
+    placeNavForViewport();
+    if (isMobileNav()) {
+      closeMega();
+      closeAllPracticeAccordions();
+    }
+
+    navToggle.addEventListener('click', toggleDrawer);
+
+    navBackdrop.addEventListener('click', () => setDrawerOpen(false));
+
+    const closeMobileNav = () => setDrawerOpen(false);
+
     mainNav.querySelectorAll('a').forEach((a) => {
       if (a === megaLink) return;
       a.addEventListener('click', () => {
-        mainNav.classList.remove('open');
-        closeMega();
-        navToggle.setAttribute('aria-expanded', 'false');
+        if (isMobileNav()) closeMobileNav();
       });
     });
     megaDrop?.querySelectorAll('a').forEach((a) => {
       a.addEventListener('click', () => {
-        mainNav.classList.remove('open');
-        closeMega();
-        navToggle.setAttribute('aria-expanded', 'false');
+        if (isMobileNav()) closeMobileNav();
       });
+    });
+
+    window.addEventListener('resize', () => {
+      placeNavForViewport();
+      if (!isMobileNav()) setDrawerOpen(false);
     });
   }
 
-  /* ---------- Mobile services accordion (monorepo-style) ---------- */
+  /* ---------- Mobile services accordion (one practice open at a time) ---------- */
   document.querySelectorAll('.mega-acc-trigger').forEach((trigger) => {
     trigger.addEventListener('click', (e) => {
       e.preventDefault();

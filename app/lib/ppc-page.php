@@ -261,74 +261,93 @@ function ts_render_ppc_service_page(array $service): void
     }
     .ppc-proof-line span{ color:var(--ppc-pink); }
 
-    /* Dashboard mock */
-    .ppc-dash{
-      background:#fff; border:1px solid var(--ppc-line); border-radius:18px;
-      padding:1.1rem 1.15rem 1.2rem;
-      box-shadow:0 18px 44px rgba(15,23,42,.08);
+    /* Premium hero visual — photo + metrics, no fake “live mock” slide */
+    .ppc-hero-visual{
+      position:relative; border-radius:20px; overflow:hidden;
+      min-height:320px; background:#0F172A;
+      box-shadow:0 24px 50px rgba(15,23,42,.18);
     }
-    .ppc-dash-top{
-      display:flex; justify-content:space-between; align-items:center; gap:.75rem;
-      margin-bottom:.9rem;
+    .ppc-hero-visual > img{
+      display:block; width:100%; height:100%; min-height:320px;
+      object-fit:cover; object-position:center;
     }
-    .ppc-dash-top strong{ font-size:13px; font-weight:800; }
-    .ppc-dash-top span{
+    .ppc-hero-visual::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(160deg, rgba(15,23,42,.15) 0%, rgba(15,23,42,.72) 55%, rgba(15,23,42,.88) 100%);
+      pointer-events:none;
+    }
+    .ppc-hero-panel{
+      position:absolute; left:1rem; right:1rem; bottom:1rem; z-index:1;
+      display:grid; gap:.75rem;
+      padding:1rem 1.05rem;
+      border-radius:16px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.65);
+      backdrop-filter:blur(10px);
+      box-shadow:0 12px 32px rgba(15,23,42,.2);
+    }
+    .ppc-hero-panel-top{
+      display:flex; justify-content:space-between; align-items:center; gap:.5rem;
+    }
+    .ppc-hero-panel-top strong{ font-size:12.5px; font-weight:800; letter-spacing:.02em; }
+    .ppc-hero-panel-top span{
       font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
-      color:var(--ppc-pink); background:var(--ppc-soft); padding:.3rem .55rem; border-radius:999px;
+      color:var(--ppc-pink);
     }
-    .ppc-dash-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; margin-bottom:.85rem; }
-    .ppc-dash-card{
-      padding:.7rem .65rem; border-radius:12px; border:1px solid var(--ppc-line); background:#F8FAFC;
-      transition:border-color .2s ease, transform .2s ease, background .2s ease;
+    .ppc-hero-metrics{
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:.55rem;
     }
-    .ppc-dash-card:hover{
-      border-color:rgba(28,79,214,.35); background:#fff; transform:translateY(-2px);
+    .ppc-hero-metric{
+      padding:.55rem .5rem; border-radius:10px; background:#F8FAFC; border:1px solid #E2E8F0;
+      text-align:left;
     }
-    .ppc-dash-card b{
-      display:block; font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
-      color:var(--ppc-muted); margin-bottom:.25rem;
+    .ppc-hero-metric b{
+      display:block; font-size:9.5px; font-weight:800; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--ppc-muted); margin-bottom:.2rem;
     }
-    .ppc-dash-card strong{
-      font-size:clamp(1.1rem,2.5vw,1.35rem); font-weight:800; color:var(--ppc-ink); letter-spacing:-.02em;
+    .ppc-hero-metric strong{
+      font-size:clamp(1.05rem,2.4vw,1.3rem); font-weight:800; color:var(--ppc-ink); letter-spacing:-.02em;
     }
-    .ppc-dash-card.is-hot strong{ color:var(--ppc-pink); }
-    .ppc-dash-waste{ margin-top:.15rem; }
-    .ppc-dash-waste-label{
-      display:flex; justify-content:space-between; font-size:11px; font-weight:700; margin-bottom:.35rem;
+    .ppc-hero-metric.is-hot strong{ color:var(--ppc-pink); }
+    .ppc-hero-note{
+      margin:0; font-size:11.5px; font-weight:600; color:var(--ppc-body); line-height:1.4;
     }
-    .ppc-dash-waste-label span{ color:var(--ppc-muted); }
-    .ppc-dash-waste-label em{ font-style:normal; color:var(--ppc-pink); }
-    .ppc-dash-bar{
-      height:10px; border-radius:999px; background:#E2E8F0; overflow:hidden;
+    .ppc-hero-note em{ font-style:normal; color:var(--ppc-pink); font-weight:800; }
+    @media (max-width:520px){
+      .ppc-hero-visual, .ppc-hero-visual > img{ min-height:280px; }
+      .ppc-hero-panel{ left:.75rem; right:.75rem; bottom:.75rem; padding:.85rem; }
     }
-    .ppc-dash-bar i{
-      display:block; height:100%; width:0; border-radius:999px;
-      background:linear-gradient(90deg, var(--ppc-pink), #22C55E);
-      transition:width 1.1s ease .2s;
-    }
-    .ppc-dash.is-in .ppc-dash-bar i{ width:59%; }
 
     .ppc-sec{ padding:clamp(2.25rem,5vw,3.5rem) 0; border-top:1px solid var(--ppc-line); }
     .ppc-sec-head{ margin-bottom:1.35rem; }
     .ppc-sec.soft{ background:#EEF3FF; }
 
-    .ppc-pains, .ppc-chans, .ppc-scope, .ppc-proof, .ppc-pkgs, .ppc-related, .ppc-kpis, .ppc-audience{
-      display:grid; gap:.75rem; grid-template-columns:1fr;
+    .ppc-pains, .ppc-chans, .ppc-scope, .ppc-proof, .ppc-pkgs, .ppc-related, .ppc-kpis, .ppc-audience, .ppc-focus{
+      display:grid; gap:1rem; grid-template-columns:1fr;
     }
     @media (min-width:700px){
       .ppc-pains{ grid-template-columns:1fr 1fr; }
-      .ppc-chans, .ppc-scope{ grid-template-columns:1fr 1fr; }
-      .ppc-kpis, .ppc-related, .ppc-audience{ grid-template-columns:repeat(3,1fr); }
+      .ppc-chans, .ppc-scope, .ppc-focus{ grid-template-columns:1fr 1fr; }
+      .ppc-kpis, .ppc-related, .ppc-audience{ grid-template-columns:repeat(3,1fr); gap:1.1rem; }
     }
     @media (min-width:1000px){
       .ppc-pains, .ppc-chans{ grid-template-columns:repeat(4,1fr); }
       .ppc-scope{ grid-template-columns:repeat(3,1fr); }
-      .ppc-proof, .ppc-pkgs{ grid-template-columns:repeat(3,1fr); }
+      .ppc-proof{ grid-template-columns:repeat(3,1fr); }
+      .ppc-focus{ grid-template-columns:repeat(3,1fr); }
     }
 
-    .ppc-pain, .ppc-tile, .ppc-proof-card, .ppc-pkg, .ppc-chan, .ppc-kpi, .ppc-aud{
+    .ppc-pain, .ppc-tile, .ppc-proof-card, .ppc-pkg, .ppc-chan, .ppc-kpi, .ppc-aud, .ppc-focus-card{
       padding:1.1rem 1.15rem; border-radius:14px;
       border:1px solid var(--ppc-line); background:#fff;
+    }
+    .ppc-kpi{
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .ppc-kpi:hover{
+      transform:translateY(-3px);
+      border-color:rgba(28,79,214,.3);
+      box-shadow:0 12px 28px rgba(15,23,42,.08);
     }
     .ppc-tile:hover, .ppc-rel:hover, .ppc-chan:hover{ border-color:rgba(28,79,214,.35); transform:translateY(-2px); }
     .ppc-tile, .ppc-rel, .ppc-chan{ transition:border-color .2s ease, transform .2s ease; }
@@ -357,40 +376,41 @@ function ts_render_ppc_service_page(array $service): void
     .ppc-vs a{ color:var(--ppc-pink); font-weight:800; text-decoration:none; }
     .ppc-vs a:hover{ text-decoration:underline; }
 
-    .ppc-tabs{ display:flex; flex-wrap:wrap; gap:.45rem; margin-bottom:1rem; }
-    .ppc-tab{
-      appearance:none; border:1px solid var(--ppc-line); background:#fff; color:var(--ppc-ink);
-      padding:.5rem 1rem; border-radius:999px; font-size:13px; font-weight:800; cursor:pointer;
-      font-family:Montserrat,system-ui,sans-serif; letter-spacing:.03em; text-transform:uppercase;
+    .ppc-focus{ margin-top:1.35rem; }
+    .ppc-focus-card{
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      height:100%;
     }
-    .ppc-tab.is-on{
-      background:var(--ppc-pink); color:#fff; border-color:var(--ppc-pink);
+    .ppc-focus-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(28,79,214,.3);
+      box-shadow:0 12px 28px rgba(15,23,42,.08);
     }
-    .ppc-tab-panel{
-      padding:1.15rem; border-radius:14px; border:1px solid var(--ppc-line); background:#fff;
-      display:none;
+    .ppc-focus-card .best{
+      display:inline-block; margin-bottom:.4rem;
+      font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ppc-pink);
     }
-    .ppc-tab-panel.is-on{ display:block; }
-    .ppc-tab-panel h3{ margin:0 0 .4rem; font-size:1.1rem; font-weight:800; }
-    .ppc-tab-panel p{ margin:0; font-size:14px; line-height:1.55; color:var(--ppc-body); }
+    .ppc-focus-card h3{ margin:0 0 .35rem; font-size:1.05rem; font-weight:800; }
+    .ppc-focus-card p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--ppc-body); }
 
-    .ppc-funnel{ display:grid; gap:.55rem; }
+    .ppc-funnel{ display:grid; gap:.7rem; }
     .ppc-funnel-row{
-      display:grid; grid-template-columns:110px 1fr; gap:.75rem; align-items:center;
+      display:grid; gap:.3rem; padding:.9rem 1rem; border-radius:14px;
+      border:1px solid var(--ppc-line); background:#fff;
+      transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
     }
-    .ppc-funnel-row b{ font-size:13px; font-weight:800; }
-    .ppc-funnel-bar{
-      position:relative; height:36px; border-radius:10px; overflow:hidden;
-      background:#F4F6FB; border:1px solid var(--ppc-line);
+    .ppc-funnel-row:hover{
+      transform:translateY(-2px);
+      border-color:rgba(28,79,214,.28);
+      box-shadow:0 10px 24px rgba(15,23,42,.06);
     }
-    .ppc-funnel-fill{
-      height:100%; border-radius:10px;
-      background:linear-gradient(90deg, var(--ppc-pink), #6B8FF0);
-      display:flex; align-items:center; padding:0 .75rem;
-      color:#fff; font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
-      white-space:nowrap;
+    .ppc-funnel-row b{ font-size:14px; font-weight:800; color:var(--ppc-ink); }
+    .ppc-funnel-tag{
+      display:inline-block;
+      font-size:10px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+      color:var(--ppc-pink);
     }
-    .ppc-funnel-note{ font-size:12px; color:var(--ppc-muted); margin-top:.15rem; }
+    .ppc-funnel-note{ margin:0; font-size:12.5px; color:var(--ppc-muted); line-height:1.4; }
 
     /* Process — animated pulse flow */
     .ppc-flow{
@@ -532,50 +552,72 @@ function ts_render_ppc_service_page(array $service): void
       background:#fff; font-size:13px; font-weight:700;
     }
 
-    /* Comparison strip packages */
+    /* Separate package cards — premium, not attached strip */
     .ppc-pkgs{
-      display:grid !important; gap:0 !important; border:1px solid var(--ppc-line); border-radius:18px; overflow:hidden;
+      display:grid !important;
       grid-template-columns:1fr !important;
+      gap:1rem !important;
+      border:none;
+      border-radius:0;
+      overflow:visible;
+      width:100%;
     }
-    @media (min-width:900px){ .ppc-pkgs{ grid-template-columns:repeat(3,1fr) !important; } }
+    @media (min-width:700px){
+      .ppc-pkgs{ grid-template-columns:repeat(2, minmax(0,1fr)) !important; gap:1.1rem !important; }
+    }
+    @media (min-width:1024px){
+      .ppc-pkgs{ grid-template-columns:repeat(3, minmax(0,1fr)) !important; gap:1.25rem !important; }
+    }
     .ppc-pkg{
-      display:flex; flex-direction:column; gap:.75rem;
-      border-radius:0 !important; border:none !important; border-bottom:1px solid var(--ppc-line) !important;
+      display:flex !important; flex-direction:column !important; gap:.7rem !important;
+      min-width:0; height:100%;
+      padding:1.2rem 1.15rem 1.25rem !important;
+      border-radius:16px !important;
+      border:1px solid var(--ppc-line) !important;
+      border-bottom:4px solid #0F172A !important;
+      background:#fff !important;
+      box-shadow:0 8px 22px rgba(15,23,42,.05);
+      transition:transform .28s ease, box-shadow .28s ease, border-color .28s ease;
     }
-    @media (min-width:900px){
-      .ppc-pkg{ border-bottom:none !important; border-right:1px solid var(--ppc-line) !important; }
-      .ppc-pkg:last-child{ border-right:none !important; }
+    .ppc-pkg:hover{
+      transform:translateY(-5px);
+      box-shadow:0 16px 36px rgba(15,23,42,.1);
+      border-color:rgba(28,79,214,.28) !important;
     }
     .ppc-pkg.is-hot{
-      border-color:transparent;
-      box-shadow:inset 0 3px 0 var(--ppc-pink);
-      background:linear-gradient(180deg, rgba(219,39,119,.06), #fff 40%);
+      border-color:rgba(28,79,214,.4) !important;
+      border-bottom-color:#1C4FD6 !important;
+      background:linear-gradient(180deg, rgba(28,79,214,.08), #fff 48%) !important;
+      box-shadow:0 12px 30px rgba(28,79,214,.12);
     }
-    .ppc-pkg-top{ display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; }
-    .ppc-pkg h3{ margin:0; font-size:1.2rem; font-weight:800; }
-    .ppc-pkg-tag{ font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ppc-pink); }
+    .ppc-pkg-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:.5rem; flex-wrap:wrap; }
+    .ppc-pkg h3{ margin:0; font-size:clamp(1.1rem, 2.5vw, 1.25rem); font-weight:800; }
+    .ppc-pkg-tag{ font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ppc-pink); }
     .ppc-pkg ul{ margin:0; padding:0; list-style:none; display:grid; gap:.4rem; flex:1; }
-    .ppc-pkg li{ font-size:13.5px; color:var(--ppc-body); padding-left:1rem; position:relative; }
+    .ppc-pkg li{ font-size:13.5px; color:var(--ppc-body); padding-left:1rem; position:relative; line-height:1.4; }
     .ppc-pkg li::before{
       content:""; position:absolute; left:0; top:.55em;
       width:6px; height:6px; border-radius:50%; background:var(--ppc-pink);
     }
-    .ppc-pkg > p{ margin:0; font-size:12.5px; color:var(--ppc-muted); }
+    .ppc-pkg > p{ margin:0; font-size:12.5px; color:var(--ppc-muted); line-height:1.45; }
+    .ppc-pkgs .ppc-btn{
+      width:100%; margin-top:auto; justify-content:center; min-height:44px; box-sizing:border-box;
+    }
 
-    /* FAQ — padded pills + animated +/- */
-    .ppc-faq{ display:grid; gap:.75rem; max-width:720px; }
+    /* FAQ — roomy, no circle toggle */
+    .ppc-faq{ display:grid; gap:1rem; max-width:920px; }
     .ppc-faq details{
-      border:1px solid var(--ppc-line); border-radius:999px; background:#fff;
-      overflow:hidden; box-shadow:3px 3px 0 rgba(15,23,42,.08);
-      transition:border-radius .25s ease, box-shadow .25s ease;
+      border:1px solid var(--ppc-line); border-radius:14px; background:#fff;
+      overflow:hidden; box-shadow:0 6px 18px rgba(15,23,42,.04);
+      transition:border-color .25s ease, box-shadow .25s ease;
     }
     .ppc-faq details[open]{
-      border-radius:22px; box-shadow:4px 4px 0 rgba(28,79,214,.12);
       border-color:rgba(28,79,214,.35);
+      box-shadow:0 10px 28px rgba(28,79,214,.08);
     }
     .ppc-faq summary{
       list-style:none; cursor:pointer;
-      padding:1rem 1.15rem 1rem 1.35rem;
+      padding:1.05rem 1.15rem;
       font-weight:700; font-size:14.5px; line-height:1.35;
       display:flex; justify-content:space-between; gap:1rem; align-items:center;
       color:var(--ppc-ink); transition:color .25s; text-align:left;
@@ -583,29 +625,12 @@ function ts_render_ppc_service_page(array $service): void
     .ppc-faq details[open] summary{ color:var(--ppc-pink); }
     .ppc-faq summary::-webkit-details-marker{ display:none; }
     .ppc-faq-toggle{
-      position:relative; flex-shrink:0;
-      width:28px; height:28px; border-radius:50%;
-      background:rgba(28,79,214,.08); border:1px solid rgba(28,79,214,.2);
-      transition:background .25s, border-color .25s, transform .25s;
+      flex-shrink:0; font-size:12px; color:var(--ppc-pink);
+      transition:transform .25s ease;
     }
-    .ppc-faq-toggle::before,
-    .ppc-faq-toggle::after{
-      content:""; position:absolute; left:50%; top:50%;
-      background:var(--ppc-pink); border-radius:1px;
-      transition:transform .28s ease, opacity .28s ease;
-    }
-    .ppc-faq-toggle::before{ width:12px; height:2px; transform:translate(-50%,-50%); }
-    .ppc-faq-toggle::after{ width:2px; height:12px; transform:translate(-50%,-50%); }
-    .ppc-faq details[open] .ppc-faq-toggle{
-      background:var(--ppc-pink); border-color:var(--ppc-pink); transform:rotate(180deg);
-    }
-    .ppc-faq details[open] .ppc-faq-toggle::before{ background:#fff; }
-    .ppc-faq details[open] .ppc-faq-toggle::after{
-      background:#fff; transform:translate(-50%,-50%) rotate(90deg) scaleY(0);
-      opacity:0;
-    }
+    .ppc-faq details[open] .ppc-faq-toggle{ transform:rotate(180deg); }
     .ppc-faq details p{
-      margin:0; padding:0 1.35rem 1.15rem;
+      margin:0; padding:0 1.15rem 1.1rem;
       font-size:14px; line-height:1.55; color:var(--ppc-body); text-align:left;
     }
 
@@ -629,8 +654,7 @@ function ts_render_ppc_service_page(array $service): void
       [data-ppc-reveal], [data-ppc-reveal].is-in{ opacity:1; transform:none; transition:none; }
       .ppc-flow-pulse, .ppc-flow-node{ animation:none !important; }
       .ppc-flow-step:hover{ transform:none; }
-      .ppc-tile:hover, .ppc-rel:hover, .ppc-chan:hover, .ppc-btn:hover, .ppc-dash-card:hover{ transform:none; }
-      .ppc-dash-bar i{ width:59%; transition:none; }
+      .ppc-tile:hover, .ppc-rel:hover, .ppc-chan:hover, .ppc-btn:hover, .ppc-kpi:hover, .ppc-pkg:hover, .ppc-focus-card:hover, .ppc-funnel-row:hover{ transform:none; }
     }
   </style>
 <?php ts_om_detail_skin_css(); ?>
@@ -654,31 +678,28 @@ function ts_render_ppc_service_page(array $service): void
         <p class="ppc-proof-line"><span>GTM/GA4</span> · <span>creative tests</span> · <span>weekly ROAS</span> · you own accounts</p>
       </div>
 
-      <div class="ppc-dash" data-ppc-dash aria-hidden="true">
-        <div class="ppc-dash-top">
-          <strong>Campaign health</strong>
-          <span>Live mock</span>
-        </div>
-        <div class="ppc-dash-cards">
-          <div class="ppc-dash-card">
-            <b>Spend</b>
-            <strong>₹2.4L</strong>
+      <div class="ppc-hero-visual" aria-hidden="true">
+        <img src="/images/stock/photo-1460925895917-afdab827c52f.jpg" alt="" width="720" height="520" loading="eager">
+        <div class="ppc-hero-panel">
+          <div class="ppc-hero-panel-top">
+            <strong>Weekly paid snapshot</strong>
+            <span>Tracked</span>
           </div>
-          <div class="ppc-dash-card">
-            <b>CPL</b>
-            <strong data-ppc-count data-to="840" data-prefix="₹">₹840</strong>
+          <div class="ppc-hero-metrics">
+            <div class="ppc-hero-metric">
+              <b>Spend</b>
+              <strong>₹2.4L</strong>
+            </div>
+            <div class="ppc-hero-metric">
+              <b>CPL</b>
+              <strong>₹840</strong>
+            </div>
+            <div class="ppc-hero-metric is-hot">
+              <b>ROAS</b>
+              <strong>3.8×</strong>
+            </div>
           </div>
-          <div class="ppc-dash-card is-hot">
-            <b>ROAS</b>
-            <strong data-ppc-count data-to="3.8" data-suffix="×" data-decimals="1">0×</strong>
-          </div>
-        </div>
-        <div class="ppc-dash-waste">
-          <div class="ppc-dash-waste-label">
-            <span>Wasted spend cut</span>
-            <em>−41%</em>
-          </div>
-          <div class="ppc-dash-bar"><i></i></div>
+          <p class="ppc-hero-note">Wasted spend cut <em>−41%</em> after structure + exclusions — anonymized account.</p>
         </div>
       </div>
     </div>
@@ -739,18 +760,14 @@ function ts_render_ppc_service_page(array $service): void
         <?php endforeach; ?>
       </div>
 
-      <div style="margin-top:1.5rem" data-ppc-reveal data-ppc-tabs>
-        <div class="ppc-tabs" role="tablist" aria-label="Channel focus">
-          <?php $ti = 0; foreach ($channelTabs as $id => $tab): ?>
-          <button type="button" class="ppc-tab<?= $ti === 0 ? ' is-on' : '' ?>" role="tab" aria-selected="<?= $ti === 0 ? 'true' : 'false' ?>" data-ppc-tab="<?= ts_h($id) ?>"><?= ts_h($tab["label"]) ?></button>
-          <?php $ti++; endforeach; ?>
-        </div>
-        <?php $ti = 0; foreach ($channelTabs as $id => $tab): ?>
-        <div class="ppc-tab-panel<?= $ti === 0 ? ' is-on' : '' ?>" data-ppc-panel="<?= ts_h($id) ?>" role="tabpanel">
+      <div class="ppc-focus">
+        <?php foreach ($channelTabs as $tab): ?>
+        <article class="ppc-focus-card" data-ppc-reveal>
+          <span class="best"><?= ts_h($tab["label"]) ?></span>
           <h3><?= ts_h($tab["title"]) ?></h3>
           <p><?= ts_h($tab["body"]) ?></p>
-        </div>
-        <?php $ti++; endforeach; ?>
+        </article>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -796,16 +813,11 @@ function ts_render_ppc_service_page(array $service): void
         <h2>Prospecting · Retargeting · Brand</h2>
         <p class="ppc-lead" style="margin-bottom:1rem">So efficient spend and volume don’t blur together.</p>
         <div class="ppc-funnel">
-          <?php
-          $widths = ["88%", "72%", "58%"];
-          foreach ($funnel as $i => $f):
-          ?>
+          <?php foreach ($funnel as $f): ?>
           <div class="ppc-funnel-row">
+            <span class="ppc-funnel-tag"><?= ts_h($f[1]) ?></span>
             <b><?= ts_h($f[0]) ?></b>
-            <div>
-              <div class="ppc-funnel-bar"><div class="ppc-funnel-fill" style="width:<?= $widths[$i] ?>"><?= ts_h($f[1]) ?></div></div>
-              <div class="ppc-funnel-note"><?= ts_h($f[2]) ?></div>
-            </div>
+            <p class="ppc-funnel-note"><?= ts_h($f[2]) ?></p>
           </div>
           <?php endforeach; ?>
         </div>
@@ -959,7 +971,7 @@ function ts_render_ppc_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p><?= ts_h($pkg[3]) ?></p>
-          <a class="ppc-btn <?= $hot ? "ppc-btn-fill" : "ppc-btn-line" ?>" href="/contact" style="justify-content:center">Get started</a>
+          <a class="ppc-btn <?= $hot ? "ppc-btn-fill" : "ppc-btn-line" ?>" href="/contact">Get started</a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -976,7 +988,7 @@ function ts_render_ppc_service_page(array $service): void
       <div class="ppc-faq">
         <?php foreach ($faqs as $faq): ?>
         <details data-ppc-reveal>
-          <summary><?= ts_h($faq[0]) ?> <span class="ppc-faq-toggle" aria-hidden="true"></span></summary>
+          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down ppc-faq-toggle" aria-hidden="true"></i></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
@@ -1037,61 +1049,6 @@ function ts_render_ppc_service_page(array $service): void
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -4% 0px" });
     nodes.forEach((el) => io.observe(el));
-  }
-
-  const dash = root.querySelector("[data-ppc-dash]");
-  if (dash) {
-    const runCounts = () => {
-      dash.classList.add("is-in");
-      dash.querySelectorAll("[data-ppc-count]").forEach((el) => {
-        const to = parseFloat(el.getAttribute("data-to") || "0");
-        const prefix = el.getAttribute("data-prefix") || "";
-        const suffix = el.getAttribute("data-suffix") || "";
-        const decimals = parseInt(el.getAttribute("data-decimals") || "0", 10);
-        if (reduce) {
-          el.textContent = prefix + to.toFixed(decimals) + suffix;
-          return;
-        }
-        const start = performance.now();
-        const dur = 900;
-        const tick = (now) => {
-          const t = Math.min(1, (now - start) / dur);
-          const eased = 1 - Math.pow(1 - t, 3);
-          const val = to * eased;
-          el.textContent = prefix + (decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString("en-IN")) + suffix;
-          if (t < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      });
-    };
-    if (reduce || !("IntersectionObserver" in window)) runCounts();
-    else {
-      const dio = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          runCounts();
-          dio.unobserve(e.target);
-        });
-      }, { threshold: 0.35 });
-      dio.observe(dash);
-    }
-  }
-
-  const tabsRoot = root.querySelector("[data-ppc-tabs]");
-  if (tabsRoot) {
-    const tabs = [...tabsRoot.querySelectorAll("[data-ppc-tab]")];
-    const panels = [...tabsRoot.querySelectorAll("[data-ppc-panel]")];
-    tabs.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = btn.getAttribute("data-ppc-tab");
-        tabs.forEach((t) => {
-          const on = t === btn;
-          t.classList.toggle("is-on", on);
-          t.setAttribute("aria-selected", on ? "true" : "false");
-        });
-        panels.forEach((p) => p.classList.toggle("is-on", p.getAttribute("data-ppc-panel") === id));
-      });
-    });
   }
 })();
 </script>

@@ -57,12 +57,12 @@ function ts_render_motion_service_page(array $service): void
     ];
 
     $process = [
-        ["01", "Brief", "Goal, audience, platforms and must-say lines."],
-        ["02", "Board", "Storyboard + rough timing you approve."],
-        ["03", "Style", "Motion look — type, colour, easing matched to brand."],
-        ["04", "Animate", "Keyframes, polish and sound if needed."],
-        ["05", "Adapt", "Crop and retime for each format."],
-        ["06", "Deliver", "Exports + sources + motion notes."],
+        ["01", "Brief", "Goal, audience, platforms and must-say lines.", "/images/stock/photo-1558655146-d09347e92766.jpg", "00:01"],
+        ["02", "Board", "Storyboard + rough timing you approve.", "/images/mobile/Prototyping.webp", "00:04"],
+        ["03", "Style", "Motion look — type, colour, easing matched to brand.", "/images/mobile/MotionIntrations.webp", "00:08"],
+        ["04", "Animate", "Keyframes, polish and sound if needed.", "/images/stock/photo-1618005182384-a83a8bd57fbe.jpg", "00:14"],
+        ["05", "Adapt", "Crop and retime for each format.", "/images/mobile/AppDesign.webp", "00:18"],
+        ["06", "Deliver", "Exports + sources + motion notes.", "/images/mobile/DesignDeliver.webp", "00:22"],
     ];
 
     $packages = [
@@ -846,6 +846,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-process{
       padding:3.75rem 0;
       background:var(--deep); color:#fff;
+      overflow:hidden;
     }
     .yl-mo .yl-process h2{
       margin:0 0 .5rem;
@@ -853,60 +854,252 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.6rem,3.5vw,2.2rem); font-weight:800;
     }
     .yl-mo .yl-process .sub{
-      margin:0 0 1.75rem; max-width:34rem;
+      margin:0 0 1.75rem; max-width:40rem;
       font-size:14px; color:rgba(255,255,255,.65); line-height:1.5;
+    }
+    .yl-mo .yl-proc-deck{
+      display:grid; gap:1.75rem;
+      align-items:center;
+    }
+    @media (min-width:900px){
+      .yl-mo .yl-proc-deck{
+        grid-template-columns:minmax(280px, .9fr) minmax(0, 1.2fr);
+        gap:2rem;
+      }
     }
     .yl-mo .yl-playhead{
       position:relative;
-      max-width:640px;
       margin:0;
-      padding-left:1.75rem;
+      padding:0;
+      list-style:none;
+      display:grid; gap:.5rem;
     }
-    .yl-mo .yl-playhead::before{
-      content:"";
-      position:absolute;
-      left:7px; top:4px; bottom:4px;
-      width:2px;
-      background:rgba(255,255,255,.18);
+    .yl-mo .yl-ph-step{ margin:0; padding:0; }
+    .yl-mo .yl-ph-btn{
+      width:100%;
+      text-align:left;
+      cursor:pointer;
+      display:grid;
+      gap:.15rem;
+      padding:.8rem 1rem .85rem 1.1rem;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:.9rem;
+      border-left:3px solid transparent;
+      background:rgba(255,255,255,.04);
+      color:#fff;
+      transition:border-color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
     }
-    .yl-mo .yl-playhead::after{
-      content:"";
-      position:absolute;
-      left:5px; top:0;
-      width:6px; height:28%;
-      border-radius:999px;
-      background:linear-gradient(180deg, #c4b5fd, #7C3AED);
-      box-shadow:0 0 12px rgba(124,58,237,.55);
-      animation:ylMoPlay 2.8s ease-in-out infinite;
+    .yl-mo .yl-ph-btn:hover{
+      border-color:rgba(196,181,253,.45);
+      transform:translateX(2px);
     }
-    @keyframes ylMoPlay{
-      0%{ top:0; opacity:.55; }
-      50%{ top:62%; opacity:1; }
-      100%{ top:0; opacity:.55; }
+    .yl-mo .yl-ph-btn.is-on{
+      border-left-color:#c4b5fd;
+      border-color:rgba(196,181,253,.4);
+      background:linear-gradient(90deg, rgba(124,58,237,.35), rgba(255,255,255,.06));
+      box-shadow:0 12px 30px rgba(0,0,0,.2);
     }
-    .yl-mo .yl-ph-step{
-      position:relative;
-      padding:0 0 1.35rem 0;
-    }
-    .yl-mo .yl-ph-step:last-child{ padding-bottom:0; }
-    .yl-mo .yl-ph-step::before{
-      content:"";
-      position:absolute;
-      left:-1.55rem; top:.35rem;
-      width:12px; height:12px;
-      border-radius:50%;
-      background:#1a1528;
-      border:2px solid #a78bfa;
-      box-shadow:0 0 0 3px rgba(124,58,237,.25);
-      z-index:1;
-    }
-    .yl-mo .yl-ph-step b{
-      display:block; margin-bottom:.3rem;
+    .yl-mo .yl-ph-btn b{
+      display:block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:#c4b5fd; letter-spacing:.08em;
+      font-size:11px; color:#c4b5fd; letter-spacing:.08em; font-weight:600;
     }
-    .yl-mo .yl-ph-step strong{ display:block; margin-bottom:.25rem; font-size:15px; }
-    .yl-mo .yl-ph-step p{ margin:0; font-size:13px; line-height:1.45; color:rgba(255,255,255,.65); max-width:36rem; }
+    .yl-mo .yl-ph-btn.is-on b{ color:#ede9fe; }
+    .yl-mo .yl-ph-btn strong{
+      display:block; font-size:14.5px; font-weight:800;
+      font-family:Montserrat,sans-serif;
+    }
+    .yl-mo .yl-ph-btn p{
+      margin:0; font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.62);
+    }
+
+    /* Motion timeline preview (process stage) */
+    .yl-mo .yl-mo-stage{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height:400px;
+      border-radius:1.25rem;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      background:#0f172a;
+      box-shadow:0 24px 50px rgba(0,0,0,.28);
+    }
+    @media (min-width:900px){
+      .yl-mo .yl-mo-stage{ min-height:500px; }
+    }
+    .yl-mo .yl-mo-stage-top{
+      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+      padding:.7rem 1rem;
+      background:rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      font-family:"IBM Plex Mono",monospace;
+      font-size:11px; letter-spacing:.06em;
+      color:rgba(255,255,255,.55);
+    }
+    .yl-mo .yl-mo-stage-top .rec{
+      display:inline-flex; align-items:center; gap:.4rem;
+      color:#fbbf24; font-weight:600;
+    }
+    .yl-mo .yl-mo-stage-top .rec::before{
+      content:"";
+      width:7px; height:7px; border-radius:50%;
+      background:#ef4444;
+      box-shadow:0 0 0 0 rgba(239,68,68,.5);
+      animation:ylMoRec 1.4s ease-out infinite;
+    }
+    @keyframes ylMoRec{
+      0%{ box-shadow:0 0 0 0 rgba(239,68,68,.45); }
+      70%{ box-shadow:0 0 0 8px rgba(239,68,68,0); }
+      100%{ box-shadow:0 0 0 0 rgba(239,68,68,0); }
+    }
+    .yl-mo .yl-mo-stage-top .tc{ color:#c4b5fd; }
+    .yl-mo .yl-mo-preview{
+      position:relative;
+      flex:1;
+      min-height:240px;
+      background:#1e1b4b;
+      overflow:hidden;
+    }
+    .yl-mo .yl-mo-frame{
+      position:absolute; inset:0;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .45s ease, visibility .45s ease, transform .55s ease;
+      transform:scale(1.04);
+    }
+    .yl-mo .yl-mo-frame.is-on{
+      opacity:1; visibility:visible; z-index:1;
+      transform:scale(1);
+    }
+    .yl-mo .yl-mo-frame img{
+      width:100%; height:100%; object-fit:cover;
+      filter:saturate(1.05) contrast(1.02);
+    }
+    .yl-mo .yl-mo-frame::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(15,23,42,.15), transparent 35%, rgba(15,23,42,.72)),
+        repeating-linear-gradient(
+          0deg,
+          transparent 0 2px,
+          rgba(255,255,255,.03) 2px 3px
+        );
+      pointer-events:none;
+    }
+    .yl-mo .yl-mo-overlay{
+      position:absolute; left:1.1rem; right:1.1rem; bottom:1.1rem;
+      z-index:2;
+      color:#fff;
+    }
+    .yl-mo .yl-mo-overlay em{
+      display:inline-block;
+      font-family:"IBM Plex Mono",monospace;
+      font-size:10px; font-style:normal; letter-spacing:.12em; text-transform:uppercase;
+      color:#c4b5fd; margin-bottom:.35rem;
+    }
+    .yl-mo .yl-mo-overlay strong{
+      display:block;
+      font-family:"Instrument Serif",Georgia,serif;
+      font-size:clamp(1.6rem, 3.4vw, 2.35rem);
+      font-weight:400; font-style:italic;
+      letter-spacing:-.02em;
+      text-shadow:0 8px 24px rgba(0,0,0,.45);
+      animation:ylMoTitleIn .5s cubic-bezier(.22,1,.36,1) both;
+    }
+    .yl-mo .yl-mo-overlay span{
+      display:block; margin-top:.35rem;
+      font-size:13px; line-height:1.45; color:rgba(255,255,255,.78);
+      max-width:34ch;
+      animation:ylMoTitleIn .55s cubic-bezier(.22,1,.36,1) .06s both;
+    }
+    @keyframes ylMoTitleIn{
+      from{ opacity:0; transform:translateY(12px); filter:blur(4px); }
+      to{ opacity:1; transform:none; filter:none; }
+    }
+    .yl-mo .yl-mo-timeline{
+      padding:.85rem 1rem 1rem;
+      background:rgba(0,0,0,.35);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    .yl-mo .yl-mo-track{
+      position:relative;
+      height:36px;
+      display:grid;
+      grid-template-columns:repeat(6, 1fr);
+      gap:4px;
+      align-items:end;
+    }
+    .yl-mo .yl-mo-track::before{
+      content:"";
+      position:absolute;
+      left:0; right:0; top:50%;
+      height:2px;
+      background:rgba(255,255,255,.12);
+      transform:translateY(-50%);
+    }
+    .yl-mo .yl-mo-mark{
+      position:relative;
+      z-index:1;
+      height:100%;
+      border:0; padding:0;
+      background:transparent;
+      cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      gap:.25rem;
+      color:rgba(255,255,255,.45);
+      font-family:"IBM Plex Mono",monospace;
+      font-size:9px; letter-spacing:.04em; text-transform:uppercase;
+    }
+    .yl-mo .yl-mo-mark i{
+      width:10px; height:10px; border-radius:50%;
+      background:rgba(255,255,255,.25);
+      border:2px solid rgba(255,255,255,.35);
+      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+    }
+    .yl-mo .yl-mo-mark.is-on,
+    .yl-mo .yl-mo-mark.is-done{ color:#c4b5fd; }
+    .yl-mo .yl-mo-mark.is-done i{
+      background:rgba(124,58,237,.7);
+      border-color:#a78bfa;
+    }
+    .yl-mo .yl-mo-mark.is-on{
+      color:#fff;
+    }
+    .yl-mo .yl-mo-mark.is-on i{
+      background:#fbbf24;
+      border-color:#fde68a;
+      box-shadow:0 0 0 4px rgba(251,191,36,.25);
+      transform:scale(1.2);
+    }
+    .yl-mo .yl-mo-playhead{
+      position:absolute;
+      top:0; bottom:14px;
+      width:2px;
+      background:linear-gradient(180deg, #fbbf24, #7c3aed);
+      border-radius:999px;
+      left:calc((100% / 6) * var(--mo-i, 0) + (100% / 12));
+      transform:translateX(-50%);
+      transition:left .4s cubic-bezier(.22,1,.36,1);
+      z-index:2;
+      pointer-events:none;
+      box-shadow:0 0 12px rgba(251,191,36,.45);
+    }
+    .yl-mo .yl-mo-playhead::before{
+      content:"";
+      position:absolute; top:-2px; left:50%;
+      width:8px; height:8px; margin-left:-4px;
+      border-radius:50%;
+      background:#fbbf24;
+    }
+    @media (prefers-reduced-motion:reduce){
+      .yl-mo .yl-mo-frame,
+      .yl-mo .yl-mo-overlay strong,
+      .yl-mo .yl-mo-overlay span,
+      .yl-mo .yl-mo-playhead,
+      .yl-mo .yl-mo-stage-top .rec::before{ animation:none !important; transition:none !important; }
+    }
 
     .yl-mo .yl-pkgs{
       padding:3.75rem 0;
@@ -983,31 +1176,117 @@ function ts_render_motion_service_page(array $service): void
       background:var(--paper);
       border-top:1px solid var(--line);
     }
-    .yl-mo .yl-faq h2{
+    .yl-mo .yl-faq-split{
+      display:grid; gap:1.75rem;
+      align-items:start;
+    }
+    @media (min-width:900px){
+      .yl-mo .yl-faq-split{
+        grid-template-columns:minmax(220px, .75fr) minmax(0, 1.35fr);
+        gap:2.25rem;
+      }
+    }
+    .yl-mo .yl-faq-intro h2{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-mo .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
-    .yl-mo .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
+    .yl-mo .yl-faq-intro .lead{
+      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+    }
+    .yl-mo .yl-faq-intro .hint{
+      display:none;
+      padding:1rem 1.1rem;
+      border-radius:1rem;
+      border:1px dashed rgba(124,58,237,.35);
+      background:rgba(124,58,237,.05);
+      font-size:13px; color:var(--muted); line-height:1.5;
+    }
+    @media (min-width:900px){
+      .yl-mo .yl-faq-intro .hint{ display:block; }
+      .yl-mo .yl-faq-intro{ position:sticky; top:5.5rem; }
+    }
+    .yl-mo .yl-faq-intro .hint strong{
+      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+    }
+    .yl-mo .yl-faq-list{ display:grid; gap:.75rem; max-width:none; width:100%; }
     .yl-mo details{
       background:#fff; border:1px solid var(--line);
       border-radius:1rem; overflow:hidden;
-      transition:box-shadow .25s ease;
+      transition:box-shadow .3s ease, border-color .3s ease;
+      align-self:start;
     }
-    .yl-mo details[open]{ box-shadow:0 10px 28px rgba(124,58,237,.1); }
+    .yl-mo details[open]{
+      box-shadow:0 14px 34px rgba(124,58,237,.12);
+      border-color:rgba(124,58,237,.35);
+    }
     .yl-mo summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
       font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      color:var(--ink);
     }
     .yl-mo summary::-webkit-details-marker{ display:none; }
-    .yl-mo summary i{ color:var(--muted); transition:transform .2s, color .2s; }
-    .yl-mo details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
-    .yl-mo details p{
-      margin:0; padding:0 1.15rem 1.1rem;
+    .yl-mo details[open] summary{ color:var(--blue); }
+    .yl-mo .yl-faq-toggle{
+      flex:0 0 auto;
+      width:28px; height:28px; border-radius:999px;
+      background:var(--soft); border:1px solid var(--line);
+      position:relative;
+      transition:background .25s ease, border-color .25s ease;
+    }
+    .yl-mo .yl-faq-toggle::before,
+    .yl-mo .yl-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--muted);
+      transition:transform .3s ease, background .25s ease, opacity .25s ease;
+    }
+    .yl-mo .yl-faq-toggle::before{ width:11px; height:2px; transform:translate(-50%,-50%); }
+    .yl-mo .yl-faq-toggle::after{ width:2px; height:11px; transform:translate(-50%,-50%); }
+    .yl-mo details[open] .yl-faq-toggle{
+      background:var(--blue); border-color:var(--deep);
+    }
+    .yl-mo details[open] .yl-faq-toggle::before{ background:#fff; }
+    .yl-mo details[open] .yl-faq-toggle::after{
+      background:#fff; opacity:0; transform:translate(-50%,-50%) scaleY(0);
+    }
+    .yl-mo .yl-faq-stripes{
+      position:relative;
+      padding:.1rem 1.15rem 1.15rem;
+      overflow:hidden;
+    }
+    .yl-mo .yl-faq-stripes::before{
+      content:"";
+      position:absolute; inset:0 1.15rem auto;
+      height:100%;
+      pointer-events:none;
+      background:repeating-linear-gradient(
+        to bottom,
+        rgba(124,58,237,.22) 0 3px,
+        transparent 3px 10px
+      );
+      transform-origin:top;
+      animation:ylMoStripeWipe .55s cubic-bezier(.22,1,.36,1) forwards;
+    }
+    @keyframes ylMoStripeWipe{
+      0%{ transform:scaleY(0); opacity:1; }
+      55%{ transform:scaleY(1); opacity:.85; }
+      100%{ transform:scaleY(1); opacity:0; }
+    }
+    .yl-mo .yl-faq-stripes p{
+      margin:0;
+      padding:.2rem 0 0;
       font-size:14px; line-height:1.65; color:var(--muted);
+      animation:ylMoStripeText .4s ease .12s both;
+    }
+    @keyframes ylMoStripeText{
+      from{ opacity:0; transform:translateY(10px); filter:blur(2px); }
+      to{ opacity:1; transform:none; filter:none; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .yl-mo .yl-faq-stripes::before,
+      .yl-mo .yl-faq-stripes p{ animation:none !important; }
     }
 
     .yl-mo .yl-related{
@@ -1302,14 +1581,48 @@ function ts_render_motion_service_page(array $service): void
     <div class="yl-wrap">
       <h2 class="yl-reveal">How a motion project runs</h2>
       <p class="sub yl-reveal d1">You approve the board before we animate — so revisions stay cheap.</p>
-      <div class="yl-playhead yl-reveal d2">
-        <?php foreach ($process as $step): ?>
-        <div class="yl-ph-step">
-          <b><?= ts_h($step[0]) ?></b>
-          <strong><?= ts_h($step[1]) ?></strong>
-          <p><?= ts_h($step[2]) ?></p>
+      <div class="yl-proc-deck yl-reveal d2" data-mo-proc>
+        <ol class="yl-playhead">
+          <?php foreach ($process as $i => $step): ?>
+          <li class="yl-ph-step">
+            <button type="button" class="yl-ph-btn<?= $i === 0 ? ' is-on' : '' ?>" data-mo-step="<?= (int) $i ?>" aria-pressed="<?= $i === 0 ? 'true' : 'false' ?>">
+              <b><?= ts_h($step[0]) ?></b>
+              <strong><?= ts_h($step[1]) ?></strong>
+              <p><?= ts_h($step[2]) ?></p>
+            </button>
+          </li>
+          <?php endforeach; ?>
+        </ol>
+        <div class="yl-mo-stage" data-mo-stage style="--mo-i:0">
+          <div class="yl-mo-stage-top">
+            <span class="rec">PREVIEW</span>
+            <span class="path">motion_project.aep</span>
+            <span class="tc" data-mo-tc><?= ts_h($process[0][4]) ?></span>
+          </div>
+          <div class="yl-mo-preview">
+            <?php foreach ($process as $i => $step): ?>
+            <figure class="yl-mo-frame<?= $i === 0 ? ' is-on' : '' ?>" data-mo-frame="<?= (int) $i ?>">
+              <img src="<?= ts_h($step[3]) ?>" alt="<?= ts_h($step[1]) ?>" width="960" height="640" loading="<?= $i === 0 ? 'eager' : 'lazy' ?>">
+              <figcaption class="yl-mo-overlay">
+                <em>Step <?= ts_h($step[0]) ?></em>
+                <strong><?= ts_h($step[1]) ?></strong>
+                <span><?= ts_h($step[2]) ?></span>
+              </figcaption>
+            </figure>
+            <?php endforeach; ?>
+          </div>
+          <div class="yl-mo-timeline">
+            <div class="yl-mo-track">
+              <span class="yl-mo-playhead" aria-hidden="true"></span>
+              <?php foreach ($process as $i => $step): ?>
+              <button type="button" class="yl-mo-mark<?= $i === 0 ? ' is-on is-done' : '' ?>" data-mo-mark="<?= (int) $i ?>" aria-label="<?= ts_h($step[1]) ?>">
+                <i></i>
+                <?= ts_h($step[1]) ?>
+              </button>
+              <?php endforeach; ?>
+            </div>
+          </div>
         </div>
-        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -1340,14 +1653,22 @@ function ts_render_motion_service_page(array $service): void
   </section>
 
   <section class="yl-faq">
-    <div class="yl-wrap">
-      <h2 class="yl-reveal">Questions before you enquire</h2>
-      <p class="lead yl-reveal d1">Straight answers so you can decide if we are the right fit.</p>
-      <div class="yl-faq-list">
-        <?php foreach ($faqs as $faq): ?>
-        <details class="yl-reveal">
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
-          <p><?= ts_h($faq[1]) ?></p>
+    <div class="yl-wrap yl-faq-split">
+      <div class="yl-faq-intro yl-reveal">
+        <h2>Questions before you enquire</h2>
+        <p class="lead">Straight answers so you can decide if we are the right fit.</p>
+        <div class="hint">
+          <strong>Still scoping the piece?</strong>
+          Send a rough script or reference link on contact — we’ll suggest length, formats and a board-first path.
+        </div>
+      </div>
+      <div class="yl-faq-list" data-mo-faq>
+        <?php foreach ($faqs as $i => $faq): ?>
+        <details class="yl-reveal"<?= $i === 0 ? ' open' : '' ?>>
+          <summary><?= ts_h($faq[0]) ?> <span class="yl-faq-toggle" aria-hidden="true"></span></summary>
+          <div class="yl-faq-stripes">
+            <p><?= ts_h($faq[1]) ?></p>
+          </div>
         </details>
         <?php endforeach; ?>
       </div>
@@ -1402,6 +1723,74 @@ function ts_render_motion_service_page(array $service): void
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   nodes.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var deck = document.querySelector("[data-mo-proc]");
+  if (deck) {
+    var steps = Array.prototype.slice.call(deck.querySelectorAll("[data-mo-step]"));
+    var frames = Array.prototype.slice.call(deck.querySelectorAll("[data-mo-frame]"));
+    var marks = Array.prototype.slice.call(deck.querySelectorAll("[data-mo-mark]"));
+    var stage = deck.querySelector("[data-mo-stage]");
+    var tc = deck.querySelector("[data-mo-tc]");
+    var times = <?= json_encode(array_column($process, 4), JSON_UNESCAPED_SLASHES) ?>;
+    var i = 0;
+    var timer = null;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function show(n) {
+      i = ((n % steps.length) + steps.length) % steps.length;
+      steps.forEach(function (el, idx) {
+        var on = idx === i;
+        el.classList.toggle("is-on", on);
+        el.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      frames.forEach(function (el, idx) {
+        el.classList.toggle("is-on", idx === i);
+      });
+      marks.forEach(function (el, idx) {
+        el.classList.toggle("is-on", idx === i);
+        el.classList.toggle("is-done", idx <= i);
+      });
+      if (stage) stage.style.setProperty("--mo-i", String(i));
+      if (tc && times[i]) tc.textContent = times[i];
+    }
+
+    function arm() {
+      if (reduce || timer) return;
+      timer = window.setInterval(function () { show(i + 1); }, 4000);
+    }
+    function disarm() {
+      if (!timer) return;
+      window.clearInterval(timer);
+      timer = null;
+    }
+
+    steps.forEach(function (el, idx) {
+      el.addEventListener("click", function () { show(idx); disarm(); arm(); });
+    });
+    marks.forEach(function (el, idx) {
+      el.addEventListener("click", function () { show(idx); disarm(); arm(); });
+    });
+    deck.addEventListener("mouseenter", disarm);
+    deck.addEventListener("mouseleave", arm);
+    show(0);
+    arm();
+  }
+
+  var faq = document.querySelector("[data-mo-faq]");
+  if (faq) {
+    var items = Array.prototype.slice.call(faq.querySelectorAll("details"));
+    items.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (!item.open) return;
+        items.forEach(function (other) {
+          if (other !== item) other.open = false;
+        });
+      });
+    });
+  }
 })();
 </script>
 

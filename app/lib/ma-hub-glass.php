@@ -60,7 +60,7 @@ function ts_render_mobile_apps_hub(): void
 
     $faqs = [
         ["Do you build for startups and established brands?", "Yes. We tailor scope to your stage — MVP, redesign, or full native/cross-platform delivery — with the same care either way."],
-        ["Which platforms do you support?", "Android, iOS, React Native, Flutter and PWAs. We follow platform patterns so the app feels native on each device."],
+        ["Which platforms do you support?", "Android, iOS, React Native and Flutter. We follow platform patterns so the app feels native on each device."],
         ["Do you only design, or develop too?", "We design and develop. Pixel-perfect UI engineering — components, micro-interactions and handoff — is part of every app build, not a separate product."],
         ["How do you keep the app easy to use?", "User journeys, prototypes and device testing. If someone can’t figure it out in seconds, we redesign the flow."],
         ["What if we already have sketches or an old app?", "Perfect — we start from wherever you are, refine the flow, modernize the UI and align with current platform guidelines."],
@@ -1304,7 +1304,43 @@ function ts_render_mobile_apps_hub(): void
       .s2-step-item.is-active{ display:block; transform:none; }
       .s2-steps-rail, .s2-steps-counter{ display:none; }
       .s2-steps-text{ padding-left:0; }
-      .s2-statement-text{ font-size:clamp(1.35rem,6vw,2rem); }
+      /* Match desktop statement: full-viewport pin + frame around copy */
+      .s2-statement-pin{
+        min-height:100svh;
+        height:100svh;
+        padding:0 1.15rem;
+      }
+      .s2-statement-net{
+        inset:0;
+        width:100%;
+        height:100%;
+      }
+      .s2-statement-text{
+        font-size:clamp(1.28rem, 5.2vw, 1.75rem);
+        line-height:1.28;
+        max-width:min(22.5rem, 92vw);
+        padding:0 .35rem;
+        letter-spacing:-.02em;
+      }
+      .s2-steps-pin{
+        min-height:auto;
+        padding:2.75rem 1.1rem 2.25rem;
+      }
+      .s2-steps-kicker{ margin:0 0 1rem; letter-spacing:.28em; }
+      .s2-steps-head{ margin-bottom:1.5rem; }
+      .s2-steps-head h2{ font-size:clamp(1.45rem, 6vw, 2rem); }
+      .s2-hero-title,
+      .s2-hero-title .line{
+        font-size:clamp(1.55rem, 7.5vw, 2.6rem) !important;
+        line-height:1.05 !important;
+        max-width:100%;
+        overflow-wrap:anywhere;
+      }
+      .s2-hero-sub{ font-size:14px; padding-inline:0.35rem; }
+      .s2-step .num{ font-size:clamp(2.5rem, 14vw, 4.5rem); }
+      .s2-step{ padding-left:clamp(2.5rem, 8vw, 4rem); min-height:auto; }
+      .s2-step h3{ font-size:clamp(1.15rem, 4.5vw, 1.6rem); }
+      .s2-step p{ font-size:14px; }
     }
     @media (prefers-reduced-motion: reduce){
       .s2-statement-text .word{ color:#0F172A; transition:none; }
@@ -1329,7 +1365,7 @@ function ts_render_mobile_apps_hub(): void
         <span class="line" data-s2-split>Build mobile apps</span>
         <span class="line accent" data-s2-split>users actually love.</span>
       </h1>
-      <p class="s2-hero-sub"><span><?= ts_h($hub["lead"]) ?></span></p>
+      <p class="s2-hero-sub"><span><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></span></p>
       <div class="s2-hero-ctas" id="s2HeroCtas">
         <a class="s2-hero-store" href="/contact">
           <i class="fas fa-comments" aria-hidden="true"></i>
@@ -1736,7 +1772,7 @@ function ts_render_mobile_apps_hub(): void
         gsap.registerPlugin(ScrollTrigger);
         gsap.to(phone, {
           yPercent: -20, ease: "none", immediateRender: false,
-          scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 1 },
+          scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: window.__ssScrub ?? 1 },
         });
       }
     }
@@ -2172,6 +2208,7 @@ function ts_render_mobile_apps_hub(): void
   const statementText = root.querySelector("#s2StatementText");
   if (statement && statementPin && statementText && window.gsap && window.ScrollTrigger && !reduce) {
     gsap.registerPlugin(ScrollTrigger);
+    const narrow = window.matchMedia("(max-width: 900px)").matches;
     const words = statementText.textContent.trim().split(/\s+/);
     statementText.textContent = "";
     const wordEls = words.map((w) => {
@@ -2189,18 +2226,26 @@ function ts_render_mobile_apps_hub(): void
       path.style.strokeDasharray = String(L);
       path.style.strokeDashoffset = String(L);
     });
+    const lightWords = (progress) => {
+      /* Finish lighting before pin ends so last words aren't stuck grey */
+      const wp = gsap.utils.clamp(0, 1, (progress - 0.08) / 0.62);
+      const n = progress >= 0.88 ? wordEls.length : Math.floor(wp * wordEls.length);
+      wordEls.forEach((w, i) => w.classList.toggle("is-on", i < n));
+    };
     const stl = gsap.timeline({
       scrollTrigger: {
         trigger: statement,
         start: "top top",
-        end: "+=130%",
+        end: narrow ? "+=110%" : "+=130%",
         pin: statementPin,
-        scrub: 1,
-        onUpdate: (self) => {
-          const wp = gsap.utils.clamp(0, 1, (self.progress - 0.18) / 0.68);
-          const n = Math.floor(wp * (wordEls.length + 2));
-          wordEls.forEach((w, i) => w.classList.toggle("is-on", i <= n));
-        },
+        scrub: window.__ssScrub === true || narrow || "ontouchstart" in window
+          ? true
+          : (window.__ssScrub ?? 0.75),
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => lightWords(self.progress),
+        onLeave: () => lightWords(1),
+        onLeaveBack: () => lightWords(0),
       },
     });
     if (sDraws[0]) stl.to(sDraws[0], { strokeDashoffset: 0, duration: 0.14, ease: "none" });
@@ -2366,7 +2411,7 @@ function ts_render_mobile_apps_hub(): void
           trigger: proc,
           start: "top 55%",
           end: "bottom 65%",
-          scrub: 0.65,
+          scrub: window.__ssScrub ?? 0.65,
         },
       }
     );

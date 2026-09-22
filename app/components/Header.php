@@ -18,8 +18,8 @@ $site = ts_site();
         <div class="mega-drop" id="servicesMegaDrop">
           <div class="mega-panel">
             <div class="mega-head mega-head-desktop">
-              <span class="mega-head-title"><i class="fas fa-layer-group"></i> Our Services</span>
-              <span class="mega-badge">4 practices</span>
+              <span class="mega-head-title"><i class="fas fa-user-check"></i> Virtual Assistant Services</span>
+              <span class="mega-badge">Dedicated helper · 4 practices</span>
             </div>
 
             <div class="mega-grid mega-grid-desktop">
@@ -68,12 +68,17 @@ $site = ts_site();
                   }
                   $colOn = $catOn || $itemOnInCol;
               ?>
-              <div class="mega-acc-item mega-<?= ts_h($col["tone"]) ?><?= $colOn ? " is-active open" : "" ?>">
-                <button type="button" class="mega-acc-trigger" aria-expanded="<?= $colOn ? "true" : "false" ?>" data-acc="mega-<?= $ci ?>">
-                  <span class="mega-acc-label"><i class="fas <?= ts_h($col["icon"]) ?>" aria-hidden="true"></i> <?= ts_h($col["title"]) ?></span>
-                  <i class="fas fa-chevron-down mega-acc-caret" aria-hidden="true"></i>
-                </button>
-                <div class="mega-acc-panel" id="mega-<?= $ci ?>" aria-hidden="<?= $colOn ? "false" : "true" ?>">
+              <div class="mega-acc-item mega-<?= ts_h($col["tone"]) ?><?= $colOn ? " is-active" : "" ?>">
+                <div class="mega-acc-row">
+                  <a href="<?= ts_h($catHref) ?>" class="mega-acc-hub<?= $catOn ? " is-on" : "" ?>"<?= $catOn ? ' aria-current="page"' : "" ?>>
+                    <span class="mega-acc-label"><i class="fas <?= ts_h($col["icon"]) ?>" aria-hidden="true"></i> <?= ts_h($col["title"]) ?></span>
+                  </a>
+                  <button type="button" class="mega-acc-trigger" aria-expanded="false" aria-controls="mega-<?= $ci ?>" data-acc="mega-<?= $ci ?>" aria-label="Show <?= ts_h($col["title"]) ?> services">
+                    <i class="fas fa-chevron-down mega-acc-caret" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="mega-acc-panel" id="mega-<?= $ci ?>" aria-hidden="true">
+                  <div class="mega-acc-panel-inner">
                   <ul>
                     <?php foreach ($col["items"] as $row):
                         $svcHref = ts_service_href($row);
@@ -85,6 +90,7 @@ $site = ts_site();
                     <?php endforeach; ?>
                   </ul>
                   <a href="<?= ts_h($catHref) ?>" class="mega-acc-all<?= $catOn ? " is-on" : "" ?>"<?= $catOn ? ' aria-current="page"' : "" ?>>View all <?= ts_h(strtolower($col["title"])) ?> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                  </div>
                 </div>
               </div>
               <?php endforeach; ?>

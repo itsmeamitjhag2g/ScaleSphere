@@ -296,12 +296,6 @@ function ts_render_service_detail(array $service): void
         return;
     }
 
-    if (($service["slug"] ?? "") === "progressive-web-apps") {
-        require_once __DIR__ . "/pwa-page.php";
-        ts_render_pwa_service_page($service);
-        return;
-    }
-
     if (($service["slug"] ?? "") === "support-and-maintenance") {
         require_once __DIR__ . "/support-page.php";
         ts_render_support_service_page($service);

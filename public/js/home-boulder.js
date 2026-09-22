@@ -4,6 +4,10 @@
   if (!root) return;
 
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+  const isNarrow = window.matchMedia("(max-width: 900px)").matches || isTouch;
+  /* 1:1 scrub on touch/narrow — no lag catch-up that feels stuck */
+  const scrubAmt = isNarrow ? true : 0.12;
   const workData = window.__SS_WORK__ || [];
   const hasGsap = !!(window.gsap && window.ScrollTrigger);
 
@@ -135,9 +139,21 @@
     runHero();
   }
 
-  /* Floating chips — desktop only (perf) */
+  /* Floating chips — services floats left-only; hero floats separate */
+  if (hasGsap && !reduce && window.innerWidth >= 1024) {
+    root.querySelectorAll("#ss-services [data-float]").forEach((el, i) => {
+      gsap.to(el, {
+        y: i % 2 === 0 ? -8 : 8,
+        duration: 3.4 + (i % 3) * 0.35,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        delay: i * 0.12,
+      });
+    });
+  }
   if (hasGsap && !reduce && window.innerWidth >= 768) {
-    root.querySelectorAll("[data-float-hero],.ss-float").forEach((el, i) => {
+    root.querySelectorAll("[data-float-hero]").forEach((el, i) => {
       gsap.to(el, {
         y: i % 2 === 0 ? -10 : 12,
         duration: 2.8 + (i % 3) * 0.4,
@@ -159,10 +175,10 @@
   const brandName = brandPanel?.querySelector("[data-brand-name]");
   const brandSub = brandPanel?.querySelector("[data-brand-sub]");
   const brandCopy = brandPanel?.querySelector("[data-brand-copy]");
-  const brandSeam = brandDoors?.querySelector("[data-brand-seam]") || brandPanel?.querySelector("[data-brand-seam]");
   const brandChips = brandPanel
     ? [...brandPanel.querySelectorAll("[data-brand-chip]")]
     : [];
+  const heroFloats = [...root.querySelectorAll("[data-float-hero]")];
   const scrollHint = document.getElementById("ssScrollHint");
   const chipFrom = {
     tl: { x: -36, y: -24 },
@@ -191,10 +207,6 @@
       doorRight.style.transformOrigin = "left center";
       doorLeft.style.transform = "scaleX(1)";
       doorRight.style.transform = "scaleX(1)";
-      if (brandSeam) {
-        brandSeam.style.opacity = "0";
-        brandSeam.style.transform = "translateX(-50%) scaleY(0.15)";
-      }
       if (brandName) {
         brandName.style.opacity = "0";
         brandName.style.transform = "translateY(28px)";
@@ -216,17 +228,39 @@
 
       const easeOpen = gsap.parseEase("power2.inOut");
 
+      /* Narrow: no pin — open doors once on scroll, no blank spacer lag */
+      if (isNarrow) {
+        const openDoors = (open) => {
+          const o = easeOpen(Math.min(1, open));
+          const scale = 1 - o;
+          doorLeft.style.transform = `scaleX(${scale})`;
+          doorRight.style.transform = `scaleX(${scale})`;
+          heroEl.style.opacity = String(1 - Math.min(1, o * 1.2));
+          heroFloats.forEach((el) => { el.style.opacity = "0"; });
+          if (scrollHint) scrollHint.style.opacity = "0";
+          const showContent = Math.min(1, Math.max(0, (o - 0.2) / 0.55));
+          if (brandName) { brandName.style.opacity = String(showContent); brandName.style.transform = "none"; }
+          if (brandSub) { brandSub.style.opacity = String(showContent * 0.9); brandSub.style.transform = "none"; }
+          if (brandCopy) { brandCopy.style.opacity = String(showContent); brandCopy.style.transform = "none"; }
+          brandChips.forEach((chip) => { chip.style.opacity = String(showContent); chip.style.transform = "none"; });
+        };
+        ScrollTrigger.create({
+          trigger: revealTrack,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          onUpdate: (self) => openDoors(Math.min(1, self.progress * 1.4)),
+          onLeave: () => openDoors(1),
+        });
+      } else {
       ScrollTrigger.create({
         trigger: revealTrack,
         start: "top top",
-        end: () => {
-          const spacer = document.getElementById("ssRevealSpacer");
-          return `+=${spacer ? spacer.offsetHeight : Math.round(window.innerHeight * 0.9)}`;
-        },
+        end: () => `+=${Math.round(window.innerHeight * 0.85)}`,
         pin: true,
-        pinSpacing: false,
-        scrub: 0.45,
-        anticipatePin: 1,
+        pinSpacing: true,
+        scrub: scrubAmt,
+        anticipatePin: 0,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           // Open doors in the first ~50% of the pin, then hold fully open until handoff
@@ -235,58 +269,69 @@
           doorLeft.style.transform = `scaleX(${scale})`;
           doorRight.style.transform = `scaleX(${scale})`;
 
-          if (brandSeam) {
-            const seam = open > 0.03 && open < 0.95 ? Math.sin(open * Math.PI) : 0;
-            brandSeam.style.opacity = String(seam * 0.9);
-            brandSeam.style.transform = `translateX(-50%) scaleY(${0.15 + seam * 0.85})`;
-          }
-
           heroEl.style.opacity = String(1 - Math.min(1, open * 1.2));
           heroEl.style.transform = `translateY(${-8 * open}px) scale(${1 - 0.015 * open})`;
+          /* Hide hero floats early so they don't stack over brand chips */
+          const floatHide = Math.min(1, open * 2.2);
+          heroFloats.forEach((el) => {
+            el.style.opacity = String(1 - floatHide);
+            el.style.pointerEvents = "none";
+          });
           if (scrollHint) scrollHint.style.opacity = String(open > 0.05 ? 0 : 1);
+
+          /* Soft fade out of blue pin into white — avoid transform (fights pin) */
+          const exit = Math.min(1, Math.max(0, (self.progress - 0.85) / 0.15));
+          revealTrack.style.opacity = String(1 - exit * 0.4);
 
           const showContent = Math.min(1, Math.max(0, (open - 0.28) / 0.5));
           if (brandName) {
-            brandName.style.opacity = String(showContent);
+            brandName.style.opacity = String(showContent * (1 - exit * 0.5));
             brandName.style.transform = `translateY(${28 * (1 - showContent)}px)`;
             brandName.style.filter = "none";
           }
           if (brandSub) {
             const s = Math.min(1, Math.max(0, (open - 0.4) / 0.42));
-            brandSub.style.opacity = String(s * 0.9);
+            brandSub.style.opacity = String(s * 0.9 * (1 - exit));
             brandSub.style.transform = `translateY(${12 * (1 - s)}px)`;
           }
           if (brandCopy) {
             const c = Math.min(1, Math.max(0, (open - 0.48) / 0.4));
-            brandCopy.style.opacity = String(c);
+            brandCopy.style.opacity = String(c * (1 - exit));
             brandCopy.style.transform = `translateY(${16 * (1 - c)}px)`;
           }
           brandChips.forEach((chip, i) => {
             const c = Math.min(1, Math.max(0, (open - 0.45 - i * 0.04) / 0.38));
             const o = chipFrom[chip.getAttribute("data-chip-from")] || { x: 0, y: 16 };
-            chip.style.opacity = String(c);
+            chip.style.opacity = String(c * (1 - exit));
             chip.style.transform = `translate(${o.x * (1 - c)}px, ${o.y * (1 - c)}px)`;
           });
         },
+        onLeave: () => {
+          revealTrack.style.opacity = "1";
+        },
+        onEnterBack: () => {
+          revealTrack.style.opacity = "1";
+        },
       });
+      }
     }
   }
 
   /* Later sections — keep visible; light lift-in only when entering */
-  if (hasGsap && !reduce) {
+  if (hasGsap && !reduce && !isNarrow) {
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.utils.toArray(".ss-panel").forEach((panel) => {
-      if (panel.classList.contains("ss-work")) return;
+      if (panel.classList.contains("ss-work") || panel.id === "ss-work") return;
       const inner = panel.querySelector("[data-ss-panel-inner]") || panel;
       gsap.from(inner, {
-        y: 24,
-        duration: 0.55,
+        y: 8,
+        duration: 0.3,
         ease: "power2.out",
         clearProps: "transform",
         scrollTrigger: {
           trigger: panel,
-          start: "top 90%",
+          start: "top 94%",
           once: true,
         },
       });
@@ -295,18 +340,6 @@
     root.querySelectorAll("[data-scramble]").forEach((el) => {
       const finalText = el.getAttribute("data-scramble") || el.textContent.trim();
       el.textContent = finalText;
-      if (reduce) return;
-      gsap.fromTo(
-        el,
-        { opacity: 0, y: 16 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.55,
-          ease: "power2.out",
-          scrollTrigger: { trigger: el, start: "top 90%", once: true },
-        }
-      );
     });
   } else {
     root.querySelectorAll("[data-scramble]").forEach((el) => {
@@ -369,9 +402,10 @@
       cards.forEach((card, i) => {
         const dist = Math.abs(i - f);
         const focus = gsap.utils.clamp(0, 1, 1 - dist * 0.85);
+        /* No scale — scale caused the bounce / uchhal feel */
         gsap.set(card, {
-          scale: 0.88 + focus * 0.12,
-          opacity: 0.4 + focus * 0.6,
+          scale: 1,
+          opacity: 0.55 + focus * 0.45,
           force3D: true,
         });
       });
@@ -385,7 +419,6 @@
       bridgeLayer.style.pointerEvents = "none";
       workLayer.style.opacity = "1";
       workLayer.style.pointerEvents = "auto";
-      // slight lead-in so first card holds briefly, then filmstrip moves
       const workP = gsap.utils.clamp(0, 1, (p - 0.06) / 0.94);
       paintTrack(workP);
     };
@@ -393,32 +426,18 @@
     const playBridgeIntro = async () => {
       if (scrambleStarted) return;
       scrambleStarted = true;
+      /* Skip bounce-in — show work strip immediately */
       bridgeLines.forEach((el) => {
         el.textContent = el.getAttribute("data-bridge-scramble") || "";
       });
-      if (!reduce) {
-        gsap.fromTo(
-          bridgeLines,
-          { opacity: 0, y: 18 },
-          { opacity: 1, y: 0, duration: 0.45, stagger: 0.1, ease: "power2.out" }
-        );
-      }
-      if (bridgeCopy) {
-        gsap.to(bridgeCopy, { opacity: 1, duration: 0.35, ease: "power2.out", delay: reduce ? 0 : 0.15 });
-      }
-      await new Promise((r) => setTimeout(r, reduce ? 0 : 420));
+      if (bridgeCopy) bridgeCopy.style.opacity = "0";
+      bridgeLayer.style.opacity = "0";
+      bridgeLayer.style.pointerEvents = "none";
+      workLayer.style.opacity = "1";
+      workLayer.style.pointerEvents = "auto";
       scrambleDone = true;
       measureStep();
-      gsap.to(bridgeLayer, { opacity: 0, y: -16, duration: 0.4, ease: "power2.inOut" });
-      gsap.to(workLayer, {
-        opacity: 1,
-        duration: 0.45,
-        ease: "power2.out",
-        onStart: () => {
-          workLayer.style.pointerEvents = "auto";
-          paintTrack(0);
-        },
-      });
+      paintTrack(0);
       if (storyTrigger) applyStoryProgress(storyTrigger.progress);
     };
 
@@ -429,41 +448,57 @@
       if (storyTrigger && scrambleDone) paintTrack(gsap.utils.clamp(0, 1, (storyTrigger.progress - 0.06) / 0.94));
     });
 
-    if (reduce) {
+    if (reduce || isNarrow) {
       bridgeLines.forEach((el) => {
         el.textContent = el.getAttribute("data-bridge-scramble") || "";
       });
-      if (bridgeCopy) bridgeCopy.style.opacity = "1";
+      if (bridgeCopy) bridgeCopy.style.opacity = "0";
       bridgeLayer.style.opacity = "0";
       bridgeLayer.style.pointerEvents = "none";
       workLayer.style.opacity = "1";
       workLayer.style.pointerEvents = "auto";
       scrambleDone = true;
+      scrambleStarted = true;
+      /* Native swipe carousel — no pin lag on small screens */
+      if (track) {
+        track.style.transform = "none";
+        const stage = document.getElementById("ssWorkStage");
+        if (stage) {
+          stage.style.overflowX = "auto";
+          stage.style.webkitOverflowScrolling = "touch";
+          stage.style.scrollSnapType = "x mandatory";
+        }
+        cards.forEach((card) => {
+          card.style.scale = "1";
+          card.style.opacity = "1";
+          card.style.scrollSnapAlign = "center";
+        });
+        track.style.paddingInline = "1rem";
+      }
       paintTrack(0);
+      storyRoot.style.height = "auto";
+      storyRoot.style.minHeight = "0";
+    } else {
+      storyTrigger = ScrollTrigger.create({
+        trigger: storyRoot,
+        start: "top top",
+        end: () => `+=${Math.round(window.innerHeight * (0.65 + n * 0.45))}`,
+        pin: true,
+        pinSpacing: true,
+        scrub: true,
+        anticipatePin: 0,
+        invalidateOnRefresh: true,
+        onEnter: () => playBridgeIntro(),
+        onEnterBack: () => {
+          if (!scrambleStarted) playBridgeIntro();
+        },
+        onRefresh: () => measureStep(),
+        onUpdate: (self) => {
+          if (self.progress > 0.01) playBridgeIntro();
+          if (scrambleDone) applyStoryProgress(self.progress);
+        },
+      });
     }
-
-    storyTrigger = ScrollTrigger.create({
-      trigger: storyRoot,
-      start: "top top",
-      end: () => {
-        const spacer = document.getElementById("ssStorySpacer");
-        return `+=${spacer ? spacer.offsetHeight : Math.round(window.innerHeight * (0.75 + n * 0.55))}`;
-      },
-      pin: true,
-      pinSpacing: false,
-      scrub: 0.45,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onEnter: () => playBridgeIntro(),
-      onEnterBack: () => {
-        if (!scrambleStarted) playBridgeIntro();
-      },
-      onRefresh: () => measureStep(),
-      onUpdate: (self) => {
-        if (self.progress > 0.01) playBridgeIntro();
-        if (scrambleDone) applyStoryProgress(self.progress);
-      },
-    });
   } else if (storyRoot) {
     const bridge = document.getElementById("ssBridgeLayer");
     const work = document.getElementById("ssWorkLayer");
@@ -493,32 +528,32 @@
   root.querySelector(".ss-quote-prev")?.addEventListener("click", () => showQ(q - 1));
   root.querySelector(".ss-quote-next")?.addEventListener("click", () => showQ(q + 1));
 
-  /* Marquee */
-  const track = root.querySelector(".ss-marquee");
-  if (track && window.gsap && !reduce) {
-    const width = track.scrollWidth / 2;
-    gsap.to(track, {
-      x: -width,
-      duration: 28,
-      ease: "none",
-      repeat: -1,
-    });
-  }
+  /* Marquee uses CSS (smoother; no ScrollTrigger conflict) */
 
   /* Reveals — never leave content invisible */
-  if (hasGsap && !reduce) {
+  if (hasGsap && !reduce && !isNarrow) {
     gsap.registerPlugin(ScrollTrigger);
     root.querySelectorAll("[data-reveal]").forEach((el) => {
       gsap.from(el, {
-        y: 18,
-        duration: 0.35,
+        y: 10,
+        duration: 0.28,
         ease: "power2.out",
         clearProps: "transform",
-        scrollTrigger: { trigger: el, start: "top 92%", once: true },
+        scrollTrigger: { trigger: el, start: "top 94%", once: true },
       });
     });
 
-    requestAnimationFrame(() => ScrollTrigger.refresh());
-    window.addEventListener("load", () => ScrollTrigger.refresh());
+    const refresh = () => ScrollTrigger.refresh();
+    requestAnimationFrame(refresh);
+    window.addEventListener("load", refresh);
+    window.addEventListener("resize", () => {
+      clearTimeout(window.__ssStRefresh);
+      window.__ssStRefresh = setTimeout(refresh, 120);
+    });
+  } else {
+    root.querySelectorAll("[data-reveal]").forEach((el) => {
+      el.style.opacity = "1";
+      el.style.transform = "none";
+    });
   }
 })();

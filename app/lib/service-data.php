@@ -308,24 +308,6 @@ const TS_SERVICE_PAGES = [
         "use_cases" => ["Apps needing rich custom UI and animations", "MVPs targeting multiple platforms quickly", "Enterprise apps with offline-first requirements"],
         "technologies" => ["Flutter", "Dart", "Firebase", "Bloc", "Codemagic"],
     ],
-    "progressive-web-apps" => [
-        "lead" => "Installable web apps with offline support, push notifications and app-like experience without store friction.",
-        "overview" => "PWAs bridge web and mobile — users add to home screen, receive push alerts and browse offline. We optimize service workers, caching strategies and Lighthouse scores for performance that rivals native.",
-        "features" => [
-            ["Service Worker Setup", "Caching, background sync and update prompts."],
-            ["Install Prompts", "Add-to-home-screen flows on supported browsers."],
-            ["Push Notifications", "Re-engage users with timely alerts."],
-            ["Performance Audit", "Lighthouse optimization for speed and PWA criteria."],
-        ],
-        "benefits" => [
-            ["No Store Approval", "Deploy updates instantly without review delays."],
-            ["Lower Development Cost", "One web codebase vs native dual track."],
-            ["Discoverable", "Still indexable by search engines unlike native-only."],
-            ["Works Offline", "Critical flows available without network."],
-        ],
-        "use_cases" => ["Retail and news sites wanting app-like UX", "Emerging markets with limited storage", "Internal tools for distributed teams"],
-        "technologies" => ["React", "Vue", "Workbox", "Lighthouse", "Web Push API"],
-    ],
     "support-and-maintenance" => [
         "lead" => "Keep your app healthy with bug fixes, OS updates, monitoring and feature enhancements on retainer.",
         "overview" => "Launch is just the beginning. We provide SLA-backed support, crash monitoring, compatibility updates for new iOS/Android releases and a backlog pipeline for iterative improvements your users request.",

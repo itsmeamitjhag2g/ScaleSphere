@@ -5,11 +5,20 @@
    ========================================================= */
 (() => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
   document.documentElement.classList.add("motion-on");
   document.documentElement.classList.remove("lenis", "has-smooth-scroll");
+  if (isTouch) document.documentElement.classList.add("ss-touch");
   window.__ssLenis = null;
+  /* Shared scrub — touch/narrow stays 1:1 so pages never feel sticky */
+  window.__ssScrub = isTouch ? true : 0.18;
 
   const isHome = () => !!document.querySelector(".ss-home");
+  const isNarrow = () => window.matchMedia("(max-width: 900px)").matches || isTouch;
+
+  if (window.ScrollTrigger) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
 
   function initAnchorScroll() {
     document.querySelectorAll('a[href^="#"]').forEach((a) => {
@@ -45,26 +54,31 @@
 
   function genericReveals() {
     if (isHome()) return;
-    if (!window.gsap) {
-      document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-shown"));
-      return;
-    }
-    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-    if (reduce) {
-      document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-shown"));
+    const els = [...document.querySelectorAll("[data-reveal]")];
+    if (!els.length) return;
+
+    /* Small screens: show immediately — no opacity:0 stuck sections */
+    if (reduce || isNarrow() || !window.gsap) {
+      els.forEach((el) => {
+        el.classList.add("is-shown");
+        el.style.opacity = "1";
+        el.style.transform = "none";
+      });
       return;
     }
 
-    document.querySelectorAll("[data-reveal]").forEach((el) => {
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    els.forEach((el) => {
       gsap.fromTo(
         el,
-        { opacity: 0, y: 36 },
+        { opacity: 0.001, y: 14 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.75,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+          duration: 0.4,
+          ease: "power2.out",
+          clearProps: "transform",
+          scrollTrigger: { trigger: el, start: "top 92%", once: true },
         }
       );
     });

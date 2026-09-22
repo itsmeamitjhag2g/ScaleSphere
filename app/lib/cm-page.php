@@ -424,48 +424,87 @@ function ts_render_cm_service_page(array $service): void
     }
 
     .cm-cal{
-      display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem;
+      display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:.5rem;
     }
-    @media (max-width:700px){ .cm-cal{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:900px){
+      .cm-cal{
+        grid-template-columns:repeat(7, minmax(108px,1fr));
+        overflow-x:auto; padding-bottom:.35rem;
+        scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
+      }
+      .cm-cal-day{ scroll-snap-align:start; }
+    }
+    @media (max-width:560px){
+      .cm-cal{ grid-template-columns:repeat(2,minmax(0,1fr)); overflow:visible; }
+    }
     .cm-cal-day{
-      padding:.65rem .5rem; border-radius:12px; border:1px solid var(--cm-line);
-      background:#fff; text-align:center; min-height:78px;
+      padding:.55rem .45rem; border-radius:10px; border:1px solid var(--cm-line);
+      background:#fff; text-align:center; min-height:0;
     }
     .cm-cal-day strong{
       display:block; font-size:10px; font-weight:800; letter-spacing:.1em;
-      text-transform:uppercase; color:var(--cm-pink); margin-bottom:.3rem;
+      text-transform:uppercase; color:var(--cm-pink); margin-bottom:.2rem;
     }
-    .cm-cal-day span{ display:block; font-size:12px; font-weight:800; color:var(--cm-ink); }
-    .cm-cal-day em{ display:block; font-style:normal; font-size:11px; color:var(--cm-muted); margin-top:.15rem; }
+    .cm-cal-day span{ display:block; font-size:12px; font-weight:800; color:var(--cm-ink); line-height:1.2; }
+    .cm-cal-day em{ display:block; font-style:normal; font-size:10.5px; color:var(--cm-muted); margin-top:.2rem; line-height:1.3; }
+
+    .cm-engine{
+      margin-top:1.15rem;
+      display:grid; gap:1.15rem;
+    }
+    @media (min-width:900px){
+      .cm-engine{ grid-template-columns:1.05fr .95fr; gap:1.5rem; align-items:start; }
+    }
+    .cm-engine-block{ min-width:0; }
+    .cm-engine-block > .cm-eyebrow{ margin-bottom:.35rem; }
+    .cm-engine-block > h3{
+      margin:0 0 .75rem; font-size:clamp(1.05rem,2.2vw,1.25rem); font-weight:800; line-height:1.2;
+    }
+    .cm-check{
+      list-style:none; margin:0; padding:0;
+      display:grid; gap:.45rem .85rem;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:520px){
+      .cm-check{ grid-template-columns:1fr 1fr; }
+    }
+    .cm-check li{
+      display:flex; gap:.55rem; align-items:flex-start;
+      font-size:13.5px; font-weight:600; line-height:1.35;
+      padding:.55rem .65rem; border-radius:10px; background:rgba(28,79,214,.04);
+    }
+    .cm-check i{
+      width:20px; height:20px; border-radius:50%; flex-shrink:0; margin-top:1px;
+      display:grid; place-items:center; font-size:8px; background:var(--cm-pink); color:#fff;
+    }
+
+    /* Before/after without nested cards */
+    .cm-rewrite{
+      display:grid; gap:.65rem;
+    }
+    .cm-rewrite-row{
+      display:grid; gap:.35rem; padding:.85rem .9rem; border-radius:12px;
+      border-left:3px solid #CBD5E1; background:#F8FAFC;
+    }
+    .cm-rewrite-row.is-good{
+      border-left-color:var(--cm-pink);
+      background:rgba(28,79,214,.05);
+    }
+    .cm-rewrite-kicker{
+      font-size:10.5px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:#94A3B8;
+    }
+    .cm-rewrite-row.is-good .cm-rewrite-kicker{ color:var(--cm-pink); }
+    .cm-rewrite-row strong{
+      display:block; font-size:13.5px; font-weight:800; color:var(--cm-ink); margin-bottom:.15rem;
+    }
+    .cm-rewrite-row.is-bad strong{ color:#94A3B8; text-decoration:line-through; text-decoration-thickness:1px; }
+    .cm-rewrite-row p{
+      margin:0; font-size:13px; line-height:1.5; color:var(--cm-body);
+    }
+    .cm-rewrite-row.is-bad p{ color:#94A3B8; }
 
     .cm-split{ display:grid; gap:1.5rem; }
     @media (min-width:900px){ .cm-split{ grid-template-columns:1fr 1fr; gap:2rem; } }
-
-    .cm-brief{
-      padding:1.15rem; border-radius:14px; border:1px solid var(--cm-line); background:#fff;
-    }
-    .cm-brief h3{ margin:0 0 .75rem; font-size:1.05rem; font-weight:800; }
-    .cm-check{ list-style:none; margin:0; padding:0; display:grid; gap:.55rem; }
-    .cm-check li{ display:flex; gap:.65rem; align-items:flex-start; font-size:14px; font-weight:600; }
-    .cm-check i{
-      width:22px; height:22px; border-radius:50%; flex-shrink:0; margin-top:1px;
-      display:grid; place-items:center; font-size:9px; background:var(--cm-pink); color:#fff;
-    }
-
-    .cm-ba{ display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
-    @media (max-width:600px){ .cm-ba{ grid-template-columns:1fr; } }
-    .cm-ba-card{ padding:1rem; border-radius:14px; border:1px solid var(--cm-line); background:#fff; }
-    .cm-ba-card.bad{ background:#F8FAFC; }
-    .cm-ba-card.good{
-      border-color:rgba(28,79,214,.3);
-      background:linear-gradient(160deg, rgba(28,79,214,.08), #fff 60%);
-    }
-    .cm-ba-label{ font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; margin-bottom:.55rem; }
-    .cm-ba-card.bad .cm-ba-label{ color:#94A3B8; }
-    .cm-ba-card.good .cm-ba-label{ color:var(--cm-pink); }
-    .cm-ba-fake{ font-size:12.5px; line-height:1.5; color:var(--cm-body); }
-    .cm-ba-fake strong{ display:block; font-size:14px; margin-bottom:.35rem; color:var(--cm-ink); }
-    .cm-ba-card.bad strong, .cm-ba-card.bad .cm-ba-fake{ color:#94A3B8; }
 
     /* Zigzag alternating process */
     .cm-steps{ display:grid; gap:1rem; max-width:820px; margin:0 auto; }
@@ -748,32 +787,29 @@ function ts_render_cm_service_page(array $service): void
         </div>
         <?php endforeach; ?>
       </div>
-      <div class="cm-split" style="margin-top:1.5rem">
-        <div class="cm-brief" data-cm-reveal>
-          <h3>Sample content brief</h3>
+      <div class="cm-engine">
+        <div class="cm-engine-block" data-cm-reveal>
+          <p class="cm-eyebrow">Brief checklist</p>
+          <h3>What every piece gets before we draft</h3>
           <ul class="cm-check">
             <?php foreach ($briefItems as $item): ?>
             <li><i class="fas fa-check" aria-hidden="true"></i><span><?= ts_h($item) ?></span></li>
             <?php endforeach; ?>
           </ul>
         </div>
-        <div data-cm-reveal>
+        <div class="cm-engine-block" data-cm-reveal>
           <p class="cm-eyebrow">Before / after</p>
-          <h2 style="font-size:clamp(1.2rem,2.5vw,1.5rem)">Fluff vs shippable copy</h2>
-          <div class="cm-ba" style="margin-top:.85rem">
-            <div class="cm-ba-card bad">
-              <div class="cm-ba-label">AI fluff</div>
-              <div class="cm-ba-fake">
-                <strong>Vague &amp; generic</strong>
-                “In today’s digital world, content is king and businesses must leverage synergies…”
-              </div>
+          <h3>Fluff vs shippable copy</h3>
+          <div class="cm-rewrite">
+            <div class="cm-rewrite-row is-bad">
+              <div class="cm-rewrite-kicker">AI fluff</div>
+              <strong>Vague &amp; generic</strong>
+              <p>“In today’s digital world, content is king and businesses must leverage synergies…”</p>
             </div>
-            <div class="cm-ba-card good">
-              <div class="cm-ba-label">Edited &amp; specific</div>
-              <div class="cm-ba-fake">
-                <strong>Intent + CTA ready</strong>
-                “Compare CRM pricing for Indian SMBs — then book a 20-min fit call with our team.”
-              </div>
+            <div class="cm-rewrite-row is-good">
+              <div class="cm-rewrite-kicker">Edited &amp; specific</div>
+              <strong>Intent + CTA ready</strong>
+              <p>“Compare CRM pricing for Indian SMBs — then book a 20-min fit call with our team.”</p>
             </div>
           </div>
         </div>

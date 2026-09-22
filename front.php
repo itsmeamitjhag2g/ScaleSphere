@@ -12,6 +12,26 @@ function ts_front(string $repoRoot, string $publicRoot): bool
 
     $path = ts_normalize_request_path();
 
+    // Block sensitive paths even if docroot is misconfigured.
+    $blocked = [
+        "/storage",
+        "/app",
+        "/config",
+        "/vendor",
+        "/.env",
+        "/.git",
+        "/composer.json",
+        "/composer.lock",
+    ];
+    foreach ($blocked as $prefix) {
+        if ($path === $prefix || str_starts_with($path, $prefix . "/")) {
+            http_response_code(404);
+            header("Content-Type: text/plain; charset=utf-8");
+            echo "Not found";
+            return true;
+        }
+    }
+
     if (in_array($path, ["/favicon.ico", "/favicon.png", "/apple-touch-icon.png"], true)) {
         $tries = [
             "/favicon.ico" => ["/favicon.ico", "/favicon.png"],
@@ -39,6 +59,7 @@ function ts_front(string $repoRoot, string $publicRoot): bool
         require_once $repoRoot . "/app/lib/site.php";
         require_once $repoRoot . "/app/lib/services-content.php";
         require_once $repoRoot . "/app/lib/work-content.php";
+        require_once $repoRoot . "/app/lib/blog.php";
         require_once $repoRoot . "/app/lib/seo.php";
         require_once $repoRoot . "/app/lib/render.php";
         require_once $repoRoot . "/app/lib/mail.php";

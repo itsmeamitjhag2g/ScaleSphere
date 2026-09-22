@@ -40,8 +40,12 @@ function ts_mail_configured(): bool
  */
 function ts_mail_inbox(): string
 {
-    $to = trim((string) (ts_env("MAIL_TO", "aj8751045@gmail.com") ?? "aj8751045@gmail.com"));
-    return $to !== "" ? $to : "aj8751045@gmail.com";
+    $to = trim((string) (ts_env("MAIL_TO", "") ?? ""));
+    if ($to === "" || !filter_var($to, FILTER_VALIDATE_EMAIL)) {
+        $fallback = trim((string) (ts_site()["email"] ?? ""));
+        return $fallback !== "" ? $fallback : "info@scalesphere.com";
+    }
+    return $to;
 }
 
 function ts_send_contact_mail(string $name, string $email, string $phone, string $message, string $service = ""): bool
@@ -88,8 +92,7 @@ function ts_send_contact_mail(string $name, string $email, string $phone, string
         } elseif ($encryption === "tls" || $encryption === "starttls") {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         } else {
-            $mail->SMTPSecure = false;
-            $mail->SMTPAutoTLS = false;
+            throw new MailException("MAIL_ENCRYPTION must be tls or ssl.");
         }
 
         $mail->setFrom($from !== "" ? $from : $user, $fromName !== "" ? $fromName : $site["name"]);

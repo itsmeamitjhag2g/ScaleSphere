@@ -3,16 +3,9 @@ $site = ts_site();
 $contactMsg = $GLOBALS["TS_CONTACT_MSG"] ?? "";
 $contactErr = $GLOBALS["TS_CONTACT_ERR"] ?? "";
 
-$serviceOptions = [
-    "Web Development",
-    "Online Marketing",
-    "Mobile Apps",
-    "Product Design",
-    "E-Commerce",
-    "SEO & Ads",
-    "Consultation",
-    "Other",
-];
+$serviceOptions = ts_contact_services();
+
+$contactFlow = array_slice(ts_va_steps(), 0, 3);
 
 $contactCards = [
     [
@@ -61,9 +54,9 @@ ob_start();
         <span class="w-1.5 h-1.5 rounded-full bg-brand"></span>
         Book Appointment
       </span>
-      <h1 class="ct-rise m-0 text-[clamp(1.75rem,4.8vw,2.85rem)] font-extrabold tracking-[-0.04em] leading-tight" data-ct data-ct-d="1">Contact Us</h1>
+      <h1 class="ct-rise m-0 text-[clamp(1.75rem,4.8vw,2.85rem)] font-extrabold tracking-[-0.04em] leading-tight" data-ct data-ct-d="1">Book Your Strategy Call</h1>
       <p class="ct-rise mt-2.5 text-[14px] sm:text-[15px] leading-relaxed text-muted font-body max-w-lg mx-auto" data-ct data-ct-d="2">
-        Tell us what you need — pick a service and we&rsquo;ll schedule the next step.
+        Tell us what you need — pick a service and we&rsquo;ll assign your dedicated Virtual Assistant for the next step.
       </p>
     </div>
   </section>
@@ -92,6 +85,18 @@ ob_start();
             <i class="fas fa-arrow-right text-brand text-xs opacity-0 group-hover:opacity-100 transition" aria-hidden="true"></i>
           </a>
           <?php endforeach; ?>
+        </div>
+
+        <div class="mt-5 p-4 rounded-xl border border-line bg-white/90">
+          <p class="m-0 mb-3 text-[11px] font-extrabold uppercase tracking-[0.14em] text-brand">What happens next</p>
+          <ol class="m-0 p-0 list-none flex flex-col gap-2.5">
+            <?php foreach ($contactFlow as $step): ?>
+            <li class="flex gap-2.5 items-start text-[13px] leading-snug text-muted font-body">
+              <span class="shrink-0 w-6 h-6 rounded-full bg-brand-soft text-brand text-[10px] font-extrabold grid place-items-center"><?= ts_h($step["num"]) ?></span>
+              <span><strong class="text-ink font-bold"><?= ts_h($step["title"]) ?></strong> — <?= ts_h($step["copy"]) ?></span>
+            </li>
+            <?php endforeach; ?>
+          </ol>
         </div>
       </div>
 
@@ -194,9 +199,22 @@ ob_start();
 
           <input type="hidden" name="ts_form" value="contact">
           <input type="hidden" name="ts_csrf" value="<?= ts_h(ts_csrf_token()) ?>">
-          <div class="hp-field" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden">
-            <label for="website">Website</label>
-            <input type="text" name="website" id="website" tabindex="-1" autocomplete="off">
+          <?php /* Honeypot — must NOT be named website/url/email or browsers autofill it and block real users */ ?>
+          <div class="hp-field" aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none">
+            <label for="ts_hp_fax">Leave blank</label>
+            <input
+              type="text"
+              name="ts_hp_fax"
+              id="ts_hp_fax"
+              value=""
+              tabindex="-1"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+              data-lpignore="true"
+              data-1p-ignore="true"
+              data-form-type="other"
+            >
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -294,7 +312,19 @@ ob_start();
 </script>
 <?php
 ts_layout("Contact Us", ob_get_clean(), [
-    "description" => "Book an appointment with ScaleSphere — web, marketing, apps and product design.",
+    "description" => "Book a free strategy call with ScaleSphere — get your dedicated Virtual Assistant for marketing, development, apps and design.",
     "path" => "/contact",
     "bodyClass" => "page-contact",
+    "jsonld" => [
+        ts_webpage_jsonld(
+            "Contact Us",
+            "Book an appointment with ScaleSphere — web, marketing, apps and product design.",
+            "/contact",
+            "ContactPage"
+        ),
+        ts_breadcrumb_jsonld([
+            ["name" => "Home", "path" => "/"],
+            ["name" => "Contact Us", "path" => "/contact"],
+        ]),
+    ],
 ]);

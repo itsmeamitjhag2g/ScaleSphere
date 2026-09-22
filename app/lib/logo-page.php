@@ -44,7 +44,7 @@ function ts_render_logo_service_page(array $service): void
     $deliverables = [
         ["Master logo suite", "Primary, secondary, mono and reverse — AI / SVG / PDF."],
         ["Raster exports", "PNG / WebP at every common size including retina."],
-        ["Favicon & app icons", "Browser, PWA and store-ready icon sets."],
+        ["Favicon & app icons", "Browser and store-ready icon sets."],
         ["Social profile kit", "Avatar, cover and post templates that match the mark."],
         ["Stationery starters", "Business card and letterhead layouts ready to print."],
         ["Mini usage guide", "One-pager so your team and freelancers stay consistent."],
@@ -376,43 +376,100 @@ function ts_render_logo_service_page(array $service): void
     }
 
     .yl-logo .yl-scale{
-      margin-top:2rem;
-      display:grid; gap:.75rem;
-      grid-template-columns:repeat(5, 1fr);
-      background:#fff;
-      border:1px solid var(--line);
+      margin-top:1.5rem;
+      display:grid; gap:.35rem 0;
+      grid-template-columns:repeat(5, minmax(0, 1fr));
+      background:linear-gradient(145deg, #2E1065 0%, #4C1D95 48%, #1E1035 100%);
+      border:1px solid rgba(255,255,255,.12);
       border-radius:1.15rem;
-      padding:1rem .85rem;
-      box-shadow:0 10px 28px rgba(15,23,42,.05);
+      padding:1.15rem .65rem 1.05rem;
+      box-shadow:0 18px 40px rgba(76,29,149,.28);
+      position:relative;
+      overflow:hidden;
+    }
+    .yl-logo .yl-scale::before{
+      content:""; position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse 50% 60% at 15% 0%, rgba(167,139,250,.22), transparent 55%),
+        radial-gradient(ellipse 40% 50% at 90% 100%, rgba(124,58,237,.2), transparent 50%);
+      pointer-events:none;
+    }
+    .yl-logo .yl-scale-head{
+      grid-column:1 / -1;
+      display:flex; justify-content:space-between; align-items:baseline; gap:.75rem;
+      padding:0 .55rem .75rem;
+      margin-bottom:.15rem;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      position:relative; z-index:1;
+    }
+    .yl-logo .yl-scale-head strong{
+      font-family:"IBM Plex Mono",monospace;
+      font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      color:#fff;
+    }
+    .yl-logo .yl-scale-head span{
+      font-size:11px; color:#fff; font-weight:400; opacity:.85;
     }
     @media (max-width:640px){
-      .yl-logo .yl-scale{ grid-template-columns:repeat(3, 1fr); }
-      .yl-logo .yl-scale .yl-sc:nth-child(4),
-      .yl-logo .yl-scale .yl-sc:nth-child(5){ display:none; }
+      .yl-logo .yl-scale{
+        grid-template-columns:repeat(3, minmax(0, 1fr));
+        padding:1rem .5rem .9rem;
+      }
     }
     .yl-logo .yl-sc{
       text-align:center;
-      display:flex; flex-direction:column; align-items:center; gap:.45rem;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      gap:.4rem;
+      min-height:7.5rem;
+      padding:.35rem .25rem .15rem;
+      position:relative; z-index:1;
+      border-right:1px solid rgba(255,255,255,.08);
+    }
+    .yl-logo .yl-sc:last-child{ border-right:0; }
+    .yl-logo .yl-sc-stage{
+      flex:1; display:grid; place-items:end center;
+      width:100%; min-height:3.25rem;
     }
     .yl-logo .yl-sc-dot{
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
-      border-radius:.4rem;
+      background:linear-gradient(145deg,#A78BFA,#7C3AED 55%,#4C1D95);
+      border-radius:.45rem;
       display:grid; place-items:center;
       color:#fff;
       font-family:Montserrat,sans-serif;
       font-weight:800;
       line-height:1;
+      box-shadow:0 8px 20px rgba(0,0,0,.28);
+      border:1px solid rgba(255,255,255,.18);
     }
-    .yl-logo .yl-sc:nth-child(1) .yl-sc-dot{ width:14px; height:14px; font-size:7px; }
-    .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:18px; height:18px; font-size:8px; }
-    .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:26px; height:26px; font-size:11px; }
-    .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:34px; height:34px; font-size:13px; }
-    .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:44px; height:44px; font-size:16px; }
+    .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:16px; height:16px; font-size:7px; border-radius:50%; }
+    .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:28px; height:28px; font-size:11px; }
+    .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:40px; height:40px; font-size:15px; }
+    .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:52px; height:52px; font-size:18px; }
+    .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:64px; height:64px; font-size:22px; }
     .yl-logo .yl-sc b{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; color:var(--blue); font-weight:600;
+      font-size:11px; color:#fff; font-weight:600;
+      letter-spacing:.02em;
     }
-    .yl-logo .yl-sc span{ font-size:11px; color:var(--muted); }
+    .yl-logo .yl-sc span{
+      font-size:11px; color:#fff; font-weight:500;
+      line-height:1.2; opacity:.92;
+    }
+    @media (max-width:640px){
+      .yl-logo .yl-sc{
+        min-height:6.5rem;
+        border-right:0;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      .yl-logo .yl-sc:nth-child(4),
+      .yl-logo .yl-sc:nth-child(5),
+      .yl-logo .yl-sc:nth-child(6){ border-bottom:0; }
+      .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:14px; height:14px; font-size:6px; }
+      .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:24px; height:24px; font-size:10px; }
+      .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:32px; height:32px; font-size:12px; }
+      .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:40px; height:40px; font-size:14px; }
+      .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:48px; height:48px; font-size:16px; }
+    }
 
     .yl-logo .yl-sec-label{
       display:inline-block;
@@ -1014,9 +1071,15 @@ function ts_render_logo_service_page(array $service): void
         </div>
 
         <div class="yl-scale" role="list" aria-label="Logo size scale">
+          <div class="yl-scale-head">
+            <strong>Size proof</strong>
+            <span>Favicon → signage</span>
+          </div>
           <?php foreach ($scales as $i => $row): ?>
           <div class="yl-sc" role="listitem">
-            <span class="yl-sc-dot" aria-hidden="true">S</span>
+            <div class="yl-sc-stage">
+              <span class="yl-sc-dot" aria-hidden="true"><?= $i === 0 ? "" : "S" ?></span>
+            </div>
             <b><?= ts_h($row[0]) ?><?= $row[0] !== "∞" ? "px" : "" ?></b>
             <span><?= ts_h($row[1]) ?></span>
           </div>

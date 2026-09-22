@@ -339,6 +339,7 @@ function ts_render_online_marketing_hub(): void
       display:grid; place-items:center;
       font-size:11px; font-weight:800; border:2px solid var(--ink);
     }
+    .ok-post-top .ok-avatar{ color:#fff !important; }
     .ok-post-top strong{ display:block; font-size:14px; font-weight:800; }
     .ok-post-top span{ font-size:12px; color:var(--muted); }
     .ok-chip{
@@ -542,6 +543,90 @@ function ts_render_online_marketing_hub(): void
       color:rgba(255,255,255,.9); font-size:15px; line-height:1.55;
     }
     .ok-close .ok-btn{ position:relative; z-index:1; margin-top:1.75rem; }
+
+    /* —— Mobile / tablet responsive —— */
+    @media (max-width: 960px){
+      .ok-wrap{ width:min(100%, calc(100% - 1.5rem)); }
+      .ok-hero{
+        min-height:0;
+        padding:5rem 1rem 2.75rem;
+      }
+      .ok-hero h1{
+        font-size:clamp(2.4rem, 12vw, 4.5rem);
+        max-width:100%;
+        overflow-wrap:anywhere;
+      }
+      .ok-hero p{
+        margin-top:1rem;
+        font-size:15px;
+        padding-inline:0.25rem;
+      }
+      .ok-hero-actions{ margin-top:1.25rem; width:100%; }
+      .ok-hero-actions .ok-btn{ width:100%; justify-content:center; }
+      .ok-stay,
+      .ok-pillars,
+      .ok-dir,
+      .ok-process,
+      .ok-quotes,
+      .ok-faq{
+        padding-top:2.5rem;
+        padding-bottom:2.5rem;
+      }
+      .ok-gallery{ padding-bottom:2.5rem; }
+      .ok-stay h2,
+      .ok-dir-head h2,
+      .ok-process h2,
+      .ok-quotes h2,
+      .ok-faq h2,
+      .ok-close h2{
+        font-size:clamp(1.55rem, 6.5vw, 2.4rem);
+        max-width:100%;
+        padding-inline:0.25rem;
+      }
+      .ok-dir-head{ margin-bottom:1.25rem; }
+      .ok-pillars-grid{ gap:0.85rem; }
+      .ok-pillar{ padding:1.15rem 1rem; }
+      .ok-pillar h3{ font-size:1.1rem; }
+      .ok-dir-card,
+      .ok-gcard,
+      .ok-post,
+      .ok-quote{
+        max-width:100%;
+        box-sizing:border-box;
+      }
+      .ok-dir-card p,
+      .ok-dir-card span,
+      .ok-gcard-body p,
+      .ok-post p,
+      .ok-pillar p{
+        overflow-wrap:anywhere;
+        word-break:break-word;
+      }
+      .ok-close{ padding:2.75rem 1rem; }
+      .ok-close p{ font-size:14px; }
+    }
+    @media (max-width: 640px){
+      .ok-wrap{ width:min(100%, calc(100% - 1.1rem)); }
+      .ok-hero{ padding:4.5rem 0.85rem 2.25rem; }
+      .ok-hero h1{ font-size:clamp(2.1rem, 14vw, 3.2rem); line-height:0.95; }
+      .ok-eyebrow{ font-size:10px; letter-spacing:0.14em; margin-bottom:0.85rem; }
+      .ok-stay,
+      .ok-pillars,
+      .ok-dir,
+      .ok-process,
+      .ok-quotes,
+      .ok-faq{
+        padding-top:2rem;
+        padding-bottom:2rem;
+      }
+      .ok-dir-head p,
+      .ok-quotes > .ok-wrap > p.lead{
+        font-size:13.5px;
+        margin-bottom:1.25rem;
+      }
+      .ok-steps{ grid-template-columns:1fr; }
+      .ok-marquee-track{ animation-duration:40s; }
+    }
   </style>
 
   <!-- HERO -->
@@ -556,7 +641,7 @@ function ts_render_online_marketing_hub(): void
         <?php endforeach; ?>
       </span>
     </h1>
-    <p><?= ts_h($hub["lead"]) ?></p>
+    <p><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></p>
     <div class="ok-hero-actions">
       <a class="ok-btn ok-btn-light" href="/contact">Start a project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       <a class="ok-btn ok-btn-ghost" href="#ok-services">View services</a>

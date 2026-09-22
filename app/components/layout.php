@@ -22,14 +22,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><?= ts_h($title) ?></title>
   <meta name="description" content="<?= ts_h($desc) ?>">
-  <meta name="robots" content="<?= !empty($index) ? "index,follow" : "noindex,nofollow" ?>">
+  <?php if (!empty($keywords)): ?>
+  <meta name="keywords" content="<?= ts_h($keywords) ?>">
+  <?php endif; ?>
+  <meta name="robots" content="<?= !empty($index) ? "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" : "noindex,nofollow" ?>">
+  <meta name="author" content="<?= ts_h($authorName ?? $site["name"]) ?>">
   <link rel="canonical" href="<?= ts_h($canonical) ?>">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="<?= ts_h($ogType ?? "website") ?>">
   <meta property="og:site_name" content="<?= ts_h($site["name"]) ?>">
   <meta property="og:title" content="<?= ts_h($title) ?>">
   <meta property="og:description" content="<?= ts_h($desc) ?>">
   <meta property="og:url" content="<?= ts_h($canonical) ?>">
   <meta property="og:image" content="<?= ts_h($image) ?>">
+  <meta property="og:image:alt" content="<?= ts_h($imageAlt ?? $site["name"]) ?>">
+  <?php if (!empty($publishedTime)): ?>
+  <meta property="article:published_time" content="<?= ts_h($publishedTime) ?>">
+  <?php endif; ?>
+  <?php if (!empty($modifiedTime)): ?>
+  <meta property="article:modified_time" content="<?= ts_h($modifiedTime) ?>">
+  <?php endif; ?>
   <link rel="icon" href="<?= ts_h(ts_logo()) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,34 +51,15 @@
   <meta name="twitter:title" content="<?= ts_h($title) ?>">
   <meta name="twitter:description" content="<?= ts_h($desc) ?>">
   <meta name="twitter:image" content="<?= ts_h($image) ?>">
+  <meta name="twitter:image:alt" content="<?= ts_h($imageAlt ?? $site["name"]) ?>">
   <meta name="theme-color" content="#1C4FD6">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      // Must be ONE selector. Commas break CSS (e.g. `.tw-home, .tw-about .flex`
-      // applies every utility to `.tw-home` itself and empties / crushes layouts).
-      important: 'main',
-      corePlugins: { preflight: false },
-      theme: {
-        extend: {
-          colors: {
-            brand: { DEFAULT: '#1C4FD6', dark: '#163AA8', soft: '#E8EEF8', deep: '#0B1A3A' },
-            ink: '#0F172A',
-            muted: '#64748B',
-            line: '#E2E8F0'
-          },
-          fontFamily: {
-            display: ['Montserrat', 'sans-serif'],
-            body: ['Nunito Sans', 'sans-serif'],
-            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace']
-          },
-          maxWidth: {
-            site: '1400px'
-          }
-        }
-      }
-    };
-  </script>
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="<?= ts_h(ts_abs("/sitemap.xml")) ?>">
+  <!-- Keep utility styles local: the content-heavy pages rely on them for their
+       responsive layout, so a third-party CDN must not be a single point of failure. -->
+  <?php
+    $twVer = @filemtime(dirname(__DIR__, 2) . "/public/css/tailwind.css") ?: time();
+  ?>
+  <link rel="stylesheet" href="/css/tailwind.css?v=<?= (int)$twVer ?>">
   <?php if (str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
   <style>
     /* Home: hide native scrollbar — sections open via wheel + GSAP */
@@ -118,7 +110,11 @@
     }
   </style>
   <?php endif; ?>
-  <link rel="stylesheet" href="/css/style.css?v=40">
+  <?php
+    $cssVer = @filemtime(dirname(__DIR__, 2) . "/public/css/style.css") ?: time();
+    $jsVer = @filemtime(dirname(__DIR__, 2) . "/public/js/main.js") ?: time();
+  ?>
+  <link rel="stylesheet" href="/css/style.css?v=<?= (int)$cssVer ?>">
   <?php if (!str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
   <link rel="stylesheet" href="/css/home.css?v=12">
   <?php endif; ?>
@@ -130,6 +126,34 @@
       top:0;
       z-index:200;
     }
+    .site-header.nav-open,
+    .site-header:has(.main-nav.open),
+    body.nav-drawer-open .site-header{
+      z-index:500 !important;
+      overflow:visible !important;
+    }
+    @media (max-width:1080px){
+      .main-nav{
+        display:none !important;
+        position:fixed !important;
+        top:var(--header-h) !important;
+        left:0 !important;
+        right:0 !important;
+        bottom:auto !important;
+        width:100% !important;
+        height:calc(100dvh - var(--header-h)) !important;
+        max-height:calc(100dvh - var(--header-h)) !important;
+        justify-content:flex-start !important;
+        z-index:460 !important;
+        transform:none !important;
+      }
+      .main-nav.open{
+        display:flex !important;
+      }
+      .nav-toggle{
+        z-index:480 !important;
+      }
+    }
     /* Soft royal white page canvas — easier on the eyes than pure #fff */
     body.page-site,
     body.page-site main,
@@ -138,6 +162,20 @@
     body.page-contact,
     body.page-services {
       background-color: #FFFEFA;
+    }
+    body.page-blog,
+    body.page-blog main {
+      background-color: #ECEBE8 !important;
+    }
+    body.page-blog main {
+      margin: 0;
+      padding: 0;
+    }
+    body.page-blog .site-header,
+    body.page-blog .header-home {
+      box-shadow: none;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+      background: #FFFEFA;
     }
     body.page-services.page-services-index,
     body.page-services.page-services-index main {
@@ -180,8 +218,8 @@
   <?php include __DIR__ . "/Header.php"; ?>
   <main><?= $body ?></main>
   <?php include __DIR__ . "/Footer.php"; ?>
-  <script src="/js/main.js?v=10"></script>
-  <script src="/js/site-motion.js?v=43"></script>
+  <script src="/js/main.js?v=<?= (int)$jsVer ?>"></script>
+  <script src="/js/site-motion.js?v=47"></script>
   <script src="/js/route-progress.js?v=4"></script>
   <?php foreach ($extraScripts ?? [] as $src): ?>
   <script src="<?= ts_h($src) ?>"></script>

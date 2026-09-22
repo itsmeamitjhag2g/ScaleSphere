@@ -5,7 +5,10 @@ function ts_session_start(): void
     if (session_status() === PHP_SESSION_NONE) {
         $secure = (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off")
             || ((string) ($_SERVER["SERVER_PORT"] ?? "") === "443")
-            || (strtolower((string) ($_SERVER["HTTP_X_FORWARDED_PROTO"] ?? "")) === "https");
+            || (
+                (string) (ts_env("TRUST_PROXY", "") ?? "") === "1"
+                && strtolower((string) ($_SERVER["HTTP_X_FORWARDED_PROTO"] ?? "")) === "https"
+            );
         session_start([
             "cookie_httponly" => true,
             "cookie_samesite" => "Lax",
@@ -30,7 +33,7 @@ function ts_verify_csrf(string $token): bool
     return $token !== "" && isset($_SESSION["ts_csrf"]) && hash_equals((string) $_SESSION["ts_csrf"], $token);
 }
 
-/** Simple per-IP contact rate limit (file-based). */
+/** Simple per-IP contact rate limit (file-based, locked). */
 function ts_contact_rate_ok(): bool
 {
     $ip = preg_replace("/[^a-fA-F0-9:.\-]/", "", (string) ($_SERVER["REMOTE_ADDR"] ?? "unknown")) ?: "unknown";
@@ -42,33 +45,62 @@ function ts_contact_rate_ok(): bool
     $now = time();
     $window = 600; // 10 minutes
     $max = 5;
-    $data = [];
-    if (is_file($file)) {
-        $decoded = json_decode((string) file_get_contents($file), true);
-        if (is_array($decoded)) {
-            $data = $decoded;
-        }
-    }
-    // prune old
-    foreach ($data as $k => $entry) {
-        if (!is_array($entry) || ($now - (int) ($entry["t"] ?? 0)) > $window) {
-            unset($data[$k]);
-        }
-    }
-    $hits = [];
-    if (isset($data[$ip]) && is_array($data[$ip]["hits"] ?? null)) {
-        $hits = array_values(array_filter(
-            $data[$ip]["hits"],
-            static fn($t) => ($now - (int) $t) <= $window
-        ));
-    }
-    if (count($hits) >= $max) {
+    $fp = fopen($file, "c+");
+    if ($fp === false) {
         return false;
     }
-    $hits[] = $now;
-    $data[$ip] = ["t" => $now, "hits" => $hits];
-    file_put_contents($file, json_encode($data), LOCK_EX);
-    return true;
+    try {
+        if (!flock($fp, LOCK_EX)) {
+            return false;
+        }
+        $raw = stream_get_contents($fp);
+        $data = [];
+        if (is_string($raw) && $raw !== "") {
+            $decoded = json_decode($raw, true);
+            if (is_array($decoded)) {
+                $data = $decoded;
+            }
+        }
+        foreach ($data as $k => $entry) {
+            if (!is_array($entry) || ($now - (int) ($entry["t"] ?? 0)) > $window) {
+                unset($data[$k]);
+            }
+        }
+        $hits = [];
+        if (isset($data[$ip]) && is_array($data[$ip]["hits"] ?? null)) {
+            $hits = array_values(array_filter(
+                $data[$ip]["hits"],
+                static fn($t) => ($now - (int) $t) <= $window
+            ));
+        }
+        if (count($hits) >= $max) {
+            return false;
+        }
+        $hits[] = $now;
+        $data[$ip] = ["t" => $now, "hits" => $hits];
+        ftruncate($fp, 0);
+        rewind($fp);
+        fwrite($fp, json_encode($data) ?: "{}");
+        fflush($fp);
+        return true;
+    } finally {
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+}
+
+function ts_contact_services(): array
+{
+    return [
+        "Web Development",
+        "Online Marketing",
+        "Mobile Apps",
+        "Product Design",
+        "E-Commerce",
+        "SEO & Ads",
+        "Consultation",
+        "Other",
+    ];
 }
 
 function ts_layout(string $title, string $body, array $opts = []): void
@@ -80,6 +112,10 @@ function ts_layout(string $title, string $body, array $opts = []): void
         $title = rtrim($title) . " | " . $brand;
     }
     $desc = $opts["description"] ?? $brand . " delivers online marketing, software development, mobile apps and creative design.";
+    $desc = trim(preg_replace("/\s+/", " ", strip_tags((string) $desc)) ?? $desc);
+    if (mb_strlen($desc) > 160) {
+        $desc = rtrim(mb_substr($desc, 0, 157)) . "…";
+    }
     $path = $opts["path"] ?? "/";
     $canonical = ts_abs($path);
     $image = ts_og_image($opts["image"] ?? null);
@@ -90,6 +126,12 @@ function ts_layout(string $title, string $body, array $opts = []): void
     $bodyClass = $extra !== "" ? "page-site " . $extra : "page-site";
     $extraStyles = $opts["extraStyles"] ?? [];
     $extraScripts = $opts["extraScripts"] ?? [];
+    $ogType = (string) ($opts["ogType"] ?? "website");
+    $imageAlt = (string) ($opts["imageAlt"] ?? $site["name"]);
+    $publishedTime = (string) ($opts["publishedTime"] ?? "");
+    $modifiedTime = (string) ($opts["modifiedTime"] ?? "");
+    $keywords = (string) ($opts["keywords"] ?? "");
+    $authorName = (string) ($opts["author"] ?? $site["name"]);
     include dirname(__DIR__) . "/components/layout.php";
 }
 
@@ -107,8 +149,8 @@ function ts_save_contact(string $name, string $email, string $phone, string $mes
     if ($name === "" || $email === "" || $phone === "") {
         throw new RuntimeException("Please fill in name, email and phone.");
     }
-    if ($service === "") {
-        throw new RuntimeException("Please choose a service.");
+    if ($service === "" || !in_array($service, ts_contact_services(), true)) {
+        throw new RuntimeException("Please choose a valid service.");
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         throw new RuntimeException("Please enter a valid email address.");

@@ -676,11 +676,11 @@ function ts_render_uiux_service_page(array $service): void
   <section class="yl-desk">
     <div class="yl-desk-inner">
       <nav class="yl-crumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>/</span>
-        <a href="/services">Services</a><span>/</span>
+          <a href="/">Home</a><span>/</span>
+          <a href="/services">Services</a><span>/</span>
         <?php if ($hub): ?><a href="<?= ts_h($hub["href"]) ?>">Creative Design</a><span>/</span><?php endif; ?>
         <span style="color:var(--ink)">UI / UX Designing</span>
-      </nav>
+        </nav>
 
       <div class="yl-hero-grid">
         <div class="yl-hero">
@@ -692,10 +692,10 @@ function ts_render_uiux_service_page(array $service): void
           </p>
           <div class="yl-hero-actions">
             <a class="yl-btn yl-btn-solid" href="/contact">Request a UI/UX enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-            <?php if ($hub): ?>
+          <?php if ($hub): ?>
             <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
-            <?php endif; ?>
-          </div>
+          <?php endif; ?>
+        </div>
           <p class="yl-trust">Research · Wireframes · Hi-fi UI · Prototypes · Usability · Dev handoff</p>
         </div>
 
@@ -738,13 +738,13 @@ function ts_render_uiux_service_page(array $service): void
           <article>
             <strong>UX outcomes</strong>
             <p>Fewer drop-offs, clearer next actions, less support load.</p>
-          </article>
+    </article>
           <article>
             <strong>UI outcomes</strong>
             <p>Polished screens, brand-ready visuals, build-ready components.</p>
           </article>
-        </div>
-      </div>
+  </div>
+  </div>
       <aside class="yl-sticky">
         <strong>You walk away with</strong>
         <p style="margin:0;font-size:14px;line-height:1.55;color:var(--muted)">
@@ -798,7 +798,7 @@ function ts_render_uiux_service_page(array $service): void
               <strong><?= ts_h($row[1]) ?></strong>
               <span><?= ts_h($row[2]) ?></span>
             </div>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
           </div>
         </div>
       </div>
@@ -825,7 +825,7 @@ function ts_render_uiux_service_page(array $service): void
               <strong><?= ts_h($row[0]) ?></strong>
               <span><?= ts_h($row[1]) ?></span>
             </div>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
           </div>
         </div>
       </div>

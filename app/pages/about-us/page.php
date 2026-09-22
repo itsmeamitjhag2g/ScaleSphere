@@ -24,13 +24,7 @@ foreach (TS_SERVICE_MEGA as $col) {
     ];
 }
 
-$journey = [
-    ["num" => "01", "title" => "Understand", "desc" => "We dig into your business, audience, goals and constraints before a single pixel or line of code."],
-    ["num" => "02", "title" => "Plan", "desc" => "Strategy, stack and milestones align around outcomes you can measure — not vanity activity."],
-    ["num" => "03", "title" => "Create", "desc" => "Designers and engineers ship polished experiences with clear reviews and transparent progress."],
-    ["num" => "04", "title" => "Launch", "desc" => "We test, harden and launch with performance, reliability and handoff your team can trust."],
-    ["num" => "05", "title" => "Grow", "desc" => "After go-live we keep optimizing — product, marketing and conversion working as one system."],
-];
+$journey = ts_va_steps();
 
 $wins = [
     ["title" => "Products that ship on time", "copy" => "Clear milestones, visible progress and launches that land without drama."],
@@ -56,20 +50,20 @@ ob_start();
     <div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_60%_45%_at_50%_20%,rgba(28,79,214,.12),transparent_70%)]" aria-hidden="true"></div>
     <div class="relative z-[1] max-w-5xl mx-auto w-full">
       <p class="ab-reveal m-0 mb-6 text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase text-brand" data-ab-reveal>
-        Who We Are
+        Dedicated Virtual Assistant · Real People
       </p>
       <h1 class="ab-reveal m-0 text-[clamp(2.4rem,9vw,5.75rem)] font-extrabold tracking-[-0.045em] leading-[0.96]" data-ab-reveal data-ab-delay="1">
-        Helping partners build digital products that
-        <em class="italic text-brand">scale</em>.
+        Your digital growth partner with a dedicated
+        <em class="italic text-brand">Virtual Assistant</em>.
       </h1>
-      <p class="ab-reveal mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3 text-[15px] sm:text-lg text-muted font-body" data-ab-reveal data-ab-delay="2">
+      <p class="ab-reveal mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3 text-[15px] sm:text-lg text-muted font-body max-w-2xl mx-auto" data-ab-reveal data-ab-delay="2">
         <span class="hidden sm:inline-block w-8 h-px bg-brand/40" aria-hidden="true"></span>
-        For ambitious businesses ready to grow.
+        Marketing, development, mobile apps and design — coordinated daily by one real contact.
         <span class="hidden sm:inline-block w-8 h-px bg-brand/40" aria-hidden="true"></span>
       </p>
       <div class="ab-reveal mt-10 flex flex-wrap gap-3 justify-center" data-ab-reveal data-ab-delay="3">
         <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-gradient-to-br from-brand to-[#3D6BE8] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">
-          Start a Project <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          Book Free Strategy Call <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </a>
         <a href="#ab-story" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:border-brand/30 hover:text-brand transition">
           Our Story
@@ -85,7 +79,7 @@ ob_start();
         Crafting products that <em class="italic text-brand">hit hard</em>.
       </h2>
       <p class="ab-reveal m-0 text-[15px] sm:text-[17px] leading-relaxed text-muted font-body md:pt-2" data-ab-reveal data-ab-delay="2">
-        We work with companies that have something worth building and are not interested in blending in. From emerging startups to established brands entering a new chapter, we help turn ideas into digital experiences people connect with — and businesses can grow on.
+        We work with companies that have something worth building. Your dedicated Virtual Assistant coordinates strategy, design, development and marketing — so ideas move from concept to execution without bouncing between disconnected specialists.
       </p>
     </div>
   </section>
@@ -121,8 +115,8 @@ ob_start();
       </div>
       <div class="ab-reveal space-y-4 text-[15px] sm:text-base leading-relaxed text-white/75 font-body" data-ab-reveal data-ab-delay="2">
         <p class="m-0">Businesses today need more than a website or an app. They need experiences that connect with people, solve real problems and support long-term growth.</p>
-        <p class="m-0">That is where <?= ts_h($site["name"]) ?> comes in. We bring strategy, design, development and digital marketing together so ideas move from concept to execution without unnecessary complexity.</p>
-        <p class="m-0">We listen, understand the bigger picture, challenge assumptions when needed, then build around the outcomes that matter — from product and web to mobile and marketing.</p>
+        <p class="m-0">That is where <?= ts_h($site["name"]) ?> comes in. We assign you a dedicated Virtual Assistant who coordinates strategy, design, development and marketing — one daily contact backed by a full specialist team.</p>
+        <p class="m-0">Your assistant listens, understands the bigger picture, keeps feedback moving and builds around the outcomes that matter — from product and web to mobile and marketing.</p>
       </div>
     </div>
   </section>
@@ -131,11 +125,11 @@ ob_start();
   <section class="py-10 sm:py-14 md:py-16">
     <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
       <div class="ab-reveal max-w-xl mb-6 sm:mb-8" data-ab-reveal>
-        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">What We Do</span>
+        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">What Your Assistant Delivers</span>
         <h2 class="m-0 text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.04em] leading-[1.05]">
-          We know what we’re <em class="italic text-brand">good at</em>.
+          Every service. <em class="italic text-brand">One assistant.</em>
         </h2>
-        <p class="mt-4 text-[15px] leading-relaxed text-muted font-body">Four focused practices — strategy to ship — so growth is never left to chance.</p>
+        <p class="mt-4 text-[15px] leading-relaxed text-muted font-body">Four focused practices — all coordinated by your dedicated Virtual Assistant from strategy through launch.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 border-t border-line pt-10">
         <?php foreach ($practices as $i => $practice): ?>
@@ -164,17 +158,19 @@ ob_start();
   <section class="py-10 sm:py-14 bg-gradient-to-b from-[#f7faff] to-white border-t border-line">
     <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
       <div class="ab-reveal max-w-xl mb-10" data-ab-reveal>
-        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">How We Work</span>
+        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">How It Works</span>
         <h2 class="m-0 text-[clamp(2rem,5vw,3.4rem)] font-extrabold tracking-[-0.04em] leading-[1.05]">
-          From first conversation to <em class="italic text-brand">growth</em>.
+          From appointment to <em class="italic text-brand">delivery</em>.
         </h2>
+        <p class="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">Book on contact, your Virtual Assistant reaches out, we discuss services, then your assistant coordinates everything daily.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <?php foreach ($journey as $i => $step): ?>
         <article class="ab-reveal p-5 rounded-2xl border border-line bg-white hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg transition duration-300" data-ab-reveal data-ab-delay="<?= min($i + 1, 4) ?>">
           <span class="block text-[11px] font-extrabold tracking-[0.14em] text-brand mb-3"><?= ts_h($step["num"]) ?></span>
+          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-soft text-brand text-sm mb-2" aria-hidden="true"><i class="fas <?= ts_h($step["icon"] ?? "fa-check") ?>"></i></span>
           <h3 class="m-0 mb-2 text-base font-extrabold"><?= ts_h($step["title"]) ?></h3>
-          <p class="m-0 text-[13px] leading-snug text-muted font-body"><?= ts_h($step["desc"]) ?></p>
+          <p class="m-0 text-[13px] leading-snug text-muted font-body"><?= ts_h($step["copy"]) ?></p>
         </article>
         <?php endforeach; ?>
       </div>
@@ -344,7 +340,19 @@ ob_start();
 </script>
 <?php
 ts_layout("About Us", ob_get_clean(), [
-    "description" => "Learn about ScaleSphere — a digital solutions partner helping businesses turn ideas into products, experiences and measurable growth.",
+    "description" => "Learn about ScaleSphere — your dedicated Virtual Assistant for marketing, development, mobile apps and design.",
     "path" => "/about-us",
     "bodyClass" => "page-about",
+    "jsonld" => [
+        ts_webpage_jsonld(
+            "About Us",
+            "Learn about ScaleSphere — a digital solutions partner helping businesses turn ideas into products, experiences and measurable growth.",
+            "/about-us",
+            "AboutPage"
+        ),
+        ts_breadcrumb_jsonld([
+            ["name" => "Home", "path" => "/"],
+            ["name" => "About Us", "path" => "/about-us"],
+        ]),
+    ],
 ]);

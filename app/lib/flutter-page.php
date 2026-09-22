@@ -186,6 +186,9 @@ function ts_render_flutter_service_page(array $service): void
     [data-fl-reveal].is-in{ opacity:1; transform:none; }
     @media (prefers-reduced-motion:reduce){
       [data-fl-reveal]{ opacity:1; transform:none; transition:none; }
+      .fl-carousel-slide{ transition:none; }
+      .fl-carousel-progress.is-anim i{ animation:none; width:100%; }
+      .fl-carousel-thumb.is-on, .fl-carousel-btn:hover{ transform:none; }
     }
 
     .fl-glass{
@@ -435,23 +438,112 @@ function ts_render_flutter_service_page(array $service): void
     .fl-ex strong{ display:block; font-family:Outfit,Inter,sans-serif; font-size:1.05rem; font-weight:600; margin-bottom:.3rem; }
     .fl-ex p{ margin:0; font-size:13px; color:var(--body); line-height:1.45; }
 
-    /* Large numbered vertical list process */
-    .fl-steps{ display:grid; gap:0; max-width:680px; }
-    .fl-step{
-      display:grid; grid-template-columns:3.5rem 1fr; gap:.85rem; align-items:start;
-      padding:1.15rem 0; border-bottom:1px solid rgba(15,23,42,.08);
-      background:transparent; border-radius:0; border:none;
-      box-shadow:none; backdrop-filter:none; -webkit-backdrop-filter:none;
-      transition:padding-left .3s;
+    /* Process carousel — compact height */
+    .fl-carousel{
+      margin-top:.35rem;
+      display:grid; gap:1rem;
     }
-    .fl-step:hover{ padding-left:.5rem; }
-    .fl-step:last-child{ border-bottom:none; }
-    .fl-step b{
-      font-size:clamp(1.5rem,3vw,2rem); font-weight:700; color:rgba(16,185,129,.35);
-      font-family:Outfit,Inter,sans-serif; line-height:1; letter-spacing:-.03em;
+    @media (min-width:860px){
+      .fl-carousel{ grid-template-columns:1.15fr .85fr; gap:1.35rem; align-items:stretch; }
     }
-    .fl-step strong{ display:block; margin:0 0 .3rem; font-size:1.05rem; font-weight:600; font-family:Outfit,Inter,sans-serif; }
-    .fl-step p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--body); }
+    .fl-carousel-stage{
+      position:relative;
+      min-height:210px;
+      border-radius:20px;
+      border:1px solid rgba(16,185,129,.18);
+      background:linear-gradient(145deg, rgba(16,185,129,.08), rgba(255,254,250,.65) 55%);
+      overflow:hidden;
+      padding:1.35rem 1.25rem 1.2rem;
+    }
+    .fl-carousel-slide{
+      position:absolute; left:1.25rem; right:1.25rem; top:1.35rem; bottom:1.2rem;
+      opacity:0; visibility:hidden;
+      transform:translateX(36px);
+      transition:opacity .45s ease, transform .45s ease, visibility .45s;
+      display:flex; flex-direction:column; justify-content:center; gap:.55rem;
+      pointer-events:none;
+    }
+    .fl-carousel-slide.is-on{
+      opacity:1; visibility:visible; transform:translateX(0);
+      pointer-events:auto;
+    }
+    .fl-carousel-slide .num{
+      font-family:Outfit,Inter,sans-serif;
+      font-size:clamp(2.4rem,5vw,3.2rem); font-weight:700; line-height:1;
+      letter-spacing:-.04em; color:rgba(16,185,129,.28);
+    }
+    .fl-carousel-slide strong{
+      display:block; font-family:Outfit,Inter,sans-serif;
+      font-size:clamp(1.35rem,3vw,1.75rem); font-weight:700; letter-spacing:-.02em;
+      color:var(--ink);
+    }
+    .fl-carousel-slide p{
+      margin:0; max-width:34ch;
+      font-size:15px; line-height:1.55; color:var(--body);
+    }
+    .fl-carousel-progress{
+      position:absolute; left:0; right:0; bottom:0; height:3px;
+      background:rgba(16,185,129,.12);
+    }
+    .fl-carousel-progress i{
+      display:block; height:100%; width:0%;
+      background:linear-gradient(90deg, var(--blue), #34D399);
+      transition:width .05s linear;
+    }
+    .fl-carousel-progress.is-anim i{ transition:none; animation:fl-car-prog 4s linear forwards; }
+    @keyframes fl-car-prog{ from{ width:0%; } to{ width:100%; } }
+    .fl-carousel-side{
+      display:flex; flex-direction:column; gap:.65rem;
+    }
+    .fl-carousel-thumbs{
+      display:grid; gap:.45rem;
+      grid-template-columns:1fr 1fr;
+    }
+    @media (min-width:860px){
+      .fl-carousel-thumbs{ grid-template-columns:1fr; }
+    }
+    .fl-carousel-thumb{
+      text-align:left; cursor:pointer;
+      border:1px solid rgba(15,23,42,.08);
+      background:rgba(255,254,250,.7);
+      border-radius:14px; padding:.7rem .85rem;
+      display:flex; gap:.65rem; align-items:center;
+      transition:border-color .25s, background .25s, transform .25s, box-shadow .25s;
+    }
+    .fl-carousel-thumb b{
+      font-family:Outfit,Inter,sans-serif; font-size:12px; font-weight:700;
+      color:var(--blue); min-width:1.5rem;
+    }
+    .fl-carousel-thumb span{
+      font-size:13px; font-weight:600; color:var(--ink); line-height:1.25;
+    }
+    .fl-carousel-thumb.is-on{
+      border-color:rgba(16,185,129,.4);
+      background:rgba(16,185,129,.1);
+      box-shadow:0 8px 22px rgba(16,185,129,.12);
+      transform:translateX(2px);
+    }
+    .fl-carousel-nav{
+      display:flex; align-items:center; justify-content:space-between; gap:.75rem;
+      margin-top:.15rem;
+    }
+    .fl-carousel-dots{ display:flex; gap:.4rem; flex-wrap:wrap; }
+    .fl-carousel-dot{
+      width:8px; height:8px; border-radius:999px; border:0; padding:0; cursor:pointer;
+      background:rgba(16,185,129,.25); transition:width .25s, background .25s;
+    }
+    .fl-carousel-dot.is-on{ width:20px; background:var(--blue); }
+    .fl-carousel-btns{ display:flex; gap:.4rem; }
+    .fl-carousel-btn{
+      width:38px; height:38px; border-radius:50%;
+      border:1px solid rgba(15,23,42,.1); background:#fff; color:var(--ink);
+      display:grid; place-items:center; cursor:pointer; font-size:12px;
+      transition:border-color .2s, color .2s, background .2s, transform .2s;
+    }
+    .fl-carousel-btn:hover{
+      border-color:rgba(16,185,129,.4); color:var(--blue);
+      background:rgba(16,185,129,.08); transform:translateY(-1px);
+    }
 
     /* Featured strip packages */
     .fl-pkgs{
@@ -702,14 +794,38 @@ function ts_render_flutter_service_page(array $service): void
       <div class="fl-panel fl-glass">
         <div class="fl-kicker" data-fl-reveal><strong>06 — Process</strong><span>Discover → ship</span></div>
         <h2 data-fl-reveal>How a Flutter project <em>runs</em></h2>
-        <div class="fl-steps">
-          <?php foreach ($steps as $row): ?>
-          <div class="fl-step" data-fl-reveal>
-            <b><?= ts_h($row[0]) ?></b>
-            <strong><?= ts_h($row[1]) ?></strong>
-            <p><?= ts_h($row[2]) ?></p>
+        <div class="fl-carousel" data-fl-carousel data-fl-reveal>
+          <div class="fl-carousel-stage" aria-live="polite">
+            <?php foreach ($steps as $i => $row): ?>
+            <article class="fl-carousel-slide<?= $i === 0 ? " is-on" : "" ?>" data-fl-slide="<?= $i ?>">
+              <span class="num" aria-hidden="true"><?= ts_h($row[0]) ?></span>
+              <strong><?= ts_h($row[1]) ?></strong>
+              <p><?= ts_h($row[2]) ?></p>
+            </article>
+            <?php endforeach; ?>
+            <div class="fl-carousel-progress" aria-hidden="true"><i></i></div>
           </div>
-          <?php endforeach; ?>
+          <div class="fl-carousel-side">
+            <div class="fl-carousel-thumbs" role="tablist" aria-label="Process steps">
+              <?php foreach ($steps as $i => $row): ?>
+              <button type="button" class="fl-carousel-thumb<?= $i === 0 ? " is-on" : "" ?>" data-fl-goto="<?= $i ?>" aria-label="<?= ts_h($row[1]) ?>">
+                <b><?= ts_h($row[0]) ?></b>
+                <span><?= ts_h($row[1]) ?></span>
+              </button>
+              <?php endforeach; ?>
+            </div>
+            <div class="fl-carousel-nav">
+              <div class="fl-carousel-dots">
+                <?php foreach ($steps as $i => $row): ?>
+                <button type="button" class="fl-carousel-dot<?= $i === 0 ? " is-on" : "" ?>" data-fl-goto="<?= $i ?>" aria-label="Go to <?= ts_h($row[1]) ?>"></button>
+                <?php endforeach; ?>
+              </div>
+              <div class="fl-carousel-btns">
+                <button type="button" class="fl-carousel-btn" data-fl-prev aria-label="Previous step"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+                <button type="button" class="fl-carousel-btn" data-fl-next aria-label="Next step"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -876,6 +992,55 @@ function ts_render_flutter_service_page(array $service): void
       chips[c % chips.length].classList.add("is-on");
       c++;
     }, 1100);
+  }
+
+  const carousel = root.querySelector("[data-fl-carousel]");
+  if (carousel) {
+    const slides = [...carousel.querySelectorAll("[data-fl-slide]")];
+    const thumbs = [...carousel.querySelectorAll(".fl-carousel-thumb")];
+    const dots = [...carousel.querySelectorAll(".fl-carousel-dot")];
+    const progress = carousel.querySelector(".fl-carousel-progress");
+    const n = slides.length;
+    let i = 0;
+    let timer = null;
+    const restartProgress = () => {
+      if (!progress || reduce) return;
+      progress.classList.remove("is-anim");
+      void progress.offsetWidth;
+      progress.classList.add("is-anim");
+    };
+    const go = (idx) => {
+      i = ((idx % n) + n) % n;
+      slides.forEach((s, k) => s.classList.toggle("is-on", k === i));
+      thumbs.forEach((t, k) => t.classList.toggle("is-on", k === i));
+      dots.forEach((d, k) => d.classList.toggle("is-on", k === i));
+      restartProgress();
+    };
+    const next = () => go(i + 1);
+    const prev = () => go(i - 1);
+    const start = () => {
+      if (reduce || n < 2) return;
+      stop();
+      timer = window.setInterval(next, 4000);
+      restartProgress();
+    };
+    const stop = () => {
+      if (timer) window.clearInterval(timer);
+      timer = null;
+      if (progress) progress.classList.remove("is-anim");
+    };
+    carousel.querySelector("[data-fl-next]")?.addEventListener("click", () => { next(); start(); });
+    carousel.querySelector("[data-fl-prev]")?.addEventListener("click", () => { prev(); start(); });
+    carousel.querySelectorAll("[data-fl-goto]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        go(parseInt(btn.getAttribute("data-fl-goto") || "0", 10));
+        start();
+      });
+    });
+    carousel.addEventListener("mouseenter", stop);
+    carousel.addEventListener("mouseleave", start);
+    go(0);
+    start();
   }
 
   if (!window.gsap) return;

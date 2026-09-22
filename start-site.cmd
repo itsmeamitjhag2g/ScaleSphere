@@ -5,6 +5,8 @@ if not exist "%PHP%" (
   echo PHP not found. Install PHP 8.3 or use XAMPP, then reopen the terminal.
   exit /b 1
 )
+if "%HOST%"=="" set HOST=127.0.0.1
+if "%PORT%"=="" set PORT=3000
 cd /d "%~dp0"
-echo ScaleSphere: http://localhost:3000
-"%PHP%" -S localhost:3000 index.php
+echo ScaleSphere: http://%HOST%:%PORT%
+"%PHP%" -S %HOST%:%PORT% index.php

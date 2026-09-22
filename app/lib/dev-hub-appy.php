@@ -22,8 +22,6 @@ function ts_render_development_hub(): void
         "Website Development" => ["We make it load", "Fast, secure sites and platforms ready to grow with demand."],
         "Software Development" => ["We make it scale", "Custom apps with clean architecture — built to evolve, not rewrite."],
         "CRM Software" => ["We make it flow", "Pipelines, automation and reporting your sales team will actually use."],
-        "SharePoint Integration" => ["We make it connected", "Document workflows and permissions that keep teams in sync."],
-        "NetSuite Integration" => ["We make it operate", "ERP connectors and process automation without the chaos."],
         "E-Commerce Platforms" => ["We make it convert", "Stores, payments and inventory wired for revenue — not vanity."],
     ];
 
@@ -31,8 +29,6 @@ function ts_render_development_hub(): void
         "Website Development" => "/images/dev/website-development.jpg",
         "Software Development" => "/images/dev/software-development.jpg",
         "CRM Software" => "/images/dev/crm.jpg",
-        "SharePoint Integration" => "/images/dev/sharepoint.jpg",
-        "NetSuite Integration" => "/images/dev/netsuite.jpg",
         "E-Commerce Platforms" => "/images/dev/ecommerce.jpg",
     ];
     $pool = array_values($svcImages);
@@ -55,20 +51,20 @@ function ts_render_development_hub(): void
             "thumb" => $svcImages["CRM Software"],
         ],
         [
+            "label" => "CRM Software",
+            "href" => ts_service_href("CRM Software"),
+            "blurb" => "Pipelines, automation and reporting your sales team will actually use.",
+            "meta" => "CRM & sales",
+            "img" => $svcImages["CRM Software"],
+            "thumb" => $svcImages["Website Development"],
+        ],
+        [
             "label" => "E-Commerce Platforms",
             "href" => ts_service_href("E-Commerce Platforms"),
             "blurb" => "Commerce stacks that checkout smoothly and grow with catalog demand.",
             "meta" => "Commerce",
             "img" => $svcImages["E-Commerce Platforms"],
-            "thumb" => $svcImages["NetSuite Integration"],
-        ],
-        [
-            "label" => "NetSuite Integration",
-            "href" => ts_service_href("NetSuite Integration"),
-            "blurb" => "ERP sync and SuiteScript so orders, inventory and finance stay reconciled.",
-            "meta" => "ERP & sync",
-            "img" => $svcImages["NetSuite Integration"],
-            "thumb" => $svcImages["E-Commerce Platforms"],
+            "thumb" => $svcImages["Software Development"],
         ],
     ];
 
@@ -163,6 +159,24 @@ function ts_render_development_hub(): void
       text-decoration-color:var(--blue);
       text-underline-offset:.12em;
       text-decoration-thickness:.055em;
+    }
+    /* The desktop word row is intentionally unbroken. On narrow phones that
+       made the first/last word disappear behind the clipped hero edge. */
+    @media (max-width:520px){
+      .ap-hero{ padding-top:2.5rem; padding-bottom:2.25rem; }
+      .ap-hero h1{ font-size:clamp(1.45rem,8.6vw,1.9rem); line-height:1.04; }
+      .ap-hero h1 .super{ margin-bottom:.55em; }
+      .ap-hero-lines{ gap:.22em; }
+      .ap-hero-line{
+        flex-wrap:wrap;
+        column-gap:.26em;
+        row-gap:.08em;
+        white-space:normal;
+        overflow:visible;
+      }
+      .ap-hero-foot{ margin-top:1.15rem; }
+      .ap-actions{ width:100%; display:grid; grid-template-columns:1fr; }
+      .ap-actions .ap-btn{ width:100%; justify-content:center; }
     }
     .ap-plus{
       display:inline-grid;
@@ -602,7 +616,7 @@ function ts_render_development_hub(): void
         </span>
       </h1>
       <div class="ap-hero-foot" data-ap-hero-foot>
-        <p><?= ts_h($hub["lead"]) ?></p>
+        <p><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></p>
         <div class="ap-actions">
           <a class="ap-btn" href="/contact">Let&rsquo;s build something that lasts</a>
           <a class="ap-textlink" href="#ap-services">How we do it</a>
@@ -841,7 +855,7 @@ function ts_render_development_hub(): void
               trigger: row,
               start: "top 88%",
               end: "top 55%",
-              scrub: 0.55,
+              scrub: window.__ssScrub ?? 0.55,
               onUpdate: (self) => {
                 if (self.progress > 0.7) el.classList.add("is-in");
               },

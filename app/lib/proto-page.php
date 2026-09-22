@@ -624,39 +624,38 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-pr .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:42rem; line-height:1.55;
     }
-    .yl-pr .yl-pkg-stack{
-      display:flex; flex-direction:column; gap:.85rem;
-      max-width:720px;
+    .yl-pr .yl-pkg-grid{
+      display:grid; gap:1rem;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:720px){
+      .yl-pr .yl-pkg-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+    }
+    @media (min-width:980px){
+      .yl-pr .yl-pkg-grid{ grid-template-columns:repeat(3, minmax(0, 1fr)); gap:1.15rem; }
     }
     .yl-pr .yl-pkg{
       background:#fff;
-      border:2px solid var(--line);
-      border-radius:1.1rem;
-      padding:1.25rem 1.25rem 1.25rem 3rem;
-      box-shadow:none;
-      display:flex; flex-direction:column; gap:.65rem;
+      border:1px solid var(--line);
+      border-radius:1.15rem;
+      padding:1.3rem 1.25rem;
+      box-shadow:0 12px 32px rgba(15,23,42,.06);
+      display:flex; flex-direction:column; gap:.7rem;
       position:relative;
-      transition:border-color .2s ease, box-shadow .2s ease;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      height:100%;
     }
-    .yl-pr .yl-pkg::before{
-      content:"";
-      position:absolute;
-      left:1.05rem; top:1.4rem;
-      width:1rem; height:1rem;
-      border-radius:50%;
-      border:2px solid rgba(124,58,237,.35);
-      background:#fff;
+    .yl-pr .yl-pkg:hover{
+      transform:translateY(-3px);
+      box-shadow:0 18px 40px rgba(124,58,237,.12);
     }
     .yl-pr .yl-pkg.is-hot{
-      border-color:var(--blue);
-      box-shadow:0 0 0 3px rgba(124,58,237,.12);
-      outline:none;
-    }
-    .yl-pr .yl-pkg.is-hot::before{
-      border-color:var(--blue);
-      background:radial-gradient(circle at center, var(--blue) 45%, #fff 48%);
+      border-color:rgba(124,58,237,.55);
+      box-shadow:0 16px 40px rgba(124,58,237,.14);
+      outline:2px solid var(--blue);
+      outline-offset:1px;
     }
     .yl-pr .yl-pkg .tag{
       font-family:"IBM Plex Mono",monospace;
@@ -666,7 +665,7 @@ function ts_render_proto_service_page(array $service): void
       margin:0; font-family:Montserrat,sans-serif;
       font-size:1.15rem; font-weight:800;
     }
-    .yl-pr .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.4rem; }
+    .yl-pr .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.4rem; flex:1; }
     .yl-pr .yl-pkg li{
       font-size:13.5px; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
@@ -682,28 +681,87 @@ function ts_render_proto_service_page(array $service): void
       background:var(--paper);
       border-top:1px solid var(--line);
     }
-    .yl-pr .yl-faq h2{
+    .yl-pr .yl-faq-split{
+      display:grid; gap:1.75rem;
+      align-items:start;
+    }
+    @media (min-width:900px){
+      .yl-pr .yl-faq-split{
+        grid-template-columns:minmax(220px, .75fr) minmax(0, 1.35fr);
+        gap:2.25rem;
+      }
+    }
+    .yl-pr .yl-faq-intro h2{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-pr .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
-    .yl-pr .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
+    .yl-pr .yl-faq-intro .lead{
+      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+    }
+    .yl-pr .yl-faq-intro .hint{
+      display:none;
+      padding:1rem 1.1rem;
+      border-radius:1rem;
+      border:1px dashed rgba(124,58,237,.35);
+      background:rgba(124,58,237,.05);
+      font-size:13px; color:var(--muted); line-height:1.5;
+    }
+    @media (min-width:900px){
+      .yl-pr .yl-faq-intro .hint{ display:block; }
+      .yl-pr .yl-faq-intro{ position:sticky; top:5.5rem; }
+    }
+    .yl-pr .yl-faq-intro .hint strong{
+      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+    }
+    .yl-pr .yl-faq-list{
+      display:grid; gap:.75rem;
+      max-width:none; width:100%;
+      align-content:start;
+    }
     .yl-pr details{
       background:#fff; border:1px solid var(--line);
       border-radius:1rem; overflow:hidden;
+      transition:box-shadow .3s ease, border-color .3s ease;
+      align-self:start;
+    }
+    .yl-pr details[open]{
+      box-shadow:0 14px 34px rgba(124,58,237,.12);
+      border-color:rgba(124,58,237,.35);
     }
     .yl-pr summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
       font-weight:700; font-size:14.5px;
-      display:flex; justify-content:space-between; gap:1rem;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      color:var(--ink);
     }
     .yl-pr summary::-webkit-details-marker{ display:none; }
-    .yl-pr summary i{ color:var(--muted); transition:transform .2s, color .2s; }
-    .yl-pr details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
+    .yl-pr details[open] summary{ color:var(--blue); }
+    .yl-pr .yl-faq-toggle{
+      flex:0 0 auto;
+      width:28px; height:28px; border-radius:999px;
+      background:var(--soft); border:1px solid var(--line);
+      position:relative;
+      transition:background .25s ease, border-color .25s ease;
+    }
+    .yl-pr .yl-faq-toggle::before,
+    .yl-pr .yl-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--muted);
+      transition:transform .3s ease, background .25s ease, opacity .25s ease;
+    }
+    .yl-pr .yl-faq-toggle::before{ width:11px; height:2px; transform:translate(-50%,-50%); }
+    .yl-pr .yl-faq-toggle::after{ width:2px; height:11px; transform:translate(-50%,-50%); }
+    .yl-pr details[open] .yl-faq-toggle{
+      background:var(--blue); border-color:var(--deep);
+    }
+    .yl-pr details[open] .yl-faq-toggle::before{ background:#fff; }
+    .yl-pr details[open] .yl-faq-toggle::after{
+      background:#fff; opacity:0; transform:translate(-50%,-50%) scaleY(0);
+    }
     .yl-pr details p{
-      margin:0; padding:0 1.15rem 1.1rem;
+      margin:0; padding:0 1.15rem 1.15rem;
       font-size:14px; line-height:1.65; color:var(--muted);
     }
 
@@ -939,7 +997,7 @@ function ts_render_proto_service_page(array $service): void
       <span class="yl-sec-label">Engagement options</span>
       <h2 class="yl-reveal">Pick the depth you need</h2>
       <p class="lead yl-reveal d1">Tell us on the contact form — pitch demo, usability-ready prototype or advanced Framer build.</p>
-      <div class="yl-pkg-stack">
+      <div class="yl-pkg-grid">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
         ?>
@@ -960,13 +1018,19 @@ function ts_render_proto_service_page(array $service): void
   </section>
 
   <section class="yl-faq">
-    <div class="yl-wrap">
-      <h2 class="yl-reveal">Questions before you enquire</h2>
-      <p class="lead yl-reveal d1">Straight answers so you can decide if we are the right fit.</p>
-      <div class="yl-faq-list">
-        <?php foreach ($faqs as $faq): ?>
-        <details class="yl-reveal">
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+    <div class="yl-wrap yl-faq-split">
+      <div class="yl-faq-intro yl-reveal">
+        <h2>Questions before you enquire</h2>
+        <p class="lead">Straight answers so you can decide if we are the right fit.</p>
+        <div class="hint">
+          <strong>Need a demo for Friday?</strong>
+          Send flows or wires on contact — we’ll suggest fidelity, tool and a realistic turnaround.
+        </div>
+      </div>
+      <div class="yl-faq-list" data-pr-faq>
+        <?php foreach ($faqs as $i => $faq): ?>
+        <details class="yl-reveal"<?= $i === 0 ? ' open' : '' ?>>
+          <summary><?= ts_h($faq[0]) ?> <span class="yl-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
@@ -1022,6 +1086,21 @@ function ts_render_proto_service_page(array $service): void
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
   nodes.forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script>
+(function () {
+  var faq = document.querySelector("[data-pr-faq]");
+  if (!faq) return;
+  var items = Array.prototype.slice.call(faq.querySelectorAll("details"));
+  items.forEach(function (item) {
+    item.addEventListener("toggle", function () {
+      if (!item.open) return;
+      items.forEach(function (other) {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
 })();
 </script>
 

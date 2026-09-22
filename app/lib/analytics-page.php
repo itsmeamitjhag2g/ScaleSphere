@@ -40,10 +40,30 @@ function ts_render_analytics_service_page(array $service): void
     ];
 
     $pyramid = [
-        ["Outcomes", "Revenue, qualified leads, purchases", "100%"],
-        ["Behavior", "Funnel steps, intent signals", "85%"],
-        ["Acquisition", "Channel / campaign / landing value", "70%"],
-        ["Data quality", "Event QA, consent, UTM hygiene", "55%"],
+        [
+            "Outcomes",
+            "Revenue, qualified leads, purchases",
+            "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
+            "Board-level numbers: revenue, pipeline and purchases — not vanity pageviews.",
+        ],
+        [
+            "Behavior",
+            "Funnel steps, intent signals",
+            "/images/stock/photo-1551288049-bebda4e38f71.jpg",
+            "How people move: product views, form starts, demo requests and drop-off points.",
+        ],
+        [
+            "Acquisition",
+            "Channel / campaign / landing value",
+            "/images/stock/photo-1557838923-2985c318be48.jpg",
+            "Which channel and campaign actually earned the visit — with clean UTMs.",
+        ],
+        [
+            "Data quality",
+            "Event QA, consent, UTM hygiene",
+            "/images/stock/photo-1555066931-4365d14bab8c.jpg",
+            "Trusted events first: DebugView, consent and no double-counting before dashboards.",
+        ],
     ];
 
     $scope = [
@@ -56,10 +76,34 @@ function ts_render_analytics_service_page(array $service): void
     ];
 
     $funnel = [
-        ["Landing", "100%", "Visit"],
-        ["Product", "62%", "Browse"],
-        ["Cart", "28%", "Intent"],
-        ["Purchase", "9%", "Convert"],
+        [
+            "Landing", "100%", "Visit",
+            "/images/stock/photo-1460925895917-afdab827c52f.jpg",
+            "Paid + organic landings spiked; bounce held at 48%.",
+            "Hero CTA competed with nav; mobile LCP lagged on promo creatives.",
+            "Tighten above-the-fold message match; defer non-critical scripts.",
+        ],
+        [
+            "Product", "62%", "Browse",
+            "/images/ec/headphones.jpg",
+            "PDP views strong; add-to-cart lagged on 2 top SKUs.",
+            "Size/variant friction and slow image gallery on mobile.",
+            "Surface stock + reviews earlier; compress gallery assets.",
+        ],
+        [
+            "Cart", "28%", "Intent",
+            "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
+            "Cart starts healthy; checkout abandon rose mid-week.",
+            "Unexpected shipping estimate and guest checkout buried.",
+            "Show shipping early; one-tap guest path above the fold.",
+        ],
+        [
+            "Purchase", "9%", "Convert",
+            "/images/stock/photo-1600880292203-757bb62b4baf.jpg",
+            "Purchase rate recovered after payment QA — trust restored.",
+            "Double purchase event inflated ROAS until Tuesday fix.",
+            "Lock single purchase event; re-baseline CPL/ROAS from that day.",
+        ],
     ];
 
     $steps = [
@@ -333,41 +377,53 @@ function ts_render_analytics_service_page(array $service): void
     }
     .an-kpi-stage{
       position:relative;
-      min-height:240px;
-      border-radius:22px;
+      min-height:320px;
+      border-radius:20px;
       border:1px solid var(--an-line);
-      background:
-        radial-gradient(ellipse 70% 60% at 10% 0%, rgba(28,79,214,.1), transparent 60%),
-        #fff;
-      box-shadow:0 18px 44px rgba(15,23,42,.07);
+      background:#0F172A;
+      box-shadow:0 18px 44px rgba(15,23,42,.1);
       overflow:hidden;
-      padding:1.5rem 1.4rem 1.35rem;
     }
     .an-kpi-slide{
-      position:absolute; left:1.4rem; right:1.4rem; top:1.5rem; bottom:1.35rem;
+      position:absolute; inset:0;
       opacity:0; visibility:hidden;
-      transform:translateX(32px);
+      transform:translateY(14px);
       transition:opacity .45s ease, transform .45s ease, visibility .45s;
-      display:flex; flex-direction:column; justify-content:center; gap:.65rem;
-      pointer-events:none;
+      display:flex; flex-direction:column; pointer-events:none;
     }
     .an-kpi-slide.is-active{
       opacity:1; visibility:visible;
-      transform:translateX(0);
+      transform:none;
       pointer-events:auto;
+    }
+    .an-kpi-slide-media{
+      position:relative; flex:1; min-height:160px; overflow:hidden;
+    }
+    .an-kpi-slide-media img{
+      display:block; width:100%; height:100%; min-height:160px; object-fit:cover;
+    }
+    .an-kpi-slide-media::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(15,23,42,.88) 0%, rgba(15,23,42,.25) 55%, transparent 100%);
+    }
+    .an-kpi-slide-body{
+      position:relative; z-index:1;
+      margin-top:-4.5rem; padding:0 1.2rem 1.2rem;
+      color:#fff;
     }
     .an-kpi-slide .lvl{
       display:inline-flex; align-items:center; gap:.4rem;
       width:fit-content;
-      font-size:11px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
-      color:var(--an-pink); background:rgba(28,79,214,.08);
-      padding:.35rem .7rem; border-radius:999px;
+      font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+      color:#fff; background:rgba(28,79,214,.85);
+      padding:.35rem .7rem; border-radius:999px; margin-bottom:.55rem;
     }
     .an-kpi-slide h3{
-      margin:0; font-family:Montserrat,system-ui,sans-serif;
-      font-size:clamp(1.4rem,3vw,1.9rem); font-weight:800; letter-spacing:-.03em; line-height:1.15;
+      margin:0 0 .35rem; font-family:Montserrat,system-ui,sans-serif;
+      font-size:clamp(1.35rem,3vw,1.75rem); font-weight:800; letter-spacing:-.03em; line-height:1.15;
+      color:#fff;
     }
-    .an-kpi-slide p{ margin:0; color:var(--an-body); font-size:15px; line-height:1.55; max-width:36ch; }
+    .an-kpi-slide p{ margin:0; color:rgba(255,255,255,.88); font-size:14px; line-height:1.5; max-width:40ch; }
     .an-kpi-nav{
       display:flex; align-items:center; justify-content:space-between; gap:1rem;
       margin-top:1.1rem;
@@ -391,52 +447,75 @@ function ts_render_analytics_service_page(array $service): void
     }
 
     .an-pyramid{
-      display:flex; flex-direction:column; align-items:center; gap:.4rem;
-      width:100%; max-width:420px; margin:0 auto;
-      padding:.5rem 0;
+      display:flex; flex-direction:column; align-items:center; gap:.45rem;
+      width:100%; max-width:440px; margin:0 auto;
+      padding:.25rem 0;
     }
     .an-pyr{
       position:relative; margin:0 auto; width:var(--pyr-w, 100%);
-      height:58px;
+      height:78px;
       display:grid; place-items:center;
       color:#fff; text-align:center;
-      cursor:pointer; border:0; padding:0 .75rem;
+      cursor:pointer; border:0; padding:0;
       clip-path:polygon(8% 0, 92% 0, 100% 100%, 0 100%);
-      background:linear-gradient(135deg, var(--an-pink), #5B87F0);
-      box-shadow:0 10px 24px rgba(28,79,214,.18);
+      overflow:hidden;
+      box-shadow:0 10px 24px rgba(15,23,42,.16);
       opacity:0; transform:translateY(16px) scale(.96);
-      transition:opacity .45s ease, transform .4s ease, filter .3s, box-shadow .3s;
+      transition:opacity .45s ease, transform .4s ease, box-shadow .3s, filter .3s;
+    }
+    .an-pyr img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+      filter:saturate(1.05);
+    }
+    .an-pyr::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(15,23,42,.35), rgba(15,23,42,.72));
+    }
+    .an-pyr-label{
+      position:relative; z-index:1; padding:0 .85rem;
     }
     .an-pyramid.is-in .an-pyr{ opacity:1; transform:none; }
     .an-pyr:nth-child(1){ --pyr-w:48%; transition-delay:.05s; clip-path:polygon(12% 0, 88% 0, 100% 100%, 0 100%); }
-    .an-pyr:nth-child(2){ --pyr-w:66%; transition-delay:.12s; background:linear-gradient(135deg, #2F63E0, #6B8FF0); }
-    .an-pyr:nth-child(3){ --pyr-w:82%; transition-delay:.19s; background:linear-gradient(135deg, #4578E8, #8AA8F4); }
+    .an-pyr:nth-child(2){ --pyr-w:66%; transition-delay:.12s; }
+    .an-pyr:nth-child(3){ --pyr-w:82%; transition-delay:.19s; }
     .an-pyr:nth-child(4){
       --pyr-w:100%; transition-delay:.26s;
-      background:linear-gradient(135deg, #6B8FF0, #C5D4FA);
-      color:var(--an-ink);
       clip-path:polygon(4% 0, 96% 0, 100% 100%, 0 100%);
     }
-    .an-pyr strong{ display:block; font-size:13px; font-weight:800; line-height:1.15; }
-    .an-pyr span{ display:block; font-size:10px; opacity:.9; margin-top:.15rem; line-height:1.25; max-width:28ch; }
+    .an-pyr strong{ display:block; font-size:13px; font-weight:800; line-height:1.15; text-shadow:0 1px 8px rgba(0,0,0,.35); }
+    .an-pyr span{ display:block; font-size:10px; opacity:.92; margin-top:.15rem; line-height:1.25; max-width:28ch; text-shadow:0 1px 6px rgba(0,0,0,.3); }
     .an-pyr.is-on{
-      filter:brightness(1.08);
-      box-shadow:0 0 0 3px rgba(28,79,214,.25), 0 14px 32px rgba(28,79,214,.3);
+      box-shadow:0 0 0 3px rgba(28,79,214,.45), 0 14px 32px rgba(15,23,42,.28);
       transform:translateY(-2px) scale(1.02);
       z-index:2;
+    }
+    .an-pyr.is-on::after{
+      background:linear-gradient(180deg, rgba(28,79,214,.25), rgba(15,23,42,.55));
     }
     .an-pyramid.is-in .an-pyr.is-on{ transform:translateY(-2px) scale(1.02); }
     .an-pyr:focus-visible{ outline:2px solid var(--an-pink); outline-offset:3px; }
 
     .an-split{ display:grid; gap:1.75rem; }
-    @media (min-width:900px){ .an-split{ grid-template-columns:1fr 1.05fr; gap:2.5rem; align-items:center; } }
+    @media (min-width:900px){ .an-split{ grid-template-columns:1fr 1.05fr; gap:2.5rem; align-items:start; } }
 
-    /* True funnel stages */
-    .an-funnel{ display:grid; gap:.7rem; }
+    /* True funnel stages — image-backed */
+    .an-funnel{ display:grid; gap:.75rem; }
     .an-funnel-row{
       position:relative;
-      display:grid; grid-template-columns:1fr; gap:.35rem;
-      padding:0;
+      display:grid; gap:.35rem;
+      cursor:pointer;
+      width:100%;
+      margin:0; padding:0;
+      border:0; background:transparent;
+      text-align:left;
+      font:inherit; color:inherit;
+      appearance:none;
+      -webkit-appearance:none;
+    }
+    .an-funnel-row:focus-visible{
+      outline:2px solid var(--an-pink);
+      outline-offset:4px;
+      border-radius:8px;
     }
     .an-funnel-meta{
       display:flex; justify-content:space-between; align-items:baseline; gap:.75rem;
@@ -449,52 +528,67 @@ function ts_render_analytics_service_page(array $service): void
     }
     .an-funnel-stage{
       position:relative; margin:0 auto;
-      height:52px; border-radius:14px;
-      background:linear-gradient(135deg, var(--an-pink), #5B87F0);
+      height:64px; border-radius:14px; overflow:hidden;
       color:#fff;
       display:flex; align-items:center; justify-content:center;
-      font-size:14px; font-weight:800;
-      box-shadow:0 10px 24px rgba(28,79,214,.22);
+      font-size:15px; font-weight:800;
+      box-shadow:0 10px 24px rgba(15,23,42,.14);
       clip-path:polygon(2% 0, 98% 0, 94% 100%, 6% 100%);
       transform:scaleX(.96);
       opacity:0;
-      transition:opacity .45s ease, transform .45s ease;
+      border:0; padding:0; width:100%;
+      transition:opacity .45s ease, transform .45s ease, box-shadow .25s ease;
+    }
+    .an-funnel-stage img{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    }
+    .an-funnel-stage::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(90deg, rgba(15,23,42,.55), rgba(28,79,214,.35));
+    }
+    .an-funnel-stage span{
+      position:relative; z-index:1; text-shadow:0 1px 8px rgba(0,0,0,.35);
     }
     .an-funnel.is-in .an-funnel-stage{ opacity:1; transform:scaleX(1); }
     .an-funnel-row:nth-child(1) .an-funnel-stage{ width:100%; transition-delay:.05s; }
-    .an-funnel-row:nth-child(2) .an-funnel-stage{
-      width:82%; transition-delay:.15s;
-      background:linear-gradient(135deg, #2F63E0, #7A9CF2);
+    .an-funnel-row:nth-child(2) .an-funnel-stage{ width:82%; transition-delay:.12s; }
+    .an-funnel-row:nth-child(3) .an-funnel-stage{ width:64%; transition-delay:.19s; }
+    .an-funnel-row:nth-child(4) .an-funnel-stage{ width:46%; transition-delay:.26s; }
+    .an-funnel-row.is-on .an-funnel-stage{
+      box-shadow:0 0 0 3px rgba(28,79,214,.35), 0 14px 30px rgba(15,23,42,.2);
+      transform:scaleX(1.02);
     }
-    .an-funnel-row:nth-child(3) .an-funnel-stage{
-      width:64%; transition-delay:.25s;
-      background:linear-gradient(135deg, #4A7AE8, #9BB4F5);
-    }
-    .an-funnel-row:nth-child(4) .an-funnel-stage{
-      width:46%; transition-delay:.35s;
-      background:linear-gradient(135deg, #6B8FF0, #C5D4FA);
-      color:var(--an-ink);
-      box-shadow:0 10px 24px rgba(28,79,214,.14);
-    }
+    .an-funnel.is-in .an-funnel-row.is-on .an-funnel-stage{ transform:scaleX(1.02); }
+    .an-funnel-row.is-on .an-funnel-meta b{ color:var(--an-pink); }
 
     .an-insight{
-      padding:1.35rem 1.35rem; border-radius:18px;
+      padding:0; border-radius:18px; overflow:hidden;
       border:1px solid var(--an-line); background:#fff;
       box-shadow:0 14px 36px rgba(15,23,42,.06);
       height:fit-content;
     }
-    .an-insight h3{ margin:0 0 1rem; font-size:1.1rem; font-weight:800; }
+    .an-insight-media{
+      position:relative; height:160px; overflow:hidden; background:#0F172A;
+    }
+    .an-insight-media img{
+      display:block; width:100%; height:100%; object-fit:cover;
+      transition:opacity .35s ease, transform .45s ease;
+    }
+    .an-insight-media::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(15,23,42,.55), transparent 60%);
+    }
+    .an-insight-body{ padding:1.15rem 1.2rem 1.25rem; }
+    .an-insight h3{ margin:0 0 .35rem; font-size:1.05rem; font-weight:800; }
+    .an-insight-stage{
+      margin:0 0 .85rem; font-size:11px; font-weight:800; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--an-pink);
+    }
     .an-insight-line{
-      display:grid; grid-template-columns:72px 1fr; gap:.75rem; padding:.75rem 0;
+      display:grid; grid-template-columns:72px 1fr; gap:.75rem; padding:.7rem 0;
       border-bottom:1px solid var(--an-line); font-size:13.5px; line-height:1.5;
-      opacity:0; transform:translateX(8px);
-      transition:opacity .4s ease, transform .4s ease;
     }
     .an-insight-line:last-child{ border-bottom:0; padding-bottom:0; }
-    .an-insight.is-in .an-insight-line{ opacity:1; transform:none; }
-    .an-insight.is-in .an-insight-line:nth-child(2){ transition-delay:.1s; }
-    .an-insight.is-in .an-insight-line:nth-child(3){ transition-delay:.2s; }
-    .an-insight.is-in .an-insight-line:nth-child(4){ transition-delay:.3s; }
     .an-insight-line b{
       font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--an-pink);
     }
@@ -767,9 +861,14 @@ function ts_render_analytics_service_page(array $service): void
           <div class="an-kpi-stage" aria-live="polite">
             <?php foreach ($pyramid as $i => $p): ?>
             <article class="an-kpi-slide<?= $i === 0 ? " is-active" : "" ?>" data-an-kpi-slide="<?= $i ?>">
-              <span class="lvl">Level <?= str_pad((string)($i + 1), 2, "0", STR_PAD_LEFT) ?></span>
-              <h3><?= ts_h($p[0]) ?></h3>
-              <p><?= ts_h($p[1]) ?></p>
+              <div class="an-kpi-slide-media">
+                <img src="<?= ts_h($p[2]) ?>" alt="" loading="<?= $i === 0 ? "eager" : "lazy" ?>" decoding="async" width="640" height="400">
+              </div>
+              <div class="an-kpi-slide-body">
+                <span class="lvl">Level <?= str_pad((string)($i + 1), 2, "0", STR_PAD_LEFT) ?></span>
+                <h3><?= ts_h($p[0]) ?></h3>
+                <p><?= ts_h($p[3]) ?></p>
+              </div>
             </article>
             <?php endforeach; ?>
           </div>
@@ -787,9 +886,12 @@ function ts_render_analytics_service_page(array $service): void
         </div>
         <div class="an-pyramid" data-an-pyramid aria-hidden="true">
           <?php foreach ($pyramid as $i => $p): ?>
-          <button type="button" class="an-pyr<?= $i === 0 ? " is-on" : "" ?>" data-an-kpi-goto="<?= $i ?>">
-            <strong><?= ts_h($p[0]) ?></strong>
-            <span><?= ts_h($p[1]) ?></span>
+          <button type="button" class="an-pyr<?= $i === 0 ? " is-on" : "" ?>" data-an-kpi-goto="<?= $i ?>" aria-label="<?= ts_h($p[0]) ?>">
+            <img src="<?= ts_h($p[2]) ?>" alt="" loading="lazy" decoding="async" width="480" height="120">
+            <span class="an-pyr-label">
+              <strong><?= ts_h($p[0]) ?></strong>
+              <span><?= ts_h($p[1]) ?></span>
+            </span>
           </button>
           <?php endforeach; ?>
         </div>
@@ -824,22 +926,31 @@ function ts_render_analytics_service_page(array $service): void
         <h2>See where money dies</h2>
         <p class="an-lead" style="margin-bottom:1rem">Landing → product → cart → purchase. Drop-offs become obvious — then fixable.</p>
         <div class="an-funnel" data-an-funnel>
-          <?php foreach ($funnel as $f): ?>
-          <div class="an-funnel-row">
+          <?php foreach ($funnel as $i => $f): ?>
+          <button type="button" class="an-funnel-row<?= $i === 0 ? " is-on" : "" ?>" data-an-funnel-goto="<?= $i ?>" aria-label="<?= ts_h($f[0]) ?> stage">
             <div class="an-funnel-meta">
               <b><?= ts_h($f[0]) ?></b>
               <em><?= ts_h($f[2]) ?></em>
             </div>
-            <div class="an-funnel-stage"><?= ts_h($f[1]) ?></div>
-          </div>
+            <div class="an-funnel-stage">
+              <img src="<?= ts_h($f[3]) ?>" alt="" loading="<?= $i === 0 ? "eager" : "lazy" ?>" decoding="async" width="640" height="120">
+              <span><?= ts_h($f[1]) ?></span>
+            </div>
+          </button>
           <?php endforeach; ?>
         </div>
       </div>
-      <div class="an-insight" data-an-insight data-an-reveal>
-        <h3>Insight sample — not chart spam</h3>
-        <div class="an-insight-line"><b>What</b><span>Paid CPL rose 18% week-over-week; organic held flat.</span></div>
-        <div class="an-insight-line"><b>Why</b><span>Brand search CPC spiked; form event was double-counting until Tuesday QA.</span></div>
-        <div class="an-insight-line"><b>Next</b><span>Pause waste queries; keep fixed conversion as source of truth for CPL.</span></div>
+      <div class="an-insight" data-an-insight data-an-funnel-insight data-an-reveal>
+        <div class="an-insight-media">
+          <img src="<?= ts_h($funnel[0][3]) ?>" alt="" data-an-funnel-img width="640" height="320" decoding="async">
+        </div>
+        <div class="an-insight-body">
+          <p class="an-insight-stage" data-an-funnel-label><?= ts_h($funnel[0][0]) ?> · <?= ts_h($funnel[0][2]) ?></p>
+          <h3>Insight sample — not chart spam</h3>
+          <div class="an-insight-line"><b>What</b><span data-an-funnel-what><?= ts_h($funnel[0][4]) ?></span></div>
+          <div class="an-insight-line"><b>Why</b><span data-an-funnel-why><?= ts_h($funnel[0][5]) ?></span></div>
+          <div class="an-insight-line"><b>Next</b><span data-an-funnel-next><?= ts_h($funnel[0][6]) ?></span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1091,6 +1202,66 @@ function ts_render_analytics_service_page(array $service): void
     deck.addEventListener("mouseleave", start);
     go(0);
     start();
+  }
+
+  /* Ecom funnel — stage ↔ insight card */
+  const funnel = root.querySelector("[data-an-funnel]");
+  const insight = root.querySelector("[data-an-funnel-insight]");
+  if (funnel && insight) {
+    const rows = [...funnel.querySelectorAll("[data-an-funnel-goto]")];
+    const stages = <?= json_encode(array_map(static function ($f) {
+        return [
+            "label" => $f[0] . " · " . $f[2],
+            "img" => $f[3],
+            "what" => $f[4],
+            "why" => $f[5],
+            "next" => $f[6],
+        ];
+    }, $funnel), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+    const imgEl = insight.querySelector("[data-an-funnel-img]");
+    const labelEl = insight.querySelector("[data-an-funnel-label]");
+    const whatEl = insight.querySelector("[data-an-funnel-what]");
+    const whyEl = insight.querySelector("[data-an-funnel-why]");
+    const nextEl = insight.querySelector("[data-an-funnel-next]");
+    let fi = 0;
+    let fTimer = null;
+    const goFunnel = (idx) => {
+      if (!stages.length) return;
+      fi = ((idx % stages.length) + stages.length) % stages.length;
+      const s = stages[fi];
+      rows.forEach((r, k) => r.classList.toggle("is-on", k === fi));
+      if (imgEl && s.img) {
+        imgEl.style.opacity = "0";
+        imgEl.style.transform = "scale(1.04)";
+        window.setTimeout(() => {
+          imgEl.src = s.img;
+          imgEl.style.opacity = "1";
+          imgEl.style.transform = "scale(1)";
+        }, reduce ? 0 : 160);
+      }
+      if (labelEl) labelEl.textContent = s.label;
+      if (whatEl) whatEl.textContent = s.what;
+      if (whyEl) whyEl.textContent = s.why;
+      if (nextEl) nextEl.textContent = s.next;
+    };
+    const startFunnel = () => {
+      if (reduce || stages.length < 2) return;
+      stopFunnel();
+      fTimer = window.setInterval(() => goFunnel(fi + 1), 4200);
+    };
+    const stopFunnel = () => { if (fTimer) window.clearInterval(fTimer); fTimer = null; };
+    rows.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        goFunnel(parseInt(btn.getAttribute("data-an-funnel-goto") || "0", 10));
+        startFunnel();
+      });
+    });
+    funnel.addEventListener("mouseenter", stopFunnel);
+    funnel.addEventListener("mouseleave", startFunnel);
+    insight.addEventListener("mouseenter", stopFunnel);
+    insight.addEventListener("mouseleave", startFunnel);
+    goFunnel(0);
+    startFunnel();
   }
 
   const dash = root.querySelector("[data-an-dash]");

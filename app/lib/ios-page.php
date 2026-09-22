@@ -410,15 +410,23 @@ function ts_render_ios_service_page(array $service): void
     .ios-ex strong{ display:block; font-family:Outfit,Inter,sans-serif; font-size:1.05rem; font-weight:600; margin-bottom:.3rem; }
     .ios-ex p{ margin:0; font-size:13px; color:var(--body); line-height:1.45; }
 
-    /* Horizontal scroll rail process */
+    /* Process steps — responsive grid, no horizontal scroll */
     .ios-steps{
-      display:flex; gap:.85rem; overflow-x:auto; scroll-snap-type:x mandatory;
-      padding-bottom:.75rem; -webkit-overflow-scrolling:touch;
-      scrollbar-width:thin;
+      display:grid;
+      gap:.75rem;
+      grid-template-columns:1fr;
+      padding-bottom:0;
+      overflow:visible;
+    }
+    @media (min-width:560px){
+      .ios-steps{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:.85rem; }
+    }
+    @media (min-width:960px){
+      .ios-steps{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
     }
     .ios-step{
-      flex:0 0 min(220px, 72vw); scroll-snap-align:start;
-      padding:1.2rem 1.1rem; border-radius:16px;
+      min-width:0;
+      padding:1.15rem 1.1rem; border-radius:16px;
       background:rgba(255,255,255,.85); border:1px solid var(--line);
       border-top:3px solid var(--blue);
       transition:transform .3s, box-shadow .3s;
@@ -427,6 +435,9 @@ function ts_render_ios_service_page(array $service): void
     .ios-step b{ font-size:11px; color:var(--blue); font-weight:700; }
     .ios-step strong{ display:block; margin:.35rem 0 .3rem; font-size:15px; font-weight:600; font-family:Outfit,Inter,sans-serif; }
     .ios-step p{ margin:0; font-size:13px; line-height:1.45; color:var(--body); }
+    @media (prefers-reduced-motion:reduce){
+      .ios-step:hover{ transform:none; }
+    }
 
     /* Stacked package rows */
     .ios-pkgs{ display:grid; gap:.75rem; }

@@ -5,8 +5,7 @@ declare(strict_types=1);
 /**
  * NetSuite Integration — SuiteScript, connectors, migration, order-to-cash.
  * Same Development tokens (#1C4FD6, Funnel Display) as WD/SD/CRM/SP,
- * different composition: copy-left + sync-orbit right; opposite-line slides;
- * radial satellite pop; ledger scrub (not wipe-up / letter-rise / clip-wipe / blur).
+ * different composition: copy-left + sync-console right; opposite-line slides.
  */
 function ts_render_ns_service_page(array $service): void
 {
@@ -34,6 +33,13 @@ function ts_render_ns_service_page(array $service): void
         ["04", "Procure-to-pay", "PO, receive, bill and pay with controls your finance team can audit."],
         ["05", "Data migration", "Chart of accounts, items, open balances — validated cutovers, not blind CSV dumps."],
         ["06", "Saved searches & ops", "Dashboards and alerts so ops see exceptions before customers do."],
+    ];
+
+    $syncJobs = [
+        ["Shopify", "Orders · inventory", "→", "NS", "SO-10482", "42 records", "ok", "fa-shopping-bag"],
+        ["CRM", "Customers · deals", "↔", "NS", "CUST-8821", "18 records", "sync", "fa-address-book"],
+        ["WMS", "Fulfill · stock", "→", "NS", "IF-2291", "Waiting", "idle", "fa-warehouse"],
+        ["Bank", "Payments · apply", "←", "NS", "PMT-441", "9 applied", "ok", "fa-university"],
     ];
 
     $otc = [
@@ -232,80 +238,167 @@ function ts_render_ns_service_page(array $service): void
     .apns-textlink:hover{ color:var(--blue); }
     .apns-trust{ margin:1rem 0 0; font-size:12.5px; color:rgba(15,23,42,.45); }
 
-    /* Sync orbit visual */
+    /* Sync console — ops-style, not orbit diagram */
     .apns-viz{
-      background:#fff; border:1px solid var(--line); border-radius:22px;
-      padding:1.15rem 1.1rem 1rem; box-shadow:0 22px 50px rgba(15,23,42,.07);
+      background:#fff; border:1px solid var(--line); border-radius:18px;
+      overflow:hidden; box-shadow:0 22px 50px rgba(15,23,42,.07);
       position:relative;
     }
     .apns-viz-top{
-      display:flex; justify-content:space-between; align-items:center; margin-bottom:.85rem;
+      display:flex; justify-content:space-between; align-items:center; gap:.75rem;
+      padding:.65rem .9rem;
+      border-bottom:1px solid var(--line);
+      background:linear-gradient(90deg, rgba(28,79,214,.06), transparent 55%), #FAFBFC;
     }
+    .apns-viz-top-left{ display:flex; align-items:center; gap:.55rem; min-width:0; }
+    .apns-viz-mark{
+      width:28px; height:28px; border-radius:7px; overflow:hidden; flex-shrink:0;
+      border:1px solid var(--line); background:#0F172A;
+    }
+    .apns-viz-mark img{ display:block; width:100%; height:100%; object-fit:cover; opacity:.9; }
     .apns-viz-top span{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
-      letter-spacing:.12em; text-transform:uppercase; color:var(--muted);
+      font-family:"IBM Plex Mono",monospace; font-size:9.5px; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:block;
     }
-    .apns-viz-top b{ color:var(--blue); font-weight:600; font-size:12px; }
-    .apns-orbit{
-      position:relative; height:clamp(220px,32vw,280px);
-      display:grid; place-items:center;
+    .apns-viz-top strong{
+      display:block; font-size:12.5px; font-weight:600; color:var(--ink); margin-top:.05rem;
     }
-    .apns-ring{
-      position:absolute; inset:12%; border:1px dashed rgba(28,79,214,.28);
-      border-radius:50%; pointer-events:none;
+    .apns-viz-live{
+      display:inline-flex; align-items:center; gap:.35rem;
+      font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+      color:var(--blue); white-space:nowrap;
     }
-    .apns-ring.is-pulse{
-      animation:apnsPulse 2.4s ease-in-out infinite;
+    .apns-viz-live i{
+      width:7px; height:7px; border-radius:50%; background:#22C55E;
+      box-shadow:0 0 0 0 rgba(34,197,94,.55);
+      animation:apnsLive 1.8s ease-out infinite;
     }
-    @keyframes apnsPulse{
-      0%,100%{ transform:scale(1); opacity:.7; }
-      50%{ transform:scale(1.04); opacity:1; }
+    @keyframes apnsLive{
+      0%{ box-shadow:0 0 0 0 rgba(34,197,94,.5); }
+      70%{ box-shadow:0 0 0 8px rgba(34,197,94,0); }
+      100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
     }
-    .apns-core{
-      position:relative; z-index:2;
-      padding:.7rem 1.1rem; border-radius:999px; background:var(--blue); color:#fff;
-      font-weight:600; font-size:13.5px; display:inline-flex; gap:.45rem; align-items:center;
-      box-shadow:0 12px 28px rgba(28,79,214,.35);
-    }
-    .apns-sat{
-      position:absolute; z-index:2;
-      min-width:92px; padding:.55rem .7rem; border-radius:12px;
-      background:#fff; border:1px solid var(--line); text-align:center;
-      font-size:12px; font-weight:500; box-shadow:0 8px 20px rgba(15,23,42,.06);
-      transition:border-color .25s, box-shadow .25s, transform .25s;
-    }
-    .apns-sat small{
-      display:block; margin-top:.15rem; font-size:10px; font-weight:400; color:var(--muted);
-    }
-    .apns-sat.is-on{
-      border-color:rgba(28,79,214,.5);
-      box-shadow:0 10px 24px rgba(28,79,214,.18);
-      transform:scale(1.04);
-    }
-    .apns-sat[data-pos="tl"]{ top:8%; left:4%; }
-    .apns-sat[data-pos="tr"]{ top:8%; right:4%; }
-    .apns-sat[data-pos="bl"]{ bottom:14%; left:6%; }
-    .apns-sat[data-pos="br"]{ bottom:14%; right:6%; }
 
-    .apns-ledger{
-      margin-top:.85rem; padding-top:.85rem; border-top:1px dashed var(--line);
+    .apns-jobs{ display:grid; gap:0; }
+    .apns-job{
+      display:grid; gap:.35rem;
+      padding:.55rem .9rem;
+      border-bottom:1px solid var(--line);
+      background:#fff; transition:background .25s;
     }
+    .apns-job.is-on{ background:linear-gradient(90deg, rgba(28,79,214,.06), #fff 70%); }
+    .apns-job-head{
+      display:flex; align-items:center; justify-content:space-between; gap:.6rem;
+    }
+    .apns-job-app{ display:flex; align-items:center; gap:.45rem; min-width:0; }
+    .apns-job-ico{
+      width:26px; height:26px; border-radius:7px; flex-shrink:0;
+      display:grid; place-items:center;
+      background:var(--soft); color:var(--blue); font-size:10px;
+      border:1px solid var(--line);
+    }
+    .apns-job.is-on .apns-job-ico{
+      background:rgba(28,79,214,.12); border-color:rgba(28,79,214,.25);
+    }
+    .apns-job-app b{ display:block; font-size:12.5px; font-weight:600; line-height:1.2; }
+    .apns-job-app small{
+      display:block; font-size:10px; color:var(--muted); font-weight:400; margin-top:.05rem;
+    }
+    .apns-job-meta{
+      display:flex; flex-direction:column; align-items:flex-end; gap:.15rem;
+      font-family:"IBM Plex Mono",monospace; font-size:9.5px; color:var(--muted);
+    }
+    .apns-job-status{
+      display:inline-flex; align-items:center; gap:.25rem;
+      padding:.15rem .4rem; border-radius:999px;
+      font-size:9.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      background:var(--soft); color:var(--muted);
+    }
+    .apns-job-status::before{
+      content:""; width:5px; height:5px; border-radius:50%; background:currentColor;
+    }
+    .apns-job[data-state="ok"] .apns-job-status{ background:rgba(34,197,94,.12); color:#15803D; }
+    .apns-job[data-state="sync"] .apns-job-status{ background:rgba(28,79,214,.12); color:var(--blue); }
+    .apns-job[data-state="idle"] .apns-job-status{ background:rgba(15,23,42,.06); color:var(--muted); }
+    .apns-job.is-on .apns-job-status{
+      background:rgba(28,79,214,.12); color:var(--blue);
+    }
+
+    .apns-pipe{
+      position:relative; height:18px;
+      display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.4rem;
+    }
+    .apns-pipe-end{
+      font-family:"IBM Plex Mono",monospace; font-size:9px; font-weight:600;
+      letter-spacing:.03em; color:var(--muted); max-width:4.5rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    }
+    .apns-pipe-end.is-ns{ color:var(--blue); text-align:right; max-width:none; }
+    .apns-pipe-track{
+      position:relative; height:3px; border-radius:999px;
+      background:rgba(15,23,42,.08); overflow:hidden;
+    }
+    .apns-pipe-fill{
+      position:absolute; inset:0 auto 0 0; width:0; border-radius:inherit;
+      background:linear-gradient(90deg, rgba(28,79,214,.35), var(--blue));
+      transition:width .6s ease;
+    }
+    .apns-job.is-on .apns-pipe-fill{ width:72%; }
+    .apns-pipe-pkt{
+      position:absolute; top:50%; left:0; width:8px; height:8px;
+      margin-top:-4px; margin-left:-4px;
+      border-radius:50%; background:var(--blue);
+      box-shadow:0 0 0 3px rgba(28,79,214,.2);
+      opacity:0;
+    }
+    .apns-job.is-on .apns-pipe-pkt{
+      opacity:1;
+      animation:apnsPkt 1.6s cubic-bezier(.4,0,.2,1) infinite;
+    }
+    .apns-job[data-dir="left"].is-on .apns-pipe-pkt{ animation-name:apnsPktLeft; }
+    @keyframes apnsPkt{
+      0%{ left:0; opacity:0; }
+      12%{ opacity:1; }
+      88%{ opacity:1; }
+      100%{ left:100%; opacity:0; }
+    }
+    @keyframes apnsPktLeft{
+      0%{ left:100%; opacity:0; }
+      12%{ opacity:1; }
+      88%{ opacity:1; }
+      100%{ left:0; opacity:0; }
+    }
+
+    .apns-ledger{ padding:.7rem .9rem .8rem; background:#F8FAFC; }
     .apns-ledger-label{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
-      letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:.55rem;
+      display:flex; justify-content:space-between; align-items:baseline; gap:.75rem;
+      font-family:"IBM Plex Mono",monospace; font-size:9.5px; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.5rem;
     }
-    .apns-ledger-track{
-      display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
-    }
+    .apns-ledger-label b{ color:var(--blue); letter-spacing:.04em; font-weight:600; }
+    .apns-ledger-track{ display:grid; grid-template-columns:repeat(4, 1fr); gap:.3rem; }
     .apns-led{
-      padding:.4rem .7rem; border-radius:999px; font-size:11.5px; font-weight:500;
-      background:var(--soft); border:1px solid var(--line); color:var(--muted);
-      transition:background .25s, color .25s, border-color .25s;
+      padding:.4rem .25rem;
+      border-radius:8px; text-align:center;
+      font-size:11px; font-weight:600;
+      background:#fff; border:1px solid var(--line); color:var(--muted);
+      transition:border-color .25s, color .25s, background .25s, box-shadow .25s;
     }
+    .apns-led small{ display:none; }
     .apns-led.is-on{
-      background:var(--tint); color:var(--blue); border-color:rgba(28,79,214,.35);
+      background:rgba(28,79,214,.08); color:var(--blue);
+      border-color:rgba(28,79,214,.4);
+      box-shadow:0 4px 12px rgba(28,79,214,.1);
     }
-    .apns-led-arrow{ color:var(--muted); font-size:11px; }
+    .apns-led.is-done{
+      background:rgba(34,197,94,.08); color:#15803D;
+      border-color:rgba(34,197,94,.35);
+    }
+    .apns-log{
+      margin:.5rem 0 0;
+      font-family:"IBM Plex Mono",monospace; font-size:10.5px; line-height:1.4;
+      color:rgba(15,23,42,.55); min-height:2.2em;
+    }
+    .apns-log em{ font-style:normal; color:var(--blue); font-weight:600; }
 
     .apns-stack{
       display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center;
@@ -318,6 +411,10 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-chip.is-on{
       background:var(--blue); color:#fff; border-color:var(--blue);
+    }
+    @media (prefers-reduced-motion:reduce){
+      .apns-viz-live i, .apns-pipe-pkt{ animation:none; }
+      .apns-job.is-on .apns-pipe-pkt{ opacity:1; left:70%; }
     }
 
     .apns-sec{ padding:clamp(2.75rem,6vw,4.25rem) 0; }
@@ -558,33 +655,61 @@ function ts_render_ns_service_page(array $service): void
 
       <div class="apns-viz" data-apns-viz aria-hidden="true">
         <div class="apns-viz-top">
-          <span>Sync map</span>
-          <b>Live paths</b>
+          <div class="apns-viz-top-left">
+            <div class="apns-viz-mark">
+              <img src="/images/dev/netsuite.jpg" alt="" width="68" height="68" decoding="async">
+            </div>
+            <div>
+              <span>Integration console</span>
+              <strong>NetSuite sync jobs</strong>
+            </div>
+          </div>
+          <span class="apns-viz-live"><i></i> Healthy · <b data-apns-clock>just now</b></span>
         </div>
-        <div class="apns-orbit">
-          <div class="apns-ring is-pulse"></div>
-          <div class="apns-core" data-apns-core><i class="fas fa-database"></i> NetSuite</div>
-          <div class="apns-sat is-on" data-pos="tl" data-apns-sat>
-            Shopify<small>Orders · inventory</small>
+        <div class="apns-jobs" data-apns-jobs>
+          <?php foreach ($syncJobs as $i => $job):
+            $dir = $job[2] === "←" ? "left" : "right";
+            $stateLabel = $job[6] === "ok" ? "OK" : ($job[6] === "sync" ? "Syncing" : "Idle");
+          ?>
+          <div class="apns-job<?= $i === 0 ? " is-on" : "" ?>" data-apns-job data-state="<?= ts_h($job[6]) ?>" data-dir="<?= $dir ?>">
+            <div class="apns-job-head">
+              <div class="apns-job-app">
+                <span class="apns-job-ico" aria-hidden="true"><i class="fas <?= ts_h($job[7]) ?>"></i></span>
+                <div>
+                  <b><?= ts_h($job[0]) ?></b>
+                  <small><?= ts_h($job[1]) ?></small>
+                </div>
+              </div>
+              <div class="apns-job-meta">
+                <span class="apns-job-status" data-apns-job-status><?= ts_h($stateLabel) ?></span>
+                <span data-apns-job-count><?= ts_h($job[5]) ?></span>
+              </div>
+            </div>
+            <div class="apns-pipe">
+              <span class="apns-pipe-end"><?= ts_h($job[0]) ?></span>
+              <div class="apns-pipe-track">
+                <span class="apns-pipe-fill"></span>
+                <span class="apns-pipe-pkt"></span>
+              </div>
+              <span class="apns-pipe-end is-ns">NetSuite</span>
+            </div>
           </div>
-          <div class="apns-sat" data-pos="tr" data-apns-sat>
-            CRM<small>Customers · deals</small>
-          </div>
-          <div class="apns-sat" data-pos="bl" data-apns-sat>
-            WMS<small>Fulfill · stock</small>
-          </div>
-          <div class="apns-sat" data-pos="br" data-apns-sat>
-            Bank<small>Payments · apply</small>
-          </div>
+          <?php endforeach; ?>
         </div>
         <div class="apns-ledger">
-          <div class="apns-ledger-label">Order-to-cash scrub</div>
+          <div class="apns-ledger-label">
+            <span>Order-to-cash run</span>
+            <b data-apns-run>#NS-48291</b>
+          </div>
           <div class="apns-ledger-track">
             <?php foreach ($otc as $i => $row): ?>
-            <?php if ($i > 0): ?><span class="apns-led-arrow">→</span><?php endif; ?>
-            <span class="apns-led<?= $i === 0 ? " is-on" : "" ?>" data-apns-led><?= ts_h($row[0]) ?></span>
+            <span class="apns-led<?= $i === 0 ? " is-on" : "" ?>" data-apns-led>
+              <?= ts_h($row[0]) ?>
+              <small><?= ts_h($row[1]) ?></small>
+            </span>
             <?php endforeach; ?>
           </div>
+          <p class="apns-log" data-apns-log><em>SO-10482</em> created from Shopify · item committed · waiting fulfill</p>
         </div>
       </div>
     </div>
@@ -792,25 +917,43 @@ function ts_render_ns_service_page(array $service): void
     reveals.forEach((el) => el.classList.add("is-in"));
   }
 
-  const sats = [...root.querySelectorAll("[data-apns-sat]")];
-  let s = 0;
-  if (sats.length && !reduce) {
+  const jobs = [...root.querySelectorAll("[data-apns-job]")];
+  const leds = [...root.querySelectorAll("[data-apns-led]")];
+  const logEl = root.querySelector("[data-apns-log]");
+  const clockEl = root.querySelector("[data-apns-clock]");
+  const runEl = root.querySelector("[data-apns-run]");
+  const logs = [
+    "<em>SO-10482</em> created from Shopify · item committed · waiting fulfill",
+    "<em>CUST-8821</em> CRM → NetSuite · contact + deal mapped",
+    "<em>IF-2291</em> WMS pick confirm queued · stock reserved",
+    "<em>PMT-441</em> bank feed matched · payment applied to invoice",
+  ];
+  const statusCycle = ["OK", "Syncing", "Idle", "OK"];
+  let j = 0;
+  let L = 0;
+  if (jobs.length && !reduce) {
     setInterval(() => {
-      sats.forEach((el) => el.classList.remove("is-on"));
-      s = (s + 1) % sats.length;
-      sats[s].classList.add("is-on");
-    }, 1800);
+      jobs.forEach((el) => el.classList.remove("is-on"));
+      j = (j + 1) % jobs.length;
+      const active = jobs[j];
+      active.classList.add("is-on");
+      active.setAttribute("data-state", j % 2 === 0 ? "sync" : "ok");
+      const st = active.querySelector("[data-apns-job-status]");
+      if (st) st.textContent = statusCycle[j % statusCycle.length];
+      if (logEl) logEl.innerHTML = logs[j % logs.length];
+      if (clockEl) clockEl.textContent = (8 + j * 3) + "s ago";
+      if (runEl) runEl.textContent = "#NS-" + (48291 + j);
+    }, 2200);
   }
 
-  const leds = [...root.querySelectorAll("[data-apns-led]")];
-  let L = 0;
   if (leds.length && !reduce) {
     setInterval(() => {
-      leds.forEach((el) => el.classList.remove("is-on"));
-      for (let i = 0; i <= L; i++) leds[i].classList.add("is-on");
+      leds.forEach((el, i) => {
+        el.classList.toggle("is-done", i < L);
+        el.classList.toggle("is-on", i === L);
+      });
       L = (L + 1) % leds.length;
-      if (L === 0) leds.forEach((el) => el.classList.remove("is-on"));
-    }, 1400);
+    }, 1600);
   }
 
   const chips = [...root.querySelectorAll(".apns-chip")];
@@ -829,28 +972,25 @@ function ts_render_ns_service_page(array $service): void
   const rights = [...root.querySelectorAll('[data-apns-slide="right"]')];
   const metas = [...root.querySelectorAll("[data-apns-meta]")];
   const viz = root.querySelector("[data-apns-viz]");
-  const core = root.querySelector("[data-apns-core]");
-  const satEls = [...root.querySelectorAll("[data-apns-sat]")];
+  const jobEls = [...root.querySelectorAll("[data-apns-job]")];
 
   if (reduce) {
-    gsap.set([...lefts, ...rights, ...metas, viz, core, ...satEls].filter(Boolean), { clearProps: "all" });
+    gsap.set([...lefts, ...rights, ...metas, viz, ...jobEls].filter(Boolean), { clearProps: "all" });
     return;
   }
 
   gsap.set(lefts, { xPercent: -108 });
   gsap.set(rights, { xPercent: 108 });
   gsap.set(metas, { opacity: 0, y: 18 });
-  if (viz) gsap.set(viz, { opacity: 0, scale: 0.92 });
-  if (core) gsap.set(core, { scale: 0.6, opacity: 0 });
-  gsap.set(satEls, { scale: 0, opacity: 0 });
+  if (viz) gsap.set(viz, { opacity: 0, y: 24 });
+  gsap.set(jobEls, { opacity: 0, x: 16 });
 
   const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
   tl.to(lefts, { xPercent: 0, duration: 0.9, stagger: 0.08 })
     .to(rights, { xPercent: 0, duration: 0.9, stagger: 0.08 }, "-=0.75")
     .to(metas, { opacity: 1, y: 0, duration: 0.6, stagger: 0.07 }, "-=0.45")
-    .to(viz, { opacity: 1, scale: 1, duration: 0.7 }, "-=0.55")
-    .to(core, { scale: 1, opacity: 1, duration: 0.55, ease: "back.out(1.6)" }, "-=0.4")
-    .to(satEls, { scale: 1, opacity: 1, duration: 0.5, stagger: 0.08, ease: "back.out(1.4)" }, "-=0.25");
+    .to(viz, { opacity: 1, y: 0, duration: 0.7 }, "-=0.55")
+    .to(jobEls, { opacity: 1, x: 0, duration: 0.45, stagger: 0.08 }, "-=0.35");
 })();
 </script>
     <?php

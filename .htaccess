@@ -3,7 +3,7 @@ Options -Indexes -MultiViews
 DirectoryIndex index.php
 
 <IfModule mod_authz_core.c>
-  <FilesMatch "(^#.*#|\.(bak|config|dist|env|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$">
+  <FilesMatch "\.(bak|config|dist|env|fla|in[ci]|log|psd|sh|sql|sw[op]|json)$">
     Require all denied
   </FilesMatch>
   <FilesMatch "\.php$">

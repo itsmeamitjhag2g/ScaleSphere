@@ -27,7 +27,7 @@ function ts_render_support_service_page(array $service): void
     ];
 
     $why = [
-        ["01", "Any stack, any origin", "Native, React Native, Flutter or PWA — built by us or someone else. We take ownership of uptime."],
+        ["01", "Any stack, any origin", "Native, React Native or Flutter — built by us or someone else. We take ownership of uptime."],
         ["02", "Predictable cost", "Retainer beats emergency freelancers when a release breaks on Friday night."],
         ["03", "Store seasons don’t wait", "New iOS / Android versions, policy changes and certificate renewals — handled on a calendar."],
         ["04", "Improve while you sleep", "Small feature sprints and UX fixes so the product doesn’t freeze after launch day."],
@@ -84,7 +84,7 @@ function ts_render_support_service_page(array $service): void
 
     $faqs = [
         ["Can you support an app you didn’t build?", "Yes. We start with a health-check, map the codebase and risk, then propose a retainer or a fix sprint. No rewrite unless you ask."],
-        ["Which platforms do you cover?", "Android, iOS, React Native, Flutter and PWAs. Mixed stacks are fine."],
+        ["Which platforms do you cover?", "Android, iOS, React Native and Flutter. Mixed stacks are fine."],
         ["What’s in a health-check?", "Crashes, performance, security basics, store compliance and UX risk — plus a ranked action list you can take to any team."],
         ["How fast do you respond?", "SLA tiers are agreed at kickoff. Critical production issues jump the queue."],
         ["Do you handle store submissions?", "Yes — signing, listings, phased rollouts and review replies as part of Care Pro or a scoped sprint."],
@@ -99,7 +99,7 @@ function ts_render_support_service_page(array $service): void
     ];
 
     $pageTitle = "App Support & Maintenance | Monitor, fix & health-check — ScaleSphere";
-    $pageDesc = "Support and maintain any mobile app — SLA bug fixes, OS updates, monitoring and health-check audits for Android, iOS, React Native, Flutter and PWAs.";
+    $pageDesc = "Support and maintain any mobile app — SLA bug fixes, OS updates, monitoring and health-check audits for Android, iOS, React Native and Flutter.";
     $canonical = $service["href"];
 
     $faqSchema = [
@@ -181,6 +181,7 @@ function ts_render_support_service_page(array $service): void
     [data-sup-reveal].is-in{ opacity:1; transform:none; }
     @media (prefers-reduced-motion:reduce){
       [data-sup-reveal]{ opacity:1; transform:none; transition:none; }
+      .sup-ex:hover, .sup-step:hover{ transform:none; }
     }
 
     .sup-hero{
@@ -308,10 +309,10 @@ function ts_render_support_service_page(array $service): void
     }
     .sup-chip.is-on{ background:var(--blue); color:#fff; border-color:var(--blue); }
 
-    .sup-sec{ padding:clamp(2.75rem,6vw,4.25rem) 0; }
+    .sup-sec{ padding:clamp(2.75rem,6vw,4.25rem) 0; position:relative; background:#FFFEFA; }
     .sup-sec.band{
-      background:rgba(255,255,255,.72);
-      border-block:1px solid var(--line);
+      background:#F4F7F5;
+      border-block:1px solid rgba(15,23,42,.06);
     }
     .sup-kicker{
       display:flex; flex-wrap:wrap; gap:.65rem; align-items:baseline; margin-bottom:.85rem;
@@ -324,7 +325,7 @@ function ts_render_support_service_page(array $service): void
     .sup-sec h2{
       font-family:Outfit,Inter,sans-serif;
       margin:0 0 .75rem; font-size:clamp(1.65rem,3.4vw,2.45rem);
-      font-weight:600; letter-spacing:-.02em; max-width:18ch;
+      font-weight:600; letter-spacing:-.02em; max-width:28ch;
     }
     .sup-sec h2 em{
       font-style:normal;
@@ -374,44 +375,62 @@ function ts_render_support_service_page(array $service): void
     .sup-card h3{ margin:.45rem 0 .4rem; font-size:1.1rem; font-weight:600; font-family:Outfit,Inter,sans-serif; }
     .sup-card p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--body); }
 
+    /* Examples — full-width card grid (no broken marquee / empty right) */
     .sup-examples{
-      display:flex; gap:.85rem; overflow:hidden;
-      mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      display:grid; gap:.85rem;
+      grid-template-columns:1fr;
+      overflow:visible; mask-image:none;
     }
+    @media (min-width:640px){ .sup-examples{ grid-template-columns:1fr 1fr; } }
+    @media (min-width:1100px){ .sup-examples{ grid-template-columns:repeat(4, 1fr); } }
     .sup-ex{
-      flex:0 0 min(240px, 70vw);
-      border-radius:16px; overflow:hidden; border:1px solid var(--line);
-      background:#fff;
-      animation:supMarquee 28s linear infinite;
+      border-radius:18px; overflow:hidden; border:1px solid rgba(15,23,42,.08);
+      background:#fff; display:flex; flex-direction:column;
+      transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
     }
-    .sup-examples:hover .sup-ex{ animation-play-state:paused; }
-    @keyframes supMarquee{
-      from{ transform:translateX(0); }
-      to{ transform:translateX(calc(-100% - .85rem)); }
+    .sup-ex:hover{
+      transform:translateY(-4px);
+      border-color:rgba(16,185,129,.3);
+      box-shadow:0 16px 36px rgba(16,185,129,.12);
     }
-    .sup-ex:hover{ box-shadow:0 12px 28px rgba(15,23,42,.1); }
     .sup-ex img{ width:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
-    .sup-ex .meta{ padding:1rem 1.05rem 1.15rem; }
+    .sup-ex .meta{ padding:1rem 1.05rem 1.15rem; flex:1; }
     .sup-ex strong{ display:block; font-family:Outfit,Inter,sans-serif; font-size:1.05rem; font-weight:600; margin-bottom:.3rem; }
     .sup-ex p{ margin:0; font-size:13px; color:var(--body); line-height:1.45; }
 
-    /* Checklist process with green ticks */
-    .sup-steps{ display:grid; gap:.55rem; max-width:640px; }
+    /* Process — full-width flow grid */
+    .sup-steps{
+      display:grid; gap:.85rem; max-width:none;
+      grid-template-columns:1fr;
+    }
+    @media (min-width:700px){ .sup-steps{ grid-template-columns:repeat(2, 1fr); } }
+    @media (min-width:1100px){ .sup-steps{ grid-template-columns:repeat(3, 1fr); } }
     .sup-step{
-      padding:.95rem 1.1rem; border-radius:12px;
-      background:#fff; border:1px solid var(--line);
-      display:grid; grid-template-columns:auto 1fr; gap:.65rem 1rem; align-items:start;
-      transition:border-color .25s, box-shadow .25s;
+      position:relative;
+      padding:1.2rem 1.15rem 1.25rem; border-radius:18px;
+      background:#fff; border:1px solid rgba(15,23,42,.08);
+      display:grid; grid-template-columns:auto 1fr; gap:.85rem; align-items:start;
+      transition:transform .3s ease, border-color .25s, box-shadow .25s;
+      min-width:0;
     }
     .sup-step::before{
-      content:""; width:1.15rem; height:1.15rem; border-radius:4px; margin-top:.15rem;
-      background:rgba(16,185,129,.15); border:2px solid var(--blue);
-      box-shadow:inset 0 0 0 2px #fff;
-      grid-row:1 / span 3;
+      content:none;
     }
-    .sup-step:hover{ border-color:rgba(16,185,129,.4); box-shadow:0 8px 22px rgba(16,185,129,.08); }
-    .sup-step b{ font-size:11px; color:var(--blue); font-weight:700; }
-    .sup-step strong{ display:block; margin:0 0 .25rem; font-size:15px; font-weight:600; font-family:Outfit,Inter,sans-serif; }
+    .sup-step-node{
+      width:44px; height:44px; border-radius:50%;
+      display:grid; place-items:center; flex-shrink:0;
+      background:radial-gradient(circle at 30% 28%, #34D399 0%, var(--blue) 58%, #047857 100%);
+      color:#fff; font-size:12px; font-weight:700;
+      font-family:Outfit,Inter,sans-serif;
+      box-shadow:0 0 0 5px rgba(16,185,129,.1), 0 8px 18px rgba(16,185,129,.25);
+    }
+    .sup-step:hover{
+      transform:translateY(-3px);
+      border-color:rgba(16,185,129,.35);
+      box-shadow:0 14px 32px rgba(16,185,129,.12);
+    }
+    .sup-step b{ display:none; }
+    .sup-step strong{ display:block; margin:0 0 .3rem; font-size:1.02rem; font-weight:600; font-family:Outfit,Inter,sans-serif; }
     .sup-step p{ margin:0; font-size:13px; line-height:1.45; color:var(--body); }
 
     /* SLA-style package rows */
@@ -444,24 +463,53 @@ function ts_render_support_service_page(array $service): void
     }
     .sup-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); }
 
-    /* Open 2-col FAQ cards */
-    .sup-faq{ display:grid; gap:.75rem; max-width:none; }
+    /* FAQ — 2-col with align-start (no sibling stretch) + +/- */
+    .sup-faq{ display:grid; gap:.75rem; max-width:none; align-items:start; }
     @media (min-width:800px){ .sup-faq{ grid-template-columns:1fr 1fr; } }
     .sup-faq details{
       border:1px solid var(--line); border-radius:14px;
-      background:#fff; overflow:hidden; min-height:100%;
+      background:#fff; overflow:hidden;
+      height:auto; align-self:start; min-height:0;
+      transition:border-color .25s, box-shadow .25s;
     }
-    .sup-faq details[open]{ background:rgba(16,185,129,.03); }
+    .sup-faq details[open]{
+      background:#fff;
+      border-color:rgba(16,185,129,.35);
+      box-shadow:0 8px 22px rgba(16,185,129,.1);
+    }
     .sup-faq summary{
-      cursor:pointer; list-style:none; padding:1rem 1.15rem;
-      font-weight:600; font-size:14.5px; display:flex; justify-content:space-between; gap:1rem;
+      cursor:pointer; list-style:none;
+      padding:1rem 1.1rem;
+      font-weight:600; font-size:14.5px; line-height:1.35;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      color:var(--ink); transition:color .25s; text-align:left;
     }
+    .sup-faq details[open] summary{ color:var(--blue); }
     .sup-faq summary::-webkit-details-marker{ display:none; }
-    .sup-faq summary i{ color:var(--muted); transition:transform .25s, color .25s; }
-    .sup-faq details[open] summary i{ transform:rotate(180deg); color:var(--blue); }
+    .sup-faq-toggle{
+      position:relative; flex-shrink:0;
+      width:26px; height:26px; border-radius:50%;
+      background:rgba(16,185,129,.1); border:1px solid rgba(16,185,129,.25);
+      transition:background .25s, border-color .25s, transform .25s;
+    }
+    .sup-faq-toggle::before,
+    .sup-faq-toggle::after{
+      content:""; position:absolute; left:50%; top:50%;
+      background:var(--blue); border-radius:1px;
+      transition:transform .28s ease, opacity .28s ease;
+    }
+    .sup-faq-toggle::before{ width:11px; height:2px; transform:translate(-50%,-50%); }
+    .sup-faq-toggle::after{ width:2px; height:11px; transform:translate(-50%,-50%); }
+    .sup-faq details[open] .sup-faq-toggle{
+      background:var(--blue); border-color:var(--blue); transform:rotate(180deg);
+    }
+    .sup-faq details[open] .sup-faq-toggle::before{ background:#fff; }
+    .sup-faq details[open] .sup-faq-toggle::after{
+      background:#fff; transform:translate(-50%,-50%) rotate(90deg) scaleY(0); opacity:0;
+    }
     .sup-faq details p{
-      margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.6; color:var(--body);
+      margin:0; padding:0 1.1rem 1.05rem;
+      font-size:14px; line-height:1.6; color:var(--body); text-align:left;
     }
 
     .sup-related{
@@ -627,9 +675,11 @@ function ts_render_support_service_page(array $service): void
       <div class="sup-steps">
         <?php foreach ($steps as $row): ?>
         <div class="sup-step" data-sup-reveal>
-          <b><?= ts_h($row[0]) ?></b>
-          <strong><?= ts_h($row[1]) ?></strong>
-          <p><?= ts_h($row[2]) ?></p>
+          <div class="sup-step-node" aria-hidden="true"><?= ts_h($row[0]) ?></div>
+          <div>
+            <strong><?= ts_h($row[1]) ?></strong>
+            <p><?= ts_h($row[2]) ?></p>
+          </div>
         </div>
         <?php endforeach; ?>
       </div>
@@ -668,7 +718,7 @@ function ts_render_support_service_page(array $service): void
       <div class="sup-faq">
         <?php foreach ($faqs as $faq): ?>
         <details data-sup-reveal>
-          <summary><?= ts_h($faq[0]) ?> <i class="fas fa-chevron-down" aria-hidden="true"></i></summary>
+          <summary><?= ts_h($faq[0]) ?> <span class="sup-faq-toggle" aria-hidden="true"></span></summary>
           <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
