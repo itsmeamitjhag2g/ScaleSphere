@@ -41,10 +41,13 @@
   <?php if (!empty($modifiedTime)): ?>
   <meta property="article:modified_time" content="<?= ts_h($modifiedTime) ?>">
   <?php endif; ?>
-  <link rel="icon" href="<?= ts_h(ts_logo()) ?>">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Montserrat:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <meta property="og:locale" content="en_IN">
   <meta name="twitter:card" content="summary_large_image">
@@ -52,7 +55,7 @@
   <meta name="twitter:description" content="<?= ts_h($desc) ?>">
   <meta name="twitter:image" content="<?= ts_h($image) ?>">
   <meta name="twitter:image:alt" content="<?= ts_h($imageAlt ?? $site["name"]) ?>">
-  <meta name="theme-color" content="#1C4FD6">
+  <meta name="theme-color" content="#0F1B3D">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="<?= ts_h(ts_abs("/sitemap.xml")) ?>">
   <!-- Keep utility styles local: the content-heavy pages rely on them for their
        responsive layout, so a third-party CDN must not be a single point of failure. -->
@@ -62,52 +65,7 @@
   <link rel="stylesheet" href="/css/tailwind.css?v=<?= (int)$twVer ?>">
   <?php if (str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
   <style>
-    /* Home: hide native scrollbar — sections open via wheel + GSAP */
-    html.ss-home-scroll, body.page-home { scrollbar-width: none; }
-    html.ss-home-scroll::-webkit-scrollbar, body.page-home::-webkit-scrollbar { width: 0; height: 0; display: none; }
     body.page-home { overflow-x: clip; }
-    /* While a section unpins, spacer keeps section color — no white flash */
-    body.page-home .pin-spacer {
-      background: linear-gradient(160deg, #163AA8 0%, #1C4FD6 50%, #3D6BE8 100%);
-    }
-    body.page-home .pin-spacer:has([data-ss-story]),
-    body.page-home .pin-spacer:has(#ss-work) {
-      background: #FFFEFA;
-    }
-  </style>
-  <script>document.documentElement.classList.add('ss-home-scroll');</script>
-  <?php endif; ?>
-  <?php if (str_contains((string) ($bodyClass ?? ''), 'page-work')): ?>
-  <style>
-    /* Our Work — cream stage; keep shared footer readable above page grid */
-    body.page-work {
-      background: #F7F4EF !important;
-      overflow-x: clip;
-    }
-    body.page-work main {
-      background: transparent;
-      position: relative;
-      z-index: 1;
-    }
-    body.page-work .header-home,
-    body.page-work .site-header {
-      background: rgba(247, 244, 239, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom-color: rgba(15, 23, 42, 0.06);
-      box-shadow: none;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-    }
-    body.page-work .site-footer.ss-footer {
-      position: relative;
-      z-index: 20;
-      margin-top: 0;
-      background: #0B1A3A;
-    }
-    body.page-work .scroll-progress {
-      background: #1C4FD6;
-    }
   </style>
   <?php endif; ?>
   <?php
@@ -116,7 +74,7 @@
   ?>
   <link rel="stylesheet" href="/css/style.css?v=<?= (int)$cssVer ?>">
   <?php if (!str_contains((string) ($bodyClass ?? ''), 'page-home')): ?>
-  <link rel="stylesheet" href="/css/home.css?v=12">
+  <link rel="stylesheet" href="/css/home.css?v=<?= (int) (@filemtime(dirname(__DIR__, 2) . "/public/css/home.css") ?: 12) ?>">
   <?php endif; ?>
   <style>
     /* Sticky header on every page */
@@ -159,6 +117,7 @@
     body.page-site main,
     body.page-home,
     body.page-about,
+    body.page-work,
     body.page-contact,
     body.page-services {
       background-color: #FFFEFA;
@@ -179,11 +138,11 @@
     }
     body.page-services.page-services-index,
     body.page-services.page-services-index main {
-      background-color: #F6F7F9 !important;
+      background-color: #FFFEFA !important;
     }
     body.page-hub-development,
     body.page-hub-development main {
-      background-color: #F6F7F9 !important;
+      background-color: #FFFEFA !important;
     }
     /* Sticky service stack needs overflow visible on ancestors */
     body.page-hub-development {
@@ -193,6 +152,8 @@
     body.page-hub-mobile-apps main {
       background-color: #FFFEFA !important;
     }
+    /* Ensure --ss-pad-x exists even if a page skips style.css tokens */
+    :root{ --ss-pad-x: 5%; }
   </style>
   <?php foreach ($extraStyles ?? [] as $href): ?>
   <link rel="stylesheet" href="<?= ts_h($href) ?>">

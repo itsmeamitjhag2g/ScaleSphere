@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/dev-common.php";
+
 /**
- * Appy Camper layout + motion (side image columns, sticky showcase),
- * ScaleSphere light palette — Development services only.
- * Reference: https://appycamper.com/
+ * Development hub: websites, custom software, CRM and e-commerce.
+ * Shares the visual system of the four development service pages (dev-service.css).
  */
 function ts_render_development_hub(): void
 {
@@ -15,907 +16,327 @@ function ts_render_development_hub(): void
         include dirname(__DIR__) . "/pages/not-found.php";
         return;
     }
+    $site = ts_site();
+    $phone = (string) ($site["phone"] ?? "");
+    $tel = (string) ($site["phoneHref"] ?? "") ?: $phone;
 
-    $services = ts_services_in_category("Development");
+    $services = [];
+    foreach (ts_services_in_category("Development") as $s) {
+        $services[$s["slug"]] = $s;
+    }
 
-    $tags = [
-        "Website Development" => ["We make it load", "Fast, secure sites and platforms ready to grow with demand."],
-        "Software Development" => ["We make it scale", "Custom apps with clean architecture — built to evolve, not rewrite."],
-        "CRM Software" => ["We make it flow", "Pipelines, automation and reporting your sales team will actually use."],
-        "E-Commerce Platforms" => ["We make it convert", "Stores, payments and inventory wired for revenue — not vanity."],
-    ];
-
-    $svcImages = [
-        "Website Development" => "/images/dev/website-development.jpg",
-        "Software Development" => "/images/dev/software-development.jpg",
-        "CRM Software" => "/images/dev/crm.jpg",
-        "E-Commerce Platforms" => "/images/dev/ecommerce.jpg",
-    ];
-    $pool = array_values($svcImages);
-
-    $featured = [
-        [
-            "label" => "Website Development",
-            "href" => ts_service_href("Website Development"),
-            "blurb" => "Marketing sites and product platforms that feel sharp and ship clean.",
-            "meta" => "Web platforms",
-            "img" => $svcImages["Website Development"],
-            "thumb" => $svcImages["Software Development"],
+    // slug => [image, image alt, typical timeline, choose this if…, what's included, packages line]
+    $cards = [
+        "website-development" => [
+            "/images/dev/website-build.jpg", "Developer’s desk with a website layout on the monitor and code open on a laptop", "Typical: 5–6 weeks",
+            "you need a new business website, or your current one is slow, dated or hard to update.",
+            ["WordPress or custom code with Laravel or Next.js", "Enquiry forms to email and WhatsApp", "Speed, SEO basics and GA4 set up from day one"],
+            "Starter, Business or Custom build",
         ],
-        [
-            "label" => "Software Development",
-            "href" => ts_service_href("Software Development"),
-            "blurb" => "End-to-end product engineering for teams that need reliability.",
-            "meta" => "Custom software",
-            "img" => $svcImages["Software Development"],
-            "thumb" => $svcImages["CRM Software"],
+        "software-development" => [
+            "/images/dev/software-code.jpg", "Laptop showing application source code in a code editor", "First version: 8–16 weeks",
+            "your team runs daily work on Excel, WhatsApp and paper, and it’s starting to slow you down.",
+            ["Customer, dealer and staff portals", "Booking, inventory and internal tools", "Connections to payments, Tally and your website"],
+            "Starts with a 2–3 week discovery sprint",
         ],
-        [
-            "label" => "CRM Software",
-            "href" => ts_service_href("CRM Software"),
-            "blurb" => "Pipelines, automation and reporting your sales team will actually use.",
-            "meta" => "CRM & sales",
-            "img" => $svcImages["CRM Software"],
-            "thumb" => $svcImages["Website Development"],
+        "crm-software" => [
+            "/images/dev/crm.jpg", "Laptop on a desk showing a sales dashboard with pipeline charts", "Typical: 4–5 weeks",
+            "leads arrive from the website, ads, IndiaMART and calls, and follow-ups get missed.",
+            ["Zoho CRM, HubSpot or a custom CRM", "Leads captured and assigned automatically", "Your data migrated and every user trained"],
+            "Essentials, Growth or Custom CRM",
         ],
-        [
-            "label" => "E-Commerce Platforms",
-            "href" => ts_service_href("E-Commerce Platforms"),
-            "blurb" => "Commerce stacks that checkout smoothly and grow with catalog demand.",
-            "meta" => "Commerce",
-            "img" => $svcImages["E-Commerce Platforms"],
-            "thumb" => $svcImages["Software Development"],
+        "e-commerce-platforms" => [
+            "/images/dev/ecommerce-checkout.jpg", "Customer paying by phone at a shop counter", "Typical: 6–8 weeks",
+            "you want your own online store instead of relying only on marketplaces or Instagram DMs.",
+            ["Shopify or WooCommerce, set up for India", "UPI, cards and COD through Razorpay or Cashfree", "Shipping, GST and order emails configured"],
+            "Launch, Growth or Custom commerce",
         ],
     ];
 
-    $impacts = [
-        ["150+", "Projects delivered across web, software and integrations."],
-        ["98%", "Client satisfaction from kickoff through handover."],
-        ["24/7", "Support options when production can't wait."],
-        ["12+", "Years shipping reliable systems for growing teams."],
+    $steps = [
+        ["Within 2 working days", "Free estimate", "Tell us what you need. A developer reviews it and you get a rough budget range and timeline."],
+        ["Week 1", "Scope and fixed quote", "A written list of pages, features and integrations, with a fixed price paid in stages."],
+        ["Weeks 1–3", "Design or prototype", "You approve the designs, or click through a prototype, before the build starts."],
+        ["Every week", "Build on a preview link", "Real progress on a private link, with a short update from your assistant every Friday."],
+        ["Launch", "Go live and hand over", "Tested on real phones and browsers, launched, then handed over with training."],
     ];
+
+    $rules = [
+        ["fa-file-signature", "Fixed quote, paid in stages", "No hourly billing. Extra work is priced and agreed before it starts."],
+        ["fa-link", "A preview link every week", "Review real pages and features as they’re built, not a demo at the end."],
+        ["fa-key", "Everything in your name", "Domain, hosting, code repository and admin logins belong to you."],
+        ["fa-book-open", "Training and documentation", "Your team can run it, or another developer can pick it up later."],
+    ];
+
+    $stack = [
+        ["Websites", ["WordPress", "Laravel", "Next.js", "Figma"]],
+        ["Custom software", ["Laravel", "Node.js", "React", "MySQL", "PostgreSQL"]],
+        ["CRM & automation", ["Zoho CRM", "HubSpot", "Zapier", "Make", "WhatsApp Business API"]],
+        ["Online stores", ["Shopify", "WooCommerce", "Razorpay", "Cashfree", "Shiprocket"]],
+    ];
+
+    $faqs = [
+        ["How much does a website or software project cost?", "It depends on the scope. A 5-page website costs far less than a store with 500 products or software with user logins and reports. After the free estimate you get a rough budget range, and after a scoping call a fixed quote paid in stages. We don’t bill by the hour."],
+        ["How long does a typical project take?", "A business website usually takes 5–6 weeks, a CRM setup 4–5 weeks, an online store 6–8 weeks, and the first version of custom software 8–16 weeks. The most common delay is waiting for content and feedback, so we agree those dates at the start too."],
+        ["Who owns the code, domain and hosting?", "You do. The domain, hosting, code repository, design files and admin logins are in your name or handed over at launch. You can move to another developer whenever you like."],
+        ["Can you work on a website or software someone else built?", "Usually, yes. We review the code and hosting first and tell you honestly whether fixing what you have or rebuilding it will cost less over the next few years."],
+        ["What happens after launch?", "Launch includes a training call and a short written guide, so you can manage day-to-day changes yourself. If you’d like us to handle updates, backups and security checks, there’s an optional monthly support plan. You’re never locked in."],
+        ["Who will we actually be talking to?", "Your dedicated assistant runs the project day to day and sends the weekly update. You also speak with the developer on the scoping call and at key reviews, so technical questions go to the person building it."],
+    ];
+
+    $title = "Website, Software, CRM & E-Commerce Development";
+    $desc = "Business websites, custom software, CRM setup and Shopify or WooCommerce stores. Fixed quote, weekly preview links, and the code is yours. Free estimate.";
+
+    $jsonld = [
+        [
+            "@context" => "https://schema.org",
+            "@type" => "Service",
+            "name" => "Development",
+            "serviceType" => "Website and software development",
+            "provider" => ["@type" => "Organization", "name" => $site["name"], "url" => $site["url"]],
+            "description" => $desc,
+            "url" => ts_abs($hub["href"]),
+            "areaServed" => "IN",
+            "hasOfferCatalog" => [
+                "@type" => "OfferCatalog",
+                "name" => "Development services",
+                "itemListElement" => array_values(array_map(static fn(array $s): array => [
+                    "@type" => "Offer",
+                    "itemOffered" => ["@type" => "Service", "name" => $s["label"], "url" => ts_abs($s["href"])],
+                ], $services)),
+            ],
+        ],
+        [
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => array_map(static fn(array $f): array => [
+                "@type" => "Question",
+                "name" => $f[0],
+                "acceptedAnswer" => ["@type" => "Answer", "text" => $f[1]],
+            ], $faqs),
+        ],
+        [
+            "@context" => "https://schema.org",
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                ["@type" => "ListItem", "position" => 1, "name" => "Home", "item" => ts_abs("/")],
+                ["@type" => "ListItem", "position" => 2, "name" => "Services", "item" => ts_abs("/services")],
+                ["@type" => "ListItem", "position" => 3, "name" => "Development", "item" => ts_abs($hub["href"])],
+            ],
+        ],
+    ];
+
+    $brief = ts_dev_brief([
+        "services" => [
+            "Website Development" => "A website or redesign",
+            "Software / CRM" => "Custom software, a portal or a CRM",
+            "E-Commerce Store" => "An online store",
+            "Not sure yet" => "Not sure yet, I need advice",
+        ],
+        "title" => "Get a free project estimate",
+        "sub" => "Describe what you need in a few lines. A developer reviews it, and your assistant sends a rough budget range, a timeline and the approach we’d suggest.",
+        "gets" => [
+            "A rough budget range for your project",
+            "A realistic timeline with milestones",
+            "Which platform fits: WordPress, Shopify, Zoho or custom",
+        ],
+        "url" => ["Current website (optional)", false],
+        "message" => ["What should it do?", "e.g. a 10-page site for our clinic with online appointment requests"],
+        "source" => "Development hub",
+    ]);
 
     ob_start();
+    echo ts_dev_css();
     ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<div class="ap" data-ap-dev>
-  <style>
-    .ap{
-      --ink:#0F172A;
-      --soft:#F6F7F9;
-      --blue:#1C4FD6;
-      --muted:rgba(15,23,42,.58);
-      --line:rgba(15,23,42,.1);
-      --white:#fff;
-      background:var(--soft);
-      color:var(--ink);
-      font-family:"Funnel Display",Montserrat,sans-serif;
-    }
-    /* Sticky stack breaks if any ancestor clips overflow (body/style.css) */
-    body.page-hub-development{
-      overflow-x:visible !important;
-    }
-    .ap *{ box-sizing:border-box; }
-    .ap-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
-
-    /* ===== HERO — WEB APP letter reveal + light motion ===== */
-    .ap-hero{
-      position:relative;
-      padding:clamp(2.75rem, 7vh, 4.5rem) 0 clamp(2.5rem, 6vh, 3.75rem);
-      background:var(--soft);
-      overflow:hidden;
-    }
-    .ap-hero-inner{
-      width:min(1280px, calc(100% - 1.5rem));
-      margin:0 auto;
-      text-align:center;
-    }
-    .ap-hero h1{
-      margin:0;
-      font-weight:400;
-      /* Sized so WEB line + APP line each stay on one row */
-      font-size:clamp(1.7rem, 6.8vw, 5.4rem);
-      line-height:.94;
-      letter-spacing:-.04em;
-      color:var(--ink);
-      text-transform:lowercase;
-    }
-    .ap-hero h1 .super{
-      display:block;
-      font-size:.28em;
-      letter-spacing:.01em;
-      color:rgba(15,23,42,.7);
-      font-weight:400;
-      margin:0 0 .45em;
-      text-transform:none;
-      line-height:1.2;
-    }
-    .ap-hero-lines{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:.08em;
-    }
-    .ap-hero-line{
-      display:flex;
-      flex-wrap:nowrap;
-      justify-content:center;
-      align-items:baseline;
-      gap:.2em .4em;
-      white-space:nowrap;
-      overflow:hidden;
-    }
-    .ap-hero h1 .pop{
-      display:inline-block;
-      will-change:transform, opacity;
-    }
-    .ap-hero h1 em{
-      font-style:normal;
-      color:var(--blue);
-      text-decoration:underline;
-      text-decoration-color:var(--blue);
-      text-underline-offset:.12em;
-      text-decoration-thickness:.055em;
-    }
-    /* The desktop word row is intentionally unbroken. On narrow phones that
-       made the first/last word disappear behind the clipped hero edge. */
-    @media (max-width:520px){
-      .ap-hero{ padding-top:2.5rem; padding-bottom:2.25rem; }
-      .ap-hero h1{ font-size:clamp(1.45rem,8.6vw,1.9rem); line-height:1.04; }
-      .ap-hero h1 .super{ margin-bottom:.55em; }
-      .ap-hero-lines{ gap:.22em; }
-      .ap-hero-line{
-        flex-wrap:wrap;
-        column-gap:.26em;
-        row-gap:.08em;
-        white-space:normal;
-        overflow:visible;
-      }
-      .ap-hero-foot{ margin-top:1.15rem; }
-      .ap-actions{ width:100%; display:grid; grid-template-columns:1fr; }
-      .ap-actions .ap-btn{ width:100%; justify-content:center; }
-    }
-    .ap-plus{
-      display:inline-grid;
-      grid-template-columns:repeat(3, clamp(4px,.55vw,7px));
-      gap:clamp(2px,.28vw,3px);
-      vertical-align:middle;
-      margin-left:.12em;
-      transform:translateY(-.18em);
-    }
-    .ap-plus i{
-      width:clamp(4px,.55vw,7px);
-      height:clamp(4px,.55vw,7px);
-      background:var(--blue);
-      display:block;
-    }
-    .ap-hero-foot{
-      margin:1.35rem auto 0;
-      max-width:46rem;
-      display:grid;
-      gap:.9rem;
-      justify-items:center;
-    }
-    .ap-hero-foot p{
-      margin:0;
-      font-size:clamp(.98rem,1.4vw,1.12rem);
-      line-height:1.5;
-      color:var(--muted);
-      font-weight:300;
-    }
-    .ap-actions{ display:flex; flex-wrap:wrap; gap:.7rem; justify-content:center; align-items:center; }
-    .ap-btn{
-      display:inline-flex; align-items:center;
-      min-height:46px; padding:0 1.25rem; border-radius:999px;
-      background:var(--blue); color:#fff; text-decoration:none;
-      font-size:14px; font-weight:600;
-      box-shadow:0 12px 28px rgba(28,79,214,.26);
-      transition:transform .2s ease, filter .2s ease;
-    }
-    .ap-btn:hover{ filter:brightness(1.05); transform:translateY(-2px); color:#fff; }
-    .ap-textlink{
-      color:var(--ink); font-size:14px; font-weight:500;
-      text-decoration:underline; text-underline-offset:5px;
-    }
-    .ap-textlink:hover{ color:var(--blue); }
-
-    .ap-sec{ padding:3.75rem 0; }
-    .ap-kicker{
-      display:flex; justify-content:space-between; gap:1rem;
-      margin-bottom:1.25rem;
-      font-size:13px; color:var(--muted); letter-spacing:.04em;
-    }
-    .ap-kicker strong{ color:var(--ink); font-weight:500; }
-
-    .ap-intro{ display:grid; gap:1.5rem; }
-    @media (min-width:900px){
-      .ap-intro{ grid-template-columns:1fr 1.2fr; gap:3rem; align-items:start; }
-    }
-    .ap-intro h2{
-      margin:0;
-      font-size:clamp(1.75rem,4vw,2.75rem);
-      font-weight:400; line-height:1.12; letter-spacing:-.02em;
-      max-width:15ch;
-    }
-    .ap-intro p{
-      margin:0 0 .9rem;
-      font-size:15.5px; line-height:1.6; color:var(--muted); font-weight:300;
-    }
-
-    /* Sticky showcase — Appy full-bleed split (no card chrome) */
-    .ap-show{
-      position:relative;
-      background:var(--soft);
-    }
-    @media (min-width:900px){
-      .ap-show{ height:calc(100vh * <?= max(4, count($featured)) ?>); }
-    }
-    .ap-show-sticky{
-      position:relative;
-      min-height:100vh;
-      padding:5.5rem 0 2rem;
-    }
-    @media (min-width:900px){
-      .ap-show-sticky{
-        position:sticky;
-        top:0;
-        height:100vh;
-        min-height:100vh;
-        padding:0;
-        display:flex;
-        flex-direction:column;
-        overflow:hidden;
-      }
-    }
-    .ap-show-bar{
-      position:absolute;
-      top:calc(var(--header-h, 72px) + .85rem);
-      left:0; right:0;
-      z-index:5;
-      width:min(1320px, calc(100% - 1.25rem));
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      pointer-events:none;
-      font-size:14px;
-      font-weight:400;
-      color:var(--ink);
-    }
-    .ap-show-bar strong{ font-weight:500; }
-    .ap-show-stage{
-      position:relative;
-      flex:1;
-      width:100%;
-      min-height:min(70vh, 640px);
-    }
-    @media (min-width:900px){
-      .ap-show-stage{
-        min-height:0;
-        height:100%;
-      }
-    }
-    .ap-slide{
-      position:absolute;
-      inset:0;
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-      z-index:1;
-      transition:opacity .45s ease, visibility .45s ease;
-    }
-    .ap-slide.is-on{
-      opacity:1;
-      visibility:visible;
-      pointer-events:auto;
-      z-index:2;
-    }
-    .ap-slide-square{
-      position:absolute;
-      right:max(1rem, calc((100% - 1120px) / 2));
-      top:50%;
-      transform:translateY(-50%);
-      width:min(48vw, 770px);
-      aspect-ratio:1;
-      background:#e8edf5;
-      overflow:hidden;
-      border-radius:0;
-    }
-    .ap-slide-square img{
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
-    .ap-slide-copy{
-      position:absolute;
-      left:max(1rem, calc((100% - 1120px) / 2));
-      top:clamp(5.5rem, 14vh, 8rem);
-      width:min(34rem, 42vw);
-      z-index:3;
-      display:flex;
-      flex-direction:column;
-      gap:.85rem;
-    }
-    .ap-slide-copy .name{
-      margin:0;
-      font-size:15px;
-      font-weight:400;
-      color:var(--muted);
-    }
-    .ap-slide-copy .name a{
-      color:inherit;
-      text-decoration:none;
-    }
-    .ap-slide-copy .name a:hover{ color:var(--blue); }
-    .ap-slide-copy .headline{
-      margin:0;
-      font-size:clamp(1.45rem, 2.6vw, 2.05rem);
-      font-weight:500;
-      line-height:1.2;
-      letter-spacing:-.02em;
-      color:var(--ink);
-      max-width:18ch;
-    }
-    .ap-slide-aside{
-      position:absolute;
-      left:max(1rem, calc((100% - 1120px) / 2));
-      bottom:clamp(1.5rem, 6vh, 3.5rem);
-      z-index:3;
-      display:grid;
-      grid-template-columns:auto 1fr;
-      gap:1rem;
-      align-items:end;
-      max-width:22rem;
-    }
-    .ap-slide-thumb{
-      width:clamp(110px, 12vw, 193px);
-      aspect-ratio:1;
-      overflow:hidden;
-      background:#d7deea;
-    }
-    .ap-slide-thumb img{
-      width:100%; height:100%; object-fit:cover; display:block;
-    }
-    .ap-slide-metric{
-      margin:0;
-      font-size:14px;
-      line-height:1.35;
-      color:var(--ink);
-      font-weight:400;
-      white-space:pre-line;
-    }
-    @media (max-width:899px){
-      .ap-show-sticky{ padding:4.5rem 1rem 2rem; }
-      .ap-show-bar{ position:relative; top:auto; width:100%; margin:0 0 1rem; }
-      .ap-show-stage{ min-height:0; height:auto; }
-      .ap-slide{
-        position:relative;
-        inset:auto;
-        display:none;
-        opacity:1;
-        visibility:visible;
-        pointer-events:auto;
-        padding-bottom:2rem;
-      }
-      .ap-slide.is-on{ display:block; }
-      .ap-slide-square{
-        position:relative;
-        right:auto; top:auto;
-        transform:none;
-        width:100%;
-        max-width:420px;
-        margin:0 0 1.25rem auto;
-      }
-      .ap-slide-copy{
-        position:relative;
-        left:auto; top:auto;
-        width:100%;
-        margin-bottom:1.25rem;
-      }
-      .ap-slide-copy .headline{ max-width:22ch; }
-      .ap-slide-aside{
-        position:relative;
-        left:auto; bottom:auto;
-      }
-    }
-
-    .ap-marquee{
-      overflow:hidden;
-      border-top:1px solid var(--line);
-      border-bottom:1px solid var(--line);
-      padding:.9rem 0;
-      background:#fff;
-    }
-    .ap-marquee-track{
-      display:flex; gap:2rem; width:max-content;
-      will-change:transform;
-      font-size:clamp(1.25rem,2.8vw,1.85rem);
-      color:rgba(15,23,42,.26); letter-spacing:.05em; text-transform:lowercase;
-    }
-    .ap-marquee-track b{ color:var(--blue); font-weight:500; }
-    .ap-marquee-track span{ white-space:nowrap; }
-
-    .ap-services{
-      padding-bottom:0;
-    }
-    .ap-services .lead{
-      margin:0 0 1.75rem; max-width:40rem;
-      color:var(--muted); font-size:15.5px; line-height:1.55; font-weight:300;
-    }
-    .ap-services-intro{
-      padding-bottom:1.5rem;
-    }
-    /* Appy services-sticky: equal sheets, shared top, next slides over */
-    .ap-svc-stack{
-      position:relative;
-    }
-    .ap-svc-sticky{
-      position:sticky;
-      /* Appy uses ~130px — header 72px + air */
-      top:calc(var(--header-h, 72px) + 3.6rem);
-      z-index:1;
-      background:var(--soft);
-      border-top:1px solid var(--line);
-      height:385px;
-      display:flex;
-      align-items:center;
-      padding:5.4rem 0;
-      box-sizing:border-box;
-    }
-    .ap-svc-sticky:last-child{
-      border-bottom:1px solid var(--line);
-    }
-    .ap-svc{
-      display:grid;
-      gap:1.35rem;
-      align-items:start;
-      /* keep .ap-wrap max-width — do not stretch full bleed */
-      width:min(1320px, calc(100% - 1.25rem));
-      margin-left:auto;
-      margin-right:auto;
-    }
-    @media (min-width:900px){
-      .ap-svc{
-        grid-template-columns:minmax(10rem, .85fr) minmax(16rem, 1.45fr) minmax(11rem, 13rem);
-        gap:1.5rem 2.5rem;
-        align-items:center;
-      }
-    }
-    .ap-svc h4{
-      margin:0;
-      font-size:clamp(1.05rem,1.7vw,1.35rem);
-      font-weight:500;
-      color:var(--ink);
-      line-height:1.25;
-    }
-    .ap-svc h4 a{
-      color:inherit;
-      text-decoration:none;
-    }
-    .ap-svc h4 a:hover{ color:var(--blue); }
-    .ap-svc-copy .tag{
-      display:block;
-      margin:0 0 .55rem;
-      color:var(--ink);
-      font-size:clamp(1.15rem,2vw,1.45rem);
-      font-weight:500;
-      line-height:1.2;
-    }
-    .ap-svc-copy p{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-      line-height:1.55;
-      font-weight:300;
-      max-width:34rem;
-    }
-    .ap-svc-visual{
-      justify-self:end;
-      width:clamp(160px, 14vw, 200px);
-      aspect-ratio:1;
-      border-radius:0;
-      overflow:visible;
-      background:transparent;
-      will-change:transform;
-      transform-origin:center center;
-    }
-    .ap-svc-visual img{
-      width:100%; height:100%; object-fit:cover; display:block;
-      border-radius:2px;
-      box-shadow:0 16px 40px rgba(15,23,42,.16);
-    }
-    @media (max-width:899px){
-      .ap-svc-sticky{
-        position:relative;
-        top:auto;
-        height:auto;
-        min-height:0;
-        padding:2rem 0;
-      }
-      .ap-svc-visual{
-        justify-self:start;
-        width:140px;
-      }
-    }
-
-    .ap-impact h3{
-      margin:0 0 1.5rem;
-      font-size:clamp(1.7rem,3.8vw,2.55rem); font-weight:400;
-      max-width:16ch; line-height:1.1;
-    }
-    .ap-impact h3 em{ font-style:normal; border-bottom:2px solid var(--blue); color:var(--blue); }
-    .ap-stats{ display:grid; gap:.85rem; grid-template-columns:1fr 1fr; }
-    @media (min-width:800px){ .ap-stats{ grid-template-columns:repeat(4,1fr); } }
-    .ap-stat{
-      padding:1.15rem 1rem;
-      background:#fff; border:1px solid var(--line); border-radius:.9rem;
-    }
-    .ap-stat strong{ display:block; font-size:clamp(1.55rem,2.8vw,2.1rem); font-weight:500; margin-bottom:.35rem; }
-    .ap-stat span{ font-size:12.5px; color:var(--muted); line-height:1.4; font-weight:300; }
-    .ap-quotes{ display:grid; gap:.85rem; margin-top:1.25rem; }
-    @media (min-width:800px){ .ap-quotes{ grid-template-columns:repeat(3,1fr); } }
-    .ap-quote{ padding:1.15rem; background:#fff; border:1px solid var(--line); border-radius:.9rem; }
-    .ap-quote p{ margin:0 0 .75rem; font-size:14px; line-height:1.5; color:rgba(15,23,42,.8); font-weight:300; }
-    .ap-quote strong{ display:block; font-size:13px; }
-    .ap-quote span{ font-size:12px; color:var(--muted); }
-
-    .ap-process-grid{ display:grid; gap:.85rem; }
-    @media (min-width:800px){ .ap-process-grid{ grid-template-columns:repeat(5,1fr); } }
-    .ap-step{
-      padding:1rem .9rem; background:#fff; border-radius:.9rem;
-      border:1px solid var(--line); border-top-width:3px; border-top-color:var(--blue);
-    }
-    .ap-step b{ display:block; margin-bottom:.35rem; font-size:11px; letter-spacing:.1em; color:var(--blue); }
-    .ap-step strong{ display:block; margin-bottom:.25rem; font-size:14px; font-weight:500; }
-    .ap-step p{ margin:0; font-size:12px; line-height:1.45; color:var(--muted); font-weight:300; }
-
-    .ap-close{
-      padding:4.5rem 0 5rem;
-      border-top:1px solid var(--line);
-      background:#fff;
-      text-align:center;
-    }
-    .ap-close .ap-wrap{ display:grid; justify-items:center; }
-    .ap-close h2{
-      margin:0 0 .9rem;
-      font-size:clamp(2rem,5.5vw,3.8rem);
-      font-weight:400; line-height:.95; letter-spacing:-.03em;
-      max-width:12ch;
-    }
-    .ap-close h2 .super{ display:block; font-size:.32em; color:var(--muted); margin-bottom:.2em; }
-    .ap-close h2 em{ font-style:normal; border-bottom:3px solid var(--blue); color:var(--blue); }
-    .ap-close p{
-      margin:0 0 1.5rem; max-width:30rem;
-      color:var(--muted); font-size:15.5px; line-height:1.55; font-weight:300;
-    }
-
-    [data-ap-reveal]{ opacity:0; transform:translateY(3.5vh); }
-    [data-ap-reveal].is-in{
-      opacity:1; transform:none;
-      transition:opacity .65s ease, transform .7s cubic-bezier(.22,1,.36,1);
-    }
-  </style>
-
-  <section class="ap-hero" data-ap-hero>
-    <div class="ap-hero-inner">
-      <h1 aria-label="We build websites enterprise backends apis platforms products — WEB APP">
-        <span class="super" data-ap-hero-el>(We build)</span>
-        <span class="ap-hero-lines">
-          <span class="ap-hero-line">
-            <span class="pop" data-ap-hero-el><em>w</em>ebsites</span>
-            <span class="pop" data-ap-hero-el><em>e</em>nterprise</span>
-            <span class="pop" data-ap-hero-el><em>b</em>ackends</span>
-            <span class="ap-plus" data-ap-hero-el aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          </span>
-          <span class="ap-hero-line">
-            <span class="pop" data-ap-hero-el><em>a</em>pis</span>
-            <span class="pop" data-ap-hero-el><em>p</em>latforms</span>
-            <span class="pop" data-ap-hero-el><em>p</em>roducts</span>
-          </span>
-        </span>
-      </h1>
-      <div class="ap-hero-foot" data-ap-hero-foot>
-        <p><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></p>
-        <div class="ap-actions">
-          <a class="ap-btn" href="/contact">Let&rsquo;s build something that lasts</a>
-          <a class="ap-textlink" href="#ap-services">How we do it</a>
+<div class="dx dxh" data-dx-page>
+  <section class="dx-hero">
+    <div class="dx-wrap dx-hero-grid">
+      <div class="dx-hero-copy">
+        <nav aria-label="Breadcrumb">
+          <ol class="dx-crumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li aria-current="page">Development</li>
+          </ol>
+        </nav>
+        <p class="dx-label">Development services</p>
+        <h1>Websites, software and online stores, <span>built properly and handed over to you</span></h1>
+        <p class="dx-hero-sub">Business websites, custom web software, CRM setup and Shopify or WooCommerce stores for growing businesses. You get a fixed quote before we start, a preview link to check every week, and one dedicated assistant who keeps the project moving.</p>
+        <div class="dx-ctas">
+          <a class="dx-btn dx-btn-primary dx-hide-lg" href="#dx-brief">Get a free estimate <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+          <a class="dx-btn dx-btn-line" href="#dx-services">See what we build</a>
         </div>
+        <ul class="dx-points">
+          <li><i class="fas fa-check" aria-hidden="true"></i>Fixed quote before any work starts</li>
+          <li><i class="fas fa-check" aria-hidden="true"></i>A preview link to review every week</li>
+          <li><i class="fas fa-check" aria-hidden="true"></i>Code, hosting and logins in your name</li>
+        </ul>
+        <?php if ($phone !== ""): ?>
+        <p class="dx-call">Rather talk it through? Call <a href="tel:<?= ts_h($tel) ?>"><?= ts_h($phone) ?></a> or message us on WhatsApp.</p>
+        <?php endif; ?>
+      </div>
+      <?= $brief ?>
+    </div>
+  </section>
+
+  <section class="dx-sec" id="dx-services">
+    <div class="dx-wrap">
+      <div class="dx-head-row" data-dx-reveal>
+        <div>
+          <p class="dx-label"><b>01</b> What we build</p>
+          <h2>Four kinds of project, one team behind them</h2>
+        </div>
+        <p class="dx-lead">Pick the one closest to what you need. Each page explains what’s included, how the project runs and what you own at the end.</p>
+      </div>
+      <div class="dxh-svcs">
+        <?php foreach ($cards as $slug => $card): if (!isset($services[$slug])) { continue; } $svc = $services[$slug]; ?>
+        <a class="dxh-svc" href="<?= ts_h($svc["href"]) ?>" data-dx-reveal>
+          <figure>
+            <img src="<?= ts_h($card[0]) ?>" alt="<?= ts_h($card[1]) ?>" width="1024" height="512" loading="lazy" decoding="async">
+            <figcaption><?= ts_h($card[2]) ?></figcaption>
+          </figure>
+          <div class="dxh-svc-body">
+            <h3><i class="fas <?= ts_h(TS_DEV_SERVICES[$slug][0]) ?>" aria-hidden="true"></i><?= ts_h($svc["label"]) ?></h3>
+            <p class="dxh-if"><b>Choose this if</b> <?= ts_h($card[3]) ?></p>
+            <ul class="dx-check">
+              <?php foreach ($card[4] as $line): ?>
+              <li><i class="fas fa-check" aria-hidden="true"></i><span><?= ts_h($line) ?></span></li>
+              <?php endforeach; ?>
+            </ul>
+            <span class="dxh-more">See <?= ts_h($svc["label"]) ?> <small><?= ts_h($card[5]) ?></small> <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </div>
+        </a>
+        <?php endforeach; ?>
+      </div>
+      <div class="dxh-unsure" data-dx-reveal>
+        <p><strong>Not sure which one you need?</strong> Many projects are a mix, like a website with bookings or a store that feeds a CRM. Describe the problem and we’ll suggest the simplest way to solve it.</p>
+        <a class="dx-btn dx-btn-dark" href="#dx-brief">Describe your project</a>
       </div>
     </div>
   </section>
 
-  <section class="ap-sec">
-    <div class="ap-wrap">
-      <div class="ap-kicker" data-ap-reveal><strong>1 — 4</strong><span>Why development matters</span></div>
-      <div class="ap-intro">
-        <h2 data-ap-reveal>Great products aren&rsquo;t defined by features alone.</h2>
-        <div data-ap-reveal>
-          <p>AI changed how we build. In a saturated landscape ruled by shipping for speed alone, ScaleSphere helps teams build development work grounded in architecture, clarity and long-term maintainability.</p>
-          <p>Not just optimising for delivery — creating systems people trust because they keep working as you scale.</p>
-          <a class="ap-textlink" href="#ap-show">Featured work â†“</a>
+  <section class="dx-sec paper" id="dx-process">
+    <div class="dx-wrap">
+      <div class="dx-head-row" data-dx-reveal>
+        <div>
+          <p class="dx-label"><b>02</b> How we work</p>
+          <h2>The same clear process on every project</h2>
         </div>
+        <p class="dx-lead">Whether it’s a 5-page website or a custom portal, you always know the price, the next date and what we need from you.</p>
       </div>
+      <ol class="dxh-flow">
+        <?php foreach ($steps as $step): ?>
+        <li data-dx-reveal>
+          <span class="dx-when"><?= ts_h($step[0]) ?></span>
+          <h3><?= ts_h($step[1]) ?></h3>
+          <p><?= ts_h($step[2]) ?></p>
+        </li>
+        <?php endforeach; ?>
+      </ol>
+      <ul class="dxh-rules">
+        <?php foreach ($rules as $r): ?>
+        <li data-dx-reveal><i class="fas <?= ts_h($r[0]) ?>" aria-hidden="true"></i><div><strong><?= ts_h($r[1]) ?></strong><span><?= ts_h($r[2]) ?></span></div></li>
+        <?php endforeach; ?>
+      </ul>
     </div>
   </section>
 
-  <section class="ap-show" id="ap-show" data-ap-show>
-    <div class="ap-show-sticky">
-      <div class="ap-show-bar">
-        <span>Featured projects</span>
-        <strong>2 — 4</strong>
+  <section class="dx-band" id="dx-assistant">
+    <div class="dx-wrap dx-band-grid">
+      <div data-dx-reveal>
+        <p class="dx-label"><b>03</b> Your dedicated assistant</p>
+        <h2>Developers write the code. Your assistant makes sure nothing stalls.</h2>
+        <p class="dx-lead">Most projects slow down while waiting for content, feedback or a decision. Your assistant collects what’s needed, books the reviews, sends the preview link and chases anything that’s stuck, so you never have to chase a developer.</p>
+        <ul class="dx-va">
+          <li><i class="fas fa-link" aria-hidden="true"></i><div><strong>Weekly preview link</strong><span>See real progress every week, not a presentation at the end.</span></div></li>
+          <li><i class="fas fa-comments" aria-hidden="true"></i><div><strong>One person to message</strong><span>Questions answered on email or WhatsApp during working hours.</span></div></li>
+          <li><i class="fas fa-clipboard-list" aria-hidden="true"></i><div><strong>Every change written down</strong><span>Feedback tracked in one list, with any extra cost agreed first.</span></div></li>
+          <li><i class="fas fa-calendar-check" aria-hidden="true"></i><div><strong>Dates you can plan around</strong><span>Milestones agreed up front and flagged early if anything slips.</span></div></li>
+        </ul>
       </div>
-      <div class="ap-show-stage">
-        <?php foreach ($featured as $i => $item): ?>
-        <article class="ap-slide<?= $i === 0 ? " is-on" : "" ?>" data-ap-slide data-index="<?= (int) $i ?>">
-          <div class="ap-slide-square" aria-hidden="true">
-            <img src="<?= ts_h($item["img"]) ?>" alt="" loading="<?= $i === 0 ? "eager" : "lazy" ?>" decoding="async" width="900" height="900">
-          </div>
-          <div class="ap-slide-copy">
-            <p class="name"><a href="<?= ts_h($item["href"]) ?>"><?= ts_h($item["label"]) ?></a></p>
-            <h3 class="headline"><?= ts_h($item["blurb"]) ?></h3>
-          </div>
-          <div class="ap-slide-aside">
-            <div class="ap-slide-thumb" aria-hidden="true">
-              <img src="<?= ts_h($item["thumb"]) ?>" alt="" loading="lazy" decoding="async" width="400" height="400">
-            </div>
-            <p class="ap-slide-metric"><?= ts_h($item["meta"]) ?></p>
-          </div>
-        </article>
+      <div data-dx-reveal><?= ts_dev_update("Online store project update", [
+          "Product and collection pages ready on your preview store",
+          "Razorpay payments and COD tested with real orders",
+          "Shipping rates set up for your three delivery zones",
+      ], [
+          "Import the remaining 80 products with variants",
+          "Need from you: return policy text and GST number",
+      ]) ?></div>
+    </div>
+  </section>
+
+  <section class="dx-sec" id="dx-stack">
+    <div class="dx-wrap">
+      <div class="dx-head-row" data-dx-reveal>
+        <div>
+          <p class="dx-label"><b>04</b> Tools we build with</p>
+          <h2>Proven platforms, chosen for your project</h2>
+        </div>
+        <p class="dx-lead">We pick what fits your budget and your team, and we’ll tell you plainly when Shopify or Zoho will serve you better than custom code.</p>
+      </div>
+      <div class="dxh-stack" data-dx-reveal>
+        <?php foreach ($stack as $group): ?>
+        <div>
+          <h3><?= ts_h($group[0]) ?></h3>
+          <ul><?php foreach ($group[1] as $t): ?><li><?= ts_h($t) ?></li><?php endforeach; ?></ul>
+        </div>
+        <?php endforeach; ?>
+      </div>
+      <p class="dxh-stack-note" data-dx-reveal>Hosted on AWS, DigitalOcean or your existing provider, with Cloudflare, SSL and backups set up before launch.</p>
+    </div>
+  </section>
+
+  <section class="dx-sec paper" id="dx-faq">
+    <div class="dx-wrap dx-faq-grid">
+      <div class="dx-faq-side" data-dx-reveal>
+        <p class="dx-label"><b>05</b> FAQ</p>
+        <h2>Questions clients ask before starting</h2>
+        <?= ts_dev_help() ?>
+      </div>
+      <div class="dx-faq">
+        <?php foreach ($faqs as $i => $faq): ?>
+        <details<?= $i === 0 ? " open" : "" ?>>
+          <summary><?= ts_h($faq[0]) ?></summary>
+          <p><?= ts_h($faq[1]) ?></p>
+        </details>
         <?php endforeach; ?>
       </div>
     </div>
   </section>
 
-  <div class="ap-marquee" aria-hidden="true">
-    <div class="ap-marquee-track" data-ap-marquee>
-      <?php for ($r = 0; $r < 2; $r++): ?>
-        <span>end <b>to</b> end</span>
-        <span>build <b>to</b> ship</span>
-        <span>code <b>to</b> cloud</span>
-        <span>end <b>to</b> end</span>
-        <span>build <b>to</b> ship</span>
-        <span>code <b>to</b> cloud</span>
-      <?php endfor; ?>
-    </div>
-  </div>
-
-  <section class="ap-sec ap-services" id="ap-services">
-    <div class="ap-wrap ap-services-intro">
-      <div class="ap-kicker" data-ap-reveal><strong>3 — 4</strong><span>What we do</span></div>
-      <h3 style="margin:0 0 .65rem;font-size:clamp(1.5rem,3.2vw,2.15rem);font-weight:400" data-ap-reveal>Our end-to-end development stack</h3>
-      <p class="lead" data-ap-reveal>Every part of the build works together — so what you ship is coherent, maintainable and ready to grow.</p>
-    </div>
-
-    <div class="ap-svc-stack">
-      <?php foreach ($services as $si => $svc):
-          $rich = ts_service_rich($svc);
-          $pair = $tags[$svc["label"]] ?? ["We make it work", $rich["lead"]];
-          $img = $svcImages[$svc["label"]] ?? $pool[$si % count($pool)];
-      ?>
-      <article class="ap-svc-sticky" data-ap-svc style="z-index:<?= (int) ($si + 1) ?>">
-        <div class="ap-wrap ap-svc">
-          <h4><a href="<?= ts_h($svc["href"]) ?>"><?= ts_h($svc["label"]) ?></a></h4>
-          <div class="ap-svc-copy">
-            <span class="tag"><?= ts_h($pair[0]) ?></span>
-            <p><?= ts_h($pair[1]) ?></p>
-          </div>
-          <div class="ap-svc-visual" data-ap-svc-img aria-hidden="true">
-            <img src="<?= ts_h($img) ?>" alt="" loading="lazy" decoding="async" width="400" height="400">
-          </div>
+  <section class="dx-close">
+    <div class="dx-wrap dx-close-grid">
+      <div data-dx-reveal>
+        <h2>Have a project in mind?</h2>
+        <p class="dx-lead">Send a few lines about it. You’ll get a rough budget range, a realistic timeline and our honest view on the right platform, with no obligation.</p>
+        <div class="dx-ctas">
+          <a class="dx-btn dx-btn-primary" href="#dx-brief">Get my free estimate <i class="fas fa-arrow-up" aria-hidden="true"></i></a>
+          <a class="dx-btn dx-btn-line" href="/our-work">See our work</a>
         </div>
-      </article>
-      <?php endforeach; ?>
-    </div>
-  </section>
-
-  <section class="ap-sec ap-impact">
-    <div class="ap-wrap">
-      <div class="ap-kicker" data-ap-reveal><strong>4 — 4</strong><span>Measurable delivery</span></div>
-      <h3 data-ap-reveal>The <em>impact</em> of building properly</h3>
-      <div class="ap-stats">
-        <?php foreach ($impacts as $row): ?>
-        <div class="ap-stat" data-ap-reveal>
-          <strong><?= ts_h($row[0]) ?></strong>
-          <span><?= ts_h($row[1]) ?></span>
-        </div>
-        <?php endforeach; ?>
+        <p class="dx-meta">No obligation · Reply within one working day</p>
       </div>
-      <div class="ap-quotes">
-        <?php foreach ($hub["testimonials"] as $row): ?>
-        <blockquote class="ap-quote" data-ap-reveal>
-          <p>&ldquo;<?= ts_h($row[0]) ?>&rdquo;</p>
-          <footer>
-            <strong><?= ts_h($row[1]) ?></strong>
-            <span><?= ts_h($row[2]) ?></span>
-          </footer>
-        </blockquote>
-        <?php endforeach; ?>
+      <div data-dx-reveal>
+        <p class="dx-rel-title">Or go straight to a service</p>
+        <ul class="dx-rels">
+          <?php foreach ($services as $slug => $svc): $meta = TS_DEV_SERVICES[$slug] ?? ["fa-code", "Development service"]; ?>
+          <li><a class="dx-rel" href="<?= ts_h($svc["href"]) ?>">
+            <i class="fas <?= ts_h($meta[0]) ?>" aria-hidden="true"></i>
+            <span><strong><?= ts_h($svc["label"]) ?></strong><small><?= ts_h($meta[1]) ?></small></span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a></li>
+          <?php endforeach; ?>
+        </ul>
       </div>
-    </div>
-  </section>
-
-  <?php if (!empty($hub["process"])): ?>
-  <section class="ap-sec">
-    <div class="ap-wrap">
-      <div class="ap-kicker" data-ap-reveal><strong>Process</strong><span>How we ship</span></div>
-      <div class="ap-process-grid">
-        <?php foreach ($hub["process"] as $i => $step): ?>
-        <div class="ap-step" data-ap-reveal>
-          <b><?= str_pad((string) ($i + 1), 2, "0", STR_PAD_LEFT) ?></b>
-          <strong><?= ts_h($step[0]) ?></strong>
-          <p><?= ts_h($step[1]) ?></p>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-
-  <section class="ap-close">
-    <div class="ap-wrap">
-      <h2 data-ap-reveal>
-        <span class="super">(Let&rsquo;s build)</span>
-        something<br>that <em>lasts</em>
-      </h2>
-      <p data-ap-reveal>The future belongs to tech people can rely on. Tell us what you&rsquo;re building — websites, software, CRM, integrations or cloud.</p>
-      <a class="ap-btn" data-ap-reveal href="/contact">Get in touch</a>
     </div>
   </section>
 </div>
-
-<script>
-(() => {
-  const root = document.querySelector("[data-ap-dev]");
-  if (!root) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const desktop = window.matchMedia("(min-width: 900px)").matches;
-
-  /* Reveals */
-  const reveals = [...root.querySelectorAll("[data-ap-reveal]")];
-  if (reduce) {
-    reveals.forEach((el) => el.classList.add("is-in"));
-  } else if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        e.target.classList.add("is-in");
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
-    reveals.forEach((el) => io.observe(el));
-  } else {
-    reveals.forEach((el) => el.classList.add("is-in"));
-  }
-
-  if (!window.gsap) return;
-  if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
-
-  /* Hero — rise + WEB APP letter settle */
-  const heroEls = [...root.querySelectorAll("[data-ap-hero-el]")];
-  const heroFoot = root.querySelector("[data-ap-hero-foot]");
-  const heroMarks = [...root.querySelectorAll(".ap-hero em")];
-  if (heroEls.length) {
-    if (reduce) {
-      gsap.set([...heroEls, heroFoot].filter(Boolean), { clearProps: "all" });
-    } else {
-      gsap.set(heroEls, { yPercent: 110, opacity: 0 });
-      if (heroFoot) gsap.set(heroFoot, { y: 28, opacity: 0 });
-      gsap.set(heroMarks, { opacity: 0.25 });
-
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.to(heroEls, {
-        yPercent: 0,
-        opacity: 1,
-        duration: 0.95,
-        stagger: 0.07,
-      })
-      .to(heroMarks, {
-        opacity: 1,
-        duration: 0.55,
-        stagger: 0.08,
-        ease: "power2.out",
-      }, "-=0.45")
-      .to(heroFoot, {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-      }, "-=0.35");
-
-      const plusDots = root.querySelectorAll(".ap-hero .ap-plus i");
-      if (plusDots.length) {
-        gsap.fromTo(plusDots,
-          { scale: 0.4, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.45, stagger: 0.04, ease: "back.out(1.6)", delay: 0.55 }
-        );
-      }
-    }
-  }
-
-  /* Services thumbs — Appy scrub: rise from below + unwind rotate into place */
-  const svcImgs = [...root.querySelectorAll("[data-ap-svc-img]")];
-  if (svcImgs.length) {
-    if (reduce) {
-      svcImgs.forEach((el) => {
-        gsap.set(el, { y: 0, rotate: 0 });
-        el.classList.add("is-in");
-      });
-    } else if (window.ScrollTrigger) {
-      svcImgs.forEach((el, i) => {
-        const settle = i % 2 === 0 ? -8 : 7;
-        const row = el.closest("[data-ap-svc]") || el;
-        gsap.fromTo(el,
-          { y: "30vh", rotate: settle > 0 ? 16 : -16 },
-          {
-            y: 0,
-            rotate: settle,
-            ease: "none",
-            scrollTrigger: {
-              /* Settle before / as the sheet sticks (Appy Webflow scrub) */
-              trigger: row,
-              start: "top 88%",
-              end: "top 55%",
-              scrub: window.__ssScrub ?? 0.55,
-              onUpdate: (self) => {
-                if (self.progress > 0.7) el.classList.add("is-in");
-              },
-            },
-          }
-        );
-        el.addEventListener("mouseenter", () => {
-          if (!el.classList.contains("is-in")) return;
-          gsap.to(el, { rotate: 0, duration: 0.4, ease: "power2.out", overwrite: "auto" });
-        });
-        el.addEventListener("mouseleave", () => {
-          gsap.to(el, { rotate: settle, duration: 0.45, ease: "power2.out", overwrite: "auto" });
-        });
-      });
-    } else {
-      svcImgs.forEach((el) => el.classList.add("is-in"));
-    }
-  }
-
-  /* Marquee */
-  const marquee = root.querySelector("[data-ap-marquee]");
-  if (marquee && !reduce) {
-    gsap.to(marquee, {
-      x: () => -(marquee.scrollWidth / 2),
-      duration: 26,
-      ease: "none",
-      repeat: -1,
-    });
-  }
-
-  /* Sticky showcase scrub — Appy full-viewport slides */
-  const show = root.querySelector("[data-ap-show]");
-  const slides = [...root.querySelectorAll("[data-ap-slide]")];
-  let active = 0;
-  const setSlide = (index) => {
-    if (index === active) return;
-    active = index;
-    slides.forEach((s, i) => s.classList.toggle("is-on", i === index));
-  };
-
-  if (show && slides.length && desktop && window.ScrollTrigger && !reduce) {
-    ScrollTrigger.create({
-      trigger: show,
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-      onUpdate: (self) => {
-        const i = Math.min(slides.length - 1, Math.floor(self.progress * slides.length));
-        setSlide(i);
-      },
-    });
-  } else if (slides.length > 1 && !reduce) {
-    setInterval(() => setSlide((active + 1) % slides.length), 4200);
-  }
-})();
-</script>
+<?= ts_dev_reveal_script() ?>
 <?php
-    ts_layout($hub["title"], ob_get_clean(), [
-        "description" => $hub["lead"],
+    ts_layout($title, (string) ob_get_clean(), [
+        "description" => $desc,
         "path" => $hub["href"],
-        "bodyClass" => "page-services page-hub-development page-ap-dev",
+        "bodyClass" => "page-services page-hub-development page-dev-service",
+        "jsonld" => $jsonld,
+        "image" => ts_og_image("/images/dev/website-build.jpg"),
     ]);
 }

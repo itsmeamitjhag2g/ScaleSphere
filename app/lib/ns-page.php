@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * NetSuite Integration — SuiteScript, connectors, migration, order-to-cash.
- * Same Development tokens (#1C4FD6, Funnel Display) as WD/SD/CRM/SP,
+ * Same Development tokens (#1F7A5A, Funnel Display) as WD/SD/CRM/SP,
  * different composition: copy-left + sync-console right; opposite-line slides.
  */
 function ts_render_ns_service_page(array $service): void
@@ -108,7 +108,7 @@ function ts_render_ns_service_page(array $service): void
         ["How long does a project take?", "A focused connector often lands in 4–8 weeks. Multi-channel + migration is milestone-based after discovery."],
     ];
 
-    $pageTitle = "NetSuite Integration | SuiteScript, Sync & Order-to-Cash — ScaleSphere";
+    $pageTitle = "NetSuite Integration & Customization | ScaleSphere";
     $pageDesc = "NetSuite customization and integration — SuiteScript, Shopify/CRM/WMS connectors, data migration, order-to-cash automation and reconciliation you can trust.";
     $canonical = $service["href"];
 
@@ -157,13 +157,13 @@ function ts_render_ns_service_page(array $service): void
   <style>
     .apns{
       --ink:#0F172A;
-      --soft:#F6F7F9;
-      --blue:#1C4FD6;
-      --blue-d:#163AA8;
+      --soft:#FFFEFA;
+      --blue:#1F7A5A;
+      --blue-d:#16604A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --white:#fff;
-      --tint:#EEF3FF;
+      --tint:#E6F1EA;
       background:var(--soft);
       color:var(--ink);
       font-family:"Funnel Display",Montserrat,sans-serif;
@@ -189,7 +189,7 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-hero::before{
       content:""; position:absolute; inset:8% 0 auto auto; width:min(48vw,420px); height:min(48vw,420px);
-      background:radial-gradient(circle, rgba(28,79,214,.12), transparent 68%);
+      background:linear-gradient(transparent,transparent);
       pointer-events:none;
     }
     .apns-hero-grid{
@@ -201,13 +201,13 @@ function ts_render_ns_service_page(array $service): void
 
     .apns-crumb{
       display:flex; flex-wrap:wrap; gap:.35rem; align-items:center;
-      font-size:12px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(12px, .75rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .apns-crumb a{ color:var(--muted); text-decoration:none; }
     .apns-crumb a:hover{ color:var(--blue); }
     .apns-eyebrow{
       margin:0 0 .85rem; font-family:"IBM Plex Mono",monospace;
-      font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue);
+      font-size:max(11px, .6875rem); font-weight:600; letter-spacing:.14em; text-transform:uppercase; color:var(--blue);
     }
     .apns-hero h1{
       margin:0 0 1rem; font-size:clamp(2.15rem,5.2vw,3.55rem);
@@ -227,16 +227,16 @@ function ts_render_ns_service_page(array $service): void
     .apns-btn{
       display:inline-flex; align-items:center; justify-content:center;
       padding:.85rem 1.35rem; border-radius:999px; background:var(--blue); color:#fff;
-      text-decoration:none; font-weight:500; font-size:14.5px;
+      text-decoration:none; font-weight:500; font-size:.9062rem;
       transition:filter .2s, transform .2s;
     }
     .apns-btn:hover{ filter:brightness(1.05); transform:translateY(-2px); color:#fff; }
     .apns-textlink{
-      color:var(--ink); font-size:14.5px; font-weight:500;
+      color:var(--ink); font-size:.9062rem; font-weight:500;
       text-decoration:underline; text-underline-offset:.18em;
     }
     .apns-textlink:hover{ color:var(--blue); }
-    .apns-trust{ margin:1rem 0 0; font-size:12.5px; color:rgba(15,23,42,.45); }
+    .apns-trust{ margin:1rem 0 0; font-size:max(12px, .7812rem); color:rgba(15,23,42,.45); }
 
     /* Sync console — ops-style, not orbit diagram */
     .apns-viz{
@@ -248,7 +248,7 @@ function ts_render_ns_service_page(array $service): void
       display:flex; justify-content:space-between; align-items:center; gap:.75rem;
       padding:.65rem .9rem;
       border-bottom:1px solid var(--line);
-      background:linear-gradient(90deg, rgba(28,79,214,.06), transparent 55%), #FAFBFC;
+      background:linear-gradient(90deg, rgba(31,122,90,.06), transparent 55%), #FAFBFC;
     }
     .apns-viz-top-left{ display:flex; align-items:center; gap:.55rem; min-width:0; }
     .apns-viz-mark{
@@ -257,19 +257,19 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-viz-mark img{ display:block; width:100%; height:100%; object-fit:cover; opacity:.9; }
     .apns-viz-top span{
-      font-family:"IBM Plex Mono",monospace; font-size:9.5px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(9.5px, .5938rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--muted); display:block;
     }
     .apns-viz-top strong{
-      display:block; font-size:12.5px; font-weight:600; color:var(--ink); margin-top:.05rem;
+      display:block; font-size:max(12px, .7812rem); font-weight:600; color:var(--ink); margin-top:.05rem;
     }
     .apns-viz-live{
       display:inline-flex; align-items:center; gap:.35rem;
-      font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10.5px, .6562rem); font-weight:600;
       color:var(--blue); white-space:nowrap;
     }
     .apns-viz-live i{
-      width:7px; height:7px; border-radius:50%; background:#22C55E;
+      width:7px; height:7px; border-radius:50%; background:#3AAD64;
       box-shadow:0 0 0 0 rgba(34,197,94,.55);
       animation:apnsLive 1.8s ease-out infinite;
     }
@@ -286,7 +286,7 @@ function ts_render_ns_service_page(array $service): void
       border-bottom:1px solid var(--line);
       background:#fff; transition:background .25s;
     }
-    .apns-job.is-on{ background:linear-gradient(90deg, rgba(28,79,214,.06), #fff 70%); }
+    .apns-job.is-on{ background:linear-gradient(90deg, rgba(31,122,90,.06), #fff 70%); }
     .apns-job-head{
       display:flex; align-items:center; justify-content:space-between; gap:.6rem;
     }
@@ -294,34 +294,34 @@ function ts_render_ns_service_page(array $service): void
     .apns-job-ico{
       width:26px; height:26px; border-radius:7px; flex-shrink:0;
       display:grid; place-items:center;
-      background:var(--soft); color:var(--blue); font-size:10px;
+      background:var(--soft); color:var(--blue); font-size:max(10px, .625rem);
       border:1px solid var(--line);
     }
     .apns-job.is-on .apns-job-ico{
-      background:rgba(28,79,214,.12); border-color:rgba(28,79,214,.25);
+      background:rgba(31,122,90,.12); border-color:rgba(31,122,90,.25);
     }
-    .apns-job-app b{ display:block; font-size:12.5px; font-weight:600; line-height:1.2; }
+    .apns-job-app b{ display:block; font-size:max(12px, .7812rem); font-weight:600; line-height:1.2; }
     .apns-job-app small{
-      display:block; font-size:10px; color:var(--muted); font-weight:400; margin-top:.05rem;
+      display:block; font-size:max(10px, .625rem); color:var(--muted); font-weight:400; margin-top:.05rem;
     }
     .apns-job-meta{
       display:flex; flex-direction:column; align-items:flex-end; gap:.15rem;
-      font-family:"IBM Plex Mono",monospace; font-size:9.5px; color:var(--muted);
+      font-family:"IBM Plex Mono",monospace; font-size:max(9.5px, .5938rem); color:var(--muted);
     }
     .apns-job-status{
       display:inline-flex; align-items:center; gap:.25rem;
       padding:.15rem .4rem; border-radius:999px;
-      font-size:9.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+      font-size:max(9.5px, .5938rem); font-weight:700; letter-spacing:.04em; text-transform:uppercase;
       background:var(--soft); color:var(--muted);
     }
     .apns-job-status::before{
       content:""; width:5px; height:5px; border-radius:50%; background:currentColor;
     }
-    .apns-job[data-state="ok"] .apns-job-status{ background:rgba(34,197,94,.12); color:#15803D; }
-    .apns-job[data-state="sync"] .apns-job-status{ background:rgba(28,79,214,.12); color:var(--blue); }
+    .apns-job[data-state="ok"] .apns-job-status{ background:rgba(34,197,94,.12); color:#257041; }
+    .apns-job[data-state="sync"] .apns-job-status{ background:rgba(31,122,90,.12); color:var(--blue); }
     .apns-job[data-state="idle"] .apns-job-status{ background:rgba(15,23,42,.06); color:var(--muted); }
     .apns-job.is-on .apns-job-status{
-      background:rgba(28,79,214,.12); color:var(--blue);
+      background:rgba(31,122,90,.12); color:var(--blue);
     }
 
     .apns-pipe{
@@ -329,7 +329,7 @@ function ts_render_ns_service_page(array $service): void
       display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:.4rem;
     }
     .apns-pipe-end{
-      font-family:"IBM Plex Mono",monospace; font-size:9px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(9px, .5625rem); font-weight:600;
       letter-spacing:.03em; color:var(--muted); max-width:4.5rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
     }
     .apns-pipe-end.is-ns{ color:var(--blue); text-align:right; max-width:none; }
@@ -339,7 +339,7 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-pipe-fill{
       position:absolute; inset:0 auto 0 0; width:0; border-radius:inherit;
-      background:linear-gradient(90deg, rgba(28,79,214,.35), var(--blue));
+      background:linear-gradient(90deg, rgba(31,122,90,.35), var(--blue));
       transition:width .6s ease;
     }
     .apns-job.is-on .apns-pipe-fill{ width:72%; }
@@ -347,7 +347,7 @@ function ts_render_ns_service_page(array $service): void
       position:absolute; top:50%; left:0; width:8px; height:8px;
       margin-top:-4px; margin-left:-4px;
       border-radius:50%; background:var(--blue);
-      box-shadow:0 0 0 3px rgba(28,79,214,.2);
+      box-shadow:0 0 0 3px rgba(31,122,90,.2);
       opacity:0;
     }
     .apns-job.is-on .apns-pipe-pkt{
@@ -371,7 +371,7 @@ function ts_render_ns_service_page(array $service): void
     .apns-ledger{ padding:.7rem .9rem .8rem; background:#F8FAFC; }
     .apns-ledger-label{
       display:flex; justify-content:space-between; align-items:baseline; gap:.75rem;
-      font-family:"IBM Plex Mono",monospace; font-size:9.5px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(9.5px, .5938rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:.5rem;
     }
     .apns-ledger-label b{ color:var(--blue); letter-spacing:.04em; font-weight:600; }
@@ -379,23 +379,23 @@ function ts_render_ns_service_page(array $service): void
     .apns-led{
       padding:.4rem .25rem;
       border-radius:8px; text-align:center;
-      font-size:11px; font-weight:600;
+      font-size:max(11px, .6875rem); font-weight:600;
       background:#fff; border:1px solid var(--line); color:var(--muted);
       transition:border-color .25s, color .25s, background .25s, box-shadow .25s;
     }
     .apns-led small{ display:none; }
     .apns-led.is-on{
-      background:rgba(28,79,214,.08); color:var(--blue);
-      border-color:rgba(28,79,214,.4);
-      box-shadow:0 4px 12px rgba(28,79,214,.1);
+      background:rgba(31,122,90,.08); color:var(--blue);
+      border-color:rgba(31,122,90,.4);
+      box-shadow:0 4px 12px rgba(31,122,90,.1);
     }
     .apns-led.is-done{
-      background:rgba(34,197,94,.08); color:#15803D;
+      background:rgba(34,197,94,.08); color:#257041;
       border-color:rgba(34,197,94,.35);
     }
     .apns-log{
       margin:.5rem 0 0;
-      font-family:"IBM Plex Mono",monospace; font-size:10.5px; line-height:1.4;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10.5px, .6562rem); line-height:1.4;
       color:rgba(15,23,42,.55); min-height:2.2em;
     }
     .apns-log em{ font-style:normal; color:var(--blue); font-weight:600; }
@@ -405,7 +405,7 @@ function ts_render_ns_service_page(array $service): void
       padding:0 1rem 2.25rem; width:min(1320px, calc(100% - 1.25rem)); margin:0 auto;
     }
     .apns-chip{
-      padding:.4rem .85rem; border-radius:999px; font-size:12px; font-weight:500;
+      padding:.4rem .85rem; border-radius:999px; font-size:max(12px, .75rem); font-weight:500;
       background:#fff; border:1px solid var(--line); color:var(--muted);
       transition:background .25s, color .25s, border-color .25s;
     }
@@ -423,10 +423,10 @@ function ts_render_ns_service_page(array $service): void
       display:flex; flex-wrap:wrap; gap:.65rem; align-items:baseline; margin-bottom:.85rem;
     }
     .apns-kicker strong{
-      font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); font-weight:600;
       letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
     }
-    .apns-kicker span{ font-size:13px; color:var(--muted); font-weight:300; }
+    .apns-kicker span{ font-size:max(12px, .8125rem); color:var(--muted); font-weight:300; }
     .apns-sec h2{
       margin:0 0 .75rem; font-size:clamp(1.75rem,3.6vw,2.55rem);
       font-weight:500; letter-spacing:-.03em; max-width:18ch;
@@ -434,11 +434,11 @@ function ts_render_ns_service_page(array $service): void
     .apns-sec h2 em{ font-style:normal; color:var(--blue); }
     .apns-lead{
       margin:0 0 1.75rem; max-width:36rem;
-      font-size:15.5px; line-height:1.55; color:var(--muted); font-weight:300;
+      font-size:.9688rem; line-height:1.55; color:var(--muted); font-weight:300;
     }
 
     /* Left-rule pain list */
-    .apns-pain{ display:grid; gap:0; max-width:700px; border-left:2px solid rgba(28,79,214,.35); }
+    .apns-pain{ display:grid; gap:0; max-width:700px; border-left:2px solid rgba(31,122,90,.35); }
     .apns-pain article{
       display:flex; gap:.9rem; padding:1.05rem 0 1.05rem 1.25rem;
       background:transparent; border:none; border-radius:0;
@@ -446,13 +446,13 @@ function ts_render_ns_service_page(array $service): void
       transition:padding-left .25s, background .25s;
     }
     .apns-pain article:last-child{ border-bottom:none; }
-    .apns-pain article:hover{ padding-left:1.5rem; background:rgba(28,79,214,.04); }
+    .apns-pain article:hover{ padding-left:1.5rem; background:rgba(31,122,90,.04); }
     .apns-pain .ix{
       font-family:"IBM Plex Mono",monospace; font-size:1.2rem; font-weight:600;
       color:var(--blue); flex-shrink:0; line-height:1;
     }
     .apns-pain h3{ margin:0 0 .35rem; font-size:1.05rem; font-weight:500; }
-    .apns-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); font-weight:300; }
+    .apns-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); font-weight:300; }
 
     .apns-grid{
       display:grid; gap:.85rem;
@@ -464,11 +464,11 @@ function ts_render_ns_service_page(array $service): void
     .apns-sec.band .apns-card{ background:var(--soft); }
     .apns-sec:not(.band) .apns-card{ background:#fff; }
     .apns-card .num{
-      font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); font-weight:600;
       color:var(--blue); letter-spacing:.08em;
     }
     .apns-card h3{ margin:.45rem 0 .4rem; font-size:1.1rem; font-weight:500; }
-    .apns-card p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); font-weight:300; }
+    .apns-card p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); font-weight:300; }
 
     .apns-otc{
       display:grid; gap:.65rem;
@@ -481,11 +481,11 @@ function ts_render_ns_service_page(array $service): void
     .apns-otc .code{
       display:inline-flex; align-items:center; justify-content:center;
       width:2.4rem; height:2.4rem; border-radius:50%; margin-bottom:.55rem;
-      background:var(--tint); color:var(--blue); font-weight:600; font-size:12px;
+      background:var(--tint); color:var(--blue); font-weight:600; font-size:max(12px, .75rem);
       font-family:"IBM Plex Mono",monospace;
     }
     .apns-otc h3{ margin:0 0 .25rem; font-size:1rem; font-weight:500; }
-    .apns-otc p{ margin:0; font-size:12.5px; color:var(--muted); font-weight:300; }
+    .apns-otc p{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); font-weight:300; }
 
     /* Zigzag process */
     .apns-steps{ display:grid; gap:1rem; max-width:800px; margin:0 auto; }
@@ -502,10 +502,10 @@ function ts_render_ns_service_page(array $service): void
     .apns-step:nth-child(even):hover{ transform:translateX(-4px); }
     .apns-sec.band .apns-step{ background:var(--soft); }
     .apns-step b{
-      font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--blue); font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); color:var(--blue); font-weight:600;
     }
-    .apns-step strong{ display:block; margin:.35rem 0 .3rem; font-size:15px; font-weight:500; }
-    .apns-step p{ margin:0; font-size:13px; line-height:1.45; color:var(--muted); font-weight:300; }
+    .apns-step strong{ display:block; margin:.35rem 0 .3rem; font-size:.9375rem; font-weight:500; }
+    .apns-step p{ margin:0; font-size:max(12px, .8125rem); line-height:1.45; color:var(--muted); font-weight:300; }
 
     .apns-del{
       list-style:none; padding:0; margin:0;
@@ -515,7 +515,7 @@ function ts_render_ns_service_page(array $service): void
     .apns-del li{
       display:flex; gap:.65rem; align-items:flex-start;
       padding:.85rem 1rem; background:#fff; border:1px solid var(--line); border-radius:12px;
-      font-size:14px; font-weight:400;
+      font-size:.875rem; font-weight:400;
     }
     .apns-del li::before{
       content:""; width:9px; height:9px; margin-top:.4rem; flex-shrink:0;
@@ -534,10 +534,10 @@ function ts_render_ns_service_page(array $service): void
       color:var(--blue); letter-spacing:-.03em; margin-bottom:.3rem;
     }
     .apns-metric span{
-      display:block; font-size:12px; font-weight:600; letter-spacing:.06em;
+      display:block; font-size:max(12px, .75rem); font-weight:600; letter-spacing:.06em;
       text-transform:uppercase; margin-bottom:.4rem;
     }
-    .apns-metric p{ margin:0; font-size:13.5px; color:var(--muted); font-weight:300; line-height:1.45; }
+    .apns-metric p{ margin:0; font-size:.8438rem; color:var(--muted); font-weight:300; line-height:1.45; }
 
     /* Featured strip packages */
     .apns-pkgs{
@@ -552,22 +552,22 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-pkg:hover{ transform:translateY(-4px); }
     .apns-pkg.is-hot{
-      border-color:rgba(28,79,214,.45);
-      box-shadow:0 18px 44px rgba(28,79,214,.12);
-      background:linear-gradient(160deg, rgba(28,79,214,.06), #fff 50%);
+      border-color:rgba(31,122,90,.45);
+      box-shadow:0 18px 44px rgba(31,122,90,.12);
+      background:linear-gradient(160deg, rgba(31,122,90,.06), #fff 50%);
     }
     .apns-pkg .tag{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .apns-pkg h3{ margin:0; font-size:1.25rem; font-weight:500; }
     .apns-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.4rem; flex:1; }
-    .apns-pkg li{ display:flex; gap:.5rem; font-size:13.5px; color:var(--muted); }
+    .apns-pkg li{ display:flex; gap:.5rem; font-size:.8438rem; color:var(--muted); }
     .apns-pkg li::before{
       content:""; width:6px; height:6px; border-radius:50%; background:var(--blue);
       margin-top:.45rem; flex-shrink:0;
     }
-    .apns-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); font-weight:300; }
+    .apns-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); font-weight:300; }
 
     /* Two-column FAQ */
     .apns-faq{ display:grid; gap:.75rem; max-width:none; }
@@ -575,17 +575,17 @@ function ts_render_ns_service_page(array $service): void
     .apns-faq details{
       border:1px solid var(--line); border-radius:14px; background:#fff; overflow:hidden;
     }
-    .apns-faq details[open]{ box-shadow:0 10px 28px rgba(28,79,214,.08); }
+    .apns-faq details[open]{ box-shadow:0 10px 28px rgba(31,122,90,.08); }
     .apns-faq summary{
       cursor:pointer; list-style:none; padding:1rem 1.15rem;
-      font-weight:500; font-size:14.5px; display:flex; justify-content:space-between; gap:1rem;
+      font-weight:500; font-size:.9062rem; display:flex; justify-content:space-between; gap:1rem;
     }
     .apns-faq summary::-webkit-details-marker{ display:none; }
     .apns-faq summary i{ color:var(--muted); transition:transform .25s, color .25s; }
     .apns-faq details[open] summary i{ transform:rotate(180deg); color:var(--blue); }
     .apns-faq details p{
       margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.6; color:var(--muted); font-weight:300;
+      font-size:.875rem; line-height:1.6; color:var(--muted); font-weight:300;
     }
 
     .apns-related{
@@ -597,9 +597,9 @@ function ts_render_ns_service_page(array $service): void
       border:1px solid var(--line); text-decoration:none; color:var(--ink);
       transition:border-color .2s, transform .2s;
     }
-    .apns-rel:hover{ border-color:rgba(28,79,214,.4); transform:translateY(-2px); color:var(--ink); }
-    .apns-rel strong{ display:block; font-size:15px; font-weight:500; margin-bottom:.25rem; }
-    .apns-rel span{ font-size:13px; color:var(--muted); font-weight:300; }
+    .apns-rel:hover{ border-color:rgba(31,122,90,.4); transform:translateY(-2px); color:var(--ink); }
+    .apns-rel strong{ display:block; font-size:.9375rem; font-weight:500; margin-bottom:.25rem; }
+    .apns-rel span{ font-size:max(12px, .8125rem); color:var(--muted); font-weight:300; }
 
     .apns-close{
       padding:clamp(3.5rem,8vw,5.25rem) 0;
@@ -619,7 +619,7 @@ function ts_render_ns_service_page(array $service): void
     }
     .apns-close p{
       margin:0; max-width:30rem;
-      color:var(--muted); font-size:15.5px; line-height:1.55; font-weight:300;
+      color:var(--muted); font-size:.9688rem; line-height:1.55; font-weight:300;
     }
     @media (prefers-reduced-motion:reduce){
       .apns-ring.is-pulse{ animation:none; }

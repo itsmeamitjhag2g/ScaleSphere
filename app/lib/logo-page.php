@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * Logo & Visual Design — Creative Design detail.
  * Same desk system as Creative Design hub / Brand / UI-UX, but mark-first layout:
@@ -81,7 +83,7 @@ function ts_render_logo_service_page(array $service): void
         ],
         [
             "Logo + Visual Kit",
-            "Most enquiries",
+            "Recommended",
             [
                 "Everything in Logo Mark",
                 "Social profile & cover kit",
@@ -117,7 +119,7 @@ function ts_render_logo_service_page(array $service): void
 
     $formats = ["SVG", "PDF", "AI", "PNG", "EPS", "ICO"];
 
-    $pageTitle = "Logo & Visual Design | Marks, Lockups & Campaign Visuals — ScaleSphere";
+    $pageTitle = "Logo & Visual Design Services | ScaleSphere";
     $pageDesc = "Logo and visual design — distinctive marks, lockups, favicons and campaign visuals delivered in every format your team, printers and developers need.";
     $canonical = $service["href"];
 
@@ -158,10 +160,10 @@ function ts_render_logo_service_page(array $service): void
   <style>
     .yl-logo{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -189,7 +191,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-logo .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-logo .yl-crumb a:hover{ color:var(--blue); }
@@ -200,8 +202,8 @@ function ts_render_logo_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.15rem;
     }
@@ -233,12 +235,12 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-trust{
       margin:1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45);
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45);
     }
     .yl-logo .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease;
     }
@@ -261,7 +263,7 @@ function ts_render_logo_service_page(array $service): void
       padding:1.15rem 1.15rem 1.35rem;
       box-shadow:
         0 22px 50px rgba(15,23,42,.1),
-        8px 8px 0 rgba(124,58,237,.12);
+        8px 8px 0 rgba(31,122,90,.12);
       transform:rotate(1.25deg);
       transition:transform .4s cubic-bezier(.22,1,.36,1);
     }
@@ -272,14 +274,14 @@ function ts_render_logo_service_page(array $service): void
       display:flex; align-items:center; justify-content:space-between;
       margin-bottom:1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-logo .yl-art-bar .dots{ display:flex; gap:.35rem; }
     .yl-logo .yl-art-bar .dots i{
-      width:8px; height:8px; border-radius:999px; background:#ff5f57; display:block;
+      width:8px; height:8px; border-radius:999px; background:#D58581; display:block;
     }
-    .yl-logo .yl-art-bar .dots i:nth-child(2){ background:#febc2e; }
-    .yl-logo .yl-art-bar .dots i:nth-child(3){ background:#28c840; }
+    .yl-logo .yl-art-bar .dots i:nth-child(2){ background:#CBA962; }
+    .yl-logo .yl-art-bar .dots i:nth-child(3){ background:#3CB44E; }
 
     .yl-logo .yl-canvas{
       position:relative;
@@ -287,22 +289,22 @@ function ts_render_logo_service_page(array $service): void
       border-radius:1rem;
       overflow:hidden;
       background:
-        linear-gradient(rgba(124,58,237,.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,.07) 1px, transparent 1px),
+        linear-gradient(rgba(31,122,90,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,122,90,.07) 1px, transparent 1px),
         #F3F0FF;
       background-size:24px 24px, 24px 24px, auto;
-      border:1px solid rgba(124,58,237,.15);
+      border:1px solid rgba(31,122,90,.15);
       display:grid; place-items:center;
     }
     .yl-logo .yl-guides{
       position:absolute; inset:12%;
-      border:1px dashed rgba(124,58,237,.28);
+      border:1px dashed rgba(31,122,90,.28);
       border-radius:50%;
       pointer-events:none;
     }
     .yl-logo .yl-guides::before,
     .yl-logo .yl-guides::after{
-      content:""; position:absolute; background:rgba(124,58,237,.22);
+      content:""; position:absolute; background:rgba(31,122,90,.22);
     }
     .yl-logo .yl-guides::before{
       left:50%; top:0; bottom:0; width:1px; transform:translateX(-50%);
@@ -315,9 +317,9 @@ function ts_render_logo_service_page(array $service): void
       position:relative; z-index:1;
       width:min(48%, 132px); aspect-ratio:1;
     }
-    .yl-logo .yl-mark svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 14px 28px rgba(76,29,149,.28)); }
+    .yl-logo .yl-mark svg{ width:100%; height:100%; display:block; filter:drop-shadow(0 14px 28px rgba(15,27,61,.28)); }
     .yl-logo .yl-mark .ring{
-      fill:none; stroke:#7C3AED; stroke-width:2.2;
+      fill:none; stroke:#1F7A5A; stroke-width:2.2;
       stroke-dasharray:4 5; opacity:.55;
       animation:ylLogoSpin 18s linear infinite;
       transform-origin:60px 60px;
@@ -354,10 +356,10 @@ function ts_render_logo_service_page(array $service): void
       width:28px; height:28px; border-radius:.55rem;
       display:grid; place-items:center;
       font-family:Montserrat,sans-serif;
-      font-size:11px; font-weight:800;
+      font-size:max(11px, .6875rem); font-weight:800;
     }
     .yl-logo .yl-var.is-primary .yl-var-swatch{
-      background:linear-gradient(135deg,#7C3AED,#4C1D95); color:#fff;
+      background:linear-gradient(#1F7A5A,#1F7A5A); color:#fff;
     }
     .yl-logo .yl-var.is-mono .yl-var-swatch{
       background:#0F172A; color:#fff;
@@ -371,7 +373,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-var.is-reverse small{ color:rgba(255,255,255,.7); }
     .yl-logo .yl-var small{
       font-family:"IBM Plex Mono",monospace;
-      font-size:9px; letter-spacing:.06em; text-transform:uppercase;
+      font-size:max(9px, .5625rem); letter-spacing:.06em; text-transform:uppercase;
       color:var(--muted); line-height:1.2;
     }
 
@@ -379,19 +381,19 @@ function ts_render_logo_service_page(array $service): void
       margin-top:1.5rem;
       display:grid; gap:.35rem 0;
       grid-template-columns:repeat(5, minmax(0, 1fr));
-      background:linear-gradient(145deg, #2E1065 0%, #4C1D95 48%, #1E1035 100%);
+      background:linear-gradient(145deg, #0F1B3D 0%, #1F7A5A 48%, #0F1B3D 100%);
       border:1px solid rgba(255,255,255,.12);
       border-radius:1.15rem;
       padding:1.15rem .65rem 1.05rem;
-      box-shadow:0 18px 40px rgba(76,29,149,.28);
+      box-shadow:0 18px 40px rgba(15,27,61,.28);
       position:relative;
       overflow:hidden;
     }
     .yl-logo .yl-scale::before{
       content:""; position:absolute; inset:0;
       background:
-        radial-gradient(ellipse 50% 60% at 15% 0%, rgba(167,139,250,.22), transparent 55%),
-        radial-gradient(ellipse 40% 50% at 90% 100%, rgba(124,58,237,.2), transparent 50%);
+        linear-gradient(transparent,transparent),
+        linear-gradient(transparent,transparent);
       pointer-events:none;
     }
     .yl-logo .yl-scale-head{
@@ -404,11 +406,11 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-scale-head strong{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+      font-size:max(10px, .625rem); font-weight:600; letter-spacing:.14em; text-transform:uppercase;
       color:#fff;
     }
     .yl-logo .yl-scale-head span{
-      font-size:11px; color:#fff; font-weight:400; opacity:.85;
+      font-size:max(11px, .6875rem); color:#fff; font-weight:400; opacity:.85;
     }
     @media (max-width:640px){
       .yl-logo .yl-scale{
@@ -431,7 +433,7 @@ function ts_render_logo_service_page(array $service): void
       width:100%; min-height:3.25rem;
     }
     .yl-logo .yl-sc-dot{
-      background:linear-gradient(145deg,#A78BFA,#7C3AED 55%,#4C1D95);
+      background:linear-gradient(#9FCFB5,#9FCFB5);
       border-radius:.45rem;
       display:grid; place-items:center;
       color:#fff;
@@ -441,18 +443,18 @@ function ts_render_logo_service_page(array $service): void
       box-shadow:0 8px 20px rgba(0,0,0,.28);
       border:1px solid rgba(255,255,255,.18);
     }
-    .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:16px; height:16px; font-size:7px; border-radius:50%; }
-    .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:28px; height:28px; font-size:11px; }
-    .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:40px; height:40px; font-size:15px; }
-    .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:52px; height:52px; font-size:18px; }
-    .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:64px; height:64px; font-size:22px; }
+    .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:16px; height:16px; font-size:max(7px, .4375rem); border-radius:50%; }
+    .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:28px; height:28px; font-size:max(11px, .6875rem); }
+    .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:40px; height:40px; font-size:.9375rem; }
+    .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:52px; height:52px; font-size:1.125rem; }
+    .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:64px; height:64px; font-size:1.375rem; }
     .yl-logo .yl-sc b{
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:#fff; font-weight:600;
+      font-size:max(11px, .6875rem); color:#fff; font-weight:600;
       letter-spacing:.02em;
     }
     .yl-logo .yl-sc span{
-      font-size:11px; color:#fff; font-weight:500;
+      font-size:max(11px, .6875rem); color:#fff; font-weight:500;
       line-height:1.2; opacity:.92;
     }
     @media (max-width:640px){
@@ -464,17 +466,17 @@ function ts_render_logo_service_page(array $service): void
       .yl-logo .yl-sc:nth-child(4),
       .yl-logo .yl-sc:nth-child(5),
       .yl-logo .yl-sc:nth-child(6){ border-bottom:0; }
-      .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:14px; height:14px; font-size:6px; }
-      .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:24px; height:24px; font-size:10px; }
-      .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:32px; height:32px; font-size:12px; }
-      .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:40px; height:40px; font-size:14px; }
-      .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:48px; height:48px; font-size:16px; }
+      .yl-logo .yl-sc:nth-child(2) .yl-sc-dot{ width:14px; height:14px; font-size:max(6px, .375rem); }
+      .yl-logo .yl-sc:nth-child(3) .yl-sc-dot{ width:24px; height:24px; font-size:max(10px, .625rem); }
+      .yl-logo .yl-sc:nth-child(4) .yl-sc-dot{ width:32px; height:32px; font-size:max(12px, .75rem); }
+      .yl-logo .yl-sc:nth-child(5) .yl-sc-dot{ width:40px; height:40px; font-size:.875rem; }
+      .yl-logo .yl-sc:nth-child(6) .yl-sc-dot{ width:48px; height:48px; font-size:1rem; }
     }
 
     .yl-logo .yl-sec-label{
       display:inline-block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.55rem;
     }
 
@@ -502,19 +504,19 @@ function ts_render_logo_service_page(array $service): void
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
     .yl-logo .yl-formats p{
-      margin:0 0 1rem; font-size:13.5px; line-height:1.5; color:var(--muted);
+      margin:0 0 1rem; font-size:.8438rem; line-height:1.5; color:var(--muted);
     }
     .yl-logo .yl-chips{
       display:flex; flex-wrap:wrap; gap:.45rem;
     }
     .yl-logo .yl-chip{
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; font-weight:600; letter-spacing:.04em;
+      font-size:max(11px, .6875rem); font-weight:600; letter-spacing:.04em;
       padding:.4rem .7rem;
       border-radius:.55rem;
-      background:rgba(124,58,237,.08);
+      background:rgba(31,122,90,.08);
       color:var(--deep);
-      border:1px solid rgba(124,58,237,.18);
+      border:1px solid rgba(31,122,90,.18);
       transform:rotate(-1deg);
     }
     .yl-logo .yl-chip:nth-child(even){ transform:rotate(1.2deg); background:#0F172A; color:#fff; border-color:#0F172A; }
@@ -525,7 +527,7 @@ function ts_render_logo_service_page(array $service): void
       max-width:18ch;
     }
     .yl-logo .yl-about .body p{
-      margin:0 0 1rem; font-size:15px; line-height:1.65; color:var(--muted);
+      margin:0 0 1rem; font-size:.9375rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-logo .yl-pains{
@@ -539,7 +541,7 @@ function ts_render_logo_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.45rem); font-weight:400;
     }
     .yl-logo .yl-pains .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-logo .yl-pain-grid{
       display:grid; gap:1rem;
@@ -549,13 +551,13 @@ function ts_render_logo_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:1.1rem; padding:1.15rem 1.1rem;
-      box-shadow:inset 3px 0 0 #7C3AED;
+      box-shadow:inset 3px 0 0 #1F7A5A;
     }
     .yl-logo .yl-pain h3{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
-    .yl-logo .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .yl-logo .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); }
 
     .yl-logo .yl-finder{
       padding:3.5rem 0;
@@ -568,7 +570,7 @@ function ts_render_logo_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-logo .yl-finder .intro p{
-      margin:0 0 1.25rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-logo .yl-window{
       background:#fff;
@@ -585,11 +587,11 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
-    .yl-logo .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-logo .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-logo .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-logo .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-logo .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-logo .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-logo .yl-window-body{ padding:1.25rem; }
     .yl-logo .yl-grid{
       display:grid; gap:1rem;
@@ -611,14 +613,14 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-logo .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-logo .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-logo .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     /* Colour theory boards */
     .yl-logo .yl-concepts{
@@ -632,7 +634,7 @@ function ts_render_logo_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-logo .yl-concepts .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-logo .yl-boards{
       display:grid; gap:1.1rem;
@@ -666,14 +668,14 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-board .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.3rem;
     }
     .yl-logo .yl-board strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-logo .yl-board > span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-logo .yl-board > span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     /* Board 1 — 60 / 30 / 10 */
     .yl-logo .yl-ct-ratio{ display:flex; height:100%; gap:.4rem; min-height:120px; }
@@ -681,11 +683,11 @@ function ts_render_logo_service_page(array $service): void
       display:flex; align-items:flex-end; justify-content:center;
       border-radius:.55rem; padding:.4rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; font-style:normal; font-weight:600; letter-spacing:.04em;
+      font-size:max(10px, .625rem); font-style:normal; font-weight:600; letter-spacing:.04em;
     }
-    .yl-logo .yl-ct-ratio .r60{ flex:6; background:#7C3AED; color:#fff; }
-    .yl-logo .yl-ct-ratio .r30{ flex:3; background:#4C1D95; color:rgba(255,255,255,.85); }
-    .yl-logo .yl-ct-ratio .r10{ flex:1; background:#FBBF24; color:#0F172A; writing-mode:vertical-rl; transform:rotate(180deg); }
+    .yl-logo .yl-ct-ratio .r60{ flex:6; background:#1F7A5A; color:#fff; }
+    .yl-logo .yl-ct-ratio .r30{ flex:3; background:#1F7A5A; color:rgba(255,255,255,.85); }
+    .yl-logo .yl-ct-ratio .r10{ flex:1; background:#C7A858; color:#0F172A; writing-mode:vertical-rl; transform:rotate(180deg); }
 
     /* Board 2 — contrast pairs */
     .yl-logo .yl-ct-contrast{
@@ -695,19 +697,19 @@ function ts_render_logo_service_page(array $service): void
       border-radius:.55rem; display:grid; place-items:center;
       font-family:Montserrat,sans-serif; font-weight:800; font-size:1.15rem;
     }
-    .yl-logo .yl-ct-contrast .lt{ background:#FAF8F5; color:#4C1D95; border:1px solid rgba(15,23,42,.08); }
-    .yl-logo .yl-ct-contrast .dk{ background:#0F172A; color:#A78BFA; }
-    .yl-logo .yl-ct-contrast .on-p{ background:#7C3AED; color:#fff; }
+    .yl-logo .yl-ct-contrast .lt{ background:#FAF8F5; color:#1F7A5A; border:1px solid rgba(15,23,42,.08); }
+    .yl-logo .yl-ct-contrast .dk{ background:#0F172A; color:#9FCFB5; }
+    .yl-logo .yl-ct-contrast .on-p{ background:#1F7A5A; color:#fff; }
     .yl-logo .yl-ct-contrast .fail{
-      background:#EDE9FE; color:#C4B5FD;
+      background:#E4F1EA; color:#A9D3BF;
       position:relative;
     }
     .yl-logo .yl-ct-contrast .fail::after{
       content:"low";
       position:absolute; bottom:.35rem; right:.4rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:8px; letter-spacing:.08em; text-transform:uppercase;
-      color:#7C3AED; opacity:.7;
+      font-size:max(8px, .5rem); letter-spacing:.08em; text-transform:uppercase;
+      color:#1F7A5A; opacity:.7;
     }
 
     /* Board 3 — analogous harmony */
@@ -718,7 +720,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-ct-swatches i{ flex:1; display:block; }
     .yl-logo .yl-ct-hue{
       display:flex; justify-content:space-between; align-items:center;
-      font-family:"IBM Plex Mono",monospace; font-size:10px; color:var(--muted);
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); color:var(--muted);
     }
     .yl-logo .yl-ct-hue b{ color:var(--deep); font-weight:600; }
 
@@ -728,7 +730,7 @@ function ts_render_logo_service_page(array $service): void
       border-radius:.55rem;
       background:
         radial-gradient(circle at 80% 20%, rgba(255,255,255,.18), transparent 40%),
-        linear-gradient(145deg, #4C1D95, #7C3AED 55%, #6D28D9);
+        linear-gradient(#1F7A5A,#1F7A5A);
       display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.45rem;
       color:#fff; text-align:center; padding:.75rem;
     }
@@ -736,7 +738,7 @@ function ts_render_logo_service_page(array $service): void
       width:42px; height:42px; border-radius:.7rem;
       background:rgba(255,255,255,.95);
       display:grid; place-items:center;
-      color:#4C1D95;
+      color:#1F7A5A;
       font-family:Montserrat,sans-serif; font-weight:800; font-size:1rem;
       box-shadow:0 8px 18px rgba(15,23,42,.2);
     }
@@ -746,7 +748,7 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-ct-lockup .cap{
       font-family:"IBM Plex Mono",monospace;
-      font-size:9px; letter-spacing:.12em; text-transform:uppercase;
+      font-size:max(9px, .5625rem); letter-spacing:.12em; text-transform:uppercase;
       opacity:.7;
     }
 
@@ -761,7 +763,7 @@ function ts_render_logo_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-logo .yl-gallery .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-logo .yl-ggrid{
       display:grid; gap:1rem;
@@ -781,13 +783,13 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-shot strong{
       display:inline;
       font-family:"IBM Plex Mono",monospace;
-      font-size:13px; font-weight:600; margin-bottom:0;
+      font-size:max(12px, .8125rem); font-weight:600; margin-bottom:0;
       border-bottom:1px solid var(--ink);
       padding-bottom:1px;
     }
     .yl-logo .yl-shot span{
       display:block; margin-top:.45rem;
-      font-size:12.5px; color:var(--muted); line-height:1.45;
+      font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45;
     }
 
     .yl-logo .yl-process{
@@ -801,13 +803,13 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-process .sub{
       margin:0 auto 1.5rem; text-align:center; max-width:34rem;
-      font-size:14px; color:rgba(255,255,255,.65); line-height:1.5;
+      font-size:.875rem; color:rgba(255,255,255,.65); line-height:1.5;
     }
     .yl-logo .yl-film-hint{
       text-align:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase;
-      color:rgba(196,181,253,.8);
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase;
+      color:rgba(31,122,90,.8);
       margin:0 0 1rem;
       animation:ylFilmHint 1.6s ease-in-out infinite;
     }
@@ -857,10 +859,10 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-film-frame b{
       display:block; margin-bottom:.35rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:#c4b5fd; letter-spacing:.08em;
+      font-size:max(11px, .6875rem); color:#DCEEE3; letter-spacing:.08em;
     }
-    .yl-logo .yl-film-frame strong{ display:block; margin-bottom:.3rem; font-size:14px; }
-    .yl-logo .yl-film-frame p{ margin:0; font-size:12px; line-height:1.45; color:rgba(255,255,255,.65); }
+    .yl-logo .yl-film-frame strong{ display:block; margin-bottom:.3rem; font-size:.875rem; }
+    .yl-logo .yl-film-frame p{ margin:0; font-size:max(12px, .75rem); line-height:1.45; color:rgba(255,255,255,.65); }
 
     .yl-logo .yl-pkgs{
       padding:3.75rem 0;
@@ -873,7 +875,7 @@ function ts_render_logo_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-logo .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-logo .yl-pkg-grid{
       display:grid; gap:1.25rem;
@@ -882,17 +884,17 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-pkg{
       background:#fff;
-      border:2px dashed rgba(124,58,237,.45);
+      border:2px dashed rgba(31,122,90,.45);
       border-radius:1.35rem;
       padding:1.4rem 1.3rem;
-      box-shadow:4px 6px 0 rgba(124,58,237,.12);
+      box-shadow:4px 6px 0 rgba(31,122,90,.12);
       display:flex; flex-direction:column; gap:.75rem;
       transform:rotate(-1.2deg);
       transition:transform .25s ease, box-shadow .25s ease;
     }
     .yl-logo .yl-pkg:nth-child(2){ transform:rotate(1deg); }
     .yl-logo .yl-pkg:nth-child(3){ transform:rotate(-.6deg); }
-    .yl-logo .yl-pkg:hover{ transform:rotate(0deg) translateY(-4px); box-shadow:6px 10px 0 rgba(124,58,237,.16); }
+    .yl-logo .yl-pkg:hover{ transform:rotate(0deg) translateY(-4px); box-shadow:6px 10px 0 rgba(31,122,90,.16); }
     .yl-logo .yl-pkg.is-hot{
       border-style:solid;
       border-color:var(--blue);
@@ -901,7 +903,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-pkg .tag{
       display:inline-flex; align-self:flex-start;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:#fff;
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:#fff;
       background:var(--blue);
       padding:.28rem .55rem;
       border-radius:999px;
@@ -913,14 +915,14 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.45rem; flex:1; }
     .yl-logo .yl-pkg li{
-      font-size:13.5px; color:var(--muted);
+      font-size:.8438rem; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-logo .yl-pkg li::before{
       content:""; position:absolute; left:0; top:.5rem;
       width:5px; height:5px; border-radius:50%; background:var(--blue);
     }
-    .yl-logo .yl-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-logo .yl-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-logo .yl-faq{
       padding:3.5rem 0;
@@ -932,7 +934,7 @@ function ts_render_logo_service_page(array $service): void
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-logo .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
+    .yl-logo .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem; }
     .yl-logo .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
     .yl-logo details{
       background:#fff; border:1px solid var(--line);
@@ -941,7 +943,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; gap:1rem;
     }
     .yl-logo summary::-webkit-details-marker{ display:none; }
@@ -949,7 +951,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
     .yl-logo details p{
       margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-logo .yl-related{
@@ -959,7 +961,7 @@ function ts_render_logo_service_page(array $service): void
     .yl-logo .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-logo .yl-rel-grid{ display:flex; flex-wrap:wrap; gap:1rem 1.5rem; }
     .yl-logo .yl-rel{
@@ -970,7 +972,7 @@ function ts_render_logo_service_page(array $service): void
       border-bottom:1px solid var(--ink);
       text-decoration:none; color:var(--ink);
       font-family:"IBM Plex Mono",monospace;
-      font-size:13px; font-weight:600;
+      font-size:max(12px, .8125rem); font-weight:600;
       box-shadow:none;
       transition:color .2s, border-color .2s;
     }
@@ -994,7 +996,7 @@ function ts_render_logo_service_page(array $service): void
     }
     .yl-logo .yl-close p{
       margin:0 auto 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -1017,7 +1019,7 @@ function ts_render_logo_service_page(array $service): void
               with lockups, mono versions and campaign assets your team can actually use.
             </p>
             <div class="yl-hero-actions">
-              <a class="yl-btn yl-btn-solid" href="/contact">Request a logo enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+              <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a logo enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
               <?php if ($hub): ?>
               <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
               <?php endif; ?>
@@ -1035,7 +1037,7 @@ function ts_render_logo_service_page(array $service): void
               <div class="yl-mark">
                 <svg viewBox="0 0 120 120" role="img" aria-label="Sample monogram construction">
                   <circle class="ring" cx="60" cy="60" r="46"/>
-                  <circle cx="60" cy="60" r="38" fill="none" stroke="rgba(124,58,237,.35)" stroke-width="1"/>
+                  <circle cx="60" cy="60" r="38" fill="none" stroke="rgba(31,122,90,.35)" stroke-width="1"/>
                   <rect x="26" y="26" width="68" height="68" rx="20" fill="url(#ylMarkGrad)"/>
                   <text x="60" y="72" text-anchor="middle"
                         font-family="Montserrat, system-ui, sans-serif"
@@ -1043,8 +1045,8 @@ function ts_render_logo_service_page(array $service): void
                         letter-spacing="-1">S</text>
                   <defs>
                     <linearGradient id="ylMarkGrad" x1="26" y1="26" x2="94" y2="94">
-                      <stop stop-color="#7C3AED"/>
-                      <stop offset="1" stop-color="#4C1D95"/>
+                      <stop stop-color="#1F7A5A"/>
+                      <stop offset="1" stop-color="#1F7A5A"/>
                     </linearGradient>
                   </defs>
                 </svg>
@@ -1142,7 +1144,7 @@ function ts_render_logo_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/logo-visual/craft</span>
+          <span class="path">Craft</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1178,7 +1180,7 @@ function ts_render_logo_service_page(array $service): void
           <span>Dominant, support and accent — so the brand colour doesn’t fight the UI or the print layout.</span>
         </article>
         <article class="yl-board">
-          <div class="yl-board-preview" style="background:#F6F7F9;padding:.75rem">
+          <div class="yl-board-preview" style="background:#FFFEFA;padding:.75rem">
             <div class="yl-ct-contrast" aria-hidden="true">
               <div class="lt">Aa</div>
               <div class="dk">Aa</div>
@@ -1194,17 +1196,17 @@ function ts_render_logo_service_page(array $service): void
           <div class="yl-board-preview" style="background:#fff;padding:1rem">
             <div class="yl-ct-analog" aria-hidden="true">
               <div class="yl-ct-swatches">
-                <i style="background:#4C1D95"></i>
-                <i style="background:#6D28D9"></i>
-                <i style="background:#7C3AED"></i>
-                <i style="background:#A78BFA"></i>
-                <i style="background:#EDE9FE"></i>
+                <i style="background:#1F7A5A"></i>
+                <i style="background:#16604A"></i>
+                <i style="background:#1F7A5A"></i>
+                <i style="background:#9FCFB5"></i>
+                <i style="background:#E4F1EA"></i>
               </div>
               <div class="yl-ct-hue"><span>Analogous</span><b>violet family</b></div>
               <div class="yl-ct-swatches" style="height:28px">
                 <i style="background:#0F172A"></i>
-                <i style="background:#7C3AED"></i>
-                <i style="background:#FBBF24"></i>
+                <i style="background:#1F7A5A"></i>
+                <i style="background:#C7A858"></i>
               </div>
               <div class="yl-ct-hue"><span>Accent</span><b>complement pop</b></div>
             </div>
@@ -1239,7 +1241,7 @@ function ts_render_logo_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/logo-visual/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1298,7 +1300,7 @@ function ts_render_logo_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2>Pick the depth you need</h2>
-      <p class="lead">Tell us on the contact form — new logo, refresh or campaign kit. We recommend a lane after a short call.</p>
+      <p class="lead">Tell us in the brief below — new logo, refresh or campaign kit. We recommend a lane after a short call.</p>
       <div class="yl-pkg-grid">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -1312,7 +1314,7 @@ function ts_render_logo_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p class="note"><?= ts_h($pkg[3]) ?></p>
-          <a class="yl-btn yl-btn-solid" href="/contact" style="align-self:flex-start">Enquire on contact <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>" style="align-self:flex-start">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -1350,22 +1352,29 @@ function ts_render_logo_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <h2>Ready for a mark that actually holds?</h2>
-    <p>
-      Send your company name, competitors you like or dislike, and where the logo will live first.
-      We’ll reply with suggested scope and next steps for kickoff.
-    </p>
-    <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Let's get your mark",
+      "em" => "right.",
+      "sub" => "Share your current logo, if you have one, and where it needs to appear. We reply with honest notes and the package that fits.",
+      "gets" => ["Where your current mark breaks: small sizes, dark backgrounds, print", "Suggested package and number of concepts", "The file formats you will receive"],
+      "options" => ["Logo Mark", "Logo + Visual Kit", "Campaign Visual System", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "logo-brief.ai",
+      "urlLabel" => "Website or link to your current logo",
+      "msgPlaceholder" => "e.g. Our logo looks blurry on WhatsApp and on shop signage.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-logo-and-visual-design page-yl-cd page-yl-logo",
         "image" => ts_og_image("/images/stock/photo-1618005182384-a83a8bd57fbe.jpg"),
     ]);

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * Interactive Prototypes — Creative Design detail.
  * Desk language + prototype player animation + local prototype imagery.
@@ -42,12 +44,12 @@ function ts_render_proto_service_page(array $service): void
     ];
 
     $gallery = [
-        ["/images/mobile/Prototyping.webp", "Clickable flows", "Multi-screen journeys with realistic taps and transitions."],
-        ["/images/mobile/UiDesign.webp", "Hi-fi UI states", "Empty, loading, error and success — not just the happy path."],
-        ["/images/mobile/UsabilityTesting.webp", "Usability rounds", "Watch people use the prototype before you write code."],
-        ["/images/mobile/MotionIntrations.webp", "Motion in context", "Micro-interactions that make demos feel alive."],
-        ["/images/mobile/AppDesign.webp", "App prototypes", "Thumb-first mobile flows for pitches and QA."],
-        ["/images/mobile/DesignDeliver.webp", "Handoff ready", "Files structured so development starts from approval."],
+        ["/images/mobile/tablet-wireframe.webp", "Clickable flows", "Multi-screen journeys with realistic taps and transitions."],
+        ["/images/mobile/phone-minimal.webp", "Hi-fi UI states", "Empty, loading, error and success — not just the happy path."],
+        ["/images/mobile/team-review.webp", "Usability rounds", "Watch people use the prototype before you write code."],
+        ["/images/mobile/phones-trio.webp", "Motion in context", "Micro-interactions that make demos feel alive."],
+        ["/images/mobile/app-in-hand.webp", "App prototypes", "Thumb-first mobile flows for pitches and QA."],
+        ["/images/mobile/sketch-flow.webp", "Handoff ready", "Files structured so development starts from approval."],
     ];
 
     $process = [
@@ -74,7 +76,7 @@ function ts_render_proto_service_page(array $service): void
         ],
         [
             "Test-Ready Prototype",
-            "Most enquiries",
+            "Recommended",
             [
                 "3–5 critical journeys",
                 "Full interaction states",
@@ -108,7 +110,7 @@ function ts_render_proto_service_page(array $service): void
         ["What should we bring to kickoff?", "Any wires, UI, user goals, or a script of what you want people to complete in the demo."],
     ];
 
-    $pageTitle = "Interactive Prototypes | Clickable Flows & User Tests — ScaleSphere";
+    $pageTitle = "Interactive Prototypes & Clickable Flows | ScaleSphere";
     $pageDesc = "Interactive prototypes for demos, usability testing and developer alignment — clickable Figma and Framer flows before production code.";
     $canonical = $service["href"];
 
@@ -149,10 +151,10 @@ function ts_render_proto_service_page(array $service): void
   <style>
     .yl-pr{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -178,7 +180,7 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-pr .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-pr .yl-crumb a:hover{ color:var(--blue); }
@@ -189,8 +191,8 @@ function ts_render_proto_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.15rem;
     }
@@ -225,12 +227,12 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-trust{
       margin:1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45);
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45);
     }
     .yl-pr .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease;
     }
@@ -253,7 +255,7 @@ function ts_render_proto_service_page(array $service): void
       padding:1rem 1.1rem 1.15rem;
       box-shadow:
         0 22px 50px rgba(15,23,42,.1),
-        8px 8px 0 rgba(124,58,237,.12);
+        8px 8px 0 rgba(31,122,90,.12);
       transform:rotate(-.8deg);
       transition:transform .35s cubic-bezier(.22,1,.36,1);
     }
@@ -264,14 +266,14 @@ function ts_render_proto_service_page(array $service): void
       display:flex; align-items:center; justify-content:space-between;
       margin-bottom:.85rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-pr .yl-player-bar .dots{ display:flex; gap:.35rem; }
     .yl-pr .yl-player-bar .dots i{
-      width:8px; height:8px; border-radius:999px; background:#ff5f57; display:block;
+      width:8px; height:8px; border-radius:999px; background:#D58581; display:block;
     }
-    .yl-pr .yl-player-bar .dots i:nth-child(2){ background:#febc2e; }
-    .yl-pr .yl-player-bar .dots i:nth-child(3){ background:#28c840; }
+    .yl-pr .yl-player-bar .dots i:nth-child(2){ background:#CBA962; }
+    .yl-pr .yl-player-bar .dots i:nth-child(3){ background:#3CB44E; }
 
     .yl-pr .yl-flow{
       display:grid; grid-template-columns:repeat(3, 1fr); gap:.55rem;
@@ -303,14 +305,14 @@ function ts_render_proto_service_page(array $service): void
       background:rgba(15,23,42,.72);
       color:#fff;
       font-family:"IBM Plex Mono",monospace;
-      font-size:8px; letter-spacing:.06em; text-transform:uppercase;
+      font-size:max(8px, .5rem); letter-spacing:.06em; text-transform:uppercase;
       backdrop-filter:blur(4px);
     }
     .yl-pr .yl-card .hotspot{
       position:absolute; width:18px; height:18px; border-radius:999px;
       border:2px solid #fff;
-      background:rgba(124,58,237,.55);
-      box-shadow:0 0 0 0 rgba(124,58,237,.45);
+      background:rgba(31,122,90,.55);
+      box-shadow:0 0 0 0 rgba(31,122,90,.45);
       animation:ylPrHot 1.6s ease-out infinite;
     }
     .yl-pr .yl-card:nth-child(1) .hotspot{ right:18%; bottom:28%; }
@@ -327,7 +329,7 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-proto-meta{
       display:flex; align-items:center; justify-content:space-between; gap:.75rem; flex-wrap:wrap;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; color:var(--muted);
+      font-size:max(10px, .625rem); color:var(--muted);
     }
     .yl-pr .yl-proto-meta .play{
       display:inline-flex; align-items:center; gap:.4rem;
@@ -339,7 +341,7 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-links{
       position:absolute; left:0; right:0; top:42%;
       height:2px; pointer-events:none; z-index:1;
-      background:linear-gradient(90deg, transparent, rgba(124,58,237,.35), transparent);
+      background:linear-gradient(90deg, transparent, rgba(31,122,90,.35), transparent);
       opacity:.7;
     }
     .yl-pr .yl-links::before,
@@ -352,19 +354,19 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-links::after{ left:66%; animation-delay:.4s; }
 
     @keyframes ylPrPulse{
-      0%{ box-shadow:0 0 0 0 rgba(124,58,237,.45); }
-      70%{ box-shadow:0 0 0 10px rgba(124,58,237,0); }
-      100%{ box-shadow:0 0 0 0 rgba(124,58,237,0); }
+      0%{ box-shadow:0 0 0 0 rgba(31,122,90,.45); }
+      70%{ box-shadow:0 0 0 10px rgba(31,122,90,0); }
+      100%{ box-shadow:0 0 0 0 rgba(31,122,90,0); }
     }
     @keyframes ylPrCard{
       0%,18%{ opacity:.45; transform:scale(.93); z-index:1; }
-      22%,42%{ opacity:1; transform:scale(1); z-index:3; box-shadow:0 14px 32px rgba(124,58,237,.2); }
+      22%,42%{ opacity:1; transform:scale(1); z-index:3; box-shadow:0 14px 32px rgba(31,122,90,.2); }
       50%,100%{ opacity:.45; transform:scale(.93); z-index:1; box-shadow:0 8px 20px rgba(15,23,42,.06); }
     }
     @keyframes ylPrHot{
-      0%{ transform:scale(1); box-shadow:0 0 0 0 rgba(124,58,237,.5); }
-      70%{ transform:scale(1.15); box-shadow:0 0 0 10px rgba(124,58,237,0); }
-      100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(124,58,237,0); }
+      0%{ transform:scale(1); box-shadow:0 0 0 0 rgba(31,122,90,.5); }
+      70%{ transform:scale(1.15); box-shadow:0 0 0 10px rgba(31,122,90,0); }
+      100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(31,122,90,0); }
     }
     @keyframes ylPrCursor{
       0%,10%{ left:18%; top:68%; opacity:0; }
@@ -402,7 +404,7 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-sec-label{
       display:inline-block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.55rem;
     }
 
@@ -417,7 +419,7 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.45rem); font-weight:400;
     }
     .yl-pr .yl-pains .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-pr .yl-pain-grid{
       display:grid; gap:1rem;
@@ -427,7 +429,7 @@ function ts_render_proto_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:1.1rem; padding:1.15rem 1.1rem;
-      box-shadow:inset 3px 0 0 #7C3AED;
+      box-shadow:inset 3px 0 0 #1F7A5A;
       transition:transform .25s ease;
     }
     .yl-pr .yl-pain:hover{ transform:translateY(-3px); }
@@ -435,7 +437,7 @@ function ts_render_proto_service_page(array $service): void
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
-    .yl-pr .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .yl-pr .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); }
 
     .yl-pr .yl-finder{
       padding:3.5rem 0;
@@ -448,7 +450,7 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-pr .yl-finder .intro p{
-      margin:0 0 1.25rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-pr .yl-window{
       background:#fff;
@@ -465,11 +467,11 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
-    .yl-pr .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-pr .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-pr .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-pr .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-pr .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-pr .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-pr .yl-window-body{ padding:1.25rem; }
     .yl-pr .yl-grid{
       display:grid; gap:1rem;
@@ -491,14 +493,14 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-pr .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-pr .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-pr .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-pr .yl-gallery{
       padding:3.5rem 0;
@@ -511,7 +513,7 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-pr .yl-gallery .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-pr .yl-ggrid{
       display:grid; gap:1rem;
@@ -535,9 +537,9 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-shot figcaption{ padding:1rem 1.05rem 1.1rem; }
     .yl-pr .yl-shot strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-pr .yl-shot span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-pr .yl-shot span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-pr .yl-process{
       padding:3.75rem 0;
@@ -552,65 +554,75 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-process .sub{
       margin:0 0 1.5rem; max-width:34rem;
-      font-size:14px; color:var(--muted); line-height:1.5;
+      font-size:.875rem; color:var(--muted); line-height:1.5;
     }
-    .yl-pr .yl-graph{
-      position:relative;
-      max-width:900px;
-      margin:0 auto;
-      min-height:420px;
-      padding:1rem 0 2rem;
+    .yl-pr .yl-flowline{
+      --gap:1rem;
+      list-style:none; margin:0; padding:0;
+      display:grid; gap:1.75rem var(--gap);
+      grid-template-columns:repeat(3, minmax(0, 1fr));
     }
-    .yl-pr .yl-graph-svg{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      pointer-events:none;
+    @media (min-width:1100px){
+      .yl-pr .yl-flowline{ --gap:1.1rem; grid-template-columns:repeat(6, minmax(0, 1fr)); }
     }
-    .yl-pr .yl-graph-svg path{
-      fill:none;
-      stroke:rgba(124,58,237,.45);
-      stroke-width:2;
-      stroke-dasharray:6 6;
+    .yl-pr .yl-flowline li{ position:relative; padding-top:1.5rem; display:flex; }
+    .yl-pr .yl-flowline li::before{
+      content:"";
+      position:absolute; top:0; left:1.1rem; z-index:2;
+      width:12px; height:12px; border-radius:50%;
+      background:var(--blue);
+      box-shadow:0 0 0 4px rgba(31,122,90,.18);
     }
+    .yl-pr .yl-flowline li:not(.is-last)::after{
+      content:"";
+      position:absolute; top:5px; left:calc(1.1rem + 18px);
+      width:calc(100% + var(--gap) - 24px); height:0;
+      border-top:2px dashed rgba(31,122,90,.45);
+      transform-origin:left center;
+      transform:scaleX(0);
+      transition:transform .6s ease;
+    }
+    .yl-pr .yl-flowline.is-in li::after{ transform:scaleX(1); }
+    .yl-pr .yl-flowline li:nth-child(2)::after{ transition-delay:.15s; }
+    .yl-pr .yl-flowline li:nth-child(3)::after{ transition-delay:.3s; }
+    .yl-pr .yl-flowline li:nth-child(4)::after{ transition-delay:.45s; }
+    .yl-pr .yl-flowline li:nth-child(5)::after{ transition-delay:.6s; }
+    @media (min-width:641px) and (max-width:1099px){
+      .yl-pr .yl-flowline li:nth-child(3n)::after{ display:none; }
+    }
+    .yl-pr .yl-flowline li.is-last::before{ background:var(--ink); box-shadow:0 0 0 4px rgba(15,23,42,.12); }
     .yl-pr .yl-node{
-      position:absolute;
-      width:min(200px, 42vw);
+      flex:1;
       background:#fff;
       border:1px solid var(--line);
       border-radius:1rem;
-      padding:.9rem .95rem;
-      box-shadow:0 10px 28px rgba(15,23,42,.07);
-      z-index:1;
+      padding:1rem 1rem 1.05rem;
+      box-shadow:0 10px 28px rgba(15,23,42,.06);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-    .yl-pr .yl-node::before{
-      content:"";
-      position:absolute;
-      width:10px; height:10px;
-      border-radius:50%;
-      background:var(--blue);
-      box-shadow:0 0 0 4px rgba(124,58,237,.2);
-      top:-5px; left:1.1rem;
-    }
+    .yl-pr .yl-node:hover{ transform:translateY(-3px); border-color:rgba(31,122,90,.35); box-shadow:0 16px 34px rgba(15,23,42,.1); }
+    .yl-pr .yl-flowline li.is-last .yl-node{ border-color:rgba(15,23,42,.22); box-shadow:4px 4px 0 var(--ink); }
     .yl-pr .yl-node b{
-      display:block; margin-bottom:.3rem;
+      display:block; margin-bottom:.35rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--blue); letter-spacing:.08em;
+      font-size:max(11px, .6875rem); color:var(--blue); letter-spacing:.08em;
     }
-    .yl-pr .yl-node strong{ display:block; margin-bottom:.25rem; font-size:14px; }
-    .yl-pr .yl-node p{ margin:0; font-size:12px; line-height:1.45; color:var(--muted); }
-    .yl-pr .yl-node.n1{ left:2%; top:8%; }
-    .yl-pr .yl-node.n2{ right:4%; top:4%; }
-    .yl-pr .yl-node.n3{ left:18%; top:38%; }
-    .yl-pr .yl-node.n4{ right:12%; top:36%; }
-    .yl-pr .yl-node.n5{ left:8%; top:68%; }
-    .yl-pr .yl-node.n6{ right:6%; top:72%; }
-    @media (max-width:720px){
-      .yl-pr .yl-graph{ min-height:0; }
-      .yl-pr .yl-graph-svg{ display:none; }
-      .yl-pr .yl-node{
-        position:relative; left:auto !important; right:auto !important; top:auto !important;
-        width:100%; margin:0 0 .75rem;
+    .yl-pr .yl-node strong{ display:block; margin-bottom:.3rem; font-size:.9375rem; }
+    .yl-pr .yl-node p{ margin:0; font-size:max(12px, .8125rem); line-height:1.5; color:var(--muted); }
+    @media (max-width:640px){
+      .yl-pr .yl-flowline{ grid-template-columns:1fr; gap:.85rem; }
+      .yl-pr .yl-flowline li{ padding:0 0 0 2rem; }
+      .yl-pr .yl-flowline li::before{ top:1.15rem; left:0; }
+      .yl-pr .yl-flowline li:not(.is-last)::after{
+        top:calc(1.15rem + 18px); left:5px;
+        width:0; height:calc(100% + .85rem - 24px);
+        border-top:0; border-left:2px dashed rgba(31,122,90,.45);
+        transform-origin:center top; transform:scaleY(0);
       }
+      .yl-pr .yl-flowline.is-in li::after{ transform:scaleY(1); }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .yl-pr .yl-flowline li::after{ transition:none; transform:none !important; }
     }
 
     .yl-pr .yl-pkgs{
@@ -624,7 +636,7 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-pr .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:42rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:42rem; line-height:1.55;
     }
     .yl-pr .yl-pkg-grid{
       display:grid; gap:1rem;
@@ -649,17 +661,17 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-pkg:hover{
       transform:translateY(-3px);
-      box-shadow:0 18px 40px rgba(124,58,237,.12);
+      box-shadow:0 18px 40px rgba(31,122,90,.12);
     }
     .yl-pr .yl-pkg.is-hot{
-      border-color:rgba(124,58,237,.55);
-      box-shadow:0 16px 40px rgba(124,58,237,.14);
+      border-color:rgba(31,122,90,.55);
+      box-shadow:0 16px 40px rgba(31,122,90,.14);
       outline:2px solid var(--blue);
       outline-offset:1px;
     }
     .yl-pr .yl-pkg .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-pr .yl-pkg h3{
       margin:0; font-family:Montserrat,sans-serif;
@@ -667,14 +679,14 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.4rem; flex:1; }
     .yl-pr .yl-pkg li{
-      font-size:13.5px; color:var(--muted);
+      font-size:.8438rem; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-pr .yl-pkg li::before{
       content:""; position:absolute; left:0; top:.5rem;
       width:5px; height:5px; border-radius:50%; background:var(--blue);
     }
-    .yl-pr .yl-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-pr .yl-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-pr .yl-faq{
       padding:3.5rem 0;
@@ -697,22 +709,22 @@ function ts_render_proto_service_page(array $service): void
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
     .yl-pr .yl-faq-intro .lead{
-      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem; line-height:1.55; max-width:28ch;
     }
     .yl-pr .yl-faq-intro .hint{
       display:none;
       padding:1rem 1.1rem;
       border-radius:1rem;
-      border:1px dashed rgba(124,58,237,.35);
-      background:rgba(124,58,237,.05);
-      font-size:13px; color:var(--muted); line-height:1.5;
+      border:1px dashed rgba(31,122,90,.35);
+      background:rgba(31,122,90,.05);
+      font-size:max(12px, .8125rem); color:var(--muted); line-height:1.5;
     }
     @media (min-width:900px){
       .yl-pr .yl-faq-intro .hint{ display:block; }
       .yl-pr .yl-faq-intro{ position:sticky; top:5.5rem; }
     }
     .yl-pr .yl-faq-intro .hint strong{
-      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+      display:block; color:var(--ink); font-size:.8438rem; margin-bottom:.25rem;
     }
     .yl-pr .yl-faq-list{
       display:grid; gap:.75rem;
@@ -726,13 +738,13 @@ function ts_render_proto_service_page(array $service): void
       align-self:start;
     }
     .yl-pr details[open]{
-      box-shadow:0 14px 34px rgba(124,58,237,.12);
-      border-color:rgba(124,58,237,.35);
+      box-shadow:0 14px 34px rgba(31,122,90,.12);
+      border-color:rgba(31,122,90,.35);
     }
     .yl-pr summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; align-items:center; gap:1rem;
       color:var(--ink);
     }
@@ -762,7 +774,7 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr details p{
       margin:0; padding:0 1.15rem 1.15rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-pr .yl-related{
@@ -772,7 +784,7 @@ function ts_render_proto_service_page(array $service): void
     .yl-pr .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-pr .yl-rel-grid{
       display:flex; flex-direction:column; gap:.55rem;
@@ -784,7 +796,7 @@ function ts_render_proto_service_page(array $service): void
       border-radius:0;
       background:transparent; border:0;
       text-decoration:none; color:var(--ink);
-      font-size:14px; font-weight:700;
+      font-size:.875rem; font-weight:700;
       box-shadow:none;
       transition:color .2s, gap .2s;
     }
@@ -813,7 +825,7 @@ function ts_render_proto_service_page(array $service): void
     }
     .yl-pr .yl-close p{
       margin:0 auto 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -836,7 +848,7 @@ function ts_render_proto_service_page(array $service): void
               before engineering spends months building the wrong flow.
             </p>
             <div class="yl-hero-actions">
-              <a class="yl-btn yl-btn-solid" href="/contact">Request a prototype enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+              <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a prototype enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
               <?php if ($hub): ?>
               <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
               <?php endif; ?>
@@ -855,23 +867,23 @@ function ts_render_proto_service_page(array $service): void
                 <svg viewBox="0 0 24 24" fill="none"><path d="M4 3l7.5 17 1.7-6.3L19 11.5 4 3z" fill="#0F172A"/><path d="M4 3l7.5 17 1.7-6.3L19 11.5 4 3z" stroke="#fff" stroke-width="1.2"/></svg>
               </div>
               <article class="yl-card">
-                <img src="/images/mobile/Prototyping.webp" alt="" width="320" height="420" loading="eager">
+                <img src="/images/mobile/tablet-wireframe.webp" alt="" width="320" height="420" loading="eager">
                 <span class="hotspot"></span>
                 <span class="cap">01 · Start</span>
               </article>
               <article class="yl-card">
-                <img src="/images/mobile/UiDesign.webp" alt="" width="320" height="420" loading="eager">
+                <img src="/images/mobile/phone-minimal.webp" alt="" width="320" height="420" loading="eager">
                 <span class="hotspot"></span>
                 <span class="cap">02 · Interact</span>
               </article>
               <article class="yl-card">
-                <img src="/images/mobile/UsabilityTesting.webp" alt="" width="320" height="420" loading="eager">
+                <img src="/images/mobile/team-review.webp" alt="" width="320" height="420" loading="eager">
                 <span class="hotspot"></span>
                 <span class="cap">03 · Validate</span>
               </article>
             </div>
             <div class="yl-proto-meta">
-              <span class="play"><i class="fas fa-play" style="font-size:8px"></i> Prototype playing</span>
+              <span class="play"><i class="fas fa-play" style="font-size:max(8px, .5rem)"></i> Prototype playing</span>
               <span>3 screens · linked hotspots</span>
             </div>
           </aside>
@@ -925,7 +937,7 @@ function ts_render_proto_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/interactive-prototypes/craft</span>
+          <span class="path">Craft</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -952,7 +964,7 @@ function ts_render_proto_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/interactive-prototypes/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -973,22 +985,17 @@ function ts_render_proto_service_page(array $service): void
     <div class="yl-wrap">
       <h2>How a prototype project runs</h2>
       <p class="sub">Screens first, then links and polish — you click through before we call it done.</p>
-      <div class="yl-graph">
-        <svg class="yl-graph-svg" viewBox="0 0 900 420" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M120 70 C 280 40, 520 40, 760 55"></path>
-          <path d="M760 90 C 640 160, 360 170, 220 200"></path>
-          <path d="M220 230 C 400 250, 620 240, 740 250"></path>
-          <path d="M740 290 C 520 330, 300 340, 150 360"></path>
-          <path d="M150 390 C 360 400, 620 390, 780 400"></path>
-        </svg>
+      <ol class="yl-flowline yl-reveal">
         <?php foreach ($process as $i => $step): ?>
-        <div class="yl-node n<?= $i + 1 ?>">
-          <b><?= ts_h($step[0]) ?></b>
-          <strong><?= ts_h($step[1]) ?></strong>
-          <p><?= ts_h($step[2]) ?></p>
-        </div>
+        <li<?= $i === count($process) - 1 ? ' class="is-last"' : "" ?>>
+          <div class="yl-node">
+            <b><?= ts_h($step[0]) ?></b>
+            <strong><?= ts_h($step[1]) ?></strong>
+            <p><?= ts_h($step[2]) ?></p>
+          </div>
+        </li>
         <?php endforeach; ?>
-      </div>
+      </ol>
     </div>
   </section>
 
@@ -996,7 +1003,7 @@ function ts_render_proto_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2 class="yl-reveal">Pick the depth you need</h2>
-      <p class="lead yl-reveal d1">Tell us on the contact form — pitch demo, usability-ready prototype or advanced Framer build.</p>
+      <p class="lead yl-reveal d1">Tell us in the brief below — pitch demo, usability-ready prototype or advanced Framer build.</p>
       <div class="yl-pkg-grid">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -1010,7 +1017,7 @@ function ts_render_proto_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p class="note"><?= ts_h($pkg[3]) ?></p>
-          <a class="yl-btn yl-btn-solid" href="/contact" style="align-self:flex-start">Enquire on contact <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>" style="align-self:flex-start">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -1024,7 +1031,7 @@ function ts_render_proto_service_page(array $service): void
         <p class="lead">Straight answers so you can decide if we are the right fit.</p>
         <div class="hint">
           <strong>Need a demo for Friday?</strong>
-          Send flows or wires on contact — we’ll suggest fidelity, tool and a realistic turnaround.
+          Send flows or wires in the brief below — we’ll suggest fidelity, tool and a realistic turnaround.
         </div>
       </div>
       <div class="yl-faq-list" data-pr-faq>
@@ -1054,14 +1061,19 @@ function ts_render_proto_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <h2>Ready to make the idea clickable?</h2>
-    <p>
-      Send your flows, wires or pitch goals on our contact page.
-      We’ll reply with suggested fidelity, tools and next steps.
-    </p>
-    <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Make the idea",
+      "em" => "clickable.",
+      "sub" => "Pitching investors, testing with users or aligning your team. Tell us what the prototype needs to prove.",
+      "gets" => ["Which flows are worth prototyping first", "Suggested fidelity and package", "How we would run a test round, if you need one"],
+      "options" => ["Demo Prototype", "Test-Ready Prototype", "Advanced / Framer", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "prototype-brief.fig",
+      "urlLabel" => "Website, deck or Figma link",
+      "msgPlaceholder" => "e.g. We pitch investors next month and need a clickable demo.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script>
@@ -1106,11 +1118,13 @@ function ts_render_proto_service_page(array $service): void
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-interactive-prototypes page-yl-cd page-yl-pr",
-        "image" => ts_og_image("/images/mobile/Prototyping.webp"),
+        "image" => ts_og_image("/images/mobile/tablet-wireframe.webp"),
     ]);
 }

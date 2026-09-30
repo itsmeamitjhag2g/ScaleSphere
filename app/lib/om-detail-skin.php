@@ -29,8 +29,9 @@ function ts_om_detail_skin_css(): void
     }
     $printed = true;
     $css = "/css/om-detail.css";
+    $ver = @filemtime(dirname(__DIR__, 2) . "/public" . $css) ?: 2;
     ?>
-<link rel="stylesheet" href="<?= ts_h($css) ?>?v=2">
+<link rel="stylesheet" href="<?= ts_h($css) ?>?v=<?= (int) $ver ?>">
     <?php
 }
 
@@ -49,7 +50,7 @@ function ts_om_detail_marquee(array $items): void
 <div class="om-detail-marquee" aria-hidden="true">
   <div class="om-detail-marquee-track">
     <?php foreach ($loop as $item): ?>
-    <span><i class="fas fa-circle" style="font-size:5px;vertical-align:middle"></i> <?= ts_h($item) ?></span>
+    <span><i class="fas fa-circle" style="font-size:max(5px, .3125rem);vertical-align:middle"></i> <?= ts_h($item) ?></span>
     <?php endforeach; ?>
   </div>
 </div>

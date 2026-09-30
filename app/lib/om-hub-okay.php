@@ -3,847 +3,340 @@
 declare(strict_types=1);
 
 /**
- * OkayDev-inspired layout for the Online Marketing hub only.
- * Nav/footer come from ts_layout; pricing-style plans are omitted.
+ * Online Marketing hub page. Shares the visual system of the seven OM service pages (om-service.css).
  */
 function ts_render_online_marketing_hub(): void
 {
     $hub = ts_service_hub("online-marketing");
     if (!$hub) {
-        http_response_code(404);
-        include dirname(__DIR__) . "/pages/not-found.php";
         return;
     }
-
-    $services = ts_services_in_category("Online Marketing");
     $site = ts_site();
+    $phone = (string) ($site["phone"] ?? "");
+    $phoneHref = (string) ($site["phoneHref"] ?? "");
+    $email = (string) ($site["email"] ?? "");
+    $tel = $phoneHref !== "" ? $phoneHref : $phone;
 
-    $rotators = ["SEO", "Ads", "Social", "Content", "Email", "Analytics"];
-    $pillars = [
-        [
-            "title" => "Make it measurable.",
-            "body" => "Every channel ties back to traffic, leads and revenue — not vanity metrics. Dashboards you can actually act on.",
-        ],
-        [
-            "title" => "See what converts.",
-            "body" => "Browse SEO, SEM, social, content, PPC, email and analytics as one stack. Filter by goal, then go deep on the service you need.",
-        ],
-        [
-            "title" => "Find the right mix.",
-            "body" => "We map budget to the channels that fit your stage — then credit every win to the work that earned it.",
-        ],
+    $services = [];
+    foreach (ts_services_in_category("Online Marketing") as $s) {
+        $services[$s["slug"]] = $s;
+    }
+
+    // slug => [icon class, the problem it solves, what we do, typical time to first results]
+    $cards = [
+        "search-engine-optimization" => ["fas fa-search", "Customers can’t find you on Google", "Technical fixes, keyword research, local SEO and on-page work so you rank for what buyers actually search.", "3–6 months"],
+        "search-engine-marketing" => ["fab fa-google", "You need enquiries this month", "Google and Bing search ads shown to people who are already looking for what you sell.", "2–4 weeks"],
+        "pay-per-click" => ["fas fa-mouse-pointer", "You want buyers on Instagram, Facebook and YouTube", "Paid campaigns across Google, Meta, YouTube and display, managed to a cost per lead or return on ad spend.", "2–4 weeks"],
+        "social-media-marketing" => ["fas fa-hashtag", "Your social pages feel dead", "A posting plan you can keep up, designed posts and reels, and quick replies on one or two platforms.", "1–3 months"],
+        "content-marketing" => ["fas fa-pen-nib", "Your website doesn’t show what you know", "Service pages, blogs and guides planned from real search data and written by people, not tools.", "3–6 months"],
+        "email-campaigns" => ["fas fa-envelope-open-text", "Customers buy once and never return", "Welcome, cart-recovery and win-back emails that run automatically, plus a regular newsletter.", "4–8 weeks"],
+        "analytics-and-reporting" => ["fas fa-chart-line", "You can’t tell which marketing works", "GA4 and conversion tracking set up properly, with one dashboard everyone trusts.", "1–2 weeks"],
     ];
 
-    $feed = [
-        [
-            "who" => "SEO Desk",
-            "handle" => "@seo",
-            "tag" => "Organic",
-            "body" => "Technical audit shipped. Fixed crawl waste, tightened title patterns, and locked a 90-day content map around buyer-intent clusters.",
-            "link" => "Search Engine Optimization",
-            "href" => ts_service_href("Search Engine Optimization"),
-        ],
-        [
-            "who" => "Paid Desk",
-            "handle" => "@ads",
-            "tag" => "Performance",
-            "body" => "Restructured Search + Meta. New negative lists, creative tests, and conversion tracking — ROAS trending up week over week.",
-            "link" => "Pay Per Click",
-            "href" => ts_service_href("Pay Per Click"),
-        ],
-        [
-            "who" => "Social Desk",
-            "handle" => "@social",
-            "tag" => "Community",
-            "body" => "Calendar live for LinkedIn + Instagram. Process posts, proof points, and soft CTAs — engagement without the reach games.",
-            "link" => "Social Media Marketing",
-            "href" => ts_service_href("Social Media Marketing"),
-        ],
+    $tools = [
+        ["fab fa-google", "Google Ads"],
+        ["fab fa-facebook", "Meta Ads"],
+        ["fas fa-chart-bar", "Google Analytics 4"],
+        ["fas fa-search", "Search Console"],
+        ["fas fa-map-marker-alt", "Google Business Profile"],
+        ["fab fa-mailchimp", "Mailchimp"],
+        ["fab fa-linkedin", "LinkedIn"],
+    ];
+
+    $steps = [
+        ["Day 1–2", "Free review", "A specialist checks your website, Google presence, ads and social pages and sends honest written notes."],
+        ["Week 1", "Strategy call", "30 minutes with your assistant to agree goals, budget and the one or two channels to start with."],
+        ["Week 1–2", "Plan and fixed quote", "A written 90-day plan and a fixed monthly fee. Ad spend is paid by you directly to Google or Meta."],
+        ["Ongoing", "Work and weekly updates", "Specialists do the work. Your assistant sends a short update every Friday and walks you through the numbers monthly."],
+    ];
+
+    $promises = [
+        ["fas fa-key", "Every account in your name"],
+        ["fas fa-users-cog", "A specialist for each channel"],
+        ["fas fa-file-alt", "Plain-English monthly report"],
     ];
 
     $faqs = [
+        ["How much does online marketing cost?", "It depends on the channels and how much work each one needs. After the free review we send a fixed monthly quote for our work. Ad budgets are separate and paid directly to Google or Meta from your own account, so you always see where that money goes."],
+        ["What’s the difference between Search Engine Marketing and Pay Per Click?", "Search Engine Marketing is our search ads service on Google and Bing: someone searches, and your ad appears. Pay Per Click covers paid campaigns more broadly, including Meta (Facebook and Instagram), YouTube and display. Many clients start with search ads and add Meta once those are profitable."],
+        ["Do we need all seven services?", "No. Most businesses start with one or two. We recommend where to begin based on your goal and budget, and only suggest adding a channel once the first one is working."],
+        ["How soon will we see results?", "Ads can bring enquiries within a few weeks of going live. SEO and content usually take three to six months to build momentum. After the review we give you a realistic forecast for your market, not a generic promise."],
+        ["Who will we actually be talking to?", "Your dedicated virtual assistant. They coordinate the SEO, ads, social and email specialists, so you have one person to message instead of managing several freelancers."],
+        ["Do you guarantee rankings or sales?", "No, and be careful with anyone who does. Google and Meta decide rankings and ad delivery. What we do commit to is clear goals, ethical work, weekly updates and full access to every account and number."],
+    ];
+
+    $posts = array_values(array_filter(ts_blog_posts(), static fn(array $p): bool => ($p["category"] ?? "") === "Online Marketing"));
+    $post = $posts[0] ?? null;
+
+    $title = "Online Marketing Services | SEO, Ads & Social Media";
+    $desc = "SEO, Google and Meta ads, social media, content, email and analytics, managed by one dedicated assistant. Start with a free marketing review.";
+
+    $jsonld = [
         [
-            "q" => "What do we get with Online Marketing?",
-            "a" => "A clear channel plan across SEO, paid, social, content, email and analytics — with weekly reporting and a single owner for results.",
+            "@context" => "https://schema.org",
+            "@type" => "Service",
+            "name" => "Online Marketing",
+            "serviceType" => "Digital marketing",
+            "provider" => ["@type" => "Organization", "name" => $site["name"], "url" => $site["url"]],
+            "description" => $desc,
+            "url" => ts_abs($hub["href"]),
+            "areaServed" => "IN",
+            "hasOfferCatalog" => [
+                "@type" => "OfferCatalog",
+                "name" => "Online marketing services",
+                "itemListElement" => array_values(array_map(static fn(array $s): array => [
+                    "@type" => "Offer",
+                    "itemOffered" => ["@type" => "Service", "name" => $s["label"], "url" => ts_abs($s["href"])],
+                ], $services)),
+            ],
         ],
         [
-            "q" => "Do you only run ads?",
-            "a" => "No. Paid is one lever. We also build organic demand, content systems and measurement so growth isn’t rented forever.",
+            "@context" => "https://schema.org",
+            "@type" => "FAQPage",
+            "mainEntity" => array_map(static fn(array $f): array => [
+                "@type" => "Question",
+                "name" => $f[0],
+                "acceptedAnswer" => ["@type" => "Answer", "text" => $f[1]],
+            ], $faqs),
         ],
         [
-            "q" => "How fast will we see results?",
-            "a" => "Paid and email can move in weeks. SEO and content compound over months. We set expectations per channel before kickoff.",
-        ],
-        [
-            "q" => "Can we start with one service?",
-            "a" => "Yes. Pick SEO, PPC, social or any offering below — we still keep the full stack in view so nothing fights itself.",
-        ],
-        [
-            "q" => "How do you report?",
-            "a" => "GA4 / Ads / Search Console dashboards plus a plain-language monthly readout: what worked, what we’ll change, where budget goes next.",
-        ],
-        [
-            "q" => "Who does the work?",
-            "a" => "Senior strategists and specialists — not a junior handoff after the pitch. Same team from audit through scale.",
+            "@context" => "https://schema.org",
+            "@type" => "BreadcrumbList",
+            "itemListElement" => [
+                ["@type" => "ListItem", "position" => 1, "name" => "Home", "item" => ts_abs("/")],
+                ["@type" => "ListItem", "position" => 2, "name" => "Services", "item" => ts_abs("/services")],
+                ["@type" => "ListItem", "position" => 3, "name" => "Online Marketing", "item" => ts_abs($hub["href"])],
+            ],
         ],
     ];
 
+    $css = "/css/om-service.css";
+    $cssVer = @filemtime(dirname(__DIR__, 2) . "/public" . $css) ?: 1;
+
     ob_start();
     ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-
-<div class="ok" data-ok-om>
-  <style>
-    .ok{
-      --ink:#0F172A;
-      --soft:#F6F7F9;
-      --blue:#1C4FD6;
-      --deep:#0B1A3A;
-      --muted:rgba(15,23,42,.62);
-      --line:rgba(15,23,42,.12);
-      background:var(--soft);
-      color:var(--ink);
-      overflow-x:clip;
-    }
-    .ok *{ box-sizing:border-box; }
-    .ok-wrap{ width:min(1320px, calc(100% - 1.25rem)); margin:0 auto; }
-    .ok-mono{
-      font-family:"IBM Plex Mono",ui-monospace,monospace;
-      font-weight:600; letter-spacing:.04em; text-transform:uppercase;
-    }
-    .ok-btn{
-      display:inline-flex; align-items:center; gap:.5rem;
-      min-height:48px; padding:0 1.35rem; border-radius:999px;
-      font-family:"IBM Plex Mono",ui-monospace,monospace;
-      font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
-      text-decoration:none; border:2px solid var(--ink);
-      transition:transform .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-    }
-    .ok-btn:hover{ transform:translateY(-2px); }
-    .ok-btn-solid{
-      background:var(--blue); color:#fff; border-color:var(--ink);
-      box-shadow:3px 3px 0 var(--ink);
-    }
-    .ok-btn-solid:hover{ background:#163AA8; }
-    .ok-btn-ghost{
-      background:#fff; color:var(--ink);
-      box-shadow:3px 3px 0 var(--ink);
-    }
-    .ok-btn-light{
-      background:#fff; color:var(--ink); border-color:#fff;
-      box-shadow:3px 3px 0 rgba(0,0,0,.25);
-    }
-
-    /* HERO — okaydev green → ScaleSphere blue */
-    .ok-hero{
-      position:relative;
-      min-height:min(88svh, 820px);
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      text-align:center;
-      padding:6.5rem 1.25rem 4.5rem;
-      background:var(--blue);
-      color:#fff;
-      overflow:hidden;
-    }
-    .ok-hero-grid{
-      position:absolute; inset:0; pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
-      background-size:48px 48px;
-      mask-image:radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 75%);
-      opacity:.55;
-    }
-    .ok-hero-glow{
-      position:absolute; left:50%; top:42%; width:70vw; height:50vh;
-      transform:translate(-50%,-50%);
-      background:radial-gradient(circle, rgba(255,255,255,.28), transparent 65%);
-      pointer-events:none;
-    }
-    .ok-eyebrow{
-      position:relative; z-index:1;
-      margin:0 0 1.25rem;
-      font-size:11px; letter-spacing:.18em;
-      color:rgba(255,255,255,.88);
-    }
-    .ok-hero h1{
-      position:relative; z-index:1;
-      margin:0;
-      font-family:"Anton","Montserrat",sans-serif;
-      font-weight:400;
-      font-size:clamp(3.6rem, 14vw, 8.5rem);
-      line-height:.9;
-      letter-spacing:.01em;
-      color:#fff;
-      text-shadow:3px 3px 0 rgba(11,26,58,.25);
-    }
-    .ok-hero-rotator{
-      display:block; min-height:1em;
-    }
-    .ok-hero-rotator span{
-      display:none;
-    }
-    .ok-hero-rotator span.is-on{ display:block; }
-    .ok-hero p{
-      position:relative; z-index:1;
-      margin:1.35rem auto 0; max-width:34rem;
-      font-size:clamp(1rem, 2vw, 1.2rem);
-      line-height:1.5; color:rgba(255,255,255,.92);
-      font-weight:600;
-    }
-    .ok-hero-actions{
-      position:relative; z-index:1;
-      margin-top:1.75rem;
-      display:flex; flex-wrap:wrap; gap:.75rem; justify-content:center;
-    }
-
-    /* Marquee */
-    .ok-marquee{
-      background:var(--ink); color:#fff;
-      border-top:2px solid var(--ink); border-bottom:2px solid var(--ink);
-      overflow:hidden; padding:.85rem 0;
-    }
-    .ok-marquee-track{
-      display:flex; gap:2rem; width:max-content;
-      animation:okMarquee 28s linear infinite;
-    }
-    .ok-marquee-track span{
-      font-family:"IBM Plex Mono",monospace;
-      font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-      white-space:nowrap; opacity:.9;
-    }
-    .ok-marquee-track i{ color:var(--blue); margin:0 .35rem; }
-    @keyframes okMarquee{
-      from{ transform:translateX(0); }
-      to{ transform:translateX(-50%); }
-    }
-
-    /* Come for the work */
-    .ok-stay{
-      padding:5rem 0 3.5rem;
-      background:var(--deep);
-      color:#fff; text-align:center;
-    }
-    .ok-stay h2{
-      margin:0 auto; max-width:18ch;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(2rem, 5.5vw, 3.4rem);
-      font-weight:800; line-height:1.12; letter-spacing:-.02em;
-    }
-    .ok-stay .ok-btn{ margin-top:1.75rem; }
-
-    /* Gallery / service mosaic */
-    .ok-gallery{
-      padding:0 0 4.5rem;
-      background:var(--deep);
-    }
-    .ok-gallery-grid{
-      width:min(1320px, calc(100% - 1.25rem));
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:1rem;
-    }
-    @media (min-width:700px){
-      .ok-gallery-grid{ grid-template-columns:1fr 1fr; }
-    }
-    @media (min-width:1024px){
-      .ok-gallery-grid{ grid-template-columns:repeat(3,1fr); }
-    }
-    .ok-gcard{
-      display:flex; flex-direction:column;
-      background:#fff; color:var(--ink);
-      border:2px solid #fff;
-      border-radius:1.15rem;
-      overflow:hidden;
-      text-decoration:none;
-      box-shadow:4px 4px 0 rgba(0,0,0,.35);
-      transition:transform .25s ease, box-shadow .25s ease;
-    }
-    .ok-gcard:hover{ transform:translateY(-4px); box-shadow:6px 8px 0 rgba(0,0,0,.35); }
-    .ok-gcard-media{
-      aspect-ratio:16/10; background:#e8edf5; overflow:hidden;
-    }
-    .ok-gcard-media img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .ok-gcard-body{ padding:1rem 1.1rem 1.15rem; text-align:left; }
-    .ok-gcard-body strong{
-      display:block; font-family:Montserrat,sans-serif;
-      font-size:15px; font-weight:800; margin-bottom:.35rem;
-    }
-    .ok-gcard-body p{
-      margin:0; font-size:13px; line-height:1.45; color:var(--muted);
-    }
-
-    /* Feed section */
-    .ok-feed-sec{
-      padding:5rem 0;
-      background:var(--soft);
-    }
-    .ok-feed-head{
-      text-align:center; margin-bottom:2.5rem;
-    }
-    .ok-feed-head h2{
-      margin:0 auto; max-width:16ch;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(2rem,5vw,3.2rem);
-      font-weight:800; line-height:1.12; letter-spacing:-.02em;
-      color:var(--ink);
-    }
-    .ok-feed-head h2 em{
-      font-style:italic; font-weight:700; color:var(--blue);
-    }
-    .ok-feed-head p{
-      margin:1rem auto 0; max-width:36rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
-    }
-    .ok-points{
-      display:grid; gap:.75rem;
-      width:min(520px,100%);
-      margin:1.75rem auto 0;
-      text-align:left;
-    }
-    .ok-points li{
-      list-style:none;
-      display:flex; gap:.85rem; align-items:flex-start;
-      padding:.85rem 1rem;
-      background:#fff; border:2px solid var(--ink); border-radius:1rem;
-      box-shadow:3px 3px 0 var(--ink);
-      font-size:14px; font-weight:700; color:var(--ink);
-    }
-    .ok-points b{
-      font-family:"IBM Plex Mono",monospace;
-      color:var(--blue); font-size:12px; letter-spacing:.06em;
-    }
-    .ok-feed-actions{ text-align:center; margin-top:1.75rem; }
-
-    .ok-feed-board{
-      width:min(720px, calc(100% - 2rem));
-      margin:2.75rem auto 0;
-      display:grid; gap:1rem;
-    }
-    .ok-post{
-      background:#fff;
-      border:2px solid var(--ink);
-      border-radius:1.25rem;
-      padding:1.15rem 1.2rem 1.25rem;
-      box-shadow:4px 4px 0 var(--ink);
-    }
-    .ok-post-top{
-      display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem;
-    }
-    .ok-avatar{
-      width:2.5rem; height:2.5rem; border-radius:999px;
-      background:var(--blue); color:#fff;
-      display:grid; place-items:center;
-      font-size:11px; font-weight:800; border:2px solid var(--ink);
-    }
-    .ok-post-top .ok-avatar{ color:#fff !important; }
-    .ok-post-top strong{ display:block; font-size:14px; font-weight:800; }
-    .ok-post-top span{ font-size:12px; color:var(--muted); }
-    .ok-chip{
-      margin-left:auto;
-      font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
-      padding:.3rem .55rem; border-radius:999px;
-      background:rgba(28,79,214,.1); color:var(--blue); border:1px solid rgba(28,79,214,.25);
-    }
-    .ok-post p{ margin:0 0 .85rem; font-size:14px; line-height:1.55; color:rgba(15,23,42,.78); }
-    .ok-post a{
-      display:inline-flex; align-items:center; gap:.35rem;
-      font-size:13px; font-weight:800; color:var(--blue); text-decoration:none;
-    }
-
-    /* Pillars */
-    .ok-pillars{
-      padding:4.5rem 0;
-      background:#fff;
-      border-top:1px solid var(--line);
-    }
-    .ok-pillars-grid{
-      display:grid; gap:1.25rem;
-    }
-    @media (min-width:800px){
-      .ok-pillars-grid{ grid-template-columns:repeat(3,1fr); }
-    }
-    .ok-pillar{
-      padding:1.5rem 1.35rem;
-      border:2px solid var(--ink);
-      border-radius:1.25rem;
-      background:var(--soft);
-      box-shadow:4px 4px 0 var(--ink);
-    }
-    .ok-pillar h3{
-      margin:0 0 .65rem;
-      font-family:Montserrat,sans-serif;
-      font-size:1.25rem; font-weight:800; letter-spacing:-.02em;
-    }
-    .ok-pillar p{ margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
-
-    /* Directory of OM services */
-    .ok-dir{
-      padding:4.5rem 0 5rem;
-      background:var(--soft);
-    }
-    .ok-dir-head{ text-align:center; margin-bottom:2rem; }
-    .ok-dir-head h2{
-      margin:0;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(1.9rem,4.5vw,2.8rem);
-      font-weight:800; letter-spacing:-.02em;
-    }
-    .ok-dir-head p{
-      margin:.75rem auto 0; max-width:34rem;
-      color:var(--muted); font-size:15px;
-    }
-    .ok-dir-grid{
-      display:grid; gap:1rem;
-    }
-    @media (min-width:640px){ .ok-dir-grid{ grid-template-columns:1fr 1fr; } }
-    @media (min-width:1000px){ .ok-dir-grid{ grid-template-columns:1fr 1fr 1fr; } }
-    .ok-dir-card{
-      display:flex; flex-direction:column; gap:.55rem;
-      padding:1.2rem 1.15rem;
-      background:#fff;
-      border:2px solid var(--ink);
-      border-radius:1.15rem;
-      text-decoration:none; color:var(--ink);
-      box-shadow:3px 3px 0 var(--ink);
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .ok-dir-card:hover{ transform:translateY(-3px); box-shadow:5px 6px 0 var(--ink); }
-    .ok-dir-card i{
-      width:2.4rem; height:2.4rem; border-radius:.7rem;
-      display:grid; place-items:center;
-      background:rgba(28,79,214,.1); color:var(--blue);
-      border:1.5px solid rgba(28,79,214,.25);
-    }
-    .ok-dir-card strong{ font-size:15px; font-weight:800; }
-    .ok-dir-card span{ font-size:13px; color:var(--muted); line-height:1.45; }
-
-    /* Process */
-    .ok-process{
-      padding:4.5rem 0;
-      background:var(--ink); color:#fff;
-    }
-    .ok-process h2{
-      margin:0 0 2rem; text-align:center;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800;
-    }
-    .ok-steps{
-      display:grid; gap:1rem;
-    }
-    @media (min-width:800px){ .ok-steps{ grid-template-columns:repeat(5,1fr); } }
-    .ok-step{
-      padding:1.1rem 1rem;
-      border:2px solid rgba(255,255,255,.2);
-      border-radius:1rem;
-      background:rgba(255,255,255,.04);
-    }
-    .ok-step b{
-      display:block;
-      font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--blue); letter-spacing:.1em; margin-bottom:.45rem;
-    }
-    .ok-step strong{ display:block; font-size:15px; margin-bottom:.35rem; }
-    .ok-step p{ margin:0; font-size:12px; line-height:1.45; color:rgba(255,255,255,.65); }
-
-    /* Testimonials */
-    .ok-quotes{
-      padding:4.5rem 0;
-      background:#fff;
-    }
-    .ok-quotes h2{
-      margin:0 0 .5rem; text-align:center;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(1.8rem,4vw,2.6rem); font-weight:800;
-    }
-    .ok-quotes > .ok-wrap > p.lead{
-      text-align:center; color:var(--muted); margin:0 auto 2rem; max-width:28rem;
-    }
-    .ok-quote-grid{
-      display:grid; gap:1rem;
-    }
-    @media (min-width:800px){ .ok-quote-grid{ grid-template-columns:repeat(3,1fr); } }
-    .ok-quote{
-      padding:1.35rem 1.25rem;
-      border:2px solid var(--ink);
-      border-radius:1.2rem;
-      background:var(--soft);
-      box-shadow:3px 3px 0 var(--ink);
-    }
-    .ok-quote p{
-      margin:0 0 1rem;
-      font-size:14px; line-height:1.55; font-weight:600; color:rgba(15,23,42,.82);
-    }
-    .ok-quote footer strong{ display:block; font-size:13px; }
-    .ok-quote footer span{ font-size:12px; color:var(--muted); }
-
-    /* FAQ — not pricing */
-    .ok-faq{
-      padding:4.5rem 0 5rem;
-      background:var(--soft);
-      border-top:1px solid var(--line);
-    }
-    .ok-faq h2{
-      margin:0 0 1.75rem; text-align:center;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800;
-    }
-    .ok-faq-list{
-      width:min(760px,100%); margin:0 auto;
-      display:grid; gap:.65rem;
-    }
-    .ok-faq details{
-      background:#fff;
-      border:2px solid var(--ink);
-      border-radius:1rem;
-      box-shadow:3px 3px 0 var(--ink);
-      padding:.15rem 0;
-    }
-    .ok-faq summary{
-      cursor:pointer; list-style:none;
-      padding:1rem 1.15rem;
-      font-weight:800; font-size:15px;
-    }
-    .ok-faq summary::-webkit-details-marker{ display:none; }
-    .ok-faq details[open] summary{ color:var(--blue); }
-    .ok-faq details p{
-      margin:0; padding:0 1.15rem 1.1rem;
-      color:var(--muted); font-size:14px; line-height:1.55;
-    }
-
-    /* Closing CTA */
-    .ok-close{
-      padding:5rem 1.25rem;
-      background:var(--blue);
-      color:#fff; text-align:center;
-      position:relative; overflow:hidden;
-    }
-    .ok-close::before{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
-      background-size:48px 48px;
-      opacity:.4;
-    }
-    .ok-close h2{
-      position:relative; z-index:1;
-      margin:0 auto; max-width:22ch;
-      font-family:Montserrat,sans-serif;
-      font-size:clamp(1.7rem,4.2vw,2.75rem);
-      font-weight:800; line-height:1.15; letter-spacing:-.02em;
-    }
-    .ok-close p{
-      position:relative; z-index:1;
-      margin:1rem auto 0; max-width:34rem;
-      color:rgba(255,255,255,.9); font-size:15px; line-height:1.55;
-    }
-    .ok-close .ok-btn{ position:relative; z-index:1; margin-top:1.75rem; }
-
-    /* —— Mobile / tablet responsive —— */
-    @media (max-width: 960px){
-      .ok-wrap{ width:min(100%, calc(100% - 1.5rem)); }
-      .ok-hero{
-        min-height:0;
-        padding:5rem 1rem 2.75rem;
-      }
-      .ok-hero h1{
-        font-size:clamp(2.4rem, 12vw, 4.5rem);
-        max-width:100%;
-        overflow-wrap:anywhere;
-      }
-      .ok-hero p{
-        margin-top:1rem;
-        font-size:15px;
-        padding-inline:0.25rem;
-      }
-      .ok-hero-actions{ margin-top:1.25rem; width:100%; }
-      .ok-hero-actions .ok-btn{ width:100%; justify-content:center; }
-      .ok-stay,
-      .ok-pillars,
-      .ok-dir,
-      .ok-process,
-      .ok-quotes,
-      .ok-faq{
-        padding-top:2.5rem;
-        padding-bottom:2.5rem;
-      }
-      .ok-gallery{ padding-bottom:2.5rem; }
-      .ok-stay h2,
-      .ok-dir-head h2,
-      .ok-process h2,
-      .ok-quotes h2,
-      .ok-faq h2,
-      .ok-close h2{
-        font-size:clamp(1.55rem, 6.5vw, 2.4rem);
-        max-width:100%;
-        padding-inline:0.25rem;
-      }
-      .ok-dir-head{ margin-bottom:1.25rem; }
-      .ok-pillars-grid{ gap:0.85rem; }
-      .ok-pillar{ padding:1.15rem 1rem; }
-      .ok-pillar h3{ font-size:1.1rem; }
-      .ok-dir-card,
-      .ok-gcard,
-      .ok-post,
-      .ok-quote{
-        max-width:100%;
-        box-sizing:border-box;
-      }
-      .ok-dir-card p,
-      .ok-dir-card span,
-      .ok-gcard-body p,
-      .ok-post p,
-      .ok-pillar p{
-        overflow-wrap:anywhere;
-        word-break:break-word;
-      }
-      .ok-close{ padding:2.75rem 1rem; }
-      .ok-close p{ font-size:14px; }
-    }
-    @media (max-width: 640px){
-      .ok-wrap{ width:min(100%, calc(100% - 1.1rem)); }
-      .ok-hero{ padding:4.5rem 0.85rem 2.25rem; }
-      .ok-hero h1{ font-size:clamp(2.1rem, 14vw, 3.2rem); line-height:0.95; }
-      .ok-eyebrow{ font-size:10px; letter-spacing:0.14em; margin-bottom:0.85rem; }
-      .ok-stay,
-      .ok-pillars,
-      .ok-dir,
-      .ok-process,
-      .ok-quotes,
-      .ok-faq{
-        padding-top:2rem;
-        padding-bottom:2rem;
-      }
-      .ok-dir-head p,
-      .ok-quotes > .ok-wrap > p.lead{
-        font-size:13.5px;
-        margin-bottom:1.25rem;
-      }
-      .ok-steps{ grid-template-columns:1fr; }
-      .ok-marquee-track{ animation-duration:40s; }
-    }
-  </style>
-
-  <!-- HERO -->
-  <section class="ok-hero">
-    <div class="ok-hero-grid" aria-hidden="true"></div>
-    <div class="ok-hero-glow" aria-hidden="true"></div>
-    <p class="ok-eyebrow ok-mono">Online marketing that compounds</p>
-    <h1>
-      <span class="ok-hero-rotator" data-ok-rotator aria-live="polite">
-        <?php foreach ($rotators as $i => $word): ?>
-        <span class="<?= $i === 0 ? "is-on" : "" ?>"><?= ts_h($word) ?></span>
-        <?php endforeach; ?>
-      </span>
-    </h1>
-    <p><?= ts_h($hub["lead"]) ?> <?= ts_h(ts_va_note()) ?></p>
-    <div class="ok-hero-actions">
-      <a class="ok-btn ok-btn-light" href="/contact">Start a project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      <a class="ok-btn ok-btn-ghost" href="#ok-services">View services</a>
-    </div>
-  </section>
-
-  <!-- Marquee of OM services only -->
-  <div class="ok-marquee" aria-hidden="true">
-    <div class="ok-marquee-track">
-      <?php for ($r = 0; $r < 2; $r++): ?>
-        <?php foreach ($services as $svc): ?>
-        <span><?= ts_h($svc["label"]) ?> <i class="fas fa-circle" style="font-size:5px;vertical-align:middle"></i></span>
-        <?php endforeach; ?>
-      <?php endfor; ?>
-    </div>
-  </div>
-
-  <!-- Stay / gallery intro -->
-  <section class="ok-stay">
-    <div class="ok-wrap">
-      <h2>Come for the traffic.<br>Stay for the revenue.</h2>
-      <a class="ok-btn ok-btn-solid" href="#ok-services">View services <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-    </div>
-  </section>
-
-  <section class="ok-gallery" id="ok-services">
-    <div class="ok-gallery-grid">
-      <?php
-      $gImgs = [
-          "/images/stock/photo-1460925895917-afdab827c52f.jpg",
-          "/images/stock/photo-1551288049-bebda4e38f71.jpg",
-          "/images/stock/photo-1432888622747-4eb9a8efeb07.jpg",
-          "/images/stock/photo-1552664730-d307ca884978.jpg",
-          "/images/stock/photo-1563986768609-322da13575f3.jpg",
-          "/images/stock/photo-1557838923-2985c318be48.jpg",
-          "/images/stock/photo-1543286386-713bdd548da4.jpg",
-      ];
-      foreach ($services as $i => $svc):
-          $rich = ts_service_rich($svc);
-          $img = $gImgs[$i % count($gImgs)];
-      ?>
-      <a class="ok-gcard" href="<?= ts_h($svc["href"]) ?>">
-        <div class="ok-gcard-media">
-          <img src="<?= ts_h($img) ?>" alt="" loading="lazy" decoding="async" width="640" height="400">
+<link rel="stylesheet" href="<?= ts_h($css) ?>?v=<?= (int) $cssVer ?>">
+<div class="sx sxh" data-sx-page>
+  <section class="sx-hero">
+    <div class="sx-wrap sx-hero-grid">
+      <div>
+        <nav aria-label="Breadcrumb">
+          <ol class="sx-crumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Services</a></li>
+            <li aria-current="page">Online Marketing</li>
+          </ol>
+        </nav>
+        <p class="sx-eyebrow">Online marketing services</p>
+        <h1>Online marketing that brings in <span>enquiries, not just traffic</span></h1>
+        <p class="sx-hero-sub">SEO, Google and Meta ads, social media, content, email and analytics, done by specialists and managed for you by one dedicated assistant. A clear plan, a fixed monthly fee and a short update every week.</p>
+        <div class="sx-ctas">
+          <a class="sx-btn sx-btn-primary sx-hide-lg" href="#sx-audit">Get a free marketing review <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+          <a class="sx-btn sx-btn-ghost" href="#sx-services">Find the right service</a>
         </div>
-        <div class="ok-gcard-body">
-          <strong><?= ts_h($svc["label"]) ?></strong>
-          <p><?= ts_h($rich["lead"]) ?></p>
-        </div>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </section>
-
-  <!-- Feed-like story -->
-  <section class="ok-feed-sec">
-    <div class="ok-wrap">
-      <div class="ok-feed-head">
-        <h2>A marketing stack<br>that doesn&rsquo;t <em>waste budget.</em></h2>
-        <p>Channels in the right order, from the people who actually run them. Strategy without the vanity games.</p>
-        <ul class="ok-points">
-          <li><b>01</b> <span>Links belong in the campaign — every click tracked to a goal.</span></li>
-          <li><b>02</b> <span>Context without a twelve-slide deck — clear weekly readouts.</span></li>
-          <li><b>03</b> <span>Share the process, not the performance theatre.</span></li>
+        <ul class="sx-hero-points">
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i> Free review, no obligation</li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i> Accounts stay in your name</li>
+          <li><i class="fas fa-check-circle" aria-hidden="true"></i> Start with one channel</li>
         </ul>
-        <div class="ok-feed-actions">
-          <a class="ok-btn ok-btn-solid" href="/contact">Talk marketing <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-        </div>
+        <?php if ($phone !== ""): ?>
+        <p class="sx-hero-call">Prefer to talk first? Call <a href="tel:<?= ts_h($tel) ?>"><?= ts_h($phone) ?></a> or message us on WhatsApp.</p>
+        <?php endif; ?>
       </div>
 
-      <div class="ok-feed-board" aria-label="Campaign updates">
-        <?php foreach ($feed as $post): ?>
-        <article class="ok-post">
-          <div class="ok-post-top">
-            <span class="ok-avatar"><?= ts_h(strtoupper(substr($post["who"], 0, 2))) ?></span>
-            <div>
-              <strong><?= ts_h($post["who"]) ?></strong>
-              <span><?= ts_h($post["handle"]) ?></span>
+      <div class="sx-audit" id="sx-audit">
+        <h2 class="sx-audit-title">Get a free marketing review</h2>
+        <p class="sx-audit-sub">Share your website and what you want more of. A specialist checks your search, ads and social presence and sends honest notes within 2 working days.</p>
+        <form method="POST" action="/contact#enquiry" class="sx-form">
+          <input type="hidden" name="ts_form" value="contact">
+          <input type="hidden" name="ts_csrf" value="<?= ts_h(ts_csrf_token()) ?>">
+          <input type="hidden" name="source" value="Online Marketing page">
+          <div class="sx-hp" aria-hidden="true"><label>Fax <input type="text" name="ts_hp_fax" value="" tabindex="-1" autocomplete="off"></label></div>
+          <label class="sx-field sx-field-full"><span>Your website</span>
+            <input type="text" name="site_url" inputmode="url" placeholder="yourbusiness.com" required maxlength="200" autocomplete="url" spellcheck="false">
+          </label>
+          <label class="sx-field sx-field-full"><span>What do you need help with?</span>
+            <select name="service" required>
+              <option value="Not sure yet" selected>Not sure yet, please advise</option>
+              <option value="SEO">Ranking on Google (SEO)</option>
+              <option value="Paid Ads (Google / Meta)">Google or Meta ads</option>
+              <option value="Social Media & Content">Social media and content</option>
+              <option value="Email Marketing">Email marketing</option>
+              <option value="Analytics & Tracking">Tracking and reporting</option>
+            </select>
+          </label>
+          <label class="sx-field"><span>Your name</span>
+            <input type="text" name="name" placeholder="Full name" required maxlength="120" autocomplete="name">
+          </label>
+          <label class="sx-field"><span>Phone / WhatsApp</span>
+            <input type="tel" name="phone" placeholder="+91 98xxx xxxxx" required maxlength="40" autocomplete="tel">
+          </label>
+          <label class="sx-field sx-field-full"><span>Email</span>
+            <input type="email" name="email" placeholder="you@business.com" required maxlength="180" autocomplete="email">
+          </label>
+          <button type="submit" class="sx-btn sx-btn-primary sx-field-full">Send my free review <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
+        </form>
+        <p class="sx-audit-foot"><i class="fas fa-lock" aria-hidden="true"></i> Reviewed by a person, not an automated tool. We only use your details to send the review.</p>
             </div>
-            <span class="ok-chip"><?= ts_h($post["tag"]) ?></span>
           </div>
-          <p><?= ts_h($post["body"]) ?></p>
-          <a href="<?= ts_h($post["href"]) ?>"><?= ts_h($post["link"]) ?> <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-        </article>
+    <div class="sx-wrap">
+      <div class="sxh-tools">
+        <span>We work inside the tools you already use</span>
+        <ul>
+          <?php foreach ($tools as $tool): ?>
+          <li><i class="<?= ts_h($tool[0]) ?>" aria-hidden="true"></i> <?= ts_h($tool[1]) ?></li>
         <?php endforeach; ?>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- Three pillars -->
-  <section class="ok-pillars">
-    <div class="ok-wrap ok-pillars-grid">
-      <?php foreach ($pillars as $pillar): ?>
-      <article class="ok-pillar">
-        <h3><?= ts_h($pillar["title"]) ?></h3>
-        <p><?= ts_h($pillar["body"]) ?></p>
-      </article>
-      <?php endforeach; ?>
+  <section class="sx-sec" id="sx-services">
+    <div class="sx-wrap">
+      <div class="sxh-head" data-sx-reveal>
+        <div>
+          <p class="sx-eyebrow">Our services</p>
+          <h2>Which service do you actually need?</h2>
     </div>
-  </section>
-
-  <!-- Directory -->
-  <section class="ok-dir" id="ok-directory">
-    <div class="ok-wrap">
-      <div class="ok-dir-head">
-        <h2>Find the right channel.</h2>
-        <p>Only Online Marketing services — open any offering for process, deliverables and FAQs.</p>
+        <p class="sx-lead">Most businesses need one or two, not all seven. Find the problem that sounds like yours. Timelines are typical for a first result, not a guarantee.</p>
       </div>
-      <div class="ok-dir-grid">
-        <?php foreach ($services as $svc):
-            $rich = ts_service_rich($svc);
-        ?>
-        <a class="ok-dir-card" href="<?= ts_h($svc["href"]) ?>">
-          <i class="fas <?= ts_h($svc["icon"]) ?>" aria-hidden="true"></i>
-          <strong><?= ts_h($svc["label"]) ?></strong>
-          <span><?= ts_h($rich["overview"]) ?></span>
+      <div class="sxh-cards">
+        <?php foreach ($cards as $slug => $card): if (!isset($services[$slug])) { continue; } ?>
+        <a class="sxh-card" href="<?= ts_h($services[$slug]["href"]) ?>" data-sx-reveal>
+          <span class="sxh-card-top">
+            <i class="<?= ts_h($card[0]) ?>" aria-hidden="true"></i>
+            <span class="sxh-card-time"><i class="far fa-clock" aria-hidden="true"></i> <?= ts_h($card[3]) ?></span>
+          </span>
+          <span class="sxh-card-if"><?= ts_h($card[1]) ?></span>
+          <h3><?= ts_h($services[$slug]["label"]) ?></h3>
+          <p><?= ts_h($card[2]) ?></p>
+          <span class="sxh-card-more">See what’s included <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
         </a>
         <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- Process -->
-  <?php if (!empty($hub["process"])): ?>
-  <section class="ok-process">
-    <div class="ok-wrap">
-      <h2>How we run Online Marketing</h2>
-      <div class="ok-steps">
-        <?php foreach ($hub["process"] as $i => $step): ?>
-        <div class="ok-step">
-          <b><?= str_pad((string) ($i + 1), 2, "0", STR_PAD_LEFT) ?></b>
-          <strong><?= ts_h($step[0]) ?></strong>
-          <p><?= ts_h($step[1]) ?></p>
+        <div class="sxh-card is-ask" data-sx-reveal>
+          <i class="fas fa-comments" aria-hidden="true"></i>
+          <h3>Not sure which one fits?</h3>
+          <p>Tell us what you want more of. We’ll recommend where to start, and what to skip for now.</p>
+          <a class="sx-btn sx-btn-primary" href="#sx-audit">Get a free review</a>
         </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-  <?php endif; ?>
-
-  <!-- Testimonials -->
-  <section class="ok-quotes">
-    <div class="ok-wrap">
-      <h2>Don&rsquo;t take our word for it.</h2>
-      <p class="lead">Take theirs. It&rsquo;s pretty okay.</p>
-      <div class="ok-quote-grid">
-        <?php foreach ($hub["testimonials"] as $row): ?>
-        <blockquote class="ok-quote">
-          <p>&ldquo;<?= ts_h($row[0]) ?>&rdquo;</p>
-          <footer>
-            <strong><?= ts_h($row[1]) ?></strong>
-            <span><?= ts_h($row[2]) ?></span>
-          </footer>
-        </blockquote>
-        <?php endforeach; ?>
       </div>
     </div>
   </section>
 
-  <!-- FAQ (basics — not pricing) -->
-  <section class="ok-faq">
-    <div class="ok-wrap">
-      <h2>Here are the basics.</h2>
-      <div class="ok-faq-list">
-        <?php foreach ($faqs as $faq): ?>
-        <details>
-          <summary><?= ts_h($faq["q"]) ?></summary>
-          <p><?= ts_h($faq["a"]) ?></p>
+  <section class="sx-sec flush-top" id="sx-process">
+    <div class="sx-wrap">
+      <div class="sx-va" data-sx-reveal>
+        <div class="sx-va-copy">
+          <p class="sx-eyebrow">How it works</p>
+          <h2>One person to message. A team doing the work.</h2>
+          <p class="sx-lead">No need to brief and chase separate SEO, ads and social freelancers. Your assistant manages all of it and you always know what’s happening.</p>
+          <ol class="sxh-flow">
+            <?php foreach ($steps as $st): ?>
+            <li><small><?= ts_h($st[0]) ?></small><strong><?= ts_h($st[1]) ?></strong><span><?= ts_h($st[2]) ?></span></li>
+            <?php endforeach; ?>
+          </ol>
+        </div>
+        <div class="sxh-va-side">
+          <div class="sx-update" aria-label="Example weekly update">
+            <div class="sx-update-head">
+              <span class="sx-update-av" aria-hidden="true">VA</span>
+              <div><strong>Weekly update</strong><small>From your assistant · example</small></div>
+              <time>Friday</time>
+      </div>
+            <h3>Done this week</h3>
+            <ul>
+              <li class="done"><i class="fas fa-check-circle" aria-hidden="true"></i> Paused two search ad groups that got clicks but no enquiries</li>
+              <li class="done"><i class="fas fa-check-circle" aria-hidden="true"></i> Published the new service page for your main location</li>
+              <li class="done"><i class="fas fa-check-circle" aria-hidden="true"></i> Scheduled next week’s Instagram posts for your approval</li>
+            </ul>
+            <h3>Next week</h3>
+            <ul>
+              <li class="next"><i class="fas fa-clock" aria-hidden="true"></i> Test a new ad headline built around your free site visit</li>
+              <li class="next"><i class="fas fa-clock" aria-hidden="true"></i> Fix the contact form that isn’t recorded in GA4</li>
+            </ul>
+            <h3>Needed from you</h3>
+            <ul>
+              <li class="next"><i class="fas fa-reply" aria-hidden="true"></i> 3–4 photos from recent jobs for the website and social posts</li>
+            </ul>
+            <div class="sx-update-foot"><i class="fas fa-info-circle" aria-hidden="true"></i> Sample format. Your updates cover your own campaigns.</div>
+    </div>
+          <ul class="sxh-promises">
+            <?php foreach ($promises as $pr): ?>
+            <li><i class="<?= ts_h($pr[0]) ?>" aria-hidden="true"></i> <?= ts_h($pr[1]) ?></li>
+        <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sx-sec wash" id="sx-faq">
+    <div class="sx-wrap sx-faq-grid">
+      <div class="sx-faq-side" data-sx-reveal>
+        <p class="sx-eyebrow">FAQ</p>
+        <h2>Questions people ask before starting</h2>
+        <div class="sx-help">
+          <strong>Still have a question?</strong>
+          <p>Talk to us directly. We usually reply within a few hours on working days.</p>
+          <?php if ($phone !== ""): ?><a class="sx-contact" href="tel:<?= ts_h($tel) ?>"><i class="fas fa-phone-alt" aria-hidden="true"></i> <?= ts_h($phone) ?></a><?php endif; ?>
+          <?php if ($email !== ""): ?><a class="sx-contact" href="mailto:<?= ts_h($email) ?>"><i class="fas fa-envelope" aria-hidden="true"></i> <?= ts_h($email) ?></a><?php endif; ?>
+        </div>
+        <?php if ($post): ?>
+        <a class="sxh-read" href="<?= ts_h($post["href"]) ?>">
+          <img src="<?= ts_h($post["cover"]) ?>" alt="" loading="lazy" decoding="async" width="96" height="96">
+          <span><small>From our blog · <?= (int) $post["readMinutes"] ?> min read</small><strong><?= ts_h($post["title"]) ?></strong></span>
+        </a>
+        <?php endif; ?>
+      </div>
+      <div class="sx-faq">
+        <?php foreach ($faqs as $i => $faq): ?>
+        <details data-sx-reveal<?= $i === 0 ? " open" : "" ?>>
+          <summary><?= ts_h($faq[0]) ?></summary>
+          <p><?= ts_h($faq[1]) ?></p>
         </details>
         <?php endforeach; ?>
       </div>
     </div>
   </section>
 
-  <!-- Close CTA -->
-  <section class="ok-close">
-    <h2><strong>Online Marketing</strong> is for teams who care how growth is made.</h2>
-    <p>Bring your funnel, your questions, and the channels you want to scale — we&rsquo;ll map a stack that compounds.</p>
-    <a class="ok-btn ok-btn-light" href="/contact">Start free conversation <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+  <section class="sx-cta">
+    <div class="sx-wrap">
+      <div class="sx-cta-box" data-sx-reveal>
+        <h2>Not sure where your next customer will come from?</h2>
+        <p class="sx-lead">Send us your website. We’ll tell you honestly which channel is likely to bring the most enquiries for your budget, and which ones to skip for now.</p>
+        <div class="sx-ctas">
+          <a class="sx-btn sx-btn-primary" href="#sx-audit">Get my free review <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <?php if ($phone !== ""): ?><a class="sx-btn sx-btn-ghost" href="tel:<?= ts_h($tel) ?>"><i class="fas fa-phone-alt" aria-hidden="true"></i> Call <?= ts_h($phone) ?></a><?php endif; ?>
+        </div>
+        <p class="sx-cta-meta">No obligation · Reply within one working day</p>
+      </div>
+    </div>
   </section>
 </div>
-
 <script>
 (() => {
-  const root = document.querySelector("[data-ok-om]");
+  const root = document.querySelector("[data-sx-page]");
   if (!root) return;
-  const rotator = root.querySelector("[data-ok-rotator]");
-  if (!rotator) return;
-  const words = [...rotator.querySelectorAll("span")];
-  if (words.length < 2) return;
-  let i = 0;
-  setInterval(() => {
-    words[i].classList.remove("is-on");
-    i = (i + 1) % words.length;
-    words[i].classList.add("is-on");
-  }, 1600);
+  const nodes = [...root.querySelectorAll("[data-sx-reveal]")];
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    nodes.forEach((el) => el.classList.add("is-in"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("is-in");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -4% 0px" });
+  nodes.forEach((el) => io.observe(el));
 })();
 </script>
 <?php
-    ts_layout($hub["title"], ob_get_clean(), [
-        "description" => $hub["lead"],
+    ts_layout($title, ob_get_clean(), [
+        "description" => $desc,
         "path" => $hub["href"],
-        "bodyClass" => "page-services page-hub-online-marketing page-ok-om",
+        "bodyClass" => "page-services page-hub-online-marketing page-om-service",
+        "jsonld" => $jsonld,
     ]);
 }

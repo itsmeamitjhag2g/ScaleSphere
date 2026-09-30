@@ -25,9 +25,9 @@ function ts_ma_mesh_boot(string $rootSelector, string $glId, string $grainId, ar
     $soft = is_array($orb["soft"] ?? null) ? $orb["soft"] : null;
     $noFade = !empty($orb["noFade"]);
     /* Mobile Apps accent greens (mega-menu green) */
-    $colA = $orb["colA"] ?? "#059669";
-    $colB = $orb["colB"] ?? "#10B981";
-    $colC = $orb["colC"] ?? "#34D399";
+    $colA = $orb["colA"] ?? "#2D6551";
+    $colB = $orb["colB"] ?? "#3B8767";
+    $colC = $orb["colC"] ?? "#7FB89C";
     ?>
 <script src="/js/three.min.js"></script>
 <script>

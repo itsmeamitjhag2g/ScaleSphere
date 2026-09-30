@@ -101,7 +101,7 @@ function ts_render_service_hub(string $hubKey): void
     </section>
 
     <!-- SERVICES — interactive explorer -->
-    <section class="py-16 md:py-20 bg-[#F6F7F9]" id="svc-list">
+    <section class="py-16 md:py-20 bg-[#FFFEFA]" id="svc-list">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <div class="text-center max-w-2xl mx-auto mb-12 svc-reveal">
           <span class="text-brand font-display font-bold text-xs uppercase tracking-widest">What We Offer</span>
@@ -190,6 +190,7 @@ function ts_render_service_hub(string $hubKey): void
     <?php endif; ?>
 
     <!-- TESTIMONIALS -->
+    <?php if (!empty($hub["testimonials"])): ?>
     <section class="py-16 md:py-20 bg-slate-50">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <div class="text-center mb-12 svc-reveal">
@@ -209,6 +210,7 @@ function ts_render_service_hub(string $hubKey): void
         </div>
       </div>
     </section>
+    <?php endif; ?>
 
     <!-- CTA -->
     <section class="py-16 md:py-20 bg-gradient-to-r <?= ts_h($tc['gradient']) ?> text-white">
@@ -435,7 +437,7 @@ function ts_render_service_detail(array $service): void
     </section>
 
     <!-- OVERVIEW -->
-    <section class="py-14 bg-[#F6F7F9]">
+    <section class="py-14 bg-[#FFFEFA]">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <div class="grid lg:grid-cols-[auto_1fr] gap-6 sm:gap-8 items-start p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-line bg-slate-50 svc-reveal">
           <div class="w-16 h-16 rounded-2xl <?= ts_h($tc['bg']) ?> <?= ts_h($tc['text']) ?> flex items-center justify-center text-2xl shrink-0"><i class="fas <?= ts_h($service["icon"]) ?>"></i></div>
@@ -468,7 +470,7 @@ function ts_render_service_detail(array $service): void
 
     <!-- BENEFITS -->
     <?php if (!empty($content["benefits"])): ?>
-    <section class="py-14 bg-[#F6F7F9]">
+    <section class="py-14 bg-[#FFFEFA]">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <div class="text-center mb-12 svc-reveal">
           <span class="text-brand font-display font-bold text-xs uppercase tracking-widest">Why It Matters</span>
@@ -507,10 +509,10 @@ function ts_render_service_detail(array $service): void
           <div class="svc-reveal svc-delay-2 p-8 rounded-3xl border border-line bg-white">
             <h3 class="font-display font-bold text-xl text-ink mb-4">Why <?= ts_h(ts_site()["name"]) ?>?</h3>
             <ul class="space-y-3 text-sm text-muted">
-              <li class="flex gap-3"><i class="fas fa-star text-amber-400 mt-0.5"></i> Dedicated specialists — not a generic agency handoff</li>
+              <li class="flex gap-3"><i class="fas fa-star text-brand mt-0.5"></i> Dedicated specialists — not a generic agency handoff</li>
               <li class="flex gap-3"><i class="fas fa-chart-line text-brand mt-0.5"></i> Clear KPIs and reporting from day one</li>
-              <li class="flex gap-3"><i class="fas fa-handshake text-emerald-500 mt-0.5"></i> Transparent communication and milestone-based delivery</li>
-              <li class="flex gap-3"><i class="fas fa-headset text-purple-500 mt-0.5"></i> Post-launch support and optimization available</li>
+              <li class="flex gap-3"><i class="fas fa-handshake text-brand mt-0.5"></i> Transparent communication and milestone-based delivery</li>
+              <li class="flex gap-3"><i class="fas fa-headset text-brand mt-0.5"></i> Post-launch support and optimization available</li>
             </ul>
             <a href="/contact" class="inline-flex items-center gap-2 mt-6 text-sm font-bold text-brand hover:underline">Discuss your project <i class="fas fa-arrow-right text-xs"></i></a>
           </div>
@@ -521,7 +523,7 @@ function ts_render_service_detail(array $service): void
 
     <!-- TECHNOLOGIES -->
     <?php if (!empty($content["technologies"])): ?>
-    <section class="py-12 bg-[#F6F7F9] border-y border-line">
+    <section class="py-12 bg-[#FFFEFA] border-y border-line">
       <div class="max-w-site mx-auto px-4 md:px-6 svc-reveal">
         <p class="text-center text-xs font-bold uppercase tracking-widest text-muted mb-6">Tools & Technologies</p>
         <div class="flex flex-wrap justify-center gap-3">
@@ -534,7 +536,7 @@ function ts_render_service_detail(array $service): void
     <?php endif; ?>
 
     <!-- DELIVERABLES -->
-    <section class="py-14 bg-[#F6F7F9]">
+    <section class="py-14 bg-[#FFFEFA]">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <div class="grid lg:grid-cols-2 gap-10 items-center">
           <div class="svc-reveal">
@@ -589,7 +591,7 @@ function ts_render_service_detail(array $service): void
 
     <!-- RELATED -->
     <?php if ($related): ?>
-    <section class="py-14 bg-[#F6F7F9]">
+    <section class="py-14 bg-[#FFFEFA]">
       <div class="max-w-site mx-auto px-4 md:px-6">
         <h2 class="font-display font-extrabold text-2xl text-ink mb-8 svc-reveal">Related Services</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

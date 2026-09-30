@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * Shared Development detail-page skin — matches /services/development (Appy hub).
- * Accent: Development blue #1C4FD6 (same as hub + mega primary).
+ * Accent: Development blue #1F7A5A (same as hub + mega primary).
  * Use for all Development sub-pages until told otherwise.
  */
 function ts_dev_detail_fonts(): void

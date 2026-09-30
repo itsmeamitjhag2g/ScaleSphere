@@ -249,4 +249,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---------- Textareas grow with their text (and placeholder when empty) ---------- */
+  const growAreas = document.querySelectorAll('main textarea');
+  if (growAreas.length) {
+    const fit = (ta) => {
+      const max = parseFloat(getComputedStyle(ta).maxHeight) || Infinity;
+      ta.style.height = 'auto';
+      let h = ta.scrollHeight;
+      if (!ta.value && ta.placeholder) {
+        ta.value = ta.placeholder;
+        h = ta.scrollHeight;
+        ta.value = '';
+      }
+      const total = h + (ta.offsetHeight - ta.clientHeight);
+      ta.style.height = Math.min(total, max) + 'px';
+      ta.style.overflowY = total > max ? 'auto' : 'hidden';
+    };
+    const fitAll = () => growAreas.forEach(fit);
+    growAreas.forEach((ta) => ta.addEventListener('input', () => fit(ta)));
+    let growTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(growTimer);
+      growTimer = setTimeout(fitAll, 120);
+    });
+    fitAll();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  }
+
 });

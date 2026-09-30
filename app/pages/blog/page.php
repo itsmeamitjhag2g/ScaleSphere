@@ -48,39 +48,6 @@ ob_start();
     </section>
   </div>
 
-  <section class="blg-shell blg-strip" aria-label="Why this journal" data-blg-strip>
-    <div class="blg-strip-head" data-blg-strip-head>
-      <h2>Built for <span class="caveat">builders</span></h2>
-      <p>Short, useful articles from the ScaleSphere practice stack — the same thinking we use on client work.</p>
-    </div>
-    <div class="blg-stats" data-blg-stats>
-      <article class="blg-stat" data-blg-stat>
-        <div class="blg-stat-icon" aria-hidden="true"><i class="fas fa-book-open"></i></div>
-        <div class="blg-stat-copy">
-          <p class="blg-stat-label">Articles</p>
-          <strong><span data-blg-count data-target="<?= count($posts) ?>">0</span></strong>
-          <span>Live from the journal folder — new posts appear here automatically</span>
-        </div>
-      </article>
-      <article class="blg-stat" data-blg-stat>
-        <div class="blg-stat-icon" aria-hidden="true"><i class="fas fa-tags"></i></div>
-        <div class="blg-stat-copy">
-          <p class="blg-stat-label">Topics</p>
-          <strong><span data-blg-count data-target="<?= count($categories) ?>">0</span></strong>
-          <span>Across marketing, delivery, apps &amp; design</span>
-        </div>
-      </article>
-      <article class="blg-stat" data-blg-stat>
-        <div class="blg-stat-icon" aria-hidden="true"><i class="fas fa-clock"></i></div>
-        <div class="blg-stat-copy">
-          <p class="blg-stat-label">Read time</p>
-          <strong><span data-blg-count data-target="<?= max(1, $totalMins) ?>">0</span><small>min</small></strong>
-          <span>Total across every published article</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
   <section class="blg-shell blg-list-wrap" id="blg-journal" aria-label="Journal listing">
     <div class="blg-list-bar">
       <div>
@@ -320,14 +287,14 @@ ob_start();
 })();
 </script>
 <?php
-ts_layout("Blog", ob_get_clean(), [
-    "description" => "ScaleSphere journal — ideas on marketing, product, apps and design that help teams scale.",
+ts_layout("Blog | Digital Growth Insights", ob_get_clean(), [
+    "description" => "Practical guides on SEO, paid ads, web and app development, UI/UX and virtual assistance from the ScaleSphere team to help growing businesses scale faster.",
     "path" => "/blog",
     "bodyClass" => "page-blog page-blog-index",
     "jsonld" => [
         ts_webpage_jsonld(
             "Blog",
-            "ScaleSphere journal — ideas on marketing, product, apps and design that help teams scale.",
+            "Practical guides on SEO, paid ads, web and app development, UI/UX and virtual assistance from the ScaleSphere team to help growing businesses scale faster.",
             "/blog"
         ),
         ts_breadcrumb_jsonld([

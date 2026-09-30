@@ -96,6 +96,21 @@ function ts_dispatch_web(string $path): void
             if ($honeypot !== "") {
                 throw new RuntimeException("Unable to submit form.");
             }
+            $siteUrl = trim((string) ($_POST["site_url"] ?? ""));
+            if (mb_strlen($siteUrl) > 200) {
+                throw new RuntimeException("Please check your website address.");
+            }
+            $source = mb_substr(preg_replace("/[^\w &\-]/u", "", (string) ($_POST["source"] ?? "")) ?? "", 0, 80);
+            $project = mb_substr(trim(preg_replace("/[\x00-\x1F\x7F]/u", " ", (string) ($_POST["project"] ?? "")) ?? ""), 0, 80);
+            $meta = array_filter([
+                $project !== "" ? "Project: " . $project : "",
+                $siteUrl !== "" ? "Website: " . $siteUrl : "",
+                $source !== "" ? "Requested from: " . $source : "",
+            ]);
+            if ($meta) {
+                $body = trim((string) ($_POST["message"] ?? ""));
+                $_POST["message"] = implode("\n", $meta) . ($body !== "" ? "\n\n" . $body : "");
+            }
             if (!ts_verify_csrf((string) ($_POST["ts_csrf"] ?? ""))) {
                 throw new RuntimeException("Session expired. Please refresh and try again.");
             }
@@ -106,10 +121,12 @@ function ts_dispatch_web(string $path): void
                 (string) ($_POST["message"] ?? ""),
                 (string) ($_POST["service"] ?? "")
             );
-            $GLOBALS["TS_CONTACT_MSG"] = ts_mail_configured()
-                ? "Thank you! Your appointment request has been sent. We will get back to you soon."
-                : "Thank you! Your appointment request has been received. We will get back to you soon.";
-            $GLOBALS["TS_CONTACT_ERR"] = "";
+            $first = trim(strtok(trim((string) ($_POST["name"] ?? "")), " ") ?: "");
+            ts_session_start();
+            $_SESSION["ts_flash"] = ($first !== "" ? "Thanks, " . $first . ". " : "Thanks. ")
+                . "Your request is with our team. You’ll hear from a real person within one working day.";
+            header("Location: /contact?sent=1#enquiry", true, 303);
+            exit;
         } catch (Throwable $error) {
             $GLOBALS["TS_CONTACT_MSG"] = "";
             $GLOBALS["TS_CONTACT_ERR"] = $error->getMessage();

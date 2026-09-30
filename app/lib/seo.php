@@ -26,7 +26,7 @@ function ts_indexable(string $path): bool
 
 function ts_og_image(?string $src = null): string
 {
-    $src = $src ?: ts_logo();
+    $src = $src ?: ts_app_icon();
     if (str_starts_with($src, "http://") || str_starts_with($src, "https://")) {
         return $src;
     }
@@ -52,7 +52,7 @@ function ts_organization_jsonld(): array
             "postalCode" => "324001",
             "addressCountry" => "IN",
         ],
-        "logo" => ts_abs(ts_logo()),
+        "logo" => ts_abs(ts_app_icon()),
         "sameAs" => array_values(array_filter([
             $site["facebook"],
             $site["twitter"],
@@ -251,7 +251,16 @@ function ts_render_sitemap(): void
 {
     header("Content-Type: application/xml; charset=utf-8");
     header("X-Robots-Tag: noindex");
-    $lastmod = gmdate("Y-m-d");
+    $latest = 0;
+    foreach (["/pages", "/lib", "/components"] as $dir) {
+        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(dirname(__DIR__) . $dir, FilesystemIterator::SKIP_DOTS));
+        foreach ($it as $file) {
+            if ($file->getExtension() === "php") {
+                $latest = max($latest, $file->getMTime());
+            }
+        }
+    }
+    $lastmod = gmdate("Y-m-d", $latest ?: time());
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
     foreach (ts_public_paths() as $path) {

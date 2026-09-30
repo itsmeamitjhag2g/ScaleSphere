@@ -228,39 +228,16 @@
 
       const easeOpen = gsap.parseEase("power2.inOut");
 
-      /* Narrow: no pin — open doors once on scroll, no blank spacer lag */
-      if (isNarrow) {
-        const openDoors = (open) => {
-          const o = easeOpen(Math.min(1, open));
-          const scale = 1 - o;
-          doorLeft.style.transform = `scaleX(${scale})`;
-          doorRight.style.transform = `scaleX(${scale})`;
-          heroEl.style.opacity = String(1 - Math.min(1, o * 1.2));
-          heroFloats.forEach((el) => { el.style.opacity = "0"; });
-          if (scrollHint) scrollHint.style.opacity = "0";
-          const showContent = Math.min(1, Math.max(0, (o - 0.2) / 0.55));
-          if (brandName) { brandName.style.opacity = String(showContent); brandName.style.transform = "none"; }
-          if (brandSub) { brandSub.style.opacity = String(showContent * 0.9); brandSub.style.transform = "none"; }
-          if (brandCopy) { brandCopy.style.opacity = String(showContent); brandCopy.style.transform = "none"; }
-          brandChips.forEach((chip) => { chip.style.opacity = String(showContent); chip.style.transform = "none"; });
-        };
-        ScrollTrigger.create({
-          trigger: revealTrack,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          onUpdate: (self) => openDoors(Math.min(1, self.progress * 1.4)),
-          onLeave: () => openDoors(1),
-        });
-      } else {
+      /* Pin on all screens — without pin the blue brand scrolls up and the next
+         section peeks underneath on mobile. Hold solid until unpin. */
       ScrollTrigger.create({
         trigger: revealTrack,
         start: "top top",
-        end: () => `+=${Math.round(window.innerHeight * 0.85)}`,
+        end: () => `+=${Math.round(window.innerHeight * (isNarrow ? 0.72 : 0.85))}`,
         pin: true,
         pinSpacing: true,
         scrub: scrubAmt,
-        anticipatePin: 0,
+        anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           // Open doors in the first ~50% of the pin, then hold fully open until handoff
@@ -270,7 +247,11 @@
           doorRight.style.transform = `scaleX(${scale})`;
 
           heroEl.style.opacity = String(1 - Math.min(1, open * 1.2));
-          heroEl.style.transform = `translateY(${-8 * open}px) scale(${1 - 0.015 * open})`;
+          if (!isNarrow) {
+            heroEl.style.transform = `translateY(${-8 * open}px) scale(${1 - 0.015 * open})`;
+          } else {
+            heroEl.style.transform = "none";
+          }
           /* Hide hero floats early so they don't stack over brand chips */
           const floatHide = Math.min(1, open * 2.2);
           heroFloats.forEach((el) => {
@@ -279,31 +260,34 @@
           });
           if (scrollHint) scrollHint.style.opacity = String(open > 0.05 ? 0 : 1);
 
-          /* Soft fade out of blue pin into white — avoid transform (fights pin) */
-          const exit = Math.min(1, Math.max(0, (self.progress - 0.85) / 0.15));
-          revealTrack.style.opacity = String(1 - exit * 0.4);
+          /* Keep full opacity — fading the pin shows the next section underneath */
+          revealTrack.style.opacity = "1";
 
           const showContent = Math.min(1, Math.max(0, (open - 0.28) / 0.5));
           if (brandName) {
-            brandName.style.opacity = String(showContent * (1 - exit * 0.5));
-            brandName.style.transform = `translateY(${28 * (1 - showContent)}px)`;
+            brandName.style.opacity = String(showContent);
+            brandName.style.transform = isNarrow
+              ? "none"
+              : `translateY(${28 * (1 - showContent)}px)`;
             brandName.style.filter = "none";
           }
           if (brandSub) {
             const s = Math.min(1, Math.max(0, (open - 0.4) / 0.42));
-            brandSub.style.opacity = String(s * 0.9 * (1 - exit));
-            brandSub.style.transform = `translateY(${12 * (1 - s)}px)`;
+            brandSub.style.opacity = String(s * 0.9);
+            brandSub.style.transform = isNarrow ? "none" : `translateY(${12 * (1 - s)}px)`;
           }
           if (brandCopy) {
             const c = Math.min(1, Math.max(0, (open - 0.48) / 0.4));
-            brandCopy.style.opacity = String(c * (1 - exit));
-            brandCopy.style.transform = `translateY(${16 * (1 - c)}px)`;
+            brandCopy.style.opacity = String(c);
+            brandCopy.style.transform = isNarrow ? "none" : `translateY(${16 * (1 - c)}px)`;
           }
           brandChips.forEach((chip, i) => {
             const c = Math.min(1, Math.max(0, (open - 0.45 - i * 0.04) / 0.38));
             const o = chipFrom[chip.getAttribute("data-chip-from")] || { x: 0, y: 16 };
-            chip.style.opacity = String(c * (1 - exit));
-            chip.style.transform = `translate(${o.x * (1 - c)}px, ${o.y * (1 - c)}px)`;
+            chip.style.opacity = String(c);
+            chip.style.transform = isNarrow
+              ? "none"
+              : `translate(${o.x * (1 - c)}px, ${o.y * (1 - c)}px)`;
           });
         },
         onLeave: () => {
@@ -313,7 +297,6 @@
           revealTrack.style.opacity = "1";
         },
       });
-      }
     }
   }
 
@@ -365,22 +348,27 @@
     const footL = document.getElementById("ssWorkFootL");
     const footR = document.getElementById("ssWorkFootR");
     const bar = document.getElementById("ssWorkProgress");
+    const prevBtn = root.querySelector("[data-ss-work-prev]");
+    const nextBtn = root.querySelector("[data-ss-work-next]");
     const n = workData.length;
+    const mobileStrip = reduce || isNarrow;
     let active = -1;
     let scrambleDone = false;
     let scrambleStarted = false;
     let storyTrigger = null;
     let cardStep = 0;
+    let lockScrollSync = false;
+    let lockTimer = 0;
 
     const measureStep = () => {
-      if (!cards.length) return 0;
+      if (!cards.length || !track) return 0;
       const gap = parseFloat(getComputedStyle(track).gap) || 16;
       cardStep = cards[0].offsetWidth + gap;
       return cardStep;
     };
 
     const setLabels = (idx) => {
-      if (idx === active || !workData[idx]) return;
+      if (!workData[idx]) return;
       active = idx;
       const item = workData[idx];
       if (titleEl) titleEl.textContent = item.title;
@@ -388,21 +376,55 @@
       if (countEl) countEl.textContent = `${String(idx + 1).padStart(2, "0")} / ${String(n).padStart(2, "0")}`;
       if (footL) footL.textContent = item.footL;
       if (footR) footR.textContent = item.footR;
+      if (prevBtn) prevBtn.disabled = idx <= 0;
+      if (nextBtn) nextBtn.disabled = idx >= n - 1;
+      if (bar) bar.style.width = `${n > 1 ? (idx / (n - 1)) * 100 : 100}%`;
+      cards.forEach((c, i) => {
+        c.style.opacity = mobileStrip ? (i === idx ? "1" : "0.72") : "";
+      });
+    };
+
+    /* Mobile CSS forces transform:none — drive the strip with scrollLeft instead */
+    const scrollCardIntoView = (idx, instant) => {
+      if (!track || !cards[idx]) return;
+      const card = cards[idx];
+      const left = card.offsetLeft - (track.clientWidth - card.offsetWidth) / 2;
+      lockScrollSync = true;
+      window.clearTimeout(lockTimer);
+      track.scrollTo({
+        left: Math.max(0, left),
+        behavior: instant ? "auto" : "smooth",
+      });
+      lockTimer = window.setTimeout(() => {
+        lockScrollSync = false;
+      }, instant ? 40 : 320);
+    };
+
+    const goToIndex = (idx, { instant = false, force = false } = {}) => {
+      const next = gsap.utils.clamp(0, Math.max(0, n - 1), idx);
+      if (!force && next === active) return;
+      setLabels(next);
+      if (mobileStrip) scrollCardIntoView(next, instant);
     };
 
     const paintTrack = (progress) => {
       if (!track || !cards.length) return;
       if (!cardStep) measureStep();
-      // 0 → first card centered; 1 → last card centered
       const maxI = Math.max(1, n - 1);
       const f = gsap.utils.clamp(0, maxI, progress * maxI);
-      gsap.set(track, { x: -f * cardStep, force3D: true });
-
       const nearest = Math.round(f);
+
+      if (mobileStrip) {
+        /* Image + labels always move together via scrollLeft */
+        if (nearest !== active) goToIndex(nearest, { instant: true, force: true });
+        if (bar) bar.style.width = `${progress * 100}%`;
+        return;
+      }
+
+      gsap.set(track, { x: -f * cardStep, force3D: true });
       cards.forEach((card, i) => {
         const dist = Math.abs(i - f);
         const focus = gsap.utils.clamp(0, 1, 1 - dist * 0.85);
-        /* No scale — scale caused the bounce / uchhal feel */
         gsap.set(card, {
           scale: 1,
           opacity: 0.55 + focus * 0.45,
@@ -423,10 +445,9 @@
       paintTrack(workP);
     };
 
-    const playBridgeIntro = async () => {
+    const playBridgeIntro = () => {
       if (scrambleStarted) return;
       scrambleStarted = true;
-      /* Skip bounce-in — show work strip immediately */
       bridgeLines.forEach((el) => {
         el.textContent = el.getAttribute("data-bridge-scramble") || "";
       });
@@ -441,14 +462,7 @@
       if (storyTrigger) applyStoryProgress(storyTrigger.progress);
     };
 
-    measureStep();
-    paintTrack(0);
-    window.addEventListener("resize", () => {
-      measureStep();
-      if (storyTrigger && scrambleDone) paintTrack(gsap.utils.clamp(0, 1, (storyTrigger.progress - 0.06) / 0.94));
-    });
-
-    if (reduce || isNarrow) {
+    if (mobileStrip) {
       bridgeLines.forEach((el) => {
         el.textContent = el.getAttribute("data-bridge-scramble") || "";
       });
@@ -459,26 +473,81 @@
       workLayer.style.pointerEvents = "auto";
       scrambleDone = true;
       scrambleStarted = true;
-      /* Native swipe carousel — no pin lag on small screens */
+
       if (track) {
         track.style.transform = "none";
-        const stage = document.getElementById("ssWorkStage");
-        if (stage) {
-          stage.style.overflowX = "auto";
-          stage.style.webkitOverflowScrolling = "touch";
-          stage.style.scrollSnapType = "x mandatory";
-        }
-        cards.forEach((card) => {
-          card.style.scale = "1";
-          card.style.opacity = "1";
-          card.style.scrollSnapAlign = "center";
-        });
-        track.style.paddingInline = "1rem";
+        gsap.set(track, { clearProps: "x,translate,transform" });
       }
-      paintTrack(0);
-      storyRoot.style.height = "auto";
-      storyRoot.style.minHeight = "0";
+      cards.forEach((card) => {
+        card.style.transform = "none";
+        card.style.scrollSnapAlign = "center";
+        gsap.set(card, { clearProps: "x,y,scale,transform" });
+      });
+
+      /* Keep section viewport-tall so pin + scrub has room (no half-blank strip) */
+      storyRoot.style.height = "";
+      storyRoot.style.minHeight = "";
+
+      if (track) {
+        track.addEventListener("scroll", () => {
+          if (lockScrollSync || !cards.length) return;
+          const mid = track.scrollLeft + track.clientWidth / 2;
+          let nearest = 0;
+          let best = Infinity;
+          cards.forEach((card, i) => {
+            const c = card.offsetLeft + card.offsetWidth / 2;
+            const d = Math.abs(c - mid);
+            if (d < best) {
+              best = d;
+              nearest = i;
+            }
+          });
+          if (nearest !== active) setLabels(nearest);
+        }, { passive: true });
+      }
+
+      prevBtn?.addEventListener("click", () => {
+        if (active > 0) goToIndex(active - 1, { instant: false, force: true });
+      });
+      nextBtn?.addEventListener("click", () => {
+        if (active < n - 1) goToIndex(active + 1, { instant: false, force: true });
+      });
+
+      if (!reduce) {
+        storyTrigger = ScrollTrigger.create({
+          trigger: storyRoot,
+          start: "top top",
+          end: () => `+=${Math.round(window.innerHeight * (0.55 + n * 0.4))}`,
+          pin: true,
+          pinSpacing: true,
+          scrub: true,
+          anticipatePin: 0,
+          invalidateOnRefresh: true,
+          onRefresh: () => {
+            measureStep();
+            if (active >= 0) scrollCardIntoView(active, true);
+          },
+          onUpdate: (self) => {
+            applyStoryProgress(self.progress);
+          },
+        });
+      }
+
+      requestAnimationFrame(() => {
+        measureStep();
+        goToIndex(0, { instant: true, force: true });
+        if (storyTrigger) applyStoryProgress(storyTrigger.progress);
+      });
     } else {
+      measureStep();
+      paintTrack(0);
+      window.addEventListener("resize", () => {
+        measureStep();
+        if (storyTrigger && scrambleDone) {
+          paintTrack(gsap.utils.clamp(0, 1, (storyTrigger.progress - 0.06) / 0.94));
+        }
+      });
+
       storyTrigger = ScrollTrigger.create({
         trigger: storyRoot,
         start: "top top",

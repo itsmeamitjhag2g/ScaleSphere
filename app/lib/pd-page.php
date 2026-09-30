@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * Product Design — Creative Design detail.
  * Desk language like Logo / Motion / Design Systems.
@@ -43,17 +45,17 @@ function ts_render_pd_service_page(array $service): void
     ];
 
     $metrics = [
-        ["−42%", "Fewer support tickets", "After clarifying onboarding flows"],
-        ["2.1×", "Faster design→dev", "Shared specs and states"],
-        ["3 wks", "Typical discovery", "Sprint to validated direction"],
-        ["100%", "You own files", "Figma + assets transferred"],
+        ["2–4 wks", "Typical discovery sprint", "Confirmed after the kickoff call"],
+        ["1", "Dedicated contact", "Your assistant runs reviews and feedback"],
+        ["4", "States per key screen", "Empty, loading, error and success"],
+        ["Figma", "Files you own", "Screens, components and prototype transferred"],
     ];
 
     $useCases = [
-        ["/images/mobile/ux-research.webp", "Zero-to-one products", "Shape the first experience before engineering scales."],
-        ["/images/mobile/Prototyping.webp", "Feature discovery", "Validate a big bet with a prototype, not a rewrite."],
-        ["/images/mobile/UsabilityTesting.webp", "Conversion fixes", "Checkout, signup and activation paths that stop leaking."],
-        ["/images/mobile/AppDesign.webp", "Multi-platform UX", "Web + app that feel like one product family."],
+        ["/images/mobile/ux-wireframes.webp", "Zero-to-one products", "Shape the first experience before engineering scales."],
+        ["/images/mobile/tablet-wireframe.webp", "Feature discovery", "Validate a big bet with a prototype, not a rewrite."],
+        ["/images/mobile/team-review.webp", "Conversion fixes", "Checkout, signup and activation paths that stop leaking."],
+        ["/images/mobile/app-in-hand.webp", "Multi-platform UX", "Web + app that feel like one product family."],
         ["/images/stock/photo-1552664730-d307ca884978.jpg", "Design sprints", "Five-day cycles from challenge to tested concept."],
         ["/images/stock/photo-1522071820081-009f0129c71c.jpg", "Team workshops", "Align product, design and eng on what to build next."],
     ];
@@ -82,7 +84,7 @@ function ts_render_pd_service_page(array $service): void
         ],
         [
             "Full Product Design",
-            "Most enquiries",
+            "Recommended",
             [
                 "End-to-end discovery",
                 "Complete wire + UI set",
@@ -116,7 +118,7 @@ function ts_render_pd_service_page(array $service): void
         ["What should we bring to the first call?", "Any brief, analytics pain, competitor links, current screenshots or a rough roadmap. Even a problem statement is enough."],
     ];
 
-    $pageTitle = "Product Design | Discovery, UX & Handoff — ScaleSphere";
+    $pageTitle = "Product Design Services | Discovery to Handoff | ScaleSphere";
     $pageDesc = "Product design from discovery to developer handoff — journeys, UI, prototypes and validated flows so teams ship the right experience faster.";
     $canonical = $service["href"];
 
@@ -157,10 +159,10 @@ function ts_render_pd_service_page(array $service): void
   <style>
     .yl-pd{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -186,7 +188,7 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-pd .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-pd .yl-crumb a:hover{ color:var(--blue); }
@@ -197,8 +199,8 @@ function ts_render_pd_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.15rem;
     }
@@ -229,12 +231,12 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-trust{
       margin:1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45);
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45);
     }
     .yl-pd .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease;
     }
@@ -257,7 +259,7 @@ function ts_render_pd_service_page(array $service): void
       padding:1.1rem 1.15rem 1.25rem;
       box-shadow:
         0 22px 50px rgba(15,23,42,.1),
-        8px 8px 0 rgba(124,58,237,.12);
+        8px 8px 0 rgba(31,122,90,.12);
       transform:rotate(.9deg);
       transition:transform .35s cubic-bezier(.22,1,.36,1);
     }
@@ -268,14 +270,14 @@ function ts_render_pd_service_page(array $service): void
       display:flex; align-items:center; justify-content:space-between;
       margin-bottom:.9rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-pd .yl-board-bar .dots{ display:flex; gap:.35rem; }
     .yl-pd .yl-board-bar .dots i{
-      width:8px; height:8px; border-radius:999px; background:#ff5f57; display:block;
+      width:8px; height:8px; border-radius:999px; background:#D58581; display:block;
     }
-    .yl-pd .yl-board-bar .dots i:nth-child(2){ background:#febc2e; }
-    .yl-pd .yl-board-bar .dots i:nth-child(3){ background:#28c840; }
+    .yl-pd .yl-board-bar .dots i:nth-child(2){ background:#CBA962; }
+    .yl-pd .yl-board-bar .dots i:nth-child(3){ background:#3CB44E; }
 
     .yl-pd .yl-board-grid{
       display:grid; gap:.85rem;
@@ -319,9 +321,9 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-ui-logo{
       width:18px; height:18px; border-radius:.4rem;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       display:grid; place-items:center;
-      color:#fff; font-family:Montserrat,sans-serif; font-size:8px; font-weight:800;
+      color:#fff; font-family:Montserrat,sans-serif; font-size:max(8px, .5rem); font-weight:800;
     }
     .yl-pd .yl-ui-top .menu{
       width:14px; height:10px; display:flex; flex-direction:column; justify-content:space-between;
@@ -333,22 +335,22 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-ui-body{ padding:0 .7rem; flex:1; display:flex; flex-direction:column; gap:.45rem; }
     .yl-pd .yl-ui-body .eyebrow{
       font-family:"IBM Plex Mono",monospace;
-      font-size:6.5px; letter-spacing:.1em; text-transform:uppercase; color:#7C3AED;
+      font-size:max(6.5px, .4062rem); letter-spacing:.1em; text-transform:uppercase; color:#1F7A5A;
     }
     .yl-pd .yl-ui-body .title{
       margin:0;
       font-family:Montserrat,sans-serif;
-      font-size:11px; font-weight:800; letter-spacing:-.02em; line-height:1.2; color:#0F172A;
+      font-size:max(11px, .6875rem); font-weight:800; letter-spacing:-.02em; line-height:1.2; color:#0F172A;
     }
     .yl-pd .yl-ui-body .sub{
       margin:0;
-      font-size:7.5px; line-height:1.35; color:rgba(15,23,42,.5);
+      font-size:max(7.5px, .4688rem); line-height:1.35; color:rgba(15,23,42,.5);
     }
 
     .yl-pd .yl-ui-hero{
       margin-top:.15rem;
       border-radius:.65rem;
-      background:linear-gradient(145deg,#4C1D95,#7C3AED 55%,#A78BFA);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       padding:.65rem .55rem;
       color:#fff;
       position:relative; overflow:hidden;
@@ -362,10 +364,10 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-ui-hero b{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:9px; font-weight:800; margin-bottom:.2rem; position:relative; z-index:1;
+      font-size:max(9px, .5625rem); font-weight:800; margin-bottom:.2rem; position:relative; z-index:1;
     }
     .yl-pd .yl-ui-hero span{
-      font-size:6.5px; opacity:.8; position:relative; z-index:1;
+      font-size:max(6.5px, .4062rem); opacity:.8; position:relative; z-index:1;
     }
 
     .yl-pd .yl-ui-dots{
@@ -374,7 +376,7 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-ui-dots i{
       width:4px; height:4px; border-radius:999px; background:rgba(15,23,42,.15);
     }
-    .yl-pd .yl-ui-dots i.on{ background:#7C3AED; width:10px; border-radius:999px; }
+    .yl-pd .yl-ui-dots i.on{ background:#1F7A5A; width:10px; border-radius:999px; }
 
     .yl-pd .yl-ui-list{ display:grid; gap:.35rem; }
     .yl-pd .yl-ui-item{
@@ -387,22 +389,22 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-ui-item .ico{
       width:16px; height:16px; border-radius:.4rem; flex-shrink:0;
-      background:rgba(124,58,237,.12);
+      background:rgba(31,122,90,.12);
       display:grid; place-items:center;
-      color:#7C3AED; font-size:7px;
+      color:#1F7A5A; font-size:max(7px, .4375rem);
     }
     .yl-pd .yl-ui-item .txt{ flex:1; min-width:0; }
     .yl-pd .yl-ui-item .txt b{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:7.5px; font-weight:800; color:#0F172A;
+      font-size:max(7.5px, .4688rem); font-weight:800; color:#0F172A;
     }
     .yl-pd .yl-ui-item .txt span{
-      display:block; font-size:6px; color:rgba(15,23,42,.45); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+      display:block; font-size:max(6px, .375rem); color:rgba(15,23,42,.45); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
     }
     .yl-pd .yl-ui-item.is-active{
-      border-color:rgba(124,58,237,.35);
-      background:#F5F3FF;
-      box-shadow:0 0 0 2px rgba(124,58,237,.12);
+      border-color:rgba(31,122,90,.35);
+      background:#E4F1EA;
+      box-shadow:0 0 0 2px rgba(31,122,90,.12);
     }
 
     .yl-pd .yl-ui-stats{
@@ -416,17 +418,17 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-ui-stat b{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:10px; font-weight:800; color:#7C3AED;
+      font-size:max(10px, .625rem); font-weight:800; color:#1F7A5A;
     }
     .yl-pd .yl-ui-stat span{
-      font-size:6px; color:rgba(15,23,42,.45);
+      font-size:max(6px, .375rem); color:rgba(15,23,42,.45);
     }
     .yl-pd .yl-ui-chart{
       display:flex; align-items:flex-end; gap:3px; height:28px; margin-top:.25rem;
     }
     .yl-pd .yl-ui-chart i{
       flex:1; border-radius:2px 2px 0 0;
-      background:linear-gradient(180deg,#A78BFA,#7C3AED);
+      background:linear-gradient(#9FCFB5,#9FCFB5);
       animation:ylPdBar 2.2s ease-in-out infinite;
       transform-origin:bottom;
     }
@@ -442,12 +444,12 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-ui-check{
       width:36px; height:36px; border-radius:999px;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
-      color:#fff; display:grid; place-items:center; font-size:14px;
-      box-shadow:0 8px 18px rgba(76,29,149,.35);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
+      color:#fff; display:grid; place-items:center; font-size:.875rem;
+      box-shadow:0 8px 18px rgba(15,27,61,.35);
       animation:ylPdGlow 2s ease-in-out infinite;
     }
-    .yl-pd .yl-ui-success .title{ font-size:10px; }
+    .yl-pd .yl-ui-success .title{ font-size:max(10px, .625rem); }
     .yl-pd .yl-ui-success .sub{ max-width:12ch; }
 
     .yl-pd .yl-ui-foot{
@@ -457,12 +459,12 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-ui-cta{
       display:flex; align-items:center; justify-content:center; gap:.3rem;
       height:26px; border-radius:999px;
-      background:#7C3AED; color:#fff;
-      font-family:Montserrat,sans-serif; font-size:8px; font-weight:800;
-      box-shadow:0 4px 10px rgba(124,58,237,.35);
+      background:#1F7A5A; color:#fff;
+      font-family:Montserrat,sans-serif; font-size:max(8px, .5rem); font-weight:800;
+      box-shadow:0 4px 10px rgba(31,122,90,.35);
     }
     .yl-pd .yl-ui-cta.alt{ background:#0F172A; box-shadow:none; }
-    .yl-pd .yl-ui-cta.gold{ background:#FBBF24; color:#0F172A; }
+    .yl-pd .yl-ui-cta.gold{ background:#C7A858; color:#0F172A; }
 
     .yl-pd .yl-graph{
       background:#fff;
@@ -470,7 +472,7 @@ function ts_render_pd_service_page(array $service): void
       border-radius:1rem;
       padding:.85rem .8rem .75rem;
       display:flex; flex-direction:column; gap:.55rem;
-      box-shadow:inset 0 0 0 1px rgba(124,58,237,.04);
+      box-shadow:inset 0 0 0 1px rgba(31,122,90,.04);
     }
     .yl-pd .yl-graph-head{
       display:flex; align-items:flex-start; justify-content:space-between; gap:.5rem;
@@ -478,23 +480,23 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-graph-head strong{
       display:block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(9px, .5625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
       margin-bottom:.15rem;
     }
     .yl-pd .yl-graph-head em{
       display:block;
       font-style:normal;
       font-family:Montserrat,sans-serif;
-      font-size:10px; font-weight:800; color:var(--ink);
+      font-size:max(10px, .625rem); font-weight:800; color:var(--ink);
     }
     .yl-pd .yl-graph-chip{
       flex-shrink:0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:9px; font-weight:600;
+      font-size:max(9px, .5625rem); font-weight:600;
       padding:.25rem .45rem;
       border-radius:999px;
-      background:rgba(16,185,129,.12);
-      color:#047857;
+      background:rgba(59,135,103,.12);
+      color:#1F5D4B;
       white-space:nowrap;
     }
     .yl-pd .yl-funnel{
@@ -518,7 +520,7 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-funnel-pct{
       font-family:"IBM Plex Mono",monospace;
-      font-size:8px; font-weight:600; color:var(--deep);
+      font-size:max(8px, .5rem); font-weight:600; color:var(--deep);
       line-height:1;
     }
     .yl-pd .yl-funnel-stack{
@@ -539,8 +541,8 @@ function ts_render_pd_service_page(array $service): void
       animation:ylPdBar 2.8s ease-in-out infinite;
     }
     .yl-pd .yl-funnel-stack .now{
-      background:linear-gradient(180deg,#A78BFA,#7C3AED);
-      box-shadow:0 4px 10px rgba(124,58,237,.25);
+      background:linear-gradient(#9FCFB5,#9FCFB5);
+      box-shadow:0 4px 10px rgba(31,122,90,.25);
       animation:ylPdBar 2.8s ease-in-out infinite .12s;
     }
     .yl-pd .yl-funnel-col:nth-child(1) .base{ height:92%; }
@@ -552,19 +554,19 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-funnel-col:nth-child(4) .base{ height:14%; animation-delay:.3s; }
     .yl-pd .yl-funnel-col:nth-child(4) .now{
       height:38%; animation-delay:.42s;
-      background:linear-gradient(180deg,#FBBF24,#7C3AED);
+      background:linear-gradient(#C7A858,#C7A858);
     }
-    .yl-pd .yl-funnel-col:nth-child(4) .yl-funnel-pct{ color:#B45309; }
+    .yl-pd .yl-funnel-col:nth-child(4) .yl-funnel-pct{ color:#1F7A5A; }
     .yl-pd .yl-funnel-name{
       font-family:"IBM Plex Mono",monospace;
-      font-size:7.5px; color:var(--muted);
+      font-size:max(7.5px, .4688rem); color:var(--muted);
       text-align:center; line-height:1.15;
       max-width:100%;
     }
     .yl-pd .yl-funnel-legend{
       display:flex; flex-wrap:wrap; gap:.55rem .75rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:8px; color:var(--muted);
+      font-size:max(8px, .5rem); color:var(--muted);
     }
     .yl-pd .yl-funnel-legend span{
       display:inline-flex; align-items:center; gap:.3rem;
@@ -573,7 +575,7 @@ function ts_render_pd_service_page(array $service): void
       width:8px; height:8px; border-radius:2px; display:inline-block;
     }
     .yl-pd .yl-funnel-legend .lg-base i{ background:rgba(15,23,42,.18); }
-    .yl-pd .yl-funnel-legend .lg-now i{ background:linear-gradient(180deg,#A78BFA,#7C3AED); }
+    .yl-pd .yl-funnel-legend .lg-now i{ background:linear-gradient(#9FCFB5,#9FCFB5); }
 
     @keyframes ylPdSlide{
       0%,8%{ opacity:0; transform:translateY(12px); }
@@ -622,7 +624,7 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-sec-label{
       display:inline-block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.55rem;
     }
 
@@ -650,9 +652,9 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-met strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.2rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.2rem;
     }
-    .yl-pd .yl-met span{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+    .yl-pd .yl-met span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.4; }
 
     .yl-pd .yl-pains{
       padding:3.5rem 0;
@@ -665,7 +667,7 @@ function ts_render_pd_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.45rem); font-weight:400;
     }
     .yl-pd .yl-pains .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-pd .yl-pain-grid{
       display:grid; gap:1rem;
@@ -684,7 +686,7 @@ function ts_render_pd_service_page(array $service): void
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
-    .yl-pd .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .yl-pd .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); }
 
     .yl-pd .yl-finder{
       padding:3.5rem 0;
@@ -697,7 +699,7 @@ function ts_render_pd_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-pd .yl-finder .intro p{
-      margin:0 0 1.25rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-pd .yl-window{
       background:#fff;
@@ -714,11 +716,11 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
-    .yl-pd .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-pd .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-pd .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-pd .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-pd .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-pd .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-pd .yl-window-body{ padding:1.25rem; }
     .yl-pd .yl-grid{
       display:grid; gap:1rem;
@@ -740,14 +742,14 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-pd .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-pd .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-pd .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-pd .yl-gallery{
       padding:3.5rem 0;
@@ -760,7 +762,7 @@ function ts_render_pd_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-pd .yl-gallery .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-pd .yl-ggrid{
       display:grid; gap:1rem;
@@ -784,9 +786,9 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-shot figcaption{ padding:1rem 1.05rem 1.1rem; }
     .yl-pd .yl-shot strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-pd .yl-shot span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-pd .yl-shot span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-pd .yl-process{
       padding:3.75rem 0;
@@ -801,7 +803,7 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-process .sub{
       margin:0 0 1.5rem; max-width:34rem;
-      font-size:14px; color:var(--muted); line-height:1.5;
+      font-size:.875rem; color:var(--muted); line-height:1.5;
     }
     .yl-pd .yl-kanban{
       display:grid; gap:1rem;
@@ -820,10 +822,10 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-kan-col h3{
       margin:0 0 .85rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.1em; text-transform:uppercase;
       color:var(--blue); font-weight:700;
       padding:.35rem .55rem;
-      background:rgba(124,58,237,.08);
+      background:rgba(31,122,90,.08);
       border-radius:.4rem;
       display:inline-block;
     }
@@ -837,10 +839,10 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-kan-card b{
       display:block; margin-bottom:.3rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--blue); letter-spacing:.06em;
+      font-size:max(11px, .6875rem); color:var(--blue); letter-spacing:.06em;
     }
-    .yl-pd .yl-kan-card strong{ display:block; margin-bottom:.25rem; font-size:14px; }
-    .yl-pd .yl-kan-card p{ margin:0; font-size:12.5px; line-height:1.45; color:var(--muted); }
+    .yl-pd .yl-kan-card strong{ display:block; margin-bottom:.25rem; font-size:.875rem; }
+    .yl-pd .yl-kan-card p{ margin:0; font-size:max(12px, .7812rem); line-height:1.45; color:var(--muted); }
 
     .yl-pd .yl-pkgs{
       padding:3.75rem 0;
@@ -853,7 +855,7 @@ function ts_render_pd_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-pd .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-pd .yl-pkg-strip{
       display:flex; flex-wrap:wrap; gap:0;
@@ -875,16 +877,16 @@ function ts_render_pd_service_page(array $service): void
       transition:border-color .25s ease, background .25s ease;
     }
     .yl-pd .yl-pkg:last-child{ border-right:0; }
-    .yl-pd .yl-pkg:hover{ border-bottom-color:rgba(124,58,237,.45); background:rgba(124,58,237,.02); }
+    .yl-pd .yl-pkg:hover{ border-bottom-color:rgba(31,122,90,.45); background:rgba(31,122,90,.02); }
     .yl-pd .yl-pkg.is-hot{
       outline:none;
       border-bottom-color:var(--blue);
-      background:linear-gradient(180deg, rgba(124,58,237,.06), #fff 40%);
+      background:linear-gradient(180deg, rgba(31,122,90,.06), #fff 40%);
       box-shadow:none;
     }
     .yl-pd .yl-pkg .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-pd .yl-pkg h3{
       margin:0; font-family:Montserrat,sans-serif;
@@ -892,14 +894,14 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.45rem; flex:1; }
     .yl-pd .yl-pkg li{
-      font-size:13.5px; color:var(--muted);
+      font-size:.8438rem; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-pd .yl-pkg li::before{
       content:""; position:absolute; left:0; top:.5rem;
       width:5px; height:5px; border-radius:50%; background:var(--blue);
     }
-    .yl-pd .yl-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-pd .yl-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-pd .yl-faq{
       padding:3.5rem 0;
@@ -922,22 +924,22 @@ function ts_render_pd_service_page(array $service): void
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
     .yl-pd .yl-faq-intro .lead{
-      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem; line-height:1.55; max-width:28ch;
     }
     .yl-pd .yl-faq-intro .hint{
       display:none;
       padding:1rem 1.1rem;
       border-radius:1rem;
-      border:1px dashed rgba(124,58,237,.35);
-      background:rgba(124,58,237,.05);
-      font-size:13px; color:var(--muted); line-height:1.5;
+      border:1px dashed rgba(31,122,90,.35);
+      background:rgba(31,122,90,.05);
+      font-size:max(12px, .8125rem); color:var(--muted); line-height:1.5;
     }
     @media (min-width:900px){
       .yl-pd .yl-faq-intro .hint{ display:block; }
       .yl-pd .yl-faq-intro{ position:sticky; top:5.5rem; }
     }
     .yl-pd .yl-faq-intro .hint strong{
-      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+      display:block; color:var(--ink); font-size:.8438rem; margin-bottom:.25rem;
     }
     .yl-pd .yl-faq-list{
       display:grid; gap:.75rem;
@@ -951,13 +953,13 @@ function ts_render_pd_service_page(array $service): void
       align-self:start;
     }
     .yl-pd details[open]{
-      box-shadow:0 14px 34px rgba(124,58,237,.12);
-      border-color:rgba(124,58,237,.35);
+      box-shadow:0 14px 34px rgba(31,122,90,.12);
+      border-color:rgba(31,122,90,.35);
     }
     .yl-pd summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; align-items:center; gap:1rem;
       color:var(--ink);
     }
@@ -987,7 +989,7 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd details p{
       margin:0; padding:0 1.15rem 1.15rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-pd .yl-related{
@@ -997,7 +999,7 @@ function ts_render_pd_service_page(array $service): void
     .yl-pd .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-pd .yl-rel-grid{ display:flex; flex-wrap:wrap; gap:.65rem; }
     .yl-pd .yl-rel{
@@ -1005,7 +1007,7 @@ function ts_render_pd_service_page(array $service): void
       padding:.5rem .95rem; border-radius:999px;
       background:#fff; border:1px solid var(--line);
       text-decoration:none; color:var(--ink);
-      font-size:13px; font-weight:700;
+      font-size:max(12px, .8125rem); font-weight:700;
       box-shadow:2px 2px 0 rgba(15,23,42,.08);
       transition:transform .2s, color .2s;
     }
@@ -1029,7 +1031,7 @@ function ts_render_pd_service_page(array $service): void
     }
     .yl-pd .yl-close p{
       margin:0 auto 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -1052,7 +1054,7 @@ function ts_render_pd_service_page(array $service): void
               so your team ships with clarity instead of expensive guesswork.
             </p>
             <div class="yl-hero-actions">
-              <a class="yl-btn yl-btn-solid" href="/contact">Request a product enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+              <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a product enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
               <?php if ($hub): ?>
               <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
               <?php endif; ?>
@@ -1146,9 +1148,9 @@ function ts_render_pd_service_page(array $service): void
                 <div class="yl-graph-head">
                   <div>
                     <strong>Activation funnel</strong>
-                    <em>Before vs after redesign</em>
+                    <em>How we map drop-off in a flow</em>
                   </div>
-                  <span class="yl-graph-chip">+24% retain</span>
+                  <span class="yl-graph-chip">Illustrative</span>
                 </div>
                 <div class="yl-funnel" aria-hidden="true">
                   <div class="yl-funnel-col">
@@ -1174,7 +1176,7 @@ function ts_render_pd_service_page(array $service): void
                 </div>
                 <div class="yl-funnel-legend">
                   <span class="lg-base"><i></i> Baseline</span>
-                  <span class="lg-now"><i></i> After redesign</span>
+                  <span class="lg-now"><i></i> Target</span>
                 </div>
               </div>
             </div>
@@ -1224,7 +1226,7 @@ function ts_render_pd_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/product-design/craft</span>
+          <span class="path">Craft</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1270,7 +1272,7 @@ function ts_render_pd_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/product-design/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1321,7 +1323,7 @@ function ts_render_pd_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2 class="yl-reveal">Pick the depth you need</h2>
-      <p class="lead yl-reveal d1">Tell us on the contact form — discovery, full product design or a stuck flow that needs rescue.</p>
+      <p class="lead yl-reveal d1">Tell us in the brief below — discovery, full product design or a stuck flow that needs rescue.</p>
       <div class="yl-pkg-strip">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -1335,7 +1337,7 @@ function ts_render_pd_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p class="note"><?= ts_h($pkg[3]) ?></p>
-          <a class="yl-btn yl-btn-solid" href="/contact" style="align-self:flex-start">Enquire on contact <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>" style="align-self:flex-start">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -1349,7 +1351,7 @@ function ts_render_pd_service_page(array $service): void
         <p class="lead">Straight answers so you can decide if we are the right fit.</p>
         <div class="hint">
           <strong>Still mapping the problem?</strong>
-          Send a brief or current screens on contact — we’ll suggest discovery depth and a first milestone.
+          Send a brief or current screens in the brief below — we’ll suggest discovery depth and a first milestone.
         </div>
       </div>
       <div class="yl-faq-list" data-pd-faq>
@@ -1379,14 +1381,19 @@ function ts_render_pd_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <h2>Ready to design the right product?</h2>
-    <p>
-      Send your brief, current screens or a problem statement on our contact page.
-      We’ll reply with suggested scope and how discovery should start.
-    </p>
-    <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Tell us what you're",
+      "em" => "building.",
+      "sub" => "An idea, a live product that is stuck, or a feature you are unsure about. Share the problem and we reply with how discovery should start.",
+      "gets" => ["Where to start: discovery, full design or a flow fix", "The questions to answer before designing", "A suggested first milestone"],
+      "options" => ["Discovery Sprint", "Full Product Design", "Feature / Flow Rescue", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "product-brief.fig",
+      "urlLabel" => "Product, website or Figma link",
+      "msgPlaceholder" => "e.g. Users sign up but never finish setting up their account.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script>
@@ -1431,11 +1438,13 @@ function ts_render_pd_service_page(array $service): void
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-product-design page-yl-cd page-yl-pd",
-        "image" => ts_og_image("/images/mobile/Prototyping.webp"),
+        "image" => ts_og_image("/images/mobile/tablet-wireframe.webp"),
     ]);
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 /**
  * SharePoint Integration — M365 hubs, permissions, Power Automate, adoption.
- * Same Development tokens (#1C4FD6, Funnel Display) as WD/SD/CRM,
+ * Same Development tokens (#1F7A5A, Funnel Display) as WD/SD/CRM,
  * different composition: hub-tree visual + permission matrix + flow draw.
  */
 function ts_render_sp_service_page(array $service): void
@@ -94,7 +94,7 @@ function ts_render_sp_service_page(array $service): void
         ["How long does a project take?", "Focused intranet launches often land in 4–8 weeks. Large migrations are milestone-based after discovery."],
     ];
 
-    $pageTitle = "SharePoint Integration | Microsoft 365 Hubs, Permissions & Flows — ScaleSphere";
+    $pageTitle = "SharePoint Integration & Microsoft 365 | ScaleSphere";
     $pageDesc = "SharePoint Online tailored to your Microsoft 365 stack — hub architecture, permissions, Power Automate approvals, migration and adoption training.";
     $canonical = $service["href"];
 
@@ -143,13 +143,13 @@ function ts_render_sp_service_page(array $service): void
   <style>
     .apsp{
       --ink:#0F172A;
-      --soft:#F6F7F9;
-      --blue:#1C4FD6;
-      --blue-d:#163AA8;
+      --soft:#FFFEFA;
+      --blue:#1F7A5A;
+      --blue-d:#16604A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --white:#fff;
-      --tint:#EEF3FF;
+      --tint:#E6F1EA;
       background:var(--soft);
       color:var(--ink);
       font-family:"Funnel Display",Montserrat,sans-serif;
@@ -184,13 +184,13 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-crumb{
       display:flex; flex-wrap:wrap; gap:.35rem;
-      font-size:12px; color:var(--muted); margin:0 0 1rem;
+      font-size:max(12px, .75rem); color:var(--muted); margin:0 0 1rem;
     }
     .apsp-crumb a{ color:var(--muted); text-decoration:none; }
     .apsp-crumb a:hover{ color:var(--blue); }
     .apsp-eyebrow{
       display:inline-flex; align-items:center; gap:.4rem;
-      font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
       margin:0 0 .75rem;
     }
@@ -219,17 +219,17 @@ function ts_render_sp_service_page(array $service): void
       display:inline-flex; align-items:center; gap:.4rem;
       min-height:46px; padding:0 1.25rem; border-radius:999px;
       background:var(--blue); color:#fff; text-decoration:none;
-      font-size:14px; font-weight:600;
-      box-shadow:0 12px 28px rgba(28,79,214,.26);
+      font-size:.875rem; font-weight:600;
+      box-shadow:0 12px 28px rgba(31,122,90,.26);
       transition:transform .2s ease, filter .2s ease;
     }
     .apsp-btn:hover{ filter:brightness(1.05); transform:translateY(-2px); color:#fff; }
     .apsp-textlink{
-      color:var(--ink); font-size:14px; font-weight:500;
+      color:var(--ink); font-size:.875rem; font-weight:500;
       text-decoration:underline; text-underline-offset:5px;
     }
     .apsp-textlink:hover{ color:var(--blue); }
-    .apsp-trust{ margin:1rem 0 0; font-size:12.5px; color:rgba(15,23,42,.45); }
+    .apsp-trust{ margin:1rem 0 0; font-size:max(12px, .7812rem); color:rgba(15,23,42,.45); }
 
     /* Hub tree visual */
     .apsp-viz{
@@ -241,54 +241,54 @@ function ts_render_sp_service_page(array $service): void
       display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;
     }
     .apsp-viz-top span{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
-    .apsp-viz-top b{ color:var(--blue); font-weight:600; font-size:12px; }
+    .apsp-viz-top b{ color:var(--blue); font-weight:600; font-size:max(12px, .75rem); }
     .apsp-tree{ display:grid; gap:.55rem; }
     .apsp-hub{
       display:flex; align-items:center; gap:.65rem;
       padding:.7rem .85rem; border-radius:12px;
-      background:var(--blue); color:#fff; font-weight:500; font-size:14px;
+      background:var(--blue); color:#fff; font-weight:500; font-size:.875rem;
     }
     .apsp-hub i{ opacity:.85; }
     .apsp-branch{
       margin-left:1.1rem; padding-left:1rem;
-      border-left:2px solid rgba(28,79,214,.25);
+      border-left:2px solid rgba(31,122,90,.25);
       display:grid; gap:.45rem;
     }
     .apsp-node{
       display:flex; align-items:center; justify-content:space-between; gap:.75rem;
       padding:.55rem .75rem; border-radius:10px;
       background:var(--soft); border:1px solid var(--line);
-      font-size:13px; font-weight:500;
+      font-size:max(12px, .8125rem); font-weight:500;
       transition:border-color .3s, background .3s, transform .3s;
     }
     .apsp-node.is-on{
-      background:var(--tint); border-color:rgba(28,79,214,.35);
+      background:var(--tint); border-color:rgba(31,122,90,.35);
       transform:translateX(4px);
     }
     .apsp-node .meta{
-      font-family:"IBM Plex Mono",monospace; font-size:10px;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem);
       color:var(--muted); letter-spacing:.04em;
     }
     .apsp-flow{
       margin-top:1rem; padding-top:.9rem; border-top:1px dashed var(--line);
     }
     .apsp-flow-label{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.08em;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); letter-spacing:.08em;
       text-transform:uppercase; color:var(--muted); margin-bottom:.55rem;
     }
     .apsp-flow-track{
       display:flex; align-items:center; gap:.35rem; flex-wrap:wrap;
     }
     .apsp-flow-step{
-      padding:.4rem .65rem; border-radius:999px; font-size:11px; font-weight:600;
+      padding:.4rem .65rem; border-radius:999px; font-size:max(11px, .6875rem); font-weight:600;
       background:var(--soft); border:1px solid var(--line); color:var(--ink);
       transition:background .3s, color .3s, border-color .3s;
     }
     .apsp-flow-step.is-on{ background:var(--blue); color:#fff; border-color:var(--blue); }
-    .apsp-flow-arrow{ color:var(--muted); font-size:10px; }
+    .apsp-flow-arrow{ color:var(--muted); font-size:max(10px, .625rem); }
 
     .apsp-stack{
       display:flex; flex-wrap:wrap; gap:.45rem; justify-content:center;
@@ -296,7 +296,7 @@ function ts_render_sp_service_page(array $service): void
       background:#fff;
     }
     .apsp-chip{
-      font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); font-weight:600;
       padding:.4rem .7rem; border-radius:999px; border:1px solid var(--line);
       color:var(--muted); background:var(--soft);
       transition:all .3s;
@@ -307,7 +307,7 @@ function ts_render_sp_service_page(array $service): void
     .apsp-sec.band{ background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
     .apsp-kicker{
       display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-      margin-bottom:1rem; font-size:13px; color:var(--muted); letter-spacing:.04em;
+      margin-bottom:1rem; font-size:max(12px, .8125rem); color:var(--muted); letter-spacing:.04em;
     }
     .apsp-kicker strong{ color:var(--ink); font-weight:500; }
     .apsp-sec h2{
@@ -322,7 +322,7 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-lead{
       margin:-.4rem 0 1.6rem; max-width:40rem;
-      color:var(--muted); font-size:15.5px; line-height:1.55; font-weight:300;
+      color:var(--muted); font-size:.9688rem; line-height:1.55; font-weight:300;
     }
 
     .apsp-perm{
@@ -333,11 +333,11 @@ function ts_render_sp_service_page(array $service): void
       padding:1.1rem; border-radius:14px; background:var(--soft); border:1px solid var(--line);
     }
     .apsp-perm .who{
-      font-family:"IBM Plex Mono",monospace; font-size:10px; letter-spacing:.08em;
+      font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); letter-spacing:.08em;
       text-transform:uppercase; color:var(--blue); margin-bottom:.4rem;
     }
     .apsp-perm h3{ margin:0 0 .3rem; font-size:1rem; font-weight:500; }
-    .apsp-perm p{ margin:0; font-size:13.5px; color:var(--muted); font-weight:300; line-height:1.45; }
+    .apsp-perm p{ margin:0; font-size:.8438rem; color:var(--muted); font-weight:300; line-height:1.45; }
 
     .apsp-grid{
       display:grid; gap:.85rem;
@@ -349,11 +349,11 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-card:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(15,23,42,.06); }
     .apsp-card .num{
-      font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--blue);
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); color:var(--blue);
       letter-spacing:.08em; display:block; margin-bottom:.45rem;
     }
     .apsp-card h3{ margin:0 0 .35rem; font-size:1.05rem; font-weight:500; }
-    .apsp-card p{ margin:0; font-size:14px; color:var(--muted); font-weight:300; line-height:1.5; }
+    .apsp-card p{ margin:0; font-size:.875rem; color:var(--muted); font-weight:300; line-height:1.5; }
 
     .apsp-pain{
       display:grid; gap:0; max-width:720px;
@@ -366,10 +366,10 @@ function ts_render_sp_service_page(array $service): void
       width:48px; height:48px; border-radius:14px;
       display:grid; place-items:center;
       background:var(--tint); color:var(--blue);
-      font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(12px, .75rem); font-weight:600;
     }
     .apsp-pain h3{ margin:0 0 .3rem; font-size:1.05rem; font-weight:500; }
-    .apsp-pain p{ margin:0; font-size:14px; color:var(--muted); font-weight:300; line-height:1.45; }
+    .apsp-pain p{ margin:0; font-size:.875rem; color:var(--muted); font-weight:300; line-height:1.45; }
 
     /* Horizontal scroll process rail */
     .apsp-steps{
@@ -386,10 +386,10 @@ function ts_render_sp_service_page(array $service): void
     .apsp-step:hover{ transform:translateY(-4px); }
     .apsp-step b{
       display:block; margin-bottom:.35rem;
-      font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--blue); letter-spacing:.08em;
+      font-family:"IBM Plex Mono",monospace; font-size:max(11px, .6875rem); color:var(--blue); letter-spacing:.08em;
     }
-    .apsp-step strong{ display:block; margin-bottom:.3rem; font-size:15px; font-weight:500; }
-    .apsp-step p{ margin:0; font-size:13px; color:var(--muted); font-weight:300; line-height:1.45; }
+    .apsp-step strong{ display:block; margin-bottom:.3rem; font-size:.9375rem; font-weight:500; }
+    .apsp-step p{ margin:0; font-size:max(12px, .8125rem); color:var(--muted); font-weight:300; line-height:1.45; }
 
     .apsp-del{
       list-style:none; padding:0; margin:0;
@@ -398,7 +398,7 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-del li{
       display:flex; gap:.65rem; align-items:flex-start;
-      padding:.55rem 0; border-bottom:1px solid var(--line); font-size:14.5px;
+      padding:.55rem 0; border-bottom:1px solid var(--line); font-size:.9062rem;
     }
     .apsp-del li::before{
       content:""; width:9px; height:9px; margin-top:.4rem; flex-shrink:0;
@@ -417,10 +417,10 @@ function ts_render_sp_service_page(array $service): void
       color:var(--blue); letter-spacing:-.03em; margin-bottom:.3rem;
     }
     .apsp-metric span{
-      display:block; font-size:12px; font-weight:600; letter-spacing:.06em;
+      display:block; font-size:max(12px, .75rem); font-weight:600; letter-spacing:.06em;
       text-transform:uppercase; margin-bottom:.4rem;
     }
-    .apsp-metric p{ margin:0; font-size:13.5px; color:var(--muted); font-weight:300; line-height:1.45; }
+    .apsp-metric p{ margin:0; font-size:.8438rem; color:var(--muted); font-weight:300; line-height:1.45; }
 
     /* SLA-style stacked packages */
     .apsp-pkgs{ display:grid; gap:.65rem; }
@@ -434,23 +434,23 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-pkg.is-hot{
       border-left-color:var(--blue);
-      background:rgba(28,79,214,.04);
-      box-shadow:0 10px 28px rgba(28,79,214,.1);
+      background:rgba(31,122,90,.04);
+      box-shadow:0 10px 28px rgba(31,122,90,.1);
     }
     .apsp-pkg .tag{
-      display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; font-weight:600;
+      display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:max(10px, .625rem); font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:#fff; background:var(--blue);
       padding:.25rem .5rem; border-radius:4px; margin-bottom:.3rem;
     }
     .apsp-pkg h3{ margin:0; font-size:1.15rem; font-weight:500; }
     .apsp-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.35rem; }
     @media (min-width:700px){ .apsp-pkg ul{ grid-template-columns:1fr 1fr; } }
-    .apsp-pkg li{ display:flex; gap:.5rem; font-size:13.5px; color:var(--muted); }
+    .apsp-pkg li{ display:flex; gap:.5rem; font-size:.8438rem; color:var(--muted); }
     .apsp-pkg li::before{
       content:""; width:6px; height:6px; border-radius:50%; background:var(--blue);
       margin-top:.45rem; flex-shrink:0;
     }
-    .apsp-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); font-weight:300; }
+    .apsp-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); font-weight:300; }
 
     /* Numbered index FAQ */
     .apsp-faq{ display:grid; gap:.55rem; max-width:720px; counter-reset:spfaq; }
@@ -461,11 +461,11 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-faq summary{
       cursor:pointer; list-style:none; padding:.95rem 0;
-      font-weight:500; font-size:15px; display:flex; justify-content:space-between; gap:1rem; align-items:center;
+      font-weight:500; font-size:.9375rem; display:flex; justify-content:space-between; gap:1rem; align-items:center;
     }
     .apsp-faq summary::before{
       content:counter(spfaq, decimal-leading-zero);
-      font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+      font-family:"IBM Plex Mono",monospace; font-size:max(12px, .75rem); font-weight:600;
       color:var(--blue); margin-right:.35rem; flex-shrink:0;
     }
     .apsp-faq summary::-webkit-details-marker{ display:none; }
@@ -473,7 +473,7 @@ function ts_render_sp_service_page(array $service): void
     .apsp-faq details[open] summary i{ transform:rotate(180deg); color:var(--blue); }
     .apsp-faq details p{
       margin:0; padding:0 0 1rem 2.1rem;
-      font-size:14px; line-height:1.6; color:var(--muted); font-weight:300;
+      font-size:.875rem; line-height:1.6; color:var(--muted); font-weight:300;
     }
 
     .apsp-related{
@@ -485,9 +485,9 @@ function ts_render_sp_service_page(array $service): void
       border:1px solid var(--line); text-decoration:none; color:var(--ink);
       transition:border-color .2s, transform .2s;
     }
-    .apsp-rel:hover{ border-color:rgba(28,79,214,.4); transform:translateY(-2px); color:var(--ink); }
-    .apsp-rel strong{ display:block; font-size:15px; font-weight:500; margin-bottom:.25rem; }
-    .apsp-rel span{ font-size:13px; color:var(--muted); font-weight:300; }
+    .apsp-rel:hover{ border-color:rgba(31,122,90,.4); transform:translateY(-2px); color:var(--ink); }
+    .apsp-rel strong{ display:block; font-size:.9375rem; font-weight:500; margin-bottom:.25rem; }
+    .apsp-rel span{ font-size:max(12px, .8125rem); color:var(--muted); font-weight:300; }
 
     .apsp-close{
       padding:clamp(3.5rem,8vw,5.25rem) 0;
@@ -509,7 +509,7 @@ function ts_render_sp_service_page(array $service): void
     }
     .apsp-close p{
       margin:0; max-width:30rem;
-      color:var(--muted); font-size:15.5px; line-height:1.55; font-weight:300;
+      color:var(--muted); font-size:.9688rem; line-height:1.55; font-weight:300;
     }
   </style>
 

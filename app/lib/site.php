@@ -19,13 +19,14 @@ function ts_site(): array
         "phoneHref" => preg_replace("/\s+/", "", $phone) ?? $phone,
         "whatsapp" => "https://wa.me/" . preg_replace("/\D+/", "", $phone),
         "address" => (string) (ts_env("SITE_ADDRESS", "Kota, Rajasthan, India") ?? "Kota, Rajasthan, India"),
-        "liveAssets" => rtrim((string) (ts_env("LIVE_ASSETS", "https://www.techasoft.com") ?? "https://www.techasoft.com"), "/"),
-        "facebook" => "https://www.facebook.com/techasoft/",
-        "twitter" => "https://twitter.com/TECHASOFT_BNGLR",
-        "linkedin" => "https://in.linkedin.com/company/techasoft-pvt-ltd",
-        "pinterest" => "https://in.pinterest.com/techasoft_pvt_ltd/",
-        "instagram" => "https://www.instagram.com/techasoft_pvt_ltd/",
-        "youtube" => "https://www.youtube.com/@techasoft-private-limited",
+        "liveAssets" => rtrim((string) (ts_env("LIVE_ASSETS", $url) ?? $url), "/"),
+        "facebook" => (string) (ts_env("SOCIAL_FACEBOOK", "https://www.facebook.com/scalesphere") ?? ""),
+        "twitter" => (string) (ts_env("SOCIAL_TWITTER", "https://x.com/scalesphere") ?? ""),
+        "linkedin" => (string) (ts_env("SOCIAL_LINKEDIN", "https://www.linkedin.com/company/scalesphere") ?? ""),
+        "pinterest" => (string) (ts_env("SOCIAL_PINTEREST", "https://www.pinterest.com/scalesphere") ?? ""),
+        "instagram" => (string) (ts_env("SOCIAL_INSTAGRAM", "https://www.instagram.com/scalesphere") ?? ""),
+        "youtube" => (string) (ts_env("SOCIAL_YOUTUBE", "https://www.youtube.com/@scalesphere") ?? ""),
+        "certifications" => (string) (ts_env("SITE_CERTIFICATIONS", "") ?? ""),
     ];
     return $site;
 }
@@ -190,39 +191,39 @@ function ts_category_accent(string $category): array
 {
     return match ($category) {
         "Online Marketing" => [
-            "hex" => "#1C4FD6",
-            "hexDark" => "#163AA8",
-            "soft" => "#EEF3FF",
-            "line" => "#1C4FD6",
-            "rgba" => "28,79,214",
+            "hex" => "#1F7A5A",
+            "hexDark" => "#16604A",
+            "soft" => "#E4F1EA",
+            "line" => "#1F7A5A",
+            "rgba" => "31,122,90",
         ],
         "Development" => [
-            "hex" => "#1C4FD6",
-            "hexDark" => "#163AA8",
-            "soft" => "#EEF3FF",
-            "line" => "#1C4FD6",
-            "rgba" => "28,79,214",
+            "hex" => "#1F7A5A",
+            "hexDark" => "#16604A",
+            "soft" => "#E6F1EA",
+            "line" => "#1F7A5A",
+            "rgba" => "31,122,90",
         ],
         "Mobile Apps" => [
-            "hex" => "#10B981",
-            "hexDark" => "#059669",
-            "soft" => "#ECFDF5",
-            "line" => "#34D399",
-            "rgba" => "16,185,129",
+            "hex" => "#3B8767",
+            "hexDark" => "#2D6551",
+            "soft" => "#EAF4EE",
+            "line" => "#3B8767",
+            "rgba" => "59,135,103",
         ],
         "Creative Design" => [
-            "hex" => "#7C3AED",
-            "hexDark" => "#6D28D9",
-            "soft" => "#F5F3FF",
-            "line" => "#C4B5FD",
-            "rgba" => "124,58,237",
+            "hex" => "#1F7A5A",
+            "hexDark" => "#16604A",
+            "soft" => "#E4F1EA",
+            "line" => "#1F7A5A",
+            "rgba" => "31,122,90",
         ],
         default => [
-            "hex" => "#1C4FD6",
-            "hexDark" => "#163AA8",
-            "soft" => "#EEF3FF",
-            "line" => "#1C4FD6",
-            "rgba" => "28,79,214",
+            "hex" => "#1F7A5A",
+            "hexDark" => "#16604A",
+            "soft" => "#E6F1EA",
+            "line" => "#1F7A5A",
+            "rgba" => "31,122,90",
         ],
     };
 }
@@ -278,7 +279,19 @@ function ts_category_href(string $category): string
 
 function ts_logo(): string
 {
-    return "/scalesphere-logo.png";
+    return "/images/brand/logo.png";
+}
+
+/** Reversed logo for dark backgrounds (footer). */
+function ts_logo_white(): string
+{
+    return "/images/brand/logo-white.png";
+}
+
+/** Square app icon (512px), also used as the Organization logo for search engines. */
+function ts_app_icon(int $size = 512): string
+{
+    return "/images/brand/icon-" . ($size <= 192 ? 192 : 512) . ".png";
 }
 
 function ts_h(string $value): string

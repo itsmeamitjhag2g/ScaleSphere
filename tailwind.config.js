@@ -16,17 +16,26 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "#1C4FD6",
-          dark: "#163AA8",
-          soft: "#E8EEF8",
-          deep: "#0B1A3A",
+          DEFAULT: "#1F7A5A",
+          dark: "#16604A",
+          soft: "#E4F1EA",
+          deep: "#0F1B3D",
+          red: "#1F7A5A",
+          blue: "#1F7A5A",
+          orange: "#3B8767",
         },
-        ink: "#0F172A",
-        muted: "#64748B",
-        line: "#E2E8F0",
+        ink: "#0F1B3D",
+        muted: "#5F6878",
+        line: "#E6E7EA",
+        royal: "#FFFEFA",
+        tmf: {
+          red: "#1F7A5A",
+          blue: "#1F7A5A",
+          orange: "#3B8767",
+        },
       },
       fontFamily: {
-        display: ["Montserrat", "sans-serif"],
+        display: ["Plus Jakarta Sans", "Montserrat", "sans-serif"],
         body: ["Nunito Sans", "sans-serif"],
         mono: [
           "ui-monospace",

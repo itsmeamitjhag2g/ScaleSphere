@@ -18,6 +18,16 @@ if (false) {
         return "";
     }
 
+    function ts_logo_white(): string
+    {
+        return "";
+    }
+
+    function ts_app_icon(int $size = 512): string
+    {
+        return "";
+    }
+
     /** @param array<string,mixed> $block */
     function ts_jsonld(array $block): string
     {

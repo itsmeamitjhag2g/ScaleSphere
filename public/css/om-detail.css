@@ -4,13 +4,13 @@
  */
 [data-om-detail]{
   --om-ink:#0F172A;
-  --om-soft:#F6F7F9;
-  --om-blue:#1C4FD6;
-  --om-blue-d:#163AA8;
-  --om-deep:#0B1A3A;
+  --om-soft:#FFFEFA;
+  --om-blue:#1F7A5A;
+  --om-blue-d:#16604A;
+  --om-deep:#111C34;
   --om-muted:rgba(15,23,42,.62);
   --om-line:rgba(15,23,42,.12);
-  --om-soft-pink:#EEF3FF;
+  --om-soft-pink:#E6F1EA;
   background:var(--om-soft) !important;
   color:var(--om-ink);
   font-family:Inter,system-ui,sans-serif;
@@ -82,7 +82,7 @@
   --an-muted:#64748B;
   --an-body:#475569;
   --an-line:var(--om-line);
-  --an-ok:#16A34A;
+  --an-ok:#2E8B50;
 }
 
 body.page-svc-search-engine-optimization main,
@@ -99,7 +99,7 @@ body.page-svc-content-marketing,
 body.page-svc-pay-per-click,
 body.page-svc-email-campaigns,
 body.page-svc-analytics-and-reporting{
-  background:#F6F7F9 !important;
+  background:#FFFEFA !important;
 }
 
 /* Soft section washes → hub soft gray */
@@ -110,7 +110,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .ppc-sec.soft,
 [data-om-detail] .em-sec.soft,
 [data-om-detail] .an-sec.soft{
-  background:#EEF3FF !important;
+  background:#E6F1EA !important;
 }
 
 /* —— HERO: hub blue grid —— */
@@ -182,7 +182,7 @@ body.page-svc-analytics-and-reporting{
   [data-om-detail] .ppc-hero h1,
   [data-om-detail] .em-hero h1,
   [data-om-detail] .an-hero h1{
-    font-size:clamp(2.1rem,7vw,3.4rem) !important;
+    font-size:clamp(2rem,5.4vw,2.9rem) !important;
     line-height:.96 !important;
   }
 
@@ -206,9 +206,9 @@ body.page-svc-analytics-and-reporting{
   [data-om-detail] .ppc-hero h1,
   [data-om-detail] .em-hero h1,
   [data-om-detail] .an-hero h1{
-    font-size:clamp(1.8rem,10vw,2.8rem) !important;
+    font-size:clamp(1.6rem,8.2vw,2.3rem) !important;
     letter-spacing:-.02em !important;
-    line-height:.98 !important;
+    line-height:1.08 !important;
   }
 
   [data-om-detail] .seo-hero-sub,
@@ -232,7 +232,7 @@ body.page-svc-analytics-and-reporting{
     width:100% !important;
     justify-content:center !important;
     min-height:44px !important;
-    font-size:11px !important;
+    font-size:max(11px, .6875rem) !important;
   }
 
   [data-om-detail] .seo-ctas,
@@ -416,7 +416,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .an-hero h1{
   font-family:"Anton","Montserrat",sans-serif !important;
   font-weight:400 !important;
-  font-size:clamp(2.4rem,7vw,4.25rem) !important;
+  font-size:clamp(2rem,5vw,4.25rem) !important;
   line-height:.95 !important;
   letter-spacing:.01em !important;
   color:#fff !important;
@@ -477,7 +477,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .em-btn,
 [data-om-detail] .an-btn{
   font-family:"IBM Plex Mono",ui-monospace,monospace !important;
-  font-size:12px !important;
+  font-size:max(12px, .75rem) !important;
   font-weight:600 !important;
   letter-spacing:.06em !important;
   border-radius:999px !important;
@@ -697,7 +697,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .ppc-pkg.is-hot,
 [data-om-detail] .em-pkg.is-hot,
 [data-om-detail] .an-pkg.is-hot{
-  background:linear-gradient(180deg, rgba(28,79,214,.08), #fff 45%) !important;
+  background:linear-gradient(180deg, rgba(31,122,90,.08), #fff 45%) !important;
   box-shadow:4px 4px 0 var(--om-ink);
 }
 
@@ -710,7 +710,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .ppc-pain .ico,
 [data-om-detail] .em-pain .ico,
 [data-om-detail] .an-pain .ico{
-  background:rgba(28,79,214,.12) !important;
+  background:rgba(31,122,90,.12) !important;
   color:var(--om-blue) !important;
   border:2px solid var(--om-ink);
 }
@@ -768,7 +768,7 @@ body.page-svc-analytics-and-reporting{
 [data-om-detail] .em-trust,
 [data-om-detail] .an-trust{
   border:2px dashed var(--om-ink) !important;
-  background:rgba(28,79,214,.06) !important;
+  background:rgba(31,122,90,.06) !important;
   border-radius:1rem !important;
 }
 
@@ -787,14 +787,14 @@ body.page-svc-analytics-and-reporting{
   box-shadow:2px 2px 0 var(--om-ink);
   background:#fff !important;
   font-family:"IBM Plex Mono",ui-monospace,monospace;
-  font-size:12px !important;
+  font-size:max(12px, .75rem) !important;
 }
 /* Funnel / bars / pink gradients → blue */
 [data-om-detail] .sem-funnel-fill,
 [data-om-detail] .an-funnel-fill,
 [data-om-detail] .cm-cluster-hub,
 [data-om-detail] .smm-phone-cell.is-reel{
-  background:linear-gradient(90deg, var(--om-blue), #6B8FF0) !important;
+  background:linear-gradient(90deg, var(--om-blue), #3B8767) !important;
 }
 /* Analytics pyramid uses photo layers — do not force solid blue fills */
 [data-om-detail] .an-pyr,
@@ -841,10 +841,10 @@ body.page-svc-analytics-and-reporting{
 }
 [data-om-detail] .om-detail-marquee-track span{
   font-family:"IBM Plex Mono",monospace;
-  font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  font-size:max(12px, .75rem); font-weight:600; letter-spacing:.12em; text-transform:uppercase;
   white-space:nowrap; opacity:.9;
 }
-[data-om-detail] .om-detail-marquee-track i{ color:#7eb6ff; margin:0 .35rem; }
+[data-om-detail] .om-detail-marquee-track i{ color:#9FCFB5; margin:0 .35rem; }
 @keyframes omDetailMarquee{
   from{ transform:translateX(0); }
   to{ transform:translateX(-50%); }

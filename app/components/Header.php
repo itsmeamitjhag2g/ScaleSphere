@@ -5,7 +5,7 @@ $site = ts_site();
 <header class="site-header header-home" id="siteHeader">
   <div class="wrap header-inner">
     <a href="/" class="logo" aria-label="<?= ts_h($site["name"]) ?> home">
-      <img src="<?= ts_h(ts_logo()) ?>" alt="<?= ts_h($site["name"]) ?>" width="160" height="40">
+      <img src="<?= ts_h(ts_logo()) ?>" alt="<?= ts_h($site["name"]) ?>" width="192" height="40">
     </a>
 
     <nav class="main-nav" id="mainNav">

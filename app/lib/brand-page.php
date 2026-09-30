@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * Brand Identity — Creative Design detail.
  * Same desk system as Creative Design hub / UI-UX page, but a distinct layout:
@@ -80,7 +82,7 @@ function ts_render_brand_service_page(array $service): void
         ],
         [
             "Full Brand Identity",
-            "Most enquiries",
+            "Recommended",
             [
                 "Full strategy & positioning",
                 "Complete visual system",
@@ -114,9 +116,9 @@ function ts_render_brand_service_page(array $service): void
         ["What should we bring to the first call?", "Any old logos, competitor links, audience notes or pitch decks. Even a rough idea of “who we want to be” is enough."],
     ];
 
-    $swatches = ["#7C3AED", "#6D28D9", "#A78BFA", "#4C1D95", "#EDE9FE", "#0F172A"];
+    $swatches = ["#1F7A5A", "#16604A", "#9FCFB5", "#1F7A5A", "#E4F1EA", "#0F172A"];
 
-    $pageTitle = "Brand Identity | Strategy, Logo Systems & Guidelines — ScaleSphere";
+    $pageTitle = "Brand Identity Design & Guidelines | ScaleSphere";
     $pageDesc = "Brand identity design — positioning, logo systems, colour, typography and brand guidelines that keep every channel consistent and trustworthy.";
     $canonical = $service["href"];
 
@@ -157,10 +159,10 @@ function ts_render_brand_service_page(array $service): void
   <style>
     .yl-brand{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -188,7 +190,7 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-brand .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-brand .yl-crumb a:hover{ color:var(--blue); }
@@ -199,8 +201,8 @@ function ts_render_brand_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.15rem;
     }
@@ -225,12 +227,12 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-trust{
       margin:1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45);
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45);
     }
     .yl-brand .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease;
     }
@@ -267,15 +269,15 @@ function ts_render_brand_service_page(array $service): void
       border-radius:999px;
       background:
         radial-gradient(circle at 50% 50%, #fff 0 10px, transparent 11px),
-        repeating-radial-gradient(circle at 50% 50%, #4C1D95 0 2px, #7C3AED 2px 4px);
-      box-shadow:0 8px 20px rgba(76,29,149,.25);
+        linear-gradient(#1F7A5A,#1F7A5A);
+      box-shadow:0 8px 20px rgba(15,27,61,.25);
       animation:ylBrandSpin 10s linear infinite;
     }
     @keyframes ylBrandSpin{ to{ transform:rotate(360deg); } }
     @media (prefers-reduced-motion:reduce){ .yl-brand .yl-disc{ animation:none; } }
     .yl-brand .yl-play .ey{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.14em; text-transform:uppercase;
       color:var(--muted); margin-bottom:.35rem;
     }
     .yl-brand .yl-play h3{
@@ -283,7 +285,7 @@ function ts_render_brand_service_page(array $service): void
       font-family:"Instrument Serif",Georgia,serif;
       font-size:1.65rem; font-weight:400;
     }
-    .yl-brand .yl-play p{ margin:0; font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-brand .yl-play p{ margin:0; font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-brand .yl-swatch-card{
       background:#fff; border:1px solid var(--line);
@@ -299,14 +301,14 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-swatch-meta{ padding:1.1rem 1.2rem 1.25rem; }
     .yl-brand .yl-swatch-meta .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.35rem;
     }
     .yl-brand .yl-swatch-meta strong{
       display:block; font-family:Montserrat,sans-serif;
       font-size:1.05rem; font-weight:800; margin-bottom:.3rem;
     }
-    .yl-brand .yl-swatch-meta p{ margin:0; font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-brand .yl-swatch-meta p{ margin:0; font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-brand .yl-pillars{
       padding:2rem 0 0;
@@ -323,14 +325,14 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-pillar h3{
       margin:0 0 .35rem;
-      font-family:Montserrat,sans-serif; font-size:14px; font-weight:800;
+      font-family:Montserrat,sans-serif; font-size:.875rem; font-weight:800;
     }
-    .yl-brand .yl-pillar p{ margin:0; font-size:12.5px; line-height:1.45; color:var(--muted); }
+    .yl-brand .yl-pillar p{ margin:0; font-size:max(12px, .7812rem); line-height:1.45; color:var(--muted); }
 
     .yl-brand .yl-sec-label{
       display:block; margin-bottom:.65rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
     }
 
     .yl-brand .yl-about{
@@ -352,7 +354,7 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-about p{
       margin:0 0 .85rem;
-      font-size:15px; line-height:1.65; color:var(--muted);
+      font-size:.9375rem; line-height:1.65; color:var(--muted);
     }
     .yl-brand .yl-sticky{
       background:#fff;
@@ -365,13 +367,13 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-sticky strong{
       display:block; margin-bottom:.5rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(11px, .6875rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-brand .yl-sticky ul{
       list-style:none; padding:0; margin:.85rem 0 0; display:grid; gap:.5rem;
     }
     .yl-brand .yl-sticky li{
-      font-size:13.5px; color:var(--muted); padding-left:.9rem; position:relative; line-height:1.4;
+      font-size:.8438rem; color:var(--muted); padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-brand .yl-sticky li::before{
       content:""; position:absolute; left:0; top:.5rem;
@@ -389,7 +391,7 @@ function ts_render_brand_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-brand .yl-pains .lead{
-      margin:0 0 1.5rem; max-width:38rem; color:var(--muted); font-size:15px; line-height:1.55;
+      margin:0 0 1.5rem; max-width:38rem; color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
     .yl-brand .yl-pain-grid{
       display:grid; gap:.85rem;
@@ -398,13 +400,13 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-pain{
       background:#fff; border:1px solid var(--line);
       border-radius:1.1rem; padding:1.15rem 1.1rem;
-      box-shadow:inset 3px 0 0 #7C3AED;
+      box-shadow:inset 3px 0 0 #1F7A5A;
     }
     .yl-brand .yl-pain h3{
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
-    .yl-brand .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .yl-brand .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); }
 
     .yl-brand .yl-finder{
       padding:3.5rem 0;
@@ -417,7 +419,7 @@ function ts_render_brand_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-brand .yl-finder .intro p{
-      margin:0 0 1.25rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-brand .yl-window{
       background:#fff;
@@ -434,11 +436,11 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
-    .yl-brand .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-brand .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-brand .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-brand .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-brand .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-brand .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-brand .yl-window-body{ padding:1.25rem; }
     .yl-brand .yl-grid{
       display:grid; gap:1rem;
@@ -455,14 +457,14 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-brand .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-brand .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-brand .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-brand .yl-gallery{
       padding:3.5rem 0;
@@ -475,7 +477,7 @@ function ts_render_brand_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-brand .yl-gallery .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-brand .yl-ggrid{
       display:grid; gap:1rem;
@@ -494,9 +496,9 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-shot figcaption{ padding:.95rem 1rem 1.05rem; }
     .yl-brand .yl-shot strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-brand .yl-shot span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-brand .yl-shot span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-brand .yl-process{
       padding:3.75rem 0 3.25rem;
@@ -511,7 +513,7 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-process .sub{
       margin:0 0 1.5rem; max-width:34rem;
-      font-size:14px; color:var(--muted); line-height:1.5;
+      font-size:.875rem; color:var(--muted); line-height:1.5;
     }
     .yl-brand .yl-rail-wrap{
       overflow-x:auto;
@@ -534,7 +536,7 @@ function ts_render_brand_service_page(array $service): void
       left:1.35rem; right:1.35rem;
       top:2rem;
       height:2px;
-      background:linear-gradient(90deg, var(--blue), rgba(124,58,237,.25));
+      background:linear-gradient(90deg, var(--blue), rgba(31,122,90,.25));
     }
     .yl-brand .yl-rail-step{
       width:200px;
@@ -549,7 +551,7 @@ function ts_render_brand_service_page(array $service): void
       border:2px solid var(--blue);
       color:var(--blue);
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; font-weight:700;
+      font-size:max(11px, .6875rem); font-weight:700;
       display:flex; align-items:center; justify-content:center;
       margin:0 0 .85rem;
       position:relative; z-index:1;
@@ -558,10 +560,10 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-rail-step strong{
       display:block; margin-bottom:.3rem;
       font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800;
+      font-size:.875rem; font-weight:800;
     }
     .yl-brand .yl-rail-step p{
-      margin:0; font-size:12.5px; line-height:1.45; color:var(--muted);
+      margin:0; font-size:max(12px, .7812rem); line-height:1.45; color:var(--muted);
     }
 
     .yl-brand .yl-pkgs{
@@ -575,7 +577,7 @@ function ts_render_brand_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-brand .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-brand .yl-pkg-stack{
       display:flex; flex-direction:column; gap:.85rem;
@@ -598,23 +600,23 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-pkg-row.is-hot{
       border-color:var(--blue);
-      box-shadow:0 12px 32px rgba(124,58,237,.12);
+      box-shadow:0 12px 32px rgba(31,122,90,.12);
     }
     .yl-brand .yl-pkg-row .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-brand .yl-pkg-row h3{
       margin:0 0 .35rem; font-family:Montserrat,sans-serif;
       font-size:1.15rem; font-weight:800;
     }
-    .yl-brand .yl-pkg-row .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-brand .yl-pkg-row .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
     .yl-brand .yl-pkg-row ul{
       list-style:none; padding:0; margin:0;
       display:grid; gap:.3rem;
     }
     .yl-brand .yl-pkg-row li{
-      font-size:13px; color:var(--muted);
+      font-size:max(12px, .8125rem); color:var(--muted);
       padding-left:.85rem; position:relative; line-height:1.4;
     }
     .yl-brand .yl-pkg-row li::before{
@@ -632,7 +634,7 @@ function ts_render_brand_service_page(array $service): void
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
-    .yl-brand .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; }
+    .yl-brand .yl-faq .lead{ margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem; }
     .yl-brand .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
     .yl-brand details{
       background:#fff; border:1px solid var(--line);
@@ -641,7 +643,7 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; gap:1rem;
     }
     .yl-brand summary::-webkit-details-marker{ display:none; }
@@ -649,7 +651,7 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
     .yl-brand details p{
       margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-brand .yl-related{
@@ -659,7 +661,7 @@ function ts_render_brand_service_page(array $service): void
     .yl-brand .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-brand .yl-rel-grid{
       display:grid; gap:.65rem;
@@ -671,14 +673,14 @@ function ts_render_brand_service_page(array $service): void
       padding:1rem .85rem; border-radius:.35rem;
       background:#fff; border:1px solid var(--line);
       text-decoration:none; color:var(--ink);
-      font-size:13px; font-weight:700;
+      font-size:max(12px, .8125rem); font-weight:700;
       box-shadow:3px 3px 0 rgba(15,23,42,.08);
       transition:transform .2s, color .2s, box-shadow .2s;
     }
     .yl-brand .yl-rel:hover{
       transform:translate(-2px,-2px);
       color:var(--blue);
-      box-shadow:5px 5px 0 rgba(124,58,237,.15);
+      box-shadow:5px 5px 0 rgba(31,122,90,.15);
     }
 
     .yl-brand .yl-close{
@@ -699,7 +701,7 @@ function ts_render_brand_service_page(array $service): void
     }
     .yl-brand .yl-close p{
       margin:0 0 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -720,7 +722,7 @@ function ts_render_brand_service_page(array $service): void
           so your company looks and sounds the same on the website, pitch deck, packaging and social.
         </p>
         <div class="yl-hero-actions">
-          <a class="yl-btn yl-btn-solid" href="/contact">Request a brand enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a brand enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
           <?php if ($hub): ?>
           <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
           <?php endif; ?>
@@ -766,7 +768,7 @@ function ts_render_brand_service_page(array $service): void
     <div class="yl-wrap yl-about-grid">
       <aside class="yl-sticky">
         <strong>Brand book includes</strong>
-        <p style="margin:0;font-size:14px;line-height:1.55;color:var(--muted)">
+        <p style="margin:0;font-size:.875rem;line-height:1.55;color:var(--muted)">
           One source of truth — so marketing, founders and vendors stop inventing off-brand work.
         </p>
         <ul>
@@ -818,7 +820,7 @@ function ts_render_brand_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/brand-identity/system</span>
+          <span class="path">System</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -845,7 +847,7 @@ function ts_render_brand_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/brand-identity/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -903,7 +905,7 @@ function ts_render_brand_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2>Pick the depth you need</h2>
-      <p class="lead">Share your stage on the contact form — new brand, refresh or full rebrand. We recommend a lane after a short call.</p>
+      <p class="lead">Share your stage in the brief below — new brand, refresh or full rebrand. We recommend a lane after a short call.</p>
       <div class="yl-pkg-stack">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -919,7 +921,7 @@ function ts_render_brand_service_page(array $service): void
             <li><?= ts_h($li) ?></li>
             <?php endforeach; ?>
           </ul>
-          <a class="yl-btn yl-btn-solid" href="/contact">Enquire <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -957,24 +959,29 @@ function ts_render_brand_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <div class="yl-wrap">
-      <h2>Ready for an identity that holds together?</h2>
-      <p>
-        Send your current logo, competitor links or a short brief on our contact page.
-        We will reply with suggested scope and next steps for kickoff.
-      </p>
-      <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-    </div>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Tell us about the brand",
+      "em" => "you're building.",
+      "sub" => "New business, a refresh or a full rebrand. Share where you are and a designer replies with how we would approach it.",
+      "gets" => ["An honest read on your current brand, if you have one", "Which package fits your stage", "What we need from you to start"],
+      "options" => ["Brand Starter", "Full Brand Identity", "Rebrand & Refresh", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "brand-brief.pdf",
+      "urlLabel" => "Current website or Instagram",
+      "msgPlaceholder" => "e.g. We are launching a skincare line and need a full identity.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-brand-identity page-yl-cd page-yl-brand",
         "image" => ts_og_image("/images/stock/photo-1618005182384-a83a8bd57fbe.jpg"),
     ]);

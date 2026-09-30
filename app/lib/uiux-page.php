@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * UI / UX Designing — Creative Design detail.
  * Yan-desk visual language (paper grid, purple) — no mesh.
@@ -73,7 +75,7 @@ function ts_render_uiux_service_page(array $service): void
         ],
         [
             "Complete Product UI/UX",
-            "Most enquiries",
+            "Recommended",
             [
                 "Full UX research & journey map",
                 "Complete wireframe set",
@@ -107,7 +109,7 @@ function ts_render_uiux_service_page(array $service): void
         ["What should we bring to the first call?", "Any brief, current screenshots, analytics pain points or competitor links. Even a rough idea is enough to start."],
     ];
 
-    $pageTitle = "UI / UX Designing | Research, Wireframes & Interfaces — ScaleSphere";
+    $pageTitle = "UI/UX Design Services | Web & Mobile | ScaleSphere";
     $pageDesc = "Professional UI/UX design for web and mobile — user research, wireframes, high-fidelity interfaces, prototypes and usability testing that improve clarity and conversion.";
     $canonical = $service["href"];
 
@@ -148,10 +150,10 @@ function ts_render_uiux_service_page(array $service): void
   <style>
     .yl-detail{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -180,7 +182,7 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-detail .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-detail .yl-crumb a:hover{ color:var(--blue); }
@@ -191,8 +193,8 @@ function ts_render_uiux_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.25rem;
     }
@@ -224,12 +226,12 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-trust{
       margin:1.1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45); letter-spacing:.02em;
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45); letter-spacing:.02em;
     }
     .yl-detail .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease, box-shadow .2s ease;
     }
@@ -258,22 +260,22 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-card-media{ aspect-ratio:4/3; overflow:hidden; background:#e8edf5; }
     .yl-detail .yl-card-media img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .yl-detail .yl-term{ font-family:"IBM Plex Mono",monospace; font-size:12px; }
+    .yl-detail .yl-term{ font-family:"IBM Plex Mono",monospace; font-size:max(12px, .75rem); }
     .yl-detail .yl-term-bar{
       display:flex; align-items:center; gap:.4rem;
       padding:.65rem .9rem;
       background:var(--deep); color:rgba(255,255,255,.7);
     }
-    .yl-detail .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-detail .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-detail .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-detail .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-detail .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-detail .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-detail .yl-term-body{
       padding:1rem 1.1rem 1.15rem;
       background:#0f172a; color:#e2e8f0;
     }
     .yl-detail .yl-term-body div{ margin-bottom:.55rem; line-height:1.45; }
     .yl-detail .yl-term-body div:last-child{ margin-bottom:0; }
-    .yl-detail .yl-term-body b{ color:#c4b5fd; font-weight:600; }
+    .yl-detail .yl-term-body b{ color:#DCEEE3; font-weight:600; }
     .yl-detail .yl-term-body span{ color:rgba(226,232,240,.78); }
 
     .yl-detail .yl-about{
@@ -290,7 +292,7 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-sec-label{
       display:block; margin-bottom:.65rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
     }
     .yl-detail .yl-about h2{
       margin:0 0 1rem;
@@ -300,7 +302,7 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-about p{
       margin:0 0 .85rem;
-      font-size:15px; line-height:1.65; color:var(--muted);
+      font-size:.9375rem; line-height:1.65; color:var(--muted);
     }
     .yl-detail .yl-split{
       display:grid; gap:.75rem; margin-top:1.25rem;
@@ -312,9 +314,9 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-split strong{
       display:block; margin-bottom:.3rem;
-      font-family:Montserrat,sans-serif; font-size:13px; font-weight:800; color:var(--blue);
+      font-family:Montserrat,sans-serif; font-size:max(12px, .8125rem); font-weight:800; color:var(--blue);
     }
-    .yl-detail .yl-split p{ margin:0; font-size:13px; line-height:1.5; color:var(--muted); }
+    .yl-detail .yl-split p{ margin:0; font-size:max(12px, .8125rem); line-height:1.5; color:var(--muted); }
     .yl-detail .yl-sticky{
       background:#fff;
       border:1px solid var(--line);
@@ -326,13 +328,13 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-sticky strong{
       display:block; margin-bottom:.5rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(11px, .6875rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-detail .yl-sticky ul{
       list-style:none; padding:0; margin:.85rem 0 0; display:grid; gap:.5rem;
     }
     .yl-detail .yl-sticky li{
-      font-size:13.5px; color:var(--muted); padding-left:.9rem; position:relative; line-height:1.4;
+      font-size:.8438rem; color:var(--muted); padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-detail .yl-sticky li::before{
       content:""; position:absolute; left:0; top:.5rem;
@@ -350,7 +352,7 @@ function ts_render_uiux_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-detail .yl-pains > .yl-wrap > .lead{
-      margin:0 0 1.5rem; max-width:38rem; color:var(--muted); font-size:15px; line-height:1.55;
+      margin:0 0 1.5rem; max-width:38rem; color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
     .yl-detail .yl-pain-grid{
       display:grid; gap:1.25rem 1.5rem;
@@ -367,7 +369,7 @@ function ts_render_uiux_service_page(array $service): void
       font-family:"IBM Plex Mono",monospace;
       font-size:clamp(2.6rem,6vw,3.6rem);
       font-weight:500; line-height:1;
-      color:rgba(124,58,237,.22);
+      color:rgba(31,122,90,.22);
       letter-spacing:-.04em;
       margin:0 0 .35rem;
     }
@@ -375,7 +377,7 @@ function ts_render_uiux_service_page(array $service): void
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1.05rem; font-weight:800;
     }
-    .yl-detail .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); max-width:22rem; }
+    .yl-detail .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); max-width:22rem; }
 
     .yl-detail .yl-finder{ padding:3.5rem 0; background:var(--soft); border-top:1px solid var(--line); }
     .yl-detail .yl-finder .intro{
@@ -386,7 +388,7 @@ function ts_render_uiux_service_page(array $service): void
       font-family:Montserrat,sans-serif;
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
-    .yl-detail .yl-finder .intro p{ margin:0; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55; }
+    .yl-detail .yl-finder .intro p{ margin:0; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55; }
     .yl-detail .yl-window{
       background:#fff;
       border:1px solid var(--line);
@@ -402,7 +404,7 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
     .yl-detail .yl-window-body{ padding:1.25rem; }
     .yl-detail .yl-grid{
@@ -421,14 +423,14 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-detail .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-detail .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-detail .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-detail .yl-gallery{
       padding:3.5rem 0;
@@ -441,7 +443,7 @@ function ts_render_uiux_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-detail .yl-gallery > .yl-wrap > .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-detail .yl-ggrid{
       display:grid; gap:1rem;
@@ -461,9 +463,9 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-shot figcaption{ padding:.95rem 1rem 1.05rem; }
     .yl-detail .yl-shot strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-detail .yl-shot span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-detail .yl-shot span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-detail .yl-process{
       padding:3.75rem 0;
@@ -476,7 +478,7 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-process .sub{
       margin:0 auto 2rem; text-align:center; max-width:34rem;
-      font-size:14px; color:rgba(255,255,255,.65); line-height:1.5;
+      font-size:.875rem; color:rgba(255,255,255,.65); line-height:1.5;
     }
     .yl-detail .yl-zigzag{
       position:relative;
@@ -490,7 +492,7 @@ function ts_render_uiux_service_page(array $service): void
       left:50%; top:0; bottom:0;
       width:2px;
       margin-left:-1px;
-      background:linear-gradient(180deg, transparent, #a78bfa 8%, #a78bfa 92%, transparent);
+      background:linear-gradient(180deg, transparent, #9FCFB5 8%, #9FCFB5 92%, transparent);
       background-size:100% 200%;
       animation:ylUxLine 3.2s ease-in-out infinite;
       opacity:.55;
@@ -516,8 +518,8 @@ function ts_render_uiux_service_page(array $service): void
       content:"";
       position:absolute; top:1.35rem;
       width:12px; height:12px; border-radius:50%;
-      background:#7C3AED;
-      box-shadow:0 0 0 4px rgba(124,58,237,.35);
+      background:#1F7A5A;
+      box-shadow:0 0 0 4px rgba(31,122,90,.35);
     }
     .yl-detail .yl-zig-step:nth-child(odd)::after{ right:-1.15rem; }
     .yl-detail .yl-zig-step:nth-child(even)::after{ left:-1.15rem; }
@@ -534,10 +536,10 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-zig-step b{
       display:block; margin-bottom:.35rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:#c4b5fd; letter-spacing:.08em;
+      font-size:max(11px, .6875rem); color:#DCEEE3; letter-spacing:.08em;
     }
-    .yl-detail .yl-zig-step strong{ display:block; margin-bottom:.3rem; font-size:15px; }
-    .yl-detail .yl-zig-step p{ margin:0; font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.65); }
+    .yl-detail .yl-zig-step strong{ display:block; margin-bottom:.3rem; font-size:.9375rem; }
+    .yl-detail .yl-zig-step p{ margin:0; font-size:max(12px, .7812rem); line-height:1.45; color:rgba(255,255,255,.65); }
 
     .yl-detail .yl-pkgs{
       padding:3.75rem 0;
@@ -550,7 +552,7 @@ function ts_render_uiux_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-detail .yl-pkgs > .yl-wrap > .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-detail .yl-pkg-grid{
       display:grid; gap:1.15rem;
@@ -577,11 +579,11 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-pkg.is-hot{
       outline:2px solid var(--blue);
       outline-offset:1px;
-      box-shadow:0 16px 40px rgba(124,58,237,.14);
+      box-shadow:0 16px 40px rgba(31,122,90,.14);
     }
     .yl-detail .yl-pkg .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-detail .yl-pkg h3{
       margin:0; font-family:Montserrat,sans-serif;
@@ -589,14 +591,14 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.45rem; flex:1; }
     .yl-detail .yl-pkg li{
-      font-size:13.5px; color:var(--muted);
+      font-size:.8438rem; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-detail .yl-pkg li::before{
       content:""; position:absolute; left:0; top:.5rem;
       width:5px; height:5px; border-radius:50%; background:var(--blue);
     }
-    .yl-detail .yl-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-detail .yl-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-detail .yl-faq{
       padding:3.5rem 0;
@@ -609,7 +611,7 @@ function ts_render_uiux_service_page(array $service): void
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
     .yl-detail .yl-faq > .yl-wrap > .lead{
-      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem;
     }
     .yl-detail .yl-faq-list{ display:grid; gap:.65rem; max-width:760px; }
     .yl-detail details{
@@ -619,7 +621,7 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; gap:1rem;
     }
     .yl-detail summary::-webkit-details-marker{ display:none; }
@@ -627,7 +629,7 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail details[open] summary i{ color:var(--blue); transform:rotate(180deg); }
     .yl-detail details p{
       margin:0; padding:0 1.15rem 1.1rem;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
     }
 
     .yl-detail .yl-related{
@@ -637,7 +639,7 @@ function ts_render_uiux_service_page(array $service): void
     .yl-detail .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-detail .yl-rel-grid{ display:flex; flex-wrap:wrap; gap:.65rem; }
     .yl-detail .yl-rel{
@@ -645,7 +647,7 @@ function ts_render_uiux_service_page(array $service): void
       padding:.5rem .95rem; border-radius:999px;
       background:#fff; border:1px solid var(--line);
       text-decoration:none; color:var(--ink);
-      font-size:13px; font-weight:700;
+      font-size:max(12px, .8125rem); font-weight:700;
       box-shadow:2px 2px 0 rgba(15,23,42,.08);
       transition:transform .2s, color .2s;
     }
@@ -669,7 +671,7 @@ function ts_render_uiux_service_page(array $service): void
     }
     .yl-detail .yl-close p{
       margin:0 auto 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -691,7 +693,7 @@ function ts_render_uiux_service_page(array $service): void
             so people understand what to do next, and your team stops rebuilding screens mid-sprint.
           </p>
           <div class="yl-hero-actions">
-            <a class="yl-btn yl-btn-solid" href="/contact">Request a UI/UX enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+            <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a UI/UX enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
           <?php if ($hub): ?>
             <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
           <?php endif; ?>
@@ -747,7 +749,7 @@ function ts_render_uiux_service_page(array $service): void
   </div>
       <aside class="yl-sticky">
         <strong>You walk away with</strong>
-        <p style="margin:0;font-size:14px;line-height:1.55;color:var(--muted)">
+        <p style="margin:0;font-size:.875rem;line-height:1.55;color:var(--muted)">
           A complete design package your developers can implement — not a moodboard.
         </p>
         <ul>
@@ -788,7 +790,7 @@ function ts_render_uiux_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/services/ui-ux/capabilities</span>
+          <span class="path">Capabilities</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -815,7 +817,7 @@ function ts_render_uiux_service_page(array $service): void
       <div class="yl-window">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/services/ui-ux/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -871,7 +873,7 @@ function ts_render_uiux_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2>Choose how deep you want to go</h2>
-      <p class="lead">Tell us your product stage on the contact form — we recommend the right lane after a short discovery call. No obligation until scope is clear.</p>
+      <p class="lead">Tell us your product stage in the brief below — we recommend the right lane after a short discovery call. No obligation until scope is clear.</p>
       <div class="yl-pkg-grid">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -885,7 +887,7 @@ function ts_render_uiux_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p class="note"><?= ts_h($pkg[3]) ?></p>
-          <a class="yl-btn yl-btn-solid" href="/contact" style="align-self:flex-start">Enquire on contact <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>" style="align-self:flex-start">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -923,22 +925,29 @@ function ts_render_uiux_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <h2>Ready to improve how your product feels?</h2>
-    <p>
-      Share your product link, current screens or a rough brief on our contact page.
-      We will reply with next steps, suggested scope and a clear path to kickoff.
-    </p>
-    <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Show us the screens that",
+      "em" => "aren't working.",
+      "sub" => "Send a link or a few screenshots. A designer looks at them and replies with the friction points we would fix first and which package fits.",
+      "gets" => ["Top friction points in your current flow", "Suggested package and a rough timeline", "Questions we need answered before quoting"],
+      "options" => ["UX Discovery Sprint", "Complete Product UI/UX", "UX Audit & Redesign", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "ui-ux-brief.fig",
+      "urlLabel" => "Website, app or Figma link",
+      "msgPlaceholder" => "e.g. People drop off at our sign-up step on mobile.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-ui-ux-designing page-yl-cd page-yl-detail",
         "image" => ts_og_image("/images/stock/photo-1561070791-2526d30994b5.jpg"),
     ]);

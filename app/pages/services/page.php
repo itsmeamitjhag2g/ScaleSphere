@@ -16,38 +16,81 @@ $headlines = [
     "Creative Design" => "Build belief before people buy in.",
 ];
 
-$hubStories = [
-    "Online Marketing" => "What we do is grow demand with searchable, paid and owned channels working as one plan. How we work: audit the funnel, pick the channels that move pipeline, then ship campaigns with weekly learning loops. Why it matters: when SEO, ads, social and content share the same outcome, every rupee and every post compounds instead of competing.",
-    "Development" => "What we build is the website, product and integrations your team can actually run. How we deliver: clear architecture, short release slices and familiar stacks so craft stays high without slowing the launch. Why it matters: a coherent platform cuts handoffs, reduces rework and gives marketing and product one surface to grow on.",
-    "Mobile Apps" => "What we ship is native and cross-platform apps people open again — not just install. How we build: first-minute clarity, calm performance and release habits that protect quality after go-live. Why it matters: retention is the product; speed, UX and support have to stay aligned or growth leaks at every update.",
-    "Creative Design" => "What we create is the identity, interface and motion system that makes the product feel intentional. How we work: tokens and prototypes before decoration, so brand and UI stay consistent as teams and surfaces expand. Why it matters: design that scales reduces one-off screens, speeds delivery and builds trust before the pitch ends.",
+$practiceInfo = [
+    "Online Marketing" => [
+        "headline" => "Grow visibility, leads and revenue.",
+        "intro" => "We plan and run your marketing channels as one strategy — SEO, ads, social, content and email — and report on the results that matter to your business.",
+        "bestFor" => "Businesses that want more qualified leads and measurable return on spend.",
+    ],
+    "Development" => [
+        "headline" => "Websites and software your business can rely on.",
+        "intro" => "We build fast websites, custom software, CRMs and online stores on proven technology, with clean code and documentation you own.",
+        "bestFor" => "Companies launching, rebuilding or automating their operations.",
+    ],
+    "Mobile Apps" => [
+        "headline" => "Apps people download — and keep using.",
+        "intro" => "Native and cross-platform apps for Android and iOS, from the first prototype to store launch and ongoing support.",
+        "bestFor" => "Startups and brands launching or improving a mobile product.",
+    ],
+    "Creative Design" => [
+        "headline" => "A brand and product that look as good as they work.",
+        "intro" => "Brand identity, UI/UX, design systems and motion — designed together so everything you publish looks and feels consistent.",
+        "bestFor" => "Teams building a new brand, a new product or a redesign.",
+    ],
 ];
 
-$itemStories = [
-    "Search Engine Optimization" => "What: organic visibility on the queries that matter. How: technical health, intent-led pages and content that earns links. Why: compounding traffic that lowers acquisition cost over time.",
-    "Search Engine Marketing" => "What: paid search that captures high-intent demand. How: tight keyword structure, creative tests and landing-page fit. Why: fast pipeline while organic authority is still growing.",
-    "Social Media Marketing" => "What: social presence that builds awareness and trust. How: calendar, creative and community rhythms tied to offers. Why: brand stays visible where conversations already happen.",
-    "Content Marketing" => "What: useful stories that educate and convert. How: briefs, drafts and distribution across SEO, email and sales. Why: one asset feeds multiple channels instead of dying on a blog.",
-    "Pay Per Click" => "What: paid media that buys qualified attention. How: audience, creative and budget rules reviewed weekly. Why: controlled spend with clear CPA and learning speed.",
-    "Email Campaigns" => "What: owned journeys that nurture and reactivate. How: segmentation, lifecycle flows and offer sequencing. Why: you keep the relationship without renting the feed.",
-    "Analytics & Reporting" => "What: measurement that explains what moved revenue. How: tracking, dashboards and assisted-conversion views. Why: teams stop arguing opinions and start doubling down on proof.",
-    "Website Development" => "What: fast, accessible sites built for conversion. How: clean architecture, performance budgets and CMS your team can edit. Why: the website becomes a reliable growth asset, not a rebuild every year.",
-    "Software Development" => "What: custom software that fits real workflows. How: discovery, modular builds and release cadence with clear owners. Why: tools match the business instead of forcing the business into the tool.",
-    "CRM Software" => "What: CRM that sales and marketing can trust daily. How: data model, pipelines and automations tied to handoffs. Why: leads stop leaking and reporting finally matches reality.",
-    "E-Commerce Platforms" => "What: storefronts that sell and scale under load. How: catalog, checkout and payment flows tuned for conversion. Why: every abandoned cart and slow page costs real revenue.",
-    "Android App Development" => "What: Android apps tuned for device reality and Play policies. How: native patterns, performance and release hygiene. Why: Android reach only pays off when the experience feels native and stable.",
-    "iOS App Development" => "What: iOS apps that feel at home on Apple devices. How: Human Interface craft, App Store readiness and calm UX. Why: premium expectation is high — polish is part of retention.",
-    "React Native Apps" => "What: one codebase for iOS and Android when speed matters. How: shared UI with native modules where needed. Why: ship both platforms faster without giving up core quality.",
-    "Flutter Apps" => "What: Flutter apps with consistent UI across platforms. How: component systems, performance profiling and store builds. Why: visual consistency and velocity without two full native teams.",
-    "Support & Maintenance" => "What: ongoing care after launch — fixes, updates and monitoring. How: SLAs, release windows and clear escalation. Why: apps age; support is what keeps installs useful.",
-    "UI / UX Designing" => "What: interfaces that make complex jobs feel simple. How: research, flows, wireframes and usability loops. Why: clarity in the product cuts support load and lifts conversion.",
-    "Brand Identity" => "What: a brand system teams can apply without guessing. How: positioning, voice, visual rules and usage guides. Why: consistency builds recognition across every touchpoint.",
-    "Logo & Visual Design" => "What: marks and visuals that carry the brand story. How: exploration, refinement and formats for every surface. Why: a strong mark anchors campaigns, product and pitch decks.",
-    "Design Systems" => "What: shared UI tokens and components for product teams. How: color, type, spacing and documented patterns. Why: new screens ship faster and look like they belong together.",
-    "Motion Graphics" => "What: motion that explains state and elevates story. How: purposeful enter/exit/emphasis, not decoration. Why: movement directs attention and makes the brand feel alive.",
-    "Product Design" => "What: end-to-end product experience from problem to UI. How: discovery, prototypes and decision-ready specs. Why: engineering builds the right thing the first time.",
-    "Interactive Prototypes" => "What: clickable prototypes stakeholders can feel. How: high-fidelity flows before costly code. Why: feedback arrives early — while direction can still change.",
+$serviceBrief = [
+    "Search Engine Optimization" => ["Rank for the searches your customers make, with technical fixes, content and quality links.", ["Technical audit", "Keyword & content plan", "Monthly ranking report"]],
+    "Search Engine Marketing" => ["Search ads that reach people ready to buy, paired with landing pages that convert.", ["Campaign setup", "Ad copy & testing", "Conversion tracking"]],
+    "Social Media Marketing" => ["A consistent social presence that builds trust and brings in enquiries.", ["Content calendar", "Post design", "Community management"]],
+    "Content Marketing" => ["Articles, guides and case studies that educate buyers and rank in search.", ["Content strategy", "Writing & editing", "Distribution"]],
+    "Pay Per Click" => ["Paid campaigns on Google, Meta and LinkedIn with controlled spend and a clear cost per lead.", ["Audience targeting", "Creative testing", "Budget optimisation"]],
+    "Email Campaigns" => ["Newsletters and automated journeys that nurture leads and bring customers back.", ["List segmentation", "Automated flows", "Performance reports"]],
+    "Analytics & Reporting" => ["Tracking and dashboards that show which channels actually drive revenue.", ["GA4 & tag setup", "Custom dashboards", "Monthly insights"]],
+    "Website Development" => ["Fast, responsive websites built to convert, with a CMS your team can edit.", ["Responsive design", "CMS setup", "SEO-ready build"]],
+    "Software Development" => ["Custom software and web applications built around the way your business works.", ["Discovery & specs", "Agile development", "Documentation & handover"]],
+    "CRM Software" => ["A CRM set up or custom-built so sales and marketing work from one source of truth.", ["Pipeline setup", "Automations", "Integrations"]],
+    "E-Commerce Platforms" => ["Online stores with smooth checkout, secure payments and simple inventory management.", ["Store build", "Payment gateways", "Inventory sync"]],
+    "Android App Development" => ["Native Android apps with smooth performance and Play Store–ready delivery.", ["Kotlin development", "Device testing", "Play Store launch"]],
+    "iOS App Development" => ["Polished iPhone and iPad apps built to Apple’s design guidelines.", ["Swift development", "TestFlight builds", "App Store launch"]],
+    "React Native Apps" => ["One codebase for iOS and Android when speed to market matters.", ["Cross-platform build", "Native modules", "Launch on both stores"]],
+    "Flutter Apps" => ["Cross-platform apps with consistent design and near-native performance.", ["Flutter UI", "Backend integration", "Store releases"]],
+    "Support & Maintenance" => ["Bug fixes, OS updates, monitoring and new features after launch.", ["Uptime monitoring", "OS updates", "Monthly releases"]],
+    "UI / UX Designing" => ["Research-led interfaces for websites and apps that are simple to use.", ["User research", "Wireframes", "High-fidelity UI"]],
+    "Brand Identity" => ["A complete brand system — positioning, visual identity and usage guidelines.", ["Brand strategy", "Visual identity", "Brand guidelines"]],
+    "Logo & Visual Design" => ["Distinctive logos and visual assets that work on every surface.", ["Logo concepts", "Final file set", "Social & print assets"]],
+    "Design Systems" => ["Reusable components and tokens so every new screen looks consistent.", ["UI tokens", "Component library", "Documentation"]],
+    "Motion Graphics" => ["Animations and explainer videos that make your product easy to understand.", ["Explainer videos", "UI animation", "Social motion"]],
+    "Product Design" => ["End-to-end product design, from defining the problem to developer-ready specs.", ["Discovery", "Prototyping", "Developer handoff"]],
+    "Interactive Prototypes" => ["Clickable prototypes to test ideas with users before development starts.", ["Clickable flows", "User testing", "Investor demos"]],
 ];
+
+$serviceIcons = [
+    "Search Engine Optimization" => "fa-search",
+    "Search Engine Marketing" => "fa-search-dollar",
+    "Social Media Marketing" => "fa-share-alt",
+    "Content Marketing" => "fa-pen-nib",
+    "Pay Per Click" => "fa-mouse-pointer",
+    "Email Campaigns" => "fa-envelope-open-text",
+    "Analytics & Reporting" => "fa-chart-line",
+    "Website Development" => "fa-globe",
+    "Software Development" => "fa-code",
+    "CRM Software" => "fa-users-cog",
+    "E-Commerce Platforms" => "fa-shopping-cart",
+    "Android App Development" => "fa-android",
+    "iOS App Development" => "fa-apple",
+    "React Native Apps" => "fa-react",
+    "Flutter Apps" => "fa-mobile-alt",
+    "Support & Maintenance" => "fa-tools",
+    "UI / UX Designing" => "fa-object-group",
+    "Brand Identity" => "fa-fingerprint",
+    "Logo & Visual Design" => "fa-bezier-curve",
+    "Design Systems" => "fa-th-large",
+    "Motion Graphics" => "fa-film",
+    "Product Design" => "fa-drafting-compass",
+    "Interactive Prototypes" => "fa-hand-pointer",
+];
+$brandIcons = ["fa-android", "fa-apple", "fa-react"];
 
 $pillars = [];
 foreach (TS_SERVICE_MEGA as $i => $col) {
@@ -60,19 +103,22 @@ foreach (TS_SERVICE_MEGA as $i => $col) {
     };
     $entries = [];
     foreach ($col["items"] as $label) {
+        $brief = $serviceBrief[$label] ?? [$col["lead"], []];
         $entries[] = [
             "label" => $label,
             "href" => ts_service_href($label),
-            "blurb" => ($itemStories[$label] ?? ("What we deliver is " . strtolower($label) . " with clear process and measurable outcomes."))
-                . " Delivered through your dedicated Virtual Assistant — a real daily helper — with specialist support behind the scenes.",
+            "icon" => $serviceIcons[$label] ?? $col["icon"],
+            "summary" => $brief[0],
+            "deliverables" => $brief[1],
         ];
     }
+    $info = $practiceInfo[$col["title"]] ?? ["headline" => $col["lead"], "intro" => $col["lead"], "bestFor" => ""];
     $pillars[] = [
         "title" => $col["title"],
         "short" => $short,
+        "icon" => $col["icon"],
         "lead" => $col["lead"],
-        "story" => ($hubStories[$col["title"]] ?? $col["lead"])
-            . " Your dedicated Virtual Assistant coordinates day-to-day execution across the stack — so your brief, build and launch stay aligned.",
+        "info" => $info,
         "headline" => $headlines[$col["title"]] ?? $col["lead"],
         "tone" => $col["tone"],
         "hub" => ts_category_href($col["title"]),
@@ -92,11 +138,13 @@ ob_start();
 <div class="svc" data-svc-page data-bk aria-label="Our services">
   <style>
     .svc{
-      --ink:#0F172A;
-      --soft:#F6F7F9;
-      --blue:#1C4FD6;
-      --muted:rgba(15,23,42,.58);
-      --line:rgba(15,23,42,.12);
+      --ink:#121212;
+      --soft:#FFFEFA;
+      --blue:#1F7A5A;
+      --red:#1F7A5A;
+      --orange:#3B8767;
+      --muted:rgba(18,18,18,.58);
+      --line:rgba(31,122,90,.12);
       background:var(--soft);
       color:var(--ink);
       overflow:clip;
@@ -171,25 +219,92 @@ ob_start();
       display:none;
     }
     @media (max-width:959px){
-      .svc-pin{ height:280vh; }
+      .svc-pin{ height:380vh; }
       .svc-rings{
-        width:min(720px, 165vw);
-        top:48%;
-        opacity:.32;
+        width:min(720px, 160vw);
+        top:46%;
+        opacity:.3;
       }
-      .svc-core{ width:min(100%, 22rem); }
+      /* Words stay centered — gutters reserved for side cards */
+      .svc-core{
+        width:min(100%, 46vw);
+        position:relative;
+        margin:0 auto;
+        z-index:2;
+      }
       .svc-stack{ gap:.06em; }
       .svc-word{
-        font-size:clamp(2.1rem, 11.5vw, 3.4rem);
+        font-size:clamp(1.35rem, 7.2vw, 2.15rem);
         letter-spacing:.02em;
       }
-      .svc-sticky{ padding:4.5rem .9rem 1.5rem; }
-      .svc-card{ display:none !important; }
+      .svc-sticky{
+        padding:4.5rem .35rem 1.5rem;
+        overflow:hidden;
+        justify-content:center;
+      }
+      /* Side floats — one card L or R beside the stack */
+      .svc-card{
+        display:flex !important;
+        flex-direction:column;
+        gap:0.4rem;
+        position:absolute !important;
+        top:50% !important;
+        bottom:auto !important;
+        width:min(36vw, 9.75rem) !important;
+        z-index:3;
+        opacity:0;
+        will-change:transform, opacity;
+        pointer-events:none;
+        background:transparent;
+        border:0;
+        border-radius:0;
+        padding:0;
+        box-shadow:none;
+      }
+      .svc-card.is-left{
+        left:2% !important;
+        right:auto !important;
+      }
+      .svc-card.is-right{
+        right:2% !important;
+        left:auto !important;
+      }
+      .svc-card.is-on{ pointer-events:auto; }
+      .svc-card-media{
+        width:100%;
+        aspect-ratio:16/10;
+        border-radius:8px;
+        overflow:hidden;
+        background:#e8edf5;
+        border:1px solid var(--line);
+        box-shadow:0 14px 30px rgba(15,23,42,.14);
+      }
+      .svc-card-media img{
+        width:100%; height:100%; object-fit:cover; display:block;
+      }
+      .svc-card h3{
+        margin:0;
+        font-size:clamp(0.72rem, 2.9vw, 0.88rem);
+        line-height:1.2;
+        font-weight:800;
+        color:var(--ink);
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:3;
+        overflow:hidden;
+      }
+      .svc-card p{ display:none; }
+      .svc-card a{
+        display:inline-flex; align-items:center; gap:.2rem;
+        margin-top:.05rem;
+        color:var(--blue); text-decoration:none;
+        font-size:max(8.5px, .5312rem); font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+      }
       .svc-finale{
         display:flex;
         position:absolute; inset:0;
         align-items:center; justify-content:center;
-        padding:0 1.15rem;
+        padding:0 var(--ss-pad-x, 5%);
         z-index:4;
         opacity:0;
         pointer-events:none;
@@ -245,7 +360,7 @@ ob_start();
         display:inline-flex; align-items:center; gap:.4rem;
         margin-top:.15rem;
         color:var(--blue); text-decoration:none;
-        font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+        font-size:max(12px, .75rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase;
       }
     }
 
@@ -269,32 +384,35 @@ ob_start();
       }
     }
 
-    /* Mobile fallback list — sits after the pin hero */
-    .svc-mobile{
-      width:min(640px,100%);
-      flex:0 0 auto;
+    /* Phones & tablets: static intro replaces the pinned scroll animation */
+    .svc-mhero{ display:none; }
+    @media (max-width:959px){
+      .svc-pin{ display:none; }
+      .svc-mhero{
+        display:block;
+        width:min(720px, 100%);
       margin:0 auto;
-      display:flex; flex-direction:column; gap:1.5rem;
-      padding:1.5rem .85rem 1.25rem;
-    }
-    .svc-mobile article{
-      display:grid; gap:1rem;
-    }
-    .svc-mobile img{
-      width:100%; aspect-ratio:16/10; object-fit:cover;
-      border-radius:10px; border:1px solid var(--line);
-    }
-    .svc-mobile h3{ margin:0; font-size:1.35rem; font-weight:800; }
-    .svc-mobile p{ margin:0; color:var(--muted); font-size:14px; line-height:1.55; }
-    .svc-mobile ul{ list-style:none; margin:.5rem 0 0; padding:0; display:grid; gap:.35rem; }
-    .svc-mobile a{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:.7rem .8rem; border-radius:.8rem;
-      border:1px solid var(--line); background:#fff;
-      color:var(--ink); text-decoration:none; font-size:13px; font-weight:700;
-    }
-    @media (min-width:960px){
-      .svc-mobile{ display:none; }
+        padding:clamp(5.25rem, 12vw, 5.75rem) clamp(1rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.75rem);
+        text-align:center;
+      }
+      .svc-mh-eyebrow{
+        display:inline-block; margin:0 0 .85rem;
+        padding:.35rem .8rem; border-radius:999px;
+        background:#E4F1EA; color:#1F7A5A;
+        font-size:max(11px, .6875rem); font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+      }
+      .svc-mh-title{
+        margin:0 auto .75rem; max-width:18ch;
+        font-family:"Anton","Bebas Neue",sans-serif;
+        font-size:clamp(1.9rem, 7.5vw, 3rem); line-height:1.05; letter-spacing:.01em;
+        text-transform:uppercase; color:var(--ink);
+      }
+      .svc-mh-lead{
+        margin:0 auto; max-width:34rem;
+        font-size:clamp(.9rem, 2.6vw, 1rem); line-height:1.6; color:var(--muted);
+      }
+      .svc .svc-rail{ border-top:0; padding-top:0; }
+      .svc .svc-rail-head{ display:none; }
     }
 
     /* ===== After-hero: practice + sub-service stories ===== */
@@ -318,7 +436,7 @@ ob_start();
     }
     .svc-rail-head p{
       margin:.75rem auto 0; max-width:40rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
     @media (max-width:720px){
       .svc-rail{
@@ -326,121 +444,189 @@ ob_start();
       }
       .svc-rail-head{ margin-bottom:1.25rem; }
       .svc-rail-head h2{ font-size:clamp(1.7rem, 8vw, 2.4rem); }
-      .svc-rail-head p{ font-size:13.5px; }
-      .svc-rail-story,
-      .svc-rail-item p{ overflow-wrap:anywhere; }
+      .svc-rail-head p{ font-size:.8438rem; }
       .svc-why,
       .svc-steps{ padding:2.25rem .85rem !important; }
     }
-    .svc-rail-grid{
+    /* Service explorer: practice tabs + service cards */
+    .sx-tabs{
+      scroll-margin-top:90px;
       width:min(1120px,100%);
-      margin:0 auto;
-      display:grid;
-      grid-template-columns:1fr;
-      gap:1.35rem;
-    }
-    @media (min-width:900px){
-      .svc-rail-grid{ grid-template-columns:1fr 1fr; gap:1.5rem 1.6rem; }
-    }
-    .svc-rail-col{
+      margin:0 auto 1.75rem;
+      display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:.6rem;
+      padding:.4rem;
       background:#fff;
       border:1px solid var(--line);
-      border-radius:1.2rem;
-      padding:1.25rem 1.2rem 1.3rem;
-      box-shadow:0 10px 28px rgba(15,23,42,.05);
-      opacity:0;
-      transform:translateX(0);
-      display:flex;
-      flex-direction:column;
-      min-width:0;
-      transition:opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+      border-radius:1.1rem;
+      box-shadow:0 8px 24px rgba(15,27,61,.05);
     }
-    .svc-rail-col:nth-child(odd){ transform:translateX(-48px); }
-    .svc-rail-col:nth-child(even){ transform:translateX(48px); }
-    .svc-rail-col.is-in{
-      opacity:1;
-      transform:none;
-      transition:opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+    .sx-tab{
+      display:flex; align-items:center; gap:.75rem;
+      min-width:0;
+      padding:.7rem .85rem;
+      border:0; border-radius:.8rem;
+      background:transparent;
+      color:var(--ink);
+      font:inherit; text-align:left;
+      cursor:pointer;
+      transition:background .25s ease, color .25s ease;
+    }
+    .sx-tab:hover{ background:rgba(31,122,90,.06); }
+    .sx-tab:focus-visible{ outline:2px solid #1F7A5A; outline-offset:2px; }
+    .sx-tab-ico{
+      flex:0 0 auto;
+      width:2.35rem; height:2.35rem; border-radius:.65rem;
+      display:grid; place-items:center;
+      background:#E4F1EA; color:#1F7A5A; font-size:.9rem;
+      transition:background .25s ease, color .25s ease;
+    }
+    .sx-tab-text{ display:flex; flex-direction:column; min-width:0; }
+    .sx-tab-text strong{ font-size:.875rem; font-weight:750; line-height:1.25; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .sx-tab-text small{ font-size:max(12px, .75rem); color:var(--muted); font-weight:500; }
+    .sx-tab.is-on{ background:#0F1B3D; color:#fff; }
+    .sx-tab.is-on .sx-tab-ico{ background:rgba(255,255,255,.12); color:#fff; }
+    .sx-tab.is-on .sx-tab-text small{ color:rgba(255,255,255,.7); }
+
+    .sx-panels{ width:min(1120px,100%); margin:0 auto; }
+    .sx-panel{
+      display:grid; grid-template-columns:minmax(0, 340px) minmax(0,1fr); gap:1.5rem;
+      align-items:start;
+    }
+    .sx-panels.is-tabs .sx-panel{ display:none; }
+    .sx-panels.is-tabs .sx-panel.is-on{ display:grid; animation:sxIn .45s cubic-bezier(.22,1,.36,1); }
+    .sx-panels:not(.is-tabs) .sx-panel + .sx-panel{ margin-top:2.5rem; }
+    @keyframes sxIn{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:none; } }
+
+    .sx-intro{
+      position:sticky; top:96px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:1.1rem;
+      overflow:hidden;
+    }
+    .sx-intro-media{ aspect-ratio:16/10; background:#E8EEEA; }
+    .sx-intro-media img{ width:100%; height:100%; object-fit:cover; display:block; }
+    .sx-intro-body{ padding:1.25rem 1.3rem 1.4rem; }
+    .sx-intro-body > p.sx-eyebrow{
+      margin:0 0 .45rem;
+      font-size:max(11px, .6875rem); font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#1F7A5A;
+    }
+    .sx-intro h3{
+      margin:0 0 .6rem;
+      font-size:1.3rem; line-height:1.25; font-weight:800; letter-spacing:-.01em; color:var(--ink);
+    }
+    .sx-intro-body > p{ margin:0 0 .85rem; font-size:.875rem; line-height:1.6; color:var(--muted); }
+    .sx-intro-body > p.sx-best{
+      padding:.7rem .8rem;
+      border-radius:.7rem;
+      background:#F4F8F5;
+      font-size:max(12px, .8125rem); color:var(--ink);
+    }
+    .sx-best b{
+      display:block; margin-bottom:.15rem;
+      font-size:max(10.5px, .6562rem); letter-spacing:.1em; text-transform:uppercase; color:#1F7A5A;
+    }
+    .sx-intro-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin-top:1rem; }
+    .sx-btn{
+      display:inline-flex; align-items:center; gap:.45rem;
+      min-height:44px; padding:0 1.1rem; border-radius:999px;
+      background:#1F7A5A; color:#fff; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:700;
+      transition:background .2s ease;
+    }
+    .sx-btn:hover{ background:#16604A; }
+    .sx-btn i{ font-size:max(11px, .6875rem); }
+    .sx-link{ font-size:max(12px, .8125rem); font-weight:700; color:var(--ink); text-decoration:underline; text-underline-offset:3px; }
+    .sx-link:hover{ color:#1F7A5A; }
+
+    .sx-grid{
+      list-style:none; margin:0; padding:0;
+      display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:1rem;
+    }
+    .sx-grid > li{ display:flex; min-width:0; }
+    .sx-card{
+      flex:1;
+      display:flex; flex-direction:column;
+      padding:1.2rem 1.2rem 1.1rem;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:1rem;
+      color:inherit; text-decoration:none;
+      transition:border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+    .sx-card:hover{
+      border-color:rgba(31,122,90,.45);
+      box-shadow:0 14px 32px rgba(15,27,61,.08);
+      transform:translateY(-2px);
+    }
+    .sx-card-ico{
+      width:2.5rem; height:2.5rem; border-radius:.7rem;
+      display:grid; place-items:center;
+      background:#E4F1EA; color:#1F7A5A; font-size:.95rem;
+      margin-bottom:.85rem;
+      transition:background .25s ease, color .25s ease;
+    }
+    .sx-card:hover .sx-card-ico{ background:#1F7A5A; color:#fff; }
+    .sx-card strong{ font-size:.9688rem; font-weight:800; line-height:1.3; color:var(--ink); }
+    .sx-card p{ margin:.4rem 0 .85rem; font-size:.8438rem; line-height:1.55; color:var(--muted); }
+    .sx-tags{
+      list-style:none; margin:0 0 1rem; padding:0;
+      display:flex; flex-wrap:wrap; gap:.35rem;
+    }
+    .sx-tags li{
+      padding:.28rem .6rem;
+      border-radius:999px;
+      background:#F4F6F5;
+      border:1px solid rgba(15,27,61,.06);
+      font-size:max(11.5px, .7188rem); font-weight:600; color:rgba(15,27,61,.75);
+    }
+    .sx-more{
+      margin-top:auto;
+      display:inline-flex; align-items:center; gap:.4rem;
+      font-size:max(12px, .7812rem); font-weight:700; color:#1F7A5A;
+    }
+    .sx-more i{ font-size:max(10px, .625rem); transition:transform .2s ease; }
+    .sx-card:hover .sx-more i{ transform:translateX(3px); }
+
+    @media (max-width:1080px){
+      .sx-panel{ grid-template-columns:minmax(0,1fr); }
+      .sx-intro{ position:static; display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
+      .sx-intro-media{ aspect-ratio:auto; min-height:100%; }
+    }
+    @media (max-width:860px){
+      .sx-tabs{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:.4rem; padding:.35rem; }
+      .sx-tab{ border:1px solid transparent; }
+      .sx-tab:not(.is-on){ background:#F6F8F7; border-color:rgba(15,27,61,.05); }
+      .sx-tab-text strong{ white-space:normal; font-size:max(12px, .8125rem); }
     }
     @media (max-width:720px){
-      .svc-rail-col,
-      .svc-rail-col:nth-child(odd),
-      .svc-rail-col:nth-child(even){
-        opacity:1 !important;
-        transform:none !important;
-        transition:none !important;
-      }
+      .sx-intro{ display:block; }
+      .sx-intro-media{ aspect-ratio:16/9; }
+      .sx-grid{ grid-template-columns:minmax(0,1fr); gap:.75rem; }
+      .sx-tabs{ margin-bottom:1.1rem; }
+      .sx-tab{ padding:.55rem .6rem; gap:.55rem; }
+      .sx-tab-ico{ width:1.9rem; height:1.9rem; font-size:.75rem; border-radius:.55rem; }
+      .sx-tab-text strong{ font-size:max(12px, .7812rem); }
+      .sx-tab-text small{ font-size:max(11px, .6875rem); }
+      .sx-intro h3{ font-size:1.15rem; }
+      .sx-intro-body > p{ font-size:.8438rem; }
+      .sx-card strong{ font-size:.9062rem; }
+      .sx-card p{ font-size:max(12px, .8125rem); }
+      .sx-card{ padding:1rem; }
+      .sx-intro-body{ padding:1.05rem 1.1rem 1.2rem; }
     }
-    .svc-rail-col:nth-child(2).is-in{ transition-delay:.06s; }
-    .svc-rail-col:nth-child(3).is-in{ transition-delay:.1s; }
-    .svc-rail-col:nth-child(4).is-in{ transition-delay:.14s; }
-    .svc-rail-col > a.svc-rail-hub-title{
-      display:block;
-      margin:0 0 .7rem;
-      padding-bottom:.7rem;
-      border-bottom:2px solid var(--blue);
-      font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
-      color:var(--ink); text-decoration:none; line-height:1.3;
+    @media (prefers-reduced-motion:reduce){
+      .sx-panels.is-tabs .sx-panel.is-on{ animation:none; }
+      .sx-card, .sx-card:hover{ transform:none; }
     }
-    .svc-rail-col > a.svc-rail-hub-title:hover{ opacity:.85; }
-    .svc-rail-col.tone-rose > a.svc-rail-hub-title{ border-color:#1C4FD6; color:#1C4FD6; }
-    .svc-rail-col.tone-blue > a.svc-rail-hub-title{ border-color:#64748B; color:#334155; }
-    .svc-rail-col.tone-green > a.svc-rail-hub-title{ border-color:#10b981; color:#059669; }
-    .svc-rail-col.tone-purple > a.svc-rail-hub-title{ border-color:#7c3aed; color:#6D28D9; }
-    .svc-rail-story{
-      margin:0 0 1rem;
-      color:var(--muted);
-      font-size:13.5px;
-      line-height:1.55;
-      font-weight:500;
-    }
-    .svc-rail-list{
-      list-style:none; margin:0; padding:0;
-      display:grid; gap:.85rem;
-      flex:1;
-    }
-    .svc-rail-item a{
-      display:block;
-      padding:.15rem 0;
-      color:inherit; text-decoration:none;
-      border-radius:.35rem;
-    }
-    .svc-rail-item strong{
-      display:block;
-      font-size:13px; font-weight:750; line-height:1.3;
-      color:var(--ink);
-      margin-bottom:.25rem;
-    }
-    .svc-rail-item p{
-      margin:0;
-      font-size:12.5px; line-height:1.5;
-      color:rgba(15,23,42,.62); font-weight:500;
-    }
-    .svc-rail-col.tone-rose .svc-rail-item a:hover strong{ color:#1C4FD6; }
-    .svc-rail-col.tone-blue .svc-rail-item a:hover strong{ color:#475569; }
-    .svc-rail-col.tone-green .svc-rail-item a:hover strong{ color:#059669; }
-    .svc-rail-col.tone-purple .svc-rail-item a:hover strong{ color:#6D28D9; }
-    .svc-rail-col .hub{
-      display:inline-flex; align-items:center; gap:.35rem;
-      margin-top:1.05rem; align-self:flex-start;
-      font-size:11px; font-weight:800;
-      letter-spacing:.1em; text-transform:uppercase; text-decoration:none;
-    }
-    .svc-rail-col.tone-rose .hub{ color:#1C4FD6; }
-    .svc-rail-col.tone-blue .hub{ color:#475569; }
-    .svc-rail-col.tone-green .hub{ color:#059669; }
-    .svc-rail-col.tone-purple .hub{ color:#6D28D9; }
-    .svc-rail-col .hub:hover{ opacity:.85; }
-    .svc-rail-col .hub i{ transition:transform .2s ease; }
-    .svc-rail-col .hub:hover i{ transform:translateX(3px); }
 
     .svc-cta{
       width:min(1100px, calc(100% - 2rem));
       margin:0 auto 3.5rem;
       padding:1.6rem 1.4rem;
       border-radius:1.2rem;
-      border:1px solid rgba(28,79,214,.28);
-      background:linear-gradient(135deg, rgba(28,79,214,.1), #fff);
+      border:1px solid rgba(31,122,90,.28);
+      background:linear-gradient(135deg, rgba(31,122,90,.1), #fff);
       display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;
     }
     .svc-cta h2{
@@ -449,13 +635,18 @@ ob_start();
       font-size:clamp(1.7rem,3.5vw,2.4rem);
       letter-spacing:.03em; font-weight:400; line-height:1; color:var(--ink);
     }
-    .svc-cta p{ margin:.4rem 0 0; color:var(--muted); font-size:14px; max-width:28rem; }
+    .svc-cta p{ margin:.4rem 0 0; color:var(--muted); font-size:.875rem; max-width:28rem; }
     .svc-cta a{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:48px; padding:0 1.3rem; border-radius:999px;
-      background:var(--blue); color:#fff; text-decoration:none;
-      font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
-      box-shadow:0 12px 28px rgba(28,79,214,.28);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
+      color:#fff;
+      text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+      box-shadow:0 12px 28px rgba(31,122,90,.22);
+    }
+    .svc-card a{
+      color:#1F7A5A;
     }
 
     /* Extra content + blog on services index */
@@ -475,7 +666,7 @@ ob_start();
       letter-spacing:.03em; font-weight:400; line-height:1; color:var(--ink);
     }
     .svc-why-copy p{
-      margin:.85rem 0 0; color:var(--muted); font-size:15px; line-height:1.65; max-width:34rem;
+      margin:.85rem 0 0; color:var(--muted); font-size:.9375rem; line-height:1.65; max-width:34rem;
     }
     .svc-why-grid{
       display:grid; gap:.75rem;
@@ -489,17 +680,17 @@ ob_start();
     }
     .svc-why-item strong{
       display:block; margin-bottom:.25rem;
-      font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink);
+      font-size:max(12px, .8125rem); font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink);
     }
-    .svc-why-item span{ display:block; color:var(--muted); font-size:13.5px; line-height:1.5; }
+    .svc-why-item span{ display:block; color:var(--muted); font-size:.8438rem; line-height:1.5; }
 
     .svc-steps{
       width:min(1100px, calc(100% - 2rem));
       margin:0 auto 3.25rem;
       padding:1.6rem 1.25rem 1.75rem;
       border-radius:1.25rem;
-      border:1px solid rgba(28,79,214,.16);
-      background:linear-gradient(160deg, rgba(28,79,214,.06), #fff 48%);
+      border:1px solid rgba(31,122,90,.16);
+      background:linear-gradient(160deg, rgba(31,122,90,.06), #fff 48%);
     }
     .svc-steps h2{
       margin:0 0 .35rem;
@@ -510,7 +701,7 @@ ob_start();
     }
     .svc-steps > p{
       margin:0 auto 1.35rem; text-align:center; max-width:34rem;
-      color:var(--muted); font-size:14.5px; line-height:1.55;
+      color:var(--muted); font-size:.9062rem; line-height:1.55;
     }
     .svc-steps-grid{
       display:grid; gap:.85rem;
@@ -527,11 +718,11 @@ ob_start();
     .svc-step em{
       display:inline-flex; align-items:center; justify-content:center;
       width:1.7rem; height:1.7rem; margin-bottom:.55rem;
-      border-radius:999px; background:rgba(28,79,214,.1);
-      color:var(--blue); font-style:normal; font-size:11px; font-weight:800;
+      border-radius:999px; background:rgba(31,122,90,.1);
+      color:var(--blue); font-style:normal; font-size:max(11px, .6875rem); font-weight:800;
     }
     .svc-step h3{ margin:0 0 .35rem; font-size:1rem; font-weight:800; color:var(--ink); }
-    .svc-step p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.5; }
+    .svc-step p{ margin:0; color:var(--muted); font-size:.8438rem; line-height:1.5; }
 
     .svc-blog{
       width:min(1100px, calc(100% - 2rem));
@@ -547,10 +738,10 @@ ob_start();
       font-size:clamp(1.7rem,3.5vw,2.5rem);
       letter-spacing:.03em; font-weight:400; line-height:1; color:var(--ink);
     }
-    .svc-blog-head p{ margin:.4rem 0 0; color:var(--muted); font-size:14.5px; max-width:28rem; }
+    .svc-blog-head p{ margin:.4rem 0 0; color:var(--muted); font-size:.9062rem; max-width:28rem; }
     .svc-blog-head a{
       color:var(--blue); text-decoration:none;
-      font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase;
+      font-size:max(12px, .75rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase;
     }
     .svc-blog-grid{
       display:grid; gap:1rem;
@@ -568,24 +759,25 @@ ob_start();
     }
     .svc-blog-card:hover{
       transform:translateY(-3px);
-      box-shadow:0 16px 34px rgba(28,79,214,.12);
+      box-shadow:0 16px 34px rgba(31,122,90,.12);
     }
     .svc-blog-card img{
       width:100%; aspect-ratio:16/10; object-fit:cover; display:block; background:#e8edf5;
     }
     .svc-blog-card > div{ padding:.95rem 1rem 1.1rem; display:flex; flex-direction:column; gap:.4rem; flex:1; }
     .svc-blog-card span{
-      font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--blue);
     }
     .svc-blog-card h3{
       margin:0; font-size:1.02rem; line-height:1.3; font-weight:800; color:var(--ink);
     }
     .svc-blog-card p{
-      margin:0; color:var(--muted); font-size:13px; line-height:1.5;
+      margin:0; color:var(--muted); font-size:max(12px, .8125rem); line-height:1.5;
       display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
     }
   </style>
 
+  <h1 class="sr-only">Our services — online marketing, development, mobile apps and creative design</h1>
   <div class="svc-pin" data-svc-pin>
     <div class="svc-sticky" data-svc-sticky>
       <div class="svc-rings" aria-hidden="true">
@@ -593,7 +785,7 @@ ob_start();
           <circle cx="400" cy="400" r="70" stroke="rgba(15,23,42,.2)" stroke-width="1"/>
           <circle cx="400" cy="400" r="140" stroke="rgba(15,23,42,.16)" stroke-width="1"/>
           <circle cx="400" cy="400" r="220" stroke="rgba(15,23,42,.13)" stroke-width="1"/>
-          <circle cx="400" cy="400" r="300" stroke="rgba(28,79,214,.35)" stroke-width="1.25"/>
+          <circle cx="400" cy="400" r="300" stroke="rgba(31,122,90,.35)" stroke-width="1.25"/>
           <circle cx="400" cy="400" r="380" stroke="rgba(15,23,42,.1)" stroke-width="1"/>
           <line x1="40" y1="400" x2="760" y2="400" stroke="rgba(15,23,42,.16)" stroke-width="1"/>
           <line x1="400" y1="40" x2="400" y2="760" stroke="rgba(15,23,42,.1)" stroke-width="1"/>
@@ -636,50 +828,70 @@ ob_start();
     </div>
   </div>
 
-  <div class="svc-mobile">
-    <?php foreach ($pillars as $pillar): ?>
-    <article>
-      <img src="<?= ts_h($pillar["img"]) ?>" alt="" loading="lazy" decoding="async" width="640" height="400">
-      <div>
-        <h3><?= ts_h($pillar["title"]) ?></h3>
-        <p><?= ts_h($pillar["lead"]) ?></p>
-        <ul>
-          <?php foreach ($pillar["items"] as $label): ?>
-          <li>
-            <a href="<?= ts_h(ts_service_href($label)) ?>">
-              <span><?= ts_h($label) ?></span>
-              <i class="fas fa-arrow-right" aria-hidden="true"></i>
-            </a>
-          </li>
-          <?php endforeach; ?>
-        </ul>
-      </div>
-    </article>
-    <?php endforeach; ?>
-  </div>
+  <section class="svc-mhero" aria-label="Service practices">
+    <p class="svc-mh-eyebrow">Our services</p>
+    <p class="svc-mh-title">Four practices. One dedicated assistant.</p>
+    <p class="svc-mh-lead">Marketing, development, mobile apps and design — planned together and coordinated by a real person who explains every step.</p>
+  </section>
 
   <section class="svc-rail" data-svc-rail>
     <div class="svc-rail-head">
-      <h2>Every service. One stack.</h2>
-      <p>Pick a practice — then open the offering you need. Every delivery is coordinated by a dedicated Virtual Assistant (real people, not bots), with specialist support behind the scenes. Each link goes to its hub or detail page, using the same colors as the mega menu.</p>
+      <h2>Every service, explained</h2>
+      <p>Choose a practice to see what we offer. Every project is coordinated by a dedicated Virtual Assistant — a real person, not a bot — with our specialists behind the scenes.</p>
+      </div>
+    <div class="sx-tabs" id="sx-tabs" role="tablist" aria-label="Service practices" data-sx-tabs>
+      <?php foreach ($pillars as $i => $pillar): ?>
+      <button type="button" class="sx-tab<?= $i === 0 ? " is-on" : "" ?>" role="tab" id="sx-tab-<?= (int) $i ?>" aria-controls="sx-panel-<?= (int) $i ?>" aria-selected="<?= $i === 0 ? "true" : "false" ?>" data-sx-tab="<?= (int) $i ?>">
+        <span class="sx-tab-ico" aria-hidden="true"><i class="fas <?= ts_h($pillar["icon"]) ?>"></i></span>
+        <span class="sx-tab-text">
+          <strong><?= ts_h($pillar["title"]) ?></strong>
+          <small><?= count($pillar["entries"]) ?> services</small>
+        </span>
+      </button>
+    <?php endforeach; ?>
+  </div>
+
+    <div class="sx-panels" data-sx-panels>
+      <?php foreach ($pillars as $i => $pillar): ?>
+      <section class="sx-panel<?= $i === 0 ? " is-on" : "" ?>" role="tabpanel" id="sx-panel-<?= (int) $i ?>" aria-labelledby="sx-tab-<?= (int) $i ?>" data-sx-panel="<?= (int) $i ?>">
+        <aside class="sx-intro">
+          <div class="sx-intro-media">
+            <img src="<?= ts_h($pillar["img"]) ?>" alt="" loading="lazy" decoding="async" width="640" height="400">
     </div>
-    <div class="svc-rail-grid">
-      <?php foreach ($pillars as $pillar): ?>
-      <article class="svc-rail-col tone-<?= ts_h($pillar["tone"]) ?>" data-svc-rail-col>
-        <a class="svc-rail-hub-title" href="<?= ts_h($pillar["hub"]) ?>"><?= ts_h($pillar["title"]) ?></a>
-        <p class="svc-rail-story"><?= ts_h($pillar["story"]) ?></p>
-        <ul class="svc-rail-list">
+          <div class="sx-intro-body">
+            <p class="sx-eyebrow"><?= ts_h($pillar["title"]) ?></p>
+            <h3><?= ts_h($pillar["info"]["headline"]) ?></h3>
+            <p><?= ts_h($pillar["info"]["intro"]) ?></p>
+            <?php if ($pillar["info"]["bestFor"] !== ""): ?>
+            <p class="sx-best"><b>Best for</b> <?= ts_h($pillar["info"]["bestFor"]) ?></p>
+            <?php endif; ?>
+            <div class="sx-intro-actions">
+              <a class="sx-btn" href="<?= ts_h($pillar["hub"]) ?>">Explore <?= ts_h($pillar["title"]) ?> <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a class="sx-link" href="/contact">Get a quote</a>
+            </div>
+          </div>
+        </aside>
+
+        <ul class="sx-grid">
           <?php foreach ($pillar["entries"] as $entry): ?>
-          <li class="svc-rail-item">
-            <a href="<?= ts_h($entry["href"]) ?>">
+          <li>
+            <a class="sx-card" href="<?= ts_h($entry["href"]) ?>">
+              <span class="sx-card-ico" aria-hidden="true"><i class="<?= in_array($entry["icon"], $brandIcons, true) ? "fab" : "fas" ?> <?= ts_h($entry["icon"]) ?>"></i></span>
               <strong><?= ts_h($entry["label"]) ?></strong>
-              <p><?= ts_h($entry["blurb"]) ?></p>
+              <p><?= ts_h($entry["summary"]) ?></p>
+              <?php if ($entry["deliverables"]): ?>
+              <ul class="sx-tags" aria-label="Includes">
+                <?php foreach ($entry["deliverables"] as $d): ?>
+                <li><?= ts_h($d) ?></li>
+                <?php endforeach; ?>
+              </ul>
+              <?php endif; ?>
+              <span class="sx-more">Learn more <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
             </a>
           </li>
           <?php endforeach; ?>
         </ul>
-        <a class="hub" href="<?= ts_h($pillar["hub"]) ?>">View hub <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
-      </article>
+      </section>
       <?php endforeach; ?>
     </div>
   </section>
@@ -772,27 +984,43 @@ ob_start();
   const finale = root.querySelector("[data-svc-finale]");
   const pin = root.querySelector("[data-svc-pin]");
   const narrow = window.matchMedia("(max-width: 959px)").matches;
-  const ink = "#0F172A";
-  const blue = "#1C4FD6";
+  const ink = "#121212";
+  const accents = ["#1F7A5A", "#1F7A5A", "#3B8767", "#1F7A5A"];
 
-  /* Rail: slide from outside → center */
-  const railCols = [...root.querySelectorAll("[data-svc-rail-col]")];
-  if (railCols.length) {
-    const mark = () => railCols.forEach((col) => col.classList.add("is-in"));
-    if (reduce || narrow || !("IntersectionObserver" in window)) {
-      mark();
-    } else {
-      const io = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          mark();
-          io.disconnect();
+  const sxTabs = [...root.querySelectorAll("[data-sx-tab]")];
+  const sxPanelsWrap = root.querySelector("[data-sx-panels]");
+  const sxPanels = [...root.querySelectorAll("[data-sx-panel]")];
+  if (sxTabs.length && sxPanelsWrap) {
+    sxPanelsWrap.classList.add("is-tabs");
+    const select = (index, focus) => {
+      sxTabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.classList.toggle("is-on", on);
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.tabIndex = on ? 0 : -1;
+        if (on && focus) tab.focus();
+      });
+      sxPanels.forEach((panel, i) => panel.classList.toggle("is-on", i === index));
+      if (window.ScrollTrigger) setTimeout(() => ScrollTrigger.refresh(), 60);
+    };
+    sxTabs.forEach((tab, i) => {
+      tab.tabIndex = i === 0 ? 0 : -1;
+      tab.addEventListener("click", () => select(i, false));
+      tab.addEventListener("keydown", (e) => {
+        const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+        if (e.key in keys) {
+          e.preventDefault();
+          select((i + keys[e.key] + sxTabs.length) % sxTabs.length, true);
+        } else if (e.key === "Home" || e.key === "End") {
+          e.preventDefault();
+          select(e.key === "Home" ? 0 : sxTabs.length - 1, true);
         }
-      }, { threshold: 0.08, rootMargin: "60px 0px" });
-      const rail = root.querySelector("[data-svc-rail]");
-      if (rail) io.observe(rail);
-      setTimeout(mark, 1200);
-    }
+      });
+    });
+
   }
+
+  if (narrow) return;
 
   if (!window.gsap || !window.ScrollTrigger || !pin || reduce) {
     words.forEach((w) => { w.style.color = ink; w.style.opacity = "1"; });
@@ -807,12 +1035,24 @@ ob_start();
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* Initial state: all black */
+  /* Initial state: all black; cards park off their own side */
   gsap.set(words, { color: ink, opacity: 1 });
-  gsap.set(cards, { y: "110vh", opacity: 0 });
+  cards.forEach((card) => {
+    const fromLeft = card.classList.contains("is-left");
+    if (narrow) {
+      gsap.set(card, {
+        x: fromLeft ? "-32vw" : "32vw",
+        yPercent: -50,
+        y: 0,
+        xPercent: 0,
+        opacity: 0,
+      });
+    } else {
+      gsap.set(card, { y: "110vh", x: 0, xPercent: 0, yPercent: 0, opacity: 0 });
+    }
+  });
   gsap.set(finale, { opacity: 0 });
   gsap.set(core, { opacity: 1 });
-  if (narrow) cards.forEach((c) => { c.style.display = "none"; });
 
   const n = words.length;
   const scrub = window.__ssScrub ?? (narrow || "ontouchstart" in window ? true : 0.45);
@@ -826,55 +1066,93 @@ ob_start();
     },
   });
 
-  /* Intro hold — titles stay black like Brikken open state */
-  tl.to({}, { duration: narrow ? 0.35 : 0.55 });
+  /* Intro hold — titles stay black; cards wait off-side */
+  tl.to({}, { duration: narrow ? 0.45 : 0.55 });
 
   words.forEach((word, i) => {
-    const card = narrow ? null : cards[i];
+    const card = cards[i];
     const t0 = tl.duration();
+    const fromLeft = card?.classList.contains("is-left");
+    /* Hold card while word is active — exit with the word, not early */
+    const hold = narrow ? 1.05 : 0.7;
+    const exitAt = t0 + hold;
+    const isLast = i === n - 1;
 
     /* Activate this practice */
-    tl.to(word, { color: blue, opacity: 1, duration: 0.35, ease: "none" }, t0);
+    tl.to(word, { color: accents[i] || accents[0], opacity: 1, duration: 0.35, ease: "none" }, t0);
     words.forEach((other, j) => {
       if (j === i) return;
       tl.to(other, { color: ink, opacity: 0.22, duration: 0.35, ease: "none" }, t0);
     });
     if (card) {
-      tl.to(card, { y: 0, opacity: 1, duration: 0.55, ease: "none" }, t0);
-      tl.to(card, { y: -90, opacity: 0, duration: 0.45, ease: "none" }, t0 + 0.7);
-    } else {
-      tl.to({}, { duration: 0.55 }, t0);
+      if (narrow) {
+        tl.to(card, {
+          x: 0,
+          yPercent: -50,
+          opacity: 1,
+          duration: 0.5,
+          ease: "none",
+        }, t0);
+        if (!isLast) {
+          tl.to(card, {
+            x: fromLeft ? "-28vw" : "28vw",
+            opacity: 0,
+            duration: 0.4,
+            ease: "none",
+          }, exitAt);
+        }
+      } else {
+        tl.to(card, { y: 0, opacity: 1, duration: 0.55, ease: "none" }, t0);
+        if (!isLast) {
+          tl.to(card, { y: -90, opacity: 0, duration: 0.45, ease: "none" }, exitAt);
+        }
+      }
     }
 
-    /* Dim active word as we leave it */
-    if (i < n - 1) {
-      tl.to(word, { color: ink, opacity: 0.22, duration: 0.25, ease: "none" }, t0 + (card ? 0.85 : 0.7));
+    /* Dim active word as we leave it (same beat as card exit) */
+    if (!isLast) {
+      tl.to(word, { color: ink, opacity: 0.22, duration: 0.3, ease: "none" }, exitAt);
+    } else {
+      /* Keep last beat on screen briefly before finale */
+      tl.to({}, { duration: narrow ? 0.55 : 0.4 });
     }
   });
 
   /* Finale — titles fade, center copy in */
   const fin = tl.duration();
+  const lastCard = cards[n - 1];
+  if (lastCard) {
+    if (narrow) {
+      const fromLeft = lastCard.classList.contains("is-left");
+      tl.to(lastCard, {
+        x: fromLeft ? "-28vw" : "28vw",
+        opacity: 0,
+        duration: 0.4,
+        ease: "none",
+      }, fin);
+    } else {
+      tl.to(lastCard, { y: -90, opacity: 0, duration: 0.4, ease: "none" }, fin);
+    }
+  }
   tl.to(words, { opacity: 0, duration: 0.45, ease: "none" }, fin);
   tl.to(core, { opacity: 0, duration: 0.45, ease: "none" }, fin);
   tl.to(finale, { opacity: 1, duration: 0.5, ease: "none" }, fin + 0.15);
 
-  if (!narrow) {
-    ScrollTrigger.create({
-      trigger: pin,
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: () => {
-        cards.forEach((card) => {
-          const op = Number(gsap.getProperty(card, "opacity")) || 0;
-          card.classList.toggle("is-on", op > 0.45);
-        });
-      },
-    });
-  }
+  ScrollTrigger.create({
+    trigger: pin,
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: () => {
+      cards.forEach((card) => {
+        const op = Number(gsap.getProperty(card, "opacity")) || 0;
+        card.classList.toggle("is-on", op > 0.45);
+      });
+    },
+  });
 })();
 </script>
 <?php
-ts_layout("Services", ob_get_clean(), [
+ts_layout("Digital Services | Marketing, Development, Apps & Design", ob_get_clean(), [
     "description" => "ScaleSphere services delivered through your dedicated Virtual Assistant — marketing, development, mobile apps and creative design.",
     "path" => "/services",
     "bodyClass" => "page-services page-services-index",

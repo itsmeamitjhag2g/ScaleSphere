@@ -5,16 +5,25 @@
     <div class="footer-grid footer-grid-slim">
       <div class="footer-brand">
         <a href="/" class="logo">
-          <img src="<?= ts_h(ts_logo()) ?>" alt="<?= ts_h($site["name"]) ?>" width="160" height="44" class="footer-logo">
+          <img src="<?= ts_h(ts_logo_white()) ?>" alt="<?= ts_h($site["name"]) ?>" width="217" height="44" class="footer-logo" loading="lazy" decoding="async">
         </a>
         <p class="footer-tagline">Your dedicated Virtual Assistant for marketing, development, mobile apps and design — one contact, full agency power.</p>
+        <?php
+        $socials = array_filter([
+            ["facebook", "Facebook", "fa-facebook-f"],
+            ["twitter", "Twitter / X", "fa-twitter"],
+            ["linkedin", "LinkedIn", "fa-linkedin-in"],
+            ["instagram", "Instagram", "fa-instagram"],
+            ["youtube", "YouTube", "fa-youtube"],
+        ], fn($s) => ($site[$s[0]] ?? "") !== "");
+        ?>
+        <?php if ($socials): ?>
         <div class="social-row">
-          <a href="<?= ts_h($site["facebook"]) ?>" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="<?= ts_h($site["twitter"]) ?>" aria-label="Twitter / X"><i class="fab fa-twitter"></i></a>
-          <a href="<?= ts_h($site["linkedin"]) ?>" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-          <a href="<?= ts_h($site["instagram"]) ?>" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="<?= ts_h($site["youtube"]) ?>" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <?php foreach ($socials as [$key, $label, $icon]): ?>
+          <a href="<?= ts_h($site[$key]) ?>" aria-label="<?= ts_h($label) ?>" target="_blank" rel="noopener noreferrer"><i class="fab <?= ts_h($icon) ?>"></i></a>
+          <?php endforeach; ?>
         </div>
+        <?php endif; ?>
       </div>
 
       <div class="footer-col">
@@ -43,9 +52,9 @@
       <div class="footer-col footer-address">
         <h6 class="footer-heading">Contact Info</h6>
         <ul class="footer-contact-list">
-          <li><a href="tel:<?= ts_h($site["phoneHref"]) ?>"><i class="fas fa-phone-alt"></i> <?= ts_h($site["phone"]) ?></a></li>
-          <li><a href="mailto:<?= ts_h($site["email"]) ?>"><i class="far fa-envelope"></i> <?= ts_h($site["email"]) ?></a></li>
-          <li><i class="fas fa-map-marker-alt"></i> <?= ts_h($site["address"]) ?></li>
+          <li><a href="tel:<?= ts_h($site["phoneHref"]) ?>"><i class="fas fa-phone-alt" aria-hidden="true"></i><span><?= ts_h($site["phone"]) ?></span></a></li>
+          <li><a href="mailto:<?= ts_h($site["email"]) ?>"><i class="far fa-envelope" aria-hidden="true"></i><span><?= ts_h($site["email"]) ?></span></a></li>
+          <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span><?= ts_h($site["address"]) ?></span></li>
         </ul>
         <a class="footer-map" href="https://maps.google.com/?q=<?= rawurlencode($site["address"]) ?>" target="_blank" rel="noopener noreferrer">Get Direction <i class="fas fa-arrow-right"></i></a>
       </div>
@@ -53,7 +62,9 @@
 
     <div class="footer-bottom">
       <p>&copy; <?= date("Y") ?> <?= ts_h($site["name"]) ?>. All rights reserved.</p>
-      <p>ISO 9001:2015 &middot; ISO 14001:2015 &middot; ISO 45001:2018 &middot; ISO 50001:2018</p>
+      <?php if (($site["certifications"] ?? "") !== ""): ?>
+      <p><?= ts_h($site["certifications"]) ?></p>
+      <?php endif; ?>
     </div>
   </div>
 </footer>

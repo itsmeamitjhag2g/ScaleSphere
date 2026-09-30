@@ -10,10 +10,11 @@ header("X-Content-Type-Options: nosniff");
 header("Referrer-Policy: strict-origin-when-cross-origin");
 header("X-Frame-Options: SAMEORIGIN");
 header("X-Permitted-Cross-Domain-Policies: none");
-header("Permissions-Policy: camera=(), microphone=(), geolocation=(), usb=()");
+header("Permissions-Policy: camera=(), microphone=(), geolocation=(), usb=(), payment=(), interest-cohort=()");
+header("Cross-Origin-Opener-Policy: same-origin");
 
 if (ts()["isProd"]) {
-    header("Strict-Transport-Security: max-age=15552000; includeSubDomains");
+    header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
 }
 
 header(
@@ -27,7 +28,8 @@ header(
     . "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; "
     . "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; "
     . "img-src 'self' data: blob: https:; "
-    . "media-src 'self' https://www.techasoft.com https:; "
+    . "media-src 'self' https:; "
     . "connect-src 'self' https:; "
     . "frame-src 'self' https://www.youtube.com https://www.google.com"
+    . (ts()["isProd"] ? "; upgrade-insecure-requests" : "")
 );

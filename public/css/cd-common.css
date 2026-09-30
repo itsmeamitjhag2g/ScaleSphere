@@ -1,0 +1,147 @@
+/* Creative Design — shared layout + on-page brief (hub + detail pages).
+   Loaded in <head>, before each page's inline <style>, so layout rules carry body-level specificity. */
+
+body .yl .yl-desk{ padding-left:0; padding-right:0; }
+body .yl .yl-desk-inner,
+body .yl .yl-brief-grid{
+  width:min(1320px, calc(100% - (2 * var(--ss-pad-x, 5%))));
+  margin-left:auto; margin-right:auto;
+}
+
+@media (max-width:768px){
+  body .yl .yl-crumb a{ display:inline-flex; align-items:center; min-height:2rem; }
+  body .yl .yl-rel{ display:inline-flex; align-items:center; min-height:2.5rem; }
+  body .yl .yl-x-quote{ display:inline-flex; align-items:center; min-height:2.5rem; }
+}
+
+.yl-brief{
+  --b-ink:var(--ink, #0F172A);
+  --b-green:#1F7A5A;
+  --b-mint:#E4F1EA;
+  --b-line:rgba(15,23,42,.12);
+  --b-muted:rgba(15,23,42,.62);
+  position:relative;
+  scroll-margin-top:5.5rem;
+  padding:clamp(3.25rem, 6vw, 5.5rem) 0;
+  background:
+    linear-gradient(rgba(15,23,42,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,23,42,.055) 1px, transparent 1px),
+    #FAF8F5;
+  background-size:36px 36px, 36px 36px, auto;
+  border-top:1px solid var(--b-line);
+  color:var(--b-ink);
+}
+.yl-brief-grid{
+  display:grid;
+  gap:clamp(2rem, 4vw, 3.5rem);
+  align-items:start;
+}
+@media (min-width:960px){
+  .yl-brief-grid{ grid-template-columns:.92fr 1.08fr; }
+  .yl-brief-copy{ position:sticky; top:6.5rem; }
+}
+
+.yl-brief-label{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.4rem .8rem;
+  background:#fff; border:1px solid var(--b-line); border-radius:999px;
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:max(11px, .6875rem); font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--b-green);
+}
+.yl-brief-label::before{
+  content:""; width:.45rem; height:.45rem; border-radius:50%;
+  background:var(--b-green); box-shadow:0 0 0 3px var(--b-mint);
+}
+.yl-brief-copy h2{
+  margin:1rem 0 .85rem;
+  font-family:Montserrat, sans-serif;
+  font-size:clamp(1.85rem, 3.8vw, 2.9rem);
+  font-weight:800; letter-spacing:-.03em; line-height:1.08;
+  text-wrap:balance;
+}
+.yl-brief-copy h2 em{
+  font-family:"Instrument Serif", Georgia, serif;
+  font-style:italic; font-weight:400; color:var(--b-green);
+}
+.yl-brief-copy > p{
+  margin:0 0 1.35rem; max-width:32rem;
+  font-size:clamp(.95rem, .9rem + .2vw, 1.05rem); line-height:1.6; color:var(--b-muted);
+}
+.yl-brief-gets{ list-style:none; margin:0 0 1.35rem; padding:0; display:grid; gap:.65rem; max-width:32rem; }
+.yl-brief-gets li{ display:flex; gap:.7rem; align-items:flex-start; font-size:.9375rem; line-height:1.5; }
+.yl-brief-gets i{
+  flex:0 0 auto; width:1.45rem; height:1.45rem; margin-top:.05rem; border-radius:.4rem;
+  display:grid; place-items:center;
+  background:var(--b-mint); color:var(--b-green); font-size:max(11px, .6875rem);
+}
+.yl-brief-call{ margin:0; font-size:.875rem; color:var(--b-muted); }
+.yl-brief-call a{ color:var(--b-ink); font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+
+.yl-brief-form{
+  background:#fff;
+  border:1.5px solid var(--b-ink);
+  border-radius:1.1rem;
+  box-shadow:6px 6px 0 var(--b-ink);
+  overflow:hidden;
+}
+.yl-brief-bar{
+  display:flex; align-items:center; gap:.75rem;
+  padding:.7rem 1rem;
+  background:#F3F1EC; border-bottom:1.5px solid var(--b-ink);
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:max(11px, .7rem); color:var(--b-muted);
+}
+.yl-brief-bar .dots{ display:inline-flex; gap:.3rem; }
+.yl-brief-bar .dots i{ width:.6rem; height:.6rem; border-radius:50%; border:1.5px solid var(--b-ink); background:#fff; }
+.yl-brief-bar .dots i:first-child{ background:var(--b-green); border-color:var(--b-green); }
+.yl-brief-bar .file{ color:var(--b-ink); font-weight:600; }
+.yl-brief-bar .when{ margin-left:auto; white-space:nowrap; }
+
+.yl-brief-body{
+  display:grid; grid-template-columns:1fr 1fr; gap:1rem .9rem;
+  padding:clamp(1.1rem, 2.4vw, 1.75rem);
+}
+.yl-brief-field{ display:grid; gap:.4rem; min-width:0; }
+.yl-brief-field.is-full, .yl-brief-submit, .yl-brief-foot{ grid-column:1 / -1; }
+.yl-brief-field > span{
+  font-family:"IBM Plex Mono", ui-monospace, monospace;
+  font-size:max(12px, .75rem); font-weight:600; letter-spacing:.02em; color:var(--b-ink);
+}
+.yl-brief-field small{ font-weight:400; color:var(--b-muted); }
+.yl-brief-field input,
+.yl-brief-field select,
+.yl-brief-field textarea{
+  width:100%; min-height:2.9rem;
+  padding:.7rem .85rem;
+  font:inherit; font-size:max(16px, .9375rem); color:var(--b-ink);
+  background:#FAF8F5;
+  border:1.5px solid var(--b-line); border-radius:.65rem;
+  transition:border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.yl-brief-field textarea{ resize:vertical; min-height:5.5rem; line-height:1.5; }
+.yl-brief-field select{
+  appearance:none; padding-right:2.4rem; cursor:pointer;
+  background-image:linear-gradient(45deg, transparent 50%, var(--b-ink) 50%), linear-gradient(135deg, var(--b-ink) 50%, transparent 50%);
+  background-position:calc(100% - 1.15rem) 50%, calc(100% - .8rem) 50%;
+  background-size:.35rem .35rem; background-repeat:no-repeat;
+}
+.yl-brief-field input:focus,
+.yl-brief-field select:focus,
+.yl-brief-field textarea:focus{
+  outline:none; background:#fff;
+  border-color:var(--b-green); box-shadow:0 0 0 3px var(--b-mint);
+}
+.yl-brief-submit{ justify-content:center; width:100%; min-height:3.1rem; font-size:.9375rem; cursor:pointer; }
+.yl-brief-foot{ margin:0; font-size:max(12px, .78rem); line-height:1.5; color:var(--b-muted); text-align:center; }
+.yl-brief-foot i{ color:var(--b-green); margin-right:.3rem; }
+.yl-brief-hp{ position:absolute !important; left:-9999px; width:1px; height:1px; overflow:hidden; }
+
+@media (max-width:560px){
+  .yl-brief-body{ grid-template-columns:1fr; }
+  .yl-brief-form{ box-shadow:4px 4px 0 var(--b-ink); }
+  .yl-brief-bar .when{ display:none; }
+}
+@media (prefers-reduced-motion:reduce){
+  .yl-brief *{ transition:none !important; }
+}

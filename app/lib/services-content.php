@@ -14,10 +14,10 @@ const TS_SERVICE_HUBS = [
         "icon" => "fa-bullhorn",
         "variant" => "marketing",
         "stats" => [
-            ["3.2x", "Avg. ROAS Lift"],
-            ["85+", "Campaigns Live"],
-            ["98%", "Client Retention"],
-            ["5+", "Years Experience"],
+            ["Free", "First audit"],
+            ["Monthly", "Plain-English report"],
+            ["Yours", "Every ad & analytics account"],
+            ["1", "Dedicated contact"],
         ],
         "technologies" => [
             "Google Ads", "Meta Ads", "Google Analytics", "Search Console", "SEMrush",
@@ -30,27 +30,22 @@ const TS_SERVICE_HUBS = [
             ["Optimize", "Weekly data reviews, A/B tests and budget reallocation."],
             ["Scale", "Double down on winners and expand into new audiences."],
         ],
-        "testimonials" => [
-            ["Our organic traffic tripled in six months. ScaleSphere's SEO and content team knows what works.", "Neha Kapoor", "Marketing Director, D2C Brand"],
-            ["Paid campaigns finally became profitable — clear reporting and constant optimization made the difference.", "Arjun Patel", "Founder, SaaS Startup"],
-            ["Social media engagement and lead quality improved dramatically after their strategy overhaul.", "Sarah Mitchell", "CMO, E-commerce"],
-        ],
+        "testimonials" => [], // Real client quotes only: [quote, name, role/company]
     ],
     "development" => [
         "key" => "development",
         "category" => "Development",
         "title" => "Development Services",
         "hero_title" => "Build Products That Scale",
-        "lead" => "Websites, enterprise software, CRM, SharePoint, NetSuite and e-commerce — engineered with clean architecture and long-term maintainability.",
+        "lead" => "Business websites, custom software, CRM setup and online stores, with a fixed quote, weekly preview links and everything handed over in your name.",
         "href" => "/services/development",
         "tone" => "blue",
         "icon" => "fa-code",
         "variant" => "dev",
         "stats" => [
-            ["150+", "Projects Delivered"],
-            ["98%", "Client Satisfaction"],
-            ["24/7", "Support Available"],
-            ["12+", "Years Experience"],
+            ["Fixed", "Quote before any code"],
+            ["Weekly", "Preview links to review"],
+            ["1", "Dedicated contact"],
         ],
         "technologies" => [
             "React", "Next.js", "Node.js", "PHP", "Laravel", "Python",
@@ -63,11 +58,7 @@ const TS_SERVICE_HUBS = [
             ["Test", "QA, security checks and performance benchmarking."],
             ["Deploy", "Production launch, monitoring and handover documentation."],
         ],
-        "testimonials" => [
-            ["ScaleSphere delivered our platform ahead of schedule with clean architecture.", "Rahul Mehta", "CTO, FinTech Startup"],
-            ["Their CRM integration saved our sales team hours every week.", "Priya Sharma", "Operations Head"],
-            ["Reliable engineering partner from discovery to deployment.", "James Carter", "Product Manager"],
-        ],
+        "testimonials" => [], // Real client quotes only: [quote, name, role/company]
     ],
     "mobile-apps" => [
         "key" => "mobile-apps",
@@ -80,10 +71,9 @@ const TS_SERVICE_HUBS = [
         "icon" => "fa-mobile-alt",
         "variant" => "mobile",
         "stats" => [
-            ["80+", "Apps Launched"],
-            ["4.8★", "Avg. Store Rating"],
-            ["24/7", "Support Available"],
-            ["12+", "Years Experience"],
+            ["Weekly", "Test builds on your phone"],
+            ["Both", "iOS & Android covered"],
+            ["1", "Dedicated contact"],
         ],
         "technologies" => [
             "Kotlin", "Swift", "React Native", "Flutter", "Firebase",
@@ -96,44 +86,35 @@ const TS_SERVICE_HUBS = [
             ["Test", "Device testing, beta releases and store compliance."],
             ["Launch", "Store submission, analytics setup and post-launch support."],
         ],
-        "testimonials" => [
-            ["Our React Native app launched on both stores with a beautiful experience.", "Anita Desai", "Founder, HealthTech"],
-            ["UI engineering and maintenance — users love the smooth performance.", "Michael Lee", "CEO, Logistics App"],
-            ["From prototype to production, responsive and detail-oriented team.", "Sneha Reddy", "Product Owner"],
-        ],
+        "testimonials" => [], // Real client quotes only: [quote, name, role/company]
     ],
     "creative-design" => [
         "key" => "creative-design",
         "category" => "Creative Design",
         "title" => "Creative Design Services",
         "hero_title" => "Design That Converts",
-        "lead" => "UI/UX, brand identity, design systems and motion graphics that elevate your product and build lasting brand recognition.",
+        "lead" => "UI/UX, brand identity, logos, design systems, motion and product design — made for real screens and real print, with editable files you keep.",
         "href" => "/services/creative-design",
         "tone" => "purple",
         "icon" => "fa-palette",
         "variant" => "design",
         "stats" => [
-            ["200+", "Design Projects"],
-            ["95%", "Client Approval Rate"],
-            ["48h", "First Concepts"],
-            ["5+", "Years Experience"],
+            ["Figma", "Editable source files"],
+            ["7", "Design services"],
+            ["1", "Dedicated contact"],
         ],
         "technologies" => [
             "Figma", "Adobe XD", "Illustrator", "Photoshop", "After Effects",
             "Principle", "Framer", "Design Tokens", "Storybook", "Lottie",
         ],
         "process" => [
-            ["Research", "User interviews, competitor audits and mood boards."],
-            ["Concept", "Exploratory directions and stakeholder alignment."],
-            ["Design", "High-fidelity screens, components and brand assets."],
-            ["Refine", "Usability testing and pixel-perfect polish."],
-            ["Deliver", "Handoff specs, assets and design system docs."],
+            ["Brief", "A short call or form: goals, audience, references and what already exists."],
+            ["Explore", "Mood boards and early directions, so you react to visuals rather than descriptions."],
+            ["Design", "The chosen direction built out into screens, brand assets or motion."],
+            ["Refine", "Rounds of feedback gathered by your assistant; changes tracked, nothing lost in chat."],
+            ["Hand over", "Organised source files, exports and notes your team or developers can use."],
         ],
-        "testimonials" => [
-            ["Our rebrand and UI overhaul increased sign-ups by 40%. Stunning work.", "David Chen", "CEO, SaaS Platform"],
-            ["Design system saved our dev team weeks on every new feature.", "Lisa Wong", "Head of Product"],
-            ["Motion graphics and prototypes brought our pitch deck to life.", "Tom Richards", "Startup Founder"],
-        ],
+        "testimonials" => [], // Real client quotes only: [quote, name, role/company]
     ],
 ];
 
@@ -195,21 +176,17 @@ function ts_services_in_category(string $category): array
 function ts_tone_classes(string $tone): array
 {
     return match ($tone) {
-        "rose" => [
-            "text" => "text-rose-600", "bg" => "bg-rose-50", "border" => "border-rose-200",
-            "gradient" => "from-rose-500 to-pink-600", "soft" => "bg-rose-500/10", "ring" => "ring-rose-500/20",
-        ],
-        "green" => [
-            "text" => "text-emerald-600", "bg" => "bg-emerald-50", "border" => "border-emerald-200",
-            "gradient" => "from-emerald-500 to-teal-600", "soft" => "bg-emerald-500/10", "ring" => "ring-emerald-500/20",
+        "rose", "green" => [
+            "text" => "text-brand", "bg" => "bg-brand-soft", "border" => "border-brand/20",
+            "gradient" => "from-brand to-brand", "soft" => "bg-brand/10", "ring" => "ring-brand/20",
         ],
         "purple" => [
-            "text" => "text-purple-600", "bg" => "bg-purple-50", "border" => "border-purple-200",
-            "gradient" => "from-purple-500 to-violet-600", "soft" => "bg-purple-500/10", "ring" => "ring-purple-500/20",
+            "text" => "text-brand", "bg" => "bg-brand-soft", "border" => "border-brand/20",
+            "gradient" => "from-brand to-brand", "soft" => "bg-brand/10", "ring" => "ring-brand/20",
         ],
         default => [
-            "text" => "text-brand", "bg" => "bg-brand-soft", "border" => "border-blue-200",
-            "gradient" => "from-brand to-blue-600", "soft" => "bg-brand/10", "ring" => "ring-brand/20",
+            "text" => "text-brand-deep", "bg" => "bg-[#EEF0F4]", "border" => "border-brand-deep/15",
+            "gradient" => "from-brand-deep to-brand-deep", "soft" => "bg-brand-deep/10", "ring" => "ring-brand-deep/20",
         ],
     };
 }

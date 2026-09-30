@@ -92,14 +92,18 @@ function ts_contact_rate_ok(): bool
 function ts_contact_services(): array
 {
     return [
-        "Web Development",
-        "Online Marketing",
-        "Mobile Apps",
-        "Product Design",
-        "E-Commerce",
-        "SEO & Ads",
-        "Consultation",
-        "Other",
+        "Virtual Assistant",
+        "SEO",
+        "Paid Ads (Google / Meta)",
+        "Social Media & Content",
+        "Email Marketing",
+        "Analytics & Tracking",
+        "Website Development",
+        "Software / CRM",
+        "E-Commerce Store",
+        "Mobile App",
+        "UI/UX & Brand Design",
+        "Not sure yet",
     ];
 }
 

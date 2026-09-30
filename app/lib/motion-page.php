@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/cd-common.php";
+
 /**
  * Motion Graphics — Creative Design detail.
  * Desk language like Logo / Design Systems, motion-first layout:
@@ -58,11 +60,11 @@ function ts_render_motion_service_page(array $service): void
 
     $process = [
         ["01", "Brief", "Goal, audience, platforms and must-say lines.", "/images/stock/photo-1558655146-d09347e92766.jpg", "00:01"],
-        ["02", "Board", "Storyboard + rough timing you approve.", "/images/mobile/Prototyping.webp", "00:04"],
-        ["03", "Style", "Motion look — type, colour, easing matched to brand.", "/images/mobile/MotionIntrations.webp", "00:08"],
+        ["02", "Board", "Storyboard + rough timing you approve.", "/images/mobile/sketch-flow.webp", "00:04"],
+        ["03", "Style", "Motion look — type, colour, easing matched to brand.", "/images/mobile/ui-sketch.webp", "00:08"],
         ["04", "Animate", "Keyframes, polish and sound if needed.", "/images/stock/photo-1618005182384-a83a8bd57fbe.jpg", "00:14"],
-        ["05", "Adapt", "Crop and retime for each format.", "/images/mobile/AppDesign.webp", "00:18"],
-        ["06", "Deliver", "Exports + sources + motion notes.", "/images/mobile/DesignDeliver.webp", "00:22"],
+        ["05", "Adapt", "Crop and retime for each format.", "/images/mobile/phones-trio.webp", "00:18"],
+        ["06", "Deliver", "Exports + sources + motion notes.", "/images/mobile/app-screens.webp", "00:22"],
     ];
 
     $packages = [
@@ -80,7 +82,7 @@ function ts_render_motion_service_page(array $service): void
         ],
         [
             "Campaign Motion Kit",
-            "Most enquiries",
+            "Recommended",
             [
                 "Master edit + storyboard",
                 "3–5 format cuts",
@@ -155,10 +157,10 @@ function ts_render_motion_service_page(array $service): void
   <style>
     .yl-mo{
       --ink:#0F172A;
-      --soft:#F6F7F9;
+      --soft:#FFFEFA;
       --paper:#FAF8F5;
-      --blue:#7C3AED;
-      --deep:#4C1D95;
+      --blue:#1F7A5A;
+      --deep:#1F7A5A;
       --muted:rgba(15,23,42,.58);
       --line:rgba(15,23,42,.1);
       --grid:rgba(15,23,42,.06);
@@ -184,7 +186,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-crumb{
       display:flex; flex-wrap:wrap; gap:.4rem; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:var(--muted); margin:0 0 1.1rem;
+      font-size:max(11px, .6875rem); color:var(--muted); margin:0 0 1.1rem;
     }
     .yl-mo .yl-crumb a{ color:var(--muted); text-decoration:none; }
     .yl-mo .yl-crumb a:hover{ color:var(--blue); }
@@ -195,14 +197,14 @@ function ts_render_motion_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:999px;
-      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #7C3AED;
-      font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+      box-shadow:0 8px 24px rgba(15,23,42,.06), inset 3px 0 0 #1F7A5A;
+      font-size:max(11px, .6875rem); font-weight:700; letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue);
       margin-bottom:1.15rem;
     }
     .yl-mo .yl-hero-badge .pulse{
       width:8px; height:8px; border-radius:999px; background:var(--blue);
-      box-shadow:0 0 0 0 rgba(124,58,237,.5);
+      box-shadow:0 0 0 0 rgba(31,122,90,.5);
       animation:ylMoPulse 1.8s ease-out infinite;
     }
 
@@ -234,12 +236,12 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-trust{
       margin:1rem 0 0;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:rgba(15,23,42,.45);
+      font-size:max(11px, .6875rem); color:rgba(15,23,42,.45);
     }
     .yl-mo .yl-btn{
       display:inline-flex; align-items:center; gap:.45rem;
       min-height:44px; padding:0 1.2rem; border-radius:999px;
-      font-size:13px; font-weight:800; text-decoration:none;
+      font-size:max(12px, .8125rem); font-weight:800; text-decoration:none;
       border:1.5px solid var(--ink);
       transition:transform .2s ease;
     }
@@ -262,7 +264,7 @@ function ts_render_motion_service_page(array $service): void
       padding:1.1rem 1.15rem 1.2rem;
       box-shadow:
         0 22px 50px rgba(15,23,42,.1),
-        8px 8px 0 rgba(124,58,237,.12);
+        8px 8px 0 rgba(31,122,90,.12);
       transform:rotate(-1deg);
       transition:transform .4s cubic-bezier(.22,1,.36,1);
     }
@@ -273,14 +275,14 @@ function ts_render_motion_service_page(array $service): void
       display:flex; align-items:center; justify-content:space-between;
       margin-bottom:.9rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-mo .yl-stage-bar .dots{ display:flex; gap:.35rem; }
     .yl-mo .yl-stage-bar .dots i{
-      width:8px; height:8px; border-radius:999px; background:#ff5f57; display:block;
+      width:8px; height:8px; border-radius:999px; background:#D58581; display:block;
     }
-    .yl-mo .yl-stage-bar .dots i:nth-child(2){ background:#febc2e; }
-    .yl-mo .yl-stage-bar .dots i:nth-child(3){ background:#28c840; }
+    .yl-mo .yl-stage-bar .dots i:nth-child(2){ background:#CBA962; }
+    .yl-mo .yl-stage-bar .dots i:nth-child(3){ background:#3CB44E; }
 
     .yl-mo .yl-frames{
       display:grid; grid-template-columns:repeat(4, 1fr); gap:.5rem;
@@ -294,9 +296,9 @@ function ts_render_motion_service_page(array $service): void
       opacity:.5; transform:scale(.94);
       animation:ylMoFrame 5.6s ease-in-out infinite;
     }
-    .yl-mo .yl-frame:nth-child(1){ animation-delay:0s; background:linear-gradient(165deg,#F5F3FF,#EDE9FE); }
-    .yl-mo .yl-frame:nth-child(2){ animation-delay:1.4s; background:linear-gradient(165deg,#4C1D95,#7C3AED); }
-    .yl-mo .yl-frame:nth-child(3){ animation-delay:2.8s; background:linear-gradient(165deg,#0F172A,#1E1B4B); }
+    .yl-mo .yl-frame:nth-child(1){ animation-delay:0s; background:linear-gradient(165deg,#E4F1EA,#E4F1EA); }
+    .yl-mo .yl-frame:nth-child(2){ animation-delay:1.4s; background:linear-gradient(#1F7A5A,#1F7A5A); }
+    .yl-mo .yl-frame:nth-child(3){ animation-delay:2.8s; background:#0F1B3D; }
     .yl-mo .yl-frame:nth-child(4){ animation-delay:4.2s; background:linear-gradient(165deg,#fff,#F3F0FF); }
 
     .yl-mo .yl-frame .scene{
@@ -306,14 +308,14 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-frame .tc{
       position:absolute; left:.4rem; bottom:.35rem; z-index:2;
       font-family:"IBM Plex Mono",monospace;
-      font-size:8px; color:rgba(15,23,42,.45);
+      font-size:max(8px, .5rem); color:rgba(15,23,42,.45);
     }
     .yl-mo .yl-frame:nth-child(2) .tc,
     .yl-mo .yl-frame:nth-child(3) .tc{ color:rgba(255,255,255,.7); }
     .yl-mo .yl-frame .label{
       position:absolute; top:.4rem; left:.4rem; z-index:2;
       font-family:"IBM Plex Mono",monospace;
-      font-size:7px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(7px, .4375rem); letter-spacing:.08em; text-transform:uppercase;
       color:rgba(15,23,42,.4);
     }
     .yl-mo .yl-frame:nth-child(2) .label,
@@ -322,15 +324,15 @@ function ts_render_motion_service_page(array $service): void
     /* Frame 1 — logo reveal */
     .yl-mo .yl-sc-logo{
       width:42%; aspect-ratio:1; border-radius:22%;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       display:grid; place-items:center;
       color:#fff; font-family:Montserrat,sans-serif; font-weight:800; font-size:1.1rem;
-      box-shadow:0 10px 22px rgba(76,29,149,.3);
+      box-shadow:0 10px 22px rgba(15,27,61,.3);
       animation:ylMoLogoIn 5.6s ease-in-out infinite;
     }
     .yl-mo .yl-sc-ring{
       position:absolute; width:58%; aspect-ratio:1; border-radius:999px;
-      border:1.5px dashed rgba(124,58,237,.4);
+      border:1.5px dashed rgba(31,122,90,.4);
       animation:ylMoSpin 8s linear infinite;
     }
 
@@ -341,7 +343,7 @@ function ts_render_motion_service_page(array $service): void
       transform-origin:left center;
     }
     .yl-mo .yl-sc-type i:nth-child(1){ width:88%; animation:ylMoSlideR 5.6s ease-in-out infinite; }
-    .yl-mo .yl-sc-type i:nth-child(2){ width:62%; background:#FBBF24; animation:ylMoSlideR 5.6s ease-in-out infinite .15s; }
+    .yl-mo .yl-sc-type i:nth-child(2){ width:62%; background:#C7A858; animation:ylMoSlideR 5.6s ease-in-out infinite .15s; }
     .yl-mo .yl-sc-type i:nth-child(3){ width:74%; animation:ylMoSlideR 5.6s ease-in-out infinite .3s; }
 
     /* Frame 3 — UI cards */
@@ -351,11 +353,11 @@ function ts_render_motion_service_page(array $service): void
       background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18);
       animation:ylMoStack 5.6s ease-in-out infinite;
     }
-    .yl-mo .yl-sc-ui i:nth-child(1){ background:rgba(124,58,237,.55); animation-delay:.1s; }
+    .yl-mo .yl-sc-ui i:nth-child(1){ background:rgba(31,122,90,.55); animation-delay:.1s; }
     .yl-mo .yl-sc-ui i:nth-child(2){ width:85%; animation-delay:.2s; }
     .yl-mo .yl-sc-ui i:nth-child(3){ width:70%; animation-delay:.3s; }
     .yl-mo .yl-sc-ui .dot{
-      width:10px; height:10px; border-radius:999px; background:#A78BFA;
+      width:10px; height:10px; border-radius:999px; background:#9FCFB5;
       margin:4px auto 0;
       animation:ylMoPulse 1.6s ease-out infinite;
     }
@@ -363,17 +365,17 @@ function ts_render_motion_service_page(array $service): void
     /* Frame 4 — success burst */
     .yl-mo .yl-sc-ok{
       width:40%; aspect-ratio:1; border-radius:999px;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
-      display:grid; place-items:center; color:#fff; font-size:14px;
+      background:linear-gradient(#1F7A5A,#1F7A5A);
+      display:grid; place-items:center; color:#fff; font-size:.875rem;
       animation:ylMoPop 5.6s ease-in-out infinite;
-      box-shadow:0 0 0 0 rgba(124,58,237,.35);
+      box-shadow:0 0 0 0 rgba(31,122,90,.35);
     }
     .yl-mo .yl-sc-spark{
-      position:absolute; width:6px; height:6px; border-radius:999px; background:#FBBF24;
+      position:absolute; width:6px; height:6px; border-radius:999px; background:#C7A858;
     }
     .yl-mo .yl-sc-spark:nth-child(1){ top:18%; left:22%; animation:ylMoSpark 5.6s ease-out infinite; }
-    .yl-mo .yl-sc-spark:nth-child(2){ top:22%; right:18%; background:#A78BFA; animation:ylMoSpark 5.6s ease-out infinite .1s; }
-    .yl-mo .yl-sc-spark:nth-child(3){ bottom:28%; left:18%; background:#7C3AED; animation:ylMoSpark 5.6s ease-out infinite .2s; }
+    .yl-mo .yl-sc-spark:nth-child(2){ top:22%; right:18%; background:#9FCFB5; animation:ylMoSpark 5.6s ease-out infinite .1s; }
+    .yl-mo .yl-sc-spark:nth-child(3){ bottom:28%; left:18%; background:#1F7A5A; animation:ylMoSpark 5.6s ease-out infinite .2s; }
     .yl-mo .yl-sc-spark:nth-child(4){ bottom:24%; right:20%; animation:ylMoSpark 5.6s ease-out infinite .15s; }
 
     .yl-mo .yl-scrub{
@@ -384,18 +386,18 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-scrub > i{
       position:absolute; left:0; top:0; bottom:0; width:35%;
       border-radius:999px;
-      background:linear-gradient(90deg,#7C3AED,#A78BFA);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       animation:ylMoScrub 5.6s linear infinite;
     }
     .yl-mo .yl-scrub-meta{
       display:flex; justify-content:space-between; align-items:center;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; color:var(--muted);
+      font-size:max(10px, .625rem); color:var(--muted);
     }
     .yl-mo .yl-play{
       width:28px; height:28px; border-radius:999px;
       background:var(--blue); color:#fff;
-      display:grid; place-items:center; font-size:10px;
+      display:grid; place-items:center; font-size:max(10px, .625rem);
       animation:ylMoPulse 2s ease-out infinite;
     }
 
@@ -405,7 +407,7 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-orbit span{
       position:absolute; inset:0;
-      border:1px dashed rgba(124,58,237,.35);
+      border:1px dashed rgba(31,122,90,.35);
       border-radius:999px;
       animation:ylMoSpin 10s linear infinite;
     }
@@ -417,9 +419,9 @@ function ts_render_motion_service_page(array $service): void
     }
 
     @keyframes ylMoPulse{
-      0%{ box-shadow:0 0 0 0 rgba(124,58,237,.45); }
-      70%{ box-shadow:0 0 0 10px rgba(124,58,237,0); }
-      100%{ box-shadow:0 0 0 0 rgba(124,58,237,0); }
+      0%{ box-shadow:0 0 0 0 rgba(31,122,90,.45); }
+      70%{ box-shadow:0 0 0 10px rgba(31,122,90,0); }
+      100%{ box-shadow:0 0 0 0 rgba(31,122,90,0); }
     }
     @keyframes ylMoEm{
       0%,100%{ transform:translateY(0); }
@@ -427,7 +429,7 @@ function ts_render_motion_service_page(array $service): void
     }
     @keyframes ylMoFrame{
       0%,18%{ opacity:.4; transform:scale(.93); }
-      22%,38%{ opacity:1; transform:scale(1); box-shadow:0 12px 28px rgba(124,58,237,.22); z-index:2; }
+      22%,38%{ opacity:1; transform:scale(1); box-shadow:0 12px 28px rgba(31,122,90,.22); z-index:2; }
       45%,100%{ opacity:.4; transform:scale(.93); box-shadow:none; }
     }
     @keyframes ylMoLogoIn{
@@ -446,8 +448,8 @@ function ts_render_motion_service_page(array $service): void
       48%,100%{ transform:translateY(0); opacity:.8; }
     }
     @keyframes ylMoPop{
-      0%,18%{ transform:scale(.3); opacity:0; box-shadow:0 0 0 0 rgba(124,58,237,.4); }
-      24%,30%{ transform:scale(1.12); opacity:1; box-shadow:0 0 0 12px rgba(124,58,237,0); }
+      0%,18%{ transform:scale(.3); opacity:0; box-shadow:0 0 0 0 rgba(31,122,90,.4); }
+      24%,30%{ transform:scale(1.12); opacity:1; box-shadow:0 0 0 12px rgba(31,122,90,0); }
       38%,100%{ transform:scale(1); opacity:1; }
     }
     @keyframes ylMoSpark{
@@ -516,7 +518,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-sec-label{
       display:inline-block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.12em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.55rem;
     }
 
@@ -531,7 +533,7 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.15rem); font-weight:800;
     }
     .yl-mo .yl-formats .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-mo .yl-fmt-grid{
       display:grid; gap:1rem;
@@ -552,11 +554,11 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-fmt .preview{
       margin:0 auto 1rem;
       border-radius:.85rem;
-      border:1px solid rgba(124,58,237,.2);
+      border:1px solid rgba(31,122,90,.2);
       background:
-        linear-gradient(rgba(124,58,237,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(124,58,237,.06) 1px, transparent 1px),
-        #F5F3FF;
+        linear-gradient(rgba(31,122,90,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,122,90,.06) 1px, transparent 1px),
+        #E4F1EA;
       background-size:12px 12px, 12px 12px, auto;
       position:relative; overflow:hidden;
       display:grid; place-items:center;
@@ -569,7 +571,7 @@ function ts_render_motion_service_page(array $service): void
     /* Mini motion: Stories */
     .yl-mo .yl-mini-story{ width:70%; height:78%; display:flex; flex-direction:column; gap:5px; justify-content:center; }
     .yl-mo .yl-mini-story .bar{
-      height:8px; border-radius:999px; background:rgba(124,58,237,.2); overflow:hidden;
+      height:8px; border-radius:999px; background:rgba(31,122,90,.2); overflow:hidden;
     }
     .yl-mo .yl-mini-story .bar > i{
       display:block; height:100%; width:40%; border-radius:999px; background:var(--blue);
@@ -577,7 +579,7 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-mini-story .card{
       flex:1; border-radius:.55rem;
-      background:linear-gradient(160deg,#7C3AED,#4C1D95);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       position:relative; overflow:hidden;
       animation:ylMoFloat 3s ease-in-out infinite;
     }
@@ -592,16 +594,16 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-mini-sq .core{
       position:absolute; inset:22%;
       border-radius:28%;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       animation:ylMoBounce 2.4s ease-in-out infinite;
     }
     .yl-mo .yl-mini-sq .orb{
       position:absolute; width:10px; height:10px; border-radius:999px;
-      background:#FBBF24; top:50%; left:50%; margin:-5px 0 0 -5px;
+      background:#C7A858; top:50%; left:50%; margin:-5px 0 0 -5px;
       animation:ylMoOrbitMini 3s linear infinite;
     }
     .yl-mo .yl-mini-sq .orb:nth-child(3){
-      background:#A78BFA; animation-duration:4.2s; animation-direction:reverse;
+      background:#9FCFB5; animation-duration:4.2s; animation-direction:reverse;
       width:8px; height:8px; margin:-4px 0 0 -4px;
     }
 
@@ -609,7 +611,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-mini-wide{ width:86%; height:70%; display:grid; grid-template-columns:1.1fr .9fr; gap:6px; align-items:stretch; }
     .yl-mo .yl-mini-wide .pane{
       border-radius:.45rem;
-      background:linear-gradient(145deg,#4C1D95,#7C3AED);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       position:relative; overflow:hidden;
     }
     .yl-mo .yl-mini-wide .pane::before{
@@ -619,10 +621,10 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-mini-wide .side{ display:grid; gap:5px; }
     .yl-mo .yl-mini-wide .side i{
-      display:block; border-radius:.35rem; background:rgba(124,58,237,.25);
+      display:block; border-radius:.35rem; background:rgba(31,122,90,.25);
       animation:ylMoBar 2s ease-in-out infinite;
     }
-    .yl-mo .yl-mini-wide .side i:nth-child(1){ height:34%; animation-delay:0s; background:linear-gradient(90deg,#7C3AED,#A78BFA); }
+    .yl-mo .yl-mini-wide .side i:nth-child(1){ height:34%; animation-delay:0s; background:linear-gradient(#1F7A5A,#1F7A5A); }
     .yl-mo .yl-mini-wide .side i:nth-child(2){ height:26%; animation-delay:.15s; }
     .yl-mo .yl-mini-wide .side i:nth-child(3){ height:40%; animation-delay:.3s; }
 
@@ -630,27 +632,27 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-mini-ui{ position:relative; width:62%; aspect-ratio:1; display:grid; place-items:center; }
     .yl-mo .yl-mini-ui .ring{
       position:absolute; inset:0; border-radius:999px;
-      border:2px solid rgba(124,58,237,.25);
+      border:2px solid rgba(31,122,90,.25);
       border-top-color:var(--blue);
       animation:ylMoSpin 1.4s linear infinite;
     }
     .yl-mo .yl-mini-ui .heart{
       width:36%; aspect-ratio:1; border-radius:30% 70% 55% 45% / 55% 35% 65% 45%;
-      background:linear-gradient(135deg,#7C3AED,#FBBF24);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       animation:ylMoBounce 1.2s ease-in-out infinite;
-      box-shadow:0 8px 16px rgba(124,58,237,.3);
+      box-shadow:0 8px 16px rgba(31,122,90,.3);
     }
 
     .yl-mo .yl-fmt .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+      font-size:max(11px, .6875rem); letter-spacing:.1em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.3rem;
     }
     .yl-mo .yl-fmt strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-mo .yl-fmt > span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-mo .yl-fmt > span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-mo .yl-about{
       padding:3.75rem 0;
@@ -670,7 +672,7 @@ function ts_render_motion_service_page(array $service): void
       max-width:16ch;
     }
     .yl-mo .yl-about .body p{
-      margin:0 0 1rem; font-size:15px; line-height:1.65; color:var(--muted);
+      margin:0 0 1rem; font-size:.9375rem; line-height:1.65; color:var(--muted);
     }
     .yl-mo .yl-easing{
       background:#fff;
@@ -699,8 +701,8 @@ function ts_render_motion_service_page(array $service): void
       position:absolute; top:50%; left:8%;
       width:18px; height:18px; margin-top:-9px;
       border-radius:999px;
-      background:linear-gradient(135deg,#7C3AED,#4C1D95);
-      box-shadow:0 6px 16px rgba(76,29,149,.35);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
+      box-shadow:0 6px 16px rgba(15,27,61,.35);
       animation:ylMoEase 2.4s cubic-bezier(.22,1,.36,1) infinite;
     }
     @keyframes ylMoEase{
@@ -711,7 +713,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-ease-labels{
       display:flex; justify-content:space-between;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; color:var(--muted);
+      font-size:max(10px, .625rem); color:var(--muted);
     }
 
     .yl-mo .yl-pains{
@@ -725,7 +727,7 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.45rem); font-weight:400;
     }
     .yl-mo .yl-pains .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-mo .yl-pain-grid{
       display:grid; gap:1rem;
@@ -735,7 +737,7 @@ function ts_render_motion_service_page(array $service): void
       background:#fff;
       border:1px solid var(--line);
       border-radius:1.1rem; padding:1.15rem 1.1rem;
-      box-shadow:inset 3px 0 0 #7C3AED;
+      box-shadow:inset 3px 0 0 #1F7A5A;
       transition:transform .25s ease;
     }
     .yl-mo .yl-pain:hover{ transform:translateY(-3px); }
@@ -743,7 +745,7 @@ function ts_render_motion_service_page(array $service): void
       margin:0 0 .4rem;
       font-family:Montserrat,sans-serif; font-size:1rem; font-weight:800;
     }
-    .yl-mo .yl-pain p{ margin:0; font-size:13.5px; line-height:1.5; color:var(--muted); }
+    .yl-mo .yl-pain p{ margin:0; font-size:.8438rem; line-height:1.5; color:var(--muted); }
 
     .yl-mo .yl-finder{
       padding:3.5rem 0;
@@ -756,7 +758,7 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.55rem,3.2vw,2.1rem); font-weight:800;
     }
     .yl-mo .yl-finder .intro p{
-      margin:0 0 1.25rem; color:var(--muted); font-size:15px; max-width:40rem; line-height:1.55;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9375rem; max-width:40rem; line-height:1.55;
     }
     .yl-mo .yl-window{
       background:#fff;
@@ -773,11 +775,11 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-window-bar .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; color:var(--muted);
+      font-size:max(12px, .75rem); color:var(--muted);
     }
-    .yl-mo .yl-dot{ width:8px; height:8px; border-radius:999px; background:#ff5f57; }
-    .yl-mo .yl-dot:nth-child(2){ background:#febc2e; }
-    .yl-mo .yl-dot:nth-child(3){ background:#28c840; }
+    .yl-mo .yl-dot{ width:8px; height:8px; border-radius:999px; background:#D58581; }
+    .yl-mo .yl-dot:nth-child(2){ background:#CBA962; }
+    .yl-mo .yl-dot:nth-child(3){ background:#3CB44E; }
     .yl-mo .yl-window-body{ padding:1.25rem; }
     .yl-mo .yl-grid{
       display:grid; gap:1rem;
@@ -799,14 +801,14 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-file .path{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.08em; text-transform:uppercase;
+      font-size:max(10px, .625rem); letter-spacing:.08em; text-transform:uppercase;
       color:var(--blue); margin-bottom:.4rem;
     }
     .yl-mo .yl-file strong{
-      display:block; font-size:15px; font-weight:800; margin-bottom:.35rem;
+      display:block; font-size:.9375rem; font-weight:800; margin-bottom:.35rem;
       font-family:Montserrat,sans-serif;
     }
-    .yl-mo .yl-file span{ font-size:13px; color:var(--muted); line-height:1.45; }
+    .yl-mo .yl-file span{ font-size:max(12px, .8125rem); color:var(--muted); line-height:1.45; }
 
     .yl-mo .yl-gallery{
       padding:3.5rem 0;
@@ -819,7 +821,7 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.8rem,3.8vw,2.4rem); font-weight:400;
     }
     .yl-mo .yl-gallery .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-mo .yl-ggrid{
       display:grid; gap:1rem;
@@ -839,9 +841,9 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-shot figcaption{ padding:.95rem 1rem 1.05rem; }
     .yl-mo .yl-shot strong{
       display:block; font-family:Montserrat,sans-serif;
-      font-size:14px; font-weight:800; margin-bottom:.25rem;
+      font-size:.875rem; font-weight:800; margin-bottom:.25rem;
     }
-    .yl-mo .yl-shot span{ font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-mo .yl-shot span{ font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-mo .yl-process{
       padding:3.75rem 0;
@@ -855,7 +857,7 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-process .sub{
       margin:0 0 1.75rem; max-width:40rem;
-      font-size:14px; color:rgba(255,255,255,.65); line-height:1.5;
+      font-size:.875rem; color:rgba(255,255,255,.65); line-height:1.5;
     }
     .yl-mo .yl-proc-deck{
       display:grid; gap:1.75rem;
@@ -890,27 +892,27 @@ function ts_render_motion_service_page(array $service): void
       transition:border-color .25s ease, background .25s ease, transform .25s ease, box-shadow .25s ease;
     }
     .yl-mo .yl-ph-btn:hover{
-      border-color:rgba(196,181,253,.45);
+      border-color:rgba(31,122,90,.45);
       transform:translateX(2px);
     }
     .yl-mo .yl-ph-btn.is-on{
-      border-left-color:#c4b5fd;
-      border-color:rgba(196,181,253,.4);
-      background:linear-gradient(90deg, rgba(124,58,237,.35), rgba(255,255,255,.06));
+      border-left-color:#DCEEE3;
+      border-color:rgba(31,122,90,.4);
+      background:linear-gradient(90deg, rgba(31,122,90,.35), rgba(255,255,255,.06));
       box-shadow:0 12px 30px rgba(0,0,0,.2);
     }
     .yl-mo .yl-ph-btn b{
       display:block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; color:#c4b5fd; letter-spacing:.08em; font-weight:600;
+      font-size:max(11px, .6875rem); color:#DCEEE3; letter-spacing:.08em; font-weight:600;
     }
-    .yl-mo .yl-ph-btn.is-on b{ color:#ede9fe; }
+    .yl-mo .yl-ph-btn.is-on b{ color:#E4F1EA; }
     .yl-mo .yl-ph-btn strong{
-      display:block; font-size:14.5px; font-weight:800;
+      display:block; font-size:.9062rem; font-weight:800;
       font-family:Montserrat,sans-serif;
     }
     .yl-mo .yl-ph-btn p{
-      margin:0; font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.62);
+      margin:0; font-size:max(12px, .7812rem); line-height:1.45; color:rgba(255,255,255,.62);
     }
 
     /* Motion timeline preview (process stage) */
@@ -934,17 +936,17 @@ function ts_render_motion_service_page(array $service): void
       background:rgba(255,255,255,.04);
       border-bottom:1px solid rgba(255,255,255,.08);
       font-family:"IBM Plex Mono",monospace;
-      font-size:11px; letter-spacing:.06em;
+      font-size:max(11px, .6875rem); letter-spacing:.06em;
       color:rgba(255,255,255,.55);
     }
     .yl-mo .yl-mo-stage-top .rec{
       display:inline-flex; align-items:center; gap:.4rem;
-      color:#fbbf24; font-weight:600;
+      color:#C7A858; font-weight:600;
     }
     .yl-mo .yl-mo-stage-top .rec::before{
       content:"";
       width:7px; height:7px; border-radius:50%;
-      background:#ef4444;
+      background:#CC6767;
       box-shadow:0 0 0 0 rgba(239,68,68,.5);
       animation:ylMoRec 1.4s ease-out infinite;
     }
@@ -953,12 +955,12 @@ function ts_render_motion_service_page(array $service): void
       70%{ box-shadow:0 0 0 8px rgba(239,68,68,0); }
       100%{ box-shadow:0 0 0 0 rgba(239,68,68,0); }
     }
-    .yl-mo .yl-mo-stage-top .tc{ color:#c4b5fd; }
+    .yl-mo .yl-mo-stage-top .tc{ color:#DCEEE3; }
     .yl-mo .yl-mo-preview{
       position:relative;
       flex:1;
       min-height:240px;
-      background:#1e1b4b;
+      background:#0F1B3D;
       overflow:hidden;
     }
     .yl-mo .yl-mo-frame{
@@ -996,8 +998,8 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-mo-overlay em{
       display:inline-block;
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; font-style:normal; letter-spacing:.12em; text-transform:uppercase;
-      color:#c4b5fd; margin-bottom:.35rem;
+      font-size:max(10px, .625rem); font-style:normal; letter-spacing:.12em; text-transform:uppercase;
+      color:#DCEEE3; margin-bottom:.35rem;
     }
     .yl-mo .yl-mo-overlay strong{
       display:block;
@@ -1010,7 +1012,7 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-mo-overlay span{
       display:block; margin-top:.35rem;
-      font-size:13px; line-height:1.45; color:rgba(255,255,255,.78);
+      font-size:max(12px, .8125rem); line-height:1.45; color:rgba(255,255,255,.78);
       max-width:34ch;
       animation:ylMoTitleIn .55s cubic-bezier(.22,1,.36,1) .06s both;
     }
@@ -1050,7 +1052,7 @@ function ts_render_motion_service_page(array $service): void
       gap:.25rem;
       color:rgba(255,255,255,.45);
       font-family:"IBM Plex Mono",monospace;
-      font-size:9px; letter-spacing:.04em; text-transform:uppercase;
+      font-size:max(9px, .5625rem); letter-spacing:.04em; text-transform:uppercase;
     }
     .yl-mo .yl-mo-mark i{
       width:10px; height:10px; border-radius:50%;
@@ -1059,39 +1061,39 @@ function ts_render_motion_service_page(array $service): void
       transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
     }
     .yl-mo .yl-mo-mark.is-on,
-    .yl-mo .yl-mo-mark.is-done{ color:#c4b5fd; }
+    .yl-mo .yl-mo-mark.is-done{ color:#DCEEE3; }
     .yl-mo .yl-mo-mark.is-done i{
-      background:rgba(124,58,237,.7);
-      border-color:#a78bfa;
+      background:rgba(31,122,90,.7);
+      border-color:#9FCFB5;
     }
     .yl-mo .yl-mo-mark.is-on{
       color:#fff;
     }
     .yl-mo .yl-mo-mark.is-on i{
-      background:#fbbf24;
-      border-color:#fde68a;
-      box-shadow:0 0 0 4px rgba(251,191,36,.25);
+      background:#C7A858;
+      border-color:#DCEEE3;
+      box-shadow:0 0 0 4px rgba(159,207,181,.25);
       transform:scale(1.2);
     }
     .yl-mo .yl-mo-playhead{
       position:absolute;
       top:0; bottom:14px;
       width:2px;
-      background:linear-gradient(180deg, #fbbf24, #7c3aed);
+      background:linear-gradient(#C7A858,#C7A858);
       border-radius:999px;
       left:calc((100% / 6) * var(--mo-i, 0) + (100% / 12));
       transform:translateX(-50%);
       transition:left .4s cubic-bezier(.22,1,.36,1);
       z-index:2;
       pointer-events:none;
-      box-shadow:0 0 12px rgba(251,191,36,.45);
+      box-shadow:0 0 12px rgba(159,207,181,.45);
     }
     .yl-mo .yl-mo-playhead::before{
       content:"";
       position:absolute; top:-2px; left:50%;
       width:8px; height:8px; margin-left:-4px;
       border-radius:50%;
-      background:#fbbf24;
+      background:#C7A858;
     }
     @media (prefers-reduced-motion:reduce){
       .yl-mo .yl-mo-frame,
@@ -1112,7 +1114,7 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.8rem,4vw,2.5rem); font-weight:400;
     }
     .yl-mo .yl-pkgs .lead{
-      margin:0 0 1.5rem; color:var(--muted); font-size:15px; max-width:38rem; line-height:1.55;
+      margin:0 0 1.5rem; color:var(--muted); font-size:.9375rem; max-width:38rem; line-height:1.55;
     }
     .yl-mo .yl-pkg-grid{
       display:grid; gap:1rem;
@@ -1134,14 +1136,14 @@ function ts_render_motion_service_page(array $service): void
       position:absolute;
       left:0; right:0; bottom:0;
       height:3px;
-      background:rgba(124,58,237,.15);
+      background:rgba(31,122,90,.15);
     }
     .yl-mo .yl-pkg::before{
       content:"";
       position:absolute;
       left:0; bottom:0;
       height:3px; width:0;
-      background:linear-gradient(90deg, #7C3AED, #c4b5fd);
+      background:linear-gradient(#1F7A5A,#1F7A5A);
       transition:width .45s ease;
       z-index:1;
     }
@@ -1150,11 +1152,11 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-pkg.is-hot{
       outline:2px solid var(--blue);
       outline-offset:1px;
-      box-shadow:0 16px 40px rgba(124,58,237,.14);
+      box-shadow:0 16px 40px rgba(31,122,90,.14);
     }
     .yl-mo .yl-pkg .tag{
       font-family:"IBM Plex Mono",monospace;
-      font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
+      font-size:max(10px, .625rem); letter-spacing:.1em; text-transform:uppercase; color:var(--blue);
     }
     .yl-mo .yl-pkg h3{
       margin:0; font-family:Montserrat,sans-serif;
@@ -1162,14 +1164,14 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-pkg ul{ list-style:none; padding:0; margin:0; display:grid; gap:.45rem; flex:1; }
     .yl-mo .yl-pkg li{
-      font-size:13.5px; color:var(--muted);
+      font-size:.8438rem; color:var(--muted);
       padding-left:.9rem; position:relative; line-height:1.4;
     }
     .yl-mo .yl-pkg li::before{
       content:""; position:absolute; left:0; top:.5rem;
       width:5px; height:5px; border-radius:50%; background:var(--blue);
     }
-    .yl-mo .yl-pkg .note{ margin:0; font-size:12.5px; color:var(--muted); line-height:1.45; }
+    .yl-mo .yl-pkg .note{ margin:0; font-size:max(12px, .7812rem); color:var(--muted); line-height:1.45; }
 
     .yl-mo .yl-faq{
       padding:3.5rem 0;
@@ -1192,22 +1194,22 @@ function ts_render_motion_service_page(array $service): void
       font-size:clamp(1.5rem,3vw,2rem); font-weight:800;
     }
     .yl-mo .yl-faq-intro .lead{
-      margin:0 0 1.25rem; color:var(--muted); font-size:14.5px; line-height:1.55; max-width:28ch;
+      margin:0 0 1.25rem; color:var(--muted); font-size:.9062rem; line-height:1.55; max-width:28ch;
     }
     .yl-mo .yl-faq-intro .hint{
       display:none;
       padding:1rem 1.1rem;
       border-radius:1rem;
-      border:1px dashed rgba(124,58,237,.35);
-      background:rgba(124,58,237,.05);
-      font-size:13px; color:var(--muted); line-height:1.5;
+      border:1px dashed rgba(31,122,90,.35);
+      background:rgba(31,122,90,.05);
+      font-size:max(12px, .8125rem); color:var(--muted); line-height:1.5;
     }
     @media (min-width:900px){
       .yl-mo .yl-faq-intro .hint{ display:block; }
       .yl-mo .yl-faq-intro{ position:sticky; top:5.5rem; }
     }
     .yl-mo .yl-faq-intro .hint strong{
-      display:block; color:var(--ink); font-size:13.5px; margin-bottom:.25rem;
+      display:block; color:var(--ink); font-size:.8438rem; margin-bottom:.25rem;
     }
     .yl-mo .yl-faq-list{ display:grid; gap:.75rem; max-width:none; width:100%; }
     .yl-mo details{
@@ -1217,13 +1219,13 @@ function ts_render_motion_service_page(array $service): void
       align-self:start;
     }
     .yl-mo details[open]{
-      box-shadow:0 14px 34px rgba(124,58,237,.12);
-      border-color:rgba(124,58,237,.35);
+      box-shadow:0 14px 34px rgba(31,122,90,.12);
+      border-color:rgba(31,122,90,.35);
     }
     .yl-mo summary{
       cursor:pointer; list-style:none;
       padding:1rem 1.15rem;
-      font-weight:700; font-size:14.5px;
+      font-weight:700; font-size:.9062rem;
       display:flex; justify-content:space-between; align-items:center; gap:1rem;
       color:var(--ink);
     }
@@ -1263,7 +1265,7 @@ function ts_render_motion_service_page(array $service): void
       pointer-events:none;
       background:repeating-linear-gradient(
         to bottom,
-        rgba(124,58,237,.22) 0 3px,
+        rgba(31,122,90,.22) 0 3px,
         transparent 3px 10px
       );
       transform-origin:top;
@@ -1277,7 +1279,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-faq-stripes p{
       margin:0;
       padding:.2rem 0 0;
-      font-size:14px; line-height:1.65; color:var(--muted);
+      font-size:.875rem; line-height:1.65; color:var(--muted);
       animation:ylMoStripeText .4s ease .12s both;
     }
     @keyframes ylMoStripeText{
@@ -1296,7 +1298,7 @@ function ts_render_motion_service_page(array $service): void
     .yl-mo .yl-related h2{
       margin:0 0 1rem;
       font-family:"IBM Plex Mono",monospace;
-      font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+      font-size:max(12px, .75rem); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
     }
     .yl-mo .yl-rel-grid{ display:flex; flex-wrap:wrap; gap:.65rem; }
     .yl-mo .yl-rel{
@@ -1304,7 +1306,7 @@ function ts_render_motion_service_page(array $service): void
       padding:.5rem .95rem; border-radius:999px;
       background:#fff; border:1px solid var(--line);
       text-decoration:none; color:var(--ink);
-      font-size:13px; font-weight:700;
+      font-size:max(12px, .8125rem); font-weight:700;
       box-shadow:2px 2px 0 rgba(15,23,42,.08);
       transition:transform .2s, color .2s;
     }
@@ -1328,7 +1330,7 @@ function ts_render_motion_service_page(array $service): void
     }
     .yl-mo .yl-close p{
       margin:0 auto 1.5rem; max-width:34rem;
-      color:var(--muted); font-size:15px; line-height:1.55;
+      color:var(--muted); font-size:.9375rem; line-height:1.55;
     }
   </style>
 
@@ -1351,7 +1353,7 @@ function ts_render_motion_service_page(array $service): void
               storyboards, kinetic type, social cuts and UI micro-animations that still feel on-brand.
             </p>
             <div class="yl-hero-actions">
-              <a class="yl-btn yl-btn-solid" href="/contact">Request a motion enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+              <a class="yl-btn yl-btn-solid" href="#cd-brief">Request a motion enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
               <?php if ($hub): ?>
               <a class="yl-btn yl-btn-ghost" href="<?= ts_h($hub["href"]) ?>">All Creative Design</a>
               <?php endif; ?>
@@ -1514,7 +1516,7 @@ function ts_render_motion_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/motion-graphics/craft</span>
+          <span class="path">Craft</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1541,7 +1543,7 @@ function ts_render_motion_service_page(array $service): void
       <div class="yl-window yl-reveal d2">
         <div class="yl-window-bar">
           <span class="yl-dot"></span><span class="yl-dot"></span><span class="yl-dot"></span>
-          <span class="path">~/motion-graphics/deliverables</span>
+          <span class="path">Deliverables</span>
         </div>
         <div class="yl-window-body">
           <div class="yl-grid cols-3">
@@ -1631,7 +1633,7 @@ function ts_render_motion_service_page(array $service): void
     <div class="yl-wrap">
       <span class="yl-sec-label">Engagement options</span>
       <h2 class="yl-reveal">Pick the depth you need</h2>
-      <p class="lead yl-reveal d1">Tell us on the contact form — one hook, a campaign kit or in-product micro-motion.</p>
+      <p class="lead yl-reveal d1">Tell us in the brief below — one hook, a campaign kit or in-product micro-motion.</p>
       <div class="yl-pkg-grid">
         <?php foreach ($packages as $pkg):
             $hot = !empty($pkg[4]);
@@ -1645,7 +1647,7 @@ function ts_render_motion_service_page(array $service): void
             <?php endforeach; ?>
           </ul>
           <p class="note"><?= ts_h($pkg[3]) ?></p>
-          <a class="yl-btn yl-btn-solid" href="/contact" style="align-self:flex-start">Enquire on contact <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
+          <a class="yl-btn yl-btn-solid" href="#cd-brief" data-cd-pick="<?= ts_h($pkg[0]) ?>" style="align-self:flex-start">Ask about this package <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
         </article>
         <?php endforeach; ?>
       </div>
@@ -1659,7 +1661,7 @@ function ts_render_motion_service_page(array $service): void
         <p class="lead">Straight answers so you can decide if we are the right fit.</p>
         <div class="hint">
           <strong>Still scoping the piece?</strong>
-          Send a rough script or reference link on contact — we’ll suggest length, formats and a board-first path.
+          Send a rough script or reference link in the brief below — we’ll suggest length, formats and a board-first path.
         </div>
       </div>
       <div class="yl-faq-list" data-mo-faq>
@@ -1691,14 +1693,19 @@ function ts_render_motion_service_page(array $service): void
   </section>
   <?php endif; ?>
 
-  <section class="yl-close">
-    <h2>Ready to make the brand move?</h2>
-    <p>
-      Send your script, brand assets or reference links on our contact page.
-      We’ll reply with suggested length, formats and next steps.
-    </p>
-    <a class="yl-btn yl-btn-solid" href="/contact">Go to contact / enquiry <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i></a>
-  </section>
+  <?php ts_cd_brief([
+      "title" => "Got something that should",
+      "em" => "move?",
+      "sub" => "An explainer, launch ads, social loops or UI animation. Tell us the idea and where it will play.",
+      "gets" => ["A suggested format, length and aspect ratios", "Which package fits", "The assets we would need from you"],
+      "options" => ["Motion Sprint", "Campaign Motion Kit", "Product Micro-Motion", "Not sure yet"],
+      "pick" => "Not sure yet",
+      "projectLabel" => "Which package are you looking at?",
+      "file" => "motion-brief.mp4",
+      "urlLabel" => "Website, reference video or brand link",
+      "msgPlaceholder" => "e.g. A 45-second explainer for our app's home page.",
+      "source" => $service["label"] . " page",
+  ]); ?>
 </div>
 
 <script>
@@ -1796,10 +1803,12 @@ function ts_render_motion_service_page(array $service): void
 
 <script type="application/ld+json"><?= json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <script type="application/ld+json"><?= json_encode($serviceSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+<script type="application/ld+json"><?= json_encode(ts_cd_breadcrumb_ld([["Home", "/"], ["Services", "/services"], ["Creative Design", "/services/creative-design"], [$service["label"], $canonical]]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 <?php
     ts_layout($pageTitle, ob_get_clean(), [
         "description" => $pageDesc,
         "path" => $canonical,
+        "extraStyles" => [ts_cd_asset("/css/cd-common.css")],
         "bodyClass" => "page-services page-svc-motion-graphics page-yl-cd page-yl-mo",
         "image" => ts_og_image("/images/stock/photo-1618005182384-a83a8bd57fbe.jpg"),
     ]);

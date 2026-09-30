@@ -1,352 +1,264 @@
 <?php
 $site = ts_site();
 
-$aboutStats = [
-    ["value" => "120+", "target" => 120, "suffix" => "+", "label" => "Projects Delivered"],
-    ["value" => "98%", "target" => 98, "suffix" => "%", "label" => "Client Retention"],
-    ["value" => "5+", "target" => 5, "suffix" => "+", "label" => "Years of Excellence"],
-    ["value" => "40+", "target" => 40, "suffix" => "+", "label" => "Digital Specialists"],
-];
+/* Only verified numbers belong here; each stat shows once its value is set in .env. */
+$facts = array_values(array_filter([
+    ["value" => (int) (ts_env("STAT_PROJECTS", "0") ?? 0), "suffix" => "+", "label" => "Projects delivered"],
+    ["value" => (int) (ts_env("STAT_TEAM", "0") ?? 0), "suffix" => "", "label" => "People on the team"],
+    ["value" => (int) (ts_env("STAT_YEARS", "0") ?? 0), "suffix" => "", "label" => "Years in business"],
+    ["value" => count(TS_SERVICE_MEGA), "suffix" => "", "label" => "Service practices"],
+], static fn(array $f): bool => $f["value"] > 0));
 
-$practices = [];
+/* One team per practice, plus the assistants who lead every client relationship. */
+$teamMeta = [
+    "Online Marketing" => [
+        "team" => "Marketing team",
+        "roles" => ["SEO specialists", "Paid ads managers", "Content & social strategists"],
+        "copy" => "Plans and runs the campaigns that bring in traffic, leads and sales — and reports on them every month.",
+    ],
+    "Development" => [
+        "team" => "Development team",
+        "roles" => ["Full-stack developers", "E-commerce engineers", "QA testers"],
+        "copy" => "Builds fast, secure websites, custom software, CRMs and online stores that your team can run with confidence.",
+    ],
+    "Mobile Apps" => [
+        "team" => "Mobile team",
+        "roles" => ["Android & iOS developers", "Flutter & React Native engineers", "Release & support"],
+        "copy" => "Designs, builds and maintains native and cross-platform apps, from first release to regular updates.",
+    ],
+    "Creative Design" => [
+        "team" => "Design team",
+        "roles" => ["UI/UX designers", "Brand designers", "Motion designers"],
+        "copy" => "Creates brand identities, interfaces and motion that make your product clear, credible and easy to use.",
+    ],
+];
+$teams = [];
 foreach (TS_SERVICE_MEGA as $col) {
-    $practices[] = [
-        "title" => $col["title"],
+    $meta = $teamMeta[$col["title"]] ?? null;
+    if (!$meta) {
+        continue;
+    }
+    $teams[] = $meta + [
         "icon" => $col["icon"],
-        "items" => array_slice($col["items"], 0, 6),
-        "href" => match ($col["title"]) {
-            "Online Marketing" => "/services/online-marketing",
-            "Development" => "/services/development",
-            "Mobile Apps" => "/services/mobile-apps",
-            "Creative Design" => "/services/creative-design",
-            default => "/services",
-        },
+        "practice" => $col["title"],
+        "href" => ts_category_href($col["title"]),
     ];
 }
 
 $journey = ts_va_steps();
 
-$wins = [
-    ["title" => "Products that ship on time", "copy" => "Clear milestones, visible progress and launches that land without drama."],
-    ["title" => "Marketing that compounds", "copy" => "SEO, ads and content tied to pipeline — not empty vanity metrics."],
-    ["title" => "Apps people actually use", "copy" => "Mobile experiences built for retention, speed and everyday usefulness."],
-    ["title" => "Design that sells the story", "copy" => "Interfaces and brand systems that feel sharp and support every funnel step."],
+$reasons = [
+    ["icon" => "fa-headset", "title" => "A dedicated point of contact", "copy" => "One Virtual Assistant knows your business and handles every question, update and request — no ticket queues."],
+    ["icon" => "fa-layer-group", "title" => "Every service under one roof", "copy" => "Marketing, development, mobile apps and design work together, so nothing gets lost between vendors."],
+    ["icon" => "fa-comments", "title" => "Honest, plain-language advice", "copy" => "We recommend only what fits your goals and budget, and explain the trade-offs clearly."],
+    ["icon" => "fa-calendar-check", "title" => "Clear timelines and updates", "copy" => "Agreed milestones, regular progress updates and review links — you always know where things stand."],
+    ["icon" => "fa-user-shield", "title" => "Secure and confidential", "copy" => "NDAs on request, role-based access and careful handling of your data, accounts and customer details."],
+    ["icon" => "fa-chart-line", "title" => "Support after launch", "copy" => "Monthly reports, maintenance and improvements — we stay with you as your business grows."],
 ];
 
-$clients = ["Next.js", "React", "Laravel", "PHP", "Flutter", "AWS", "Shopify", "Figma", "Node.js", "MySQL", "WordPress", "Firebase"];
-
-$confessions = [
-    ["quote" => "ScaleSphere delivers on time with no compromise in quality. Responsive team and excellent analytical skills.", "name" => "Nishant Kumar", "role" => "CEO, Bravo Pharma", "initials" => "NK"],
-    ["quote" => "We are very satisfied to have found ScaleSphere as our development partner. True professionals from start to finish.", "name" => "Bhuvan Patil", "role" => "Entrepreneur", "initials" => "BP"],
-    ["quote" => "The team displays real understanding of our issues and ships quality work on every milestone.", "name" => "Nikhil Kumar", "role" => "Entrepreneur", "initials" => "NK"],
-];
+$mapSrc = "https://www.google.com/maps?q=" . rawurlencode($site["address"]) . "&z=13&output=embed";
+$directions = "https://maps.google.com/?q=" . rawurlencode($site["address"]);
 
 ob_start();
 ?>
-<div class="tw-about tw-site font-display text-ink bg-[#F6F7F9] overflow-x-hidden" data-ab-page>
+<div class="vh vp" data-vh-root>
 
-  <!-- 1. HERO — Griflan oversized statement, ScaleSphere palette -->
-  <section class="relative min-h-[72svh] flex items-center justify-center text-center px-4 sm:px-6 pt-20 pb-12 bg-gradient-to-b from-[#F6F7F9] via-brand-soft/40 to-[#F6F7F9]">
-    <div class="absolute inset-0 pointer-events-none opacity-40 bg-[radial-gradient(ellipse_60%_45%_at_50%_20%,rgba(28,79,214,.12),transparent_70%)]" aria-hidden="true"></div>
-    <div class="relative z-[1] max-w-5xl mx-auto w-full">
-      <p class="ab-reveal m-0 mb-6 text-[11px] sm:text-xs font-extrabold tracking-[0.18em] uppercase text-brand" data-ab-reveal>
-        Dedicated Virtual Assistant · Real People
+  <!-- HERO -->
+  <section class="vp-hero" aria-labelledby="abTitle">
+    <div class="vh-wrap vp-hero-inner">
+      <nav class="vp-crumbs" aria-label="Breadcrumb" data-vh-hero>
+        <a href="/">Home</a><i class="fas fa-chevron-right" aria-hidden="true"></i><span aria-current="page">About Us</span>
+      </nav>
+      <h1 class="vp-title" id="abTitle" data-vh-hero>A digital agency built around one simple idea: you always know who to talk to.</h1>
+      <p class="vp-lead" data-vh-hero>
+        <?= ts_h($site["name"]) ?> pairs every client with a dedicated Virtual Assistant, backed by in-house teams for marketing, development, mobile apps and design.
       </p>
-      <h1 class="ab-reveal m-0 text-[clamp(2.4rem,9vw,5.75rem)] font-extrabold tracking-[-0.045em] leading-[0.96]" data-ab-reveal data-ab-delay="1">
-        Your digital growth partner with a dedicated
-        <em class="italic text-brand">Virtual Assistant</em>.
-      </h1>
-      <p class="ab-reveal mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-3 text-[15px] sm:text-lg text-muted font-body max-w-2xl mx-auto" data-ab-reveal data-ab-delay="2">
-        <span class="hidden sm:inline-block w-8 h-px bg-brand/40" aria-hidden="true"></span>
-        Marketing, development, mobile apps and design — coordinated daily by one real contact.
-        <span class="hidden sm:inline-block w-8 h-px bg-brand/40" aria-hidden="true"></span>
-      </p>
-      <div class="ab-reveal mt-10 flex flex-wrap gap-3 justify-center" data-ab-reveal data-ab-delay="3">
-        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-gradient-to-br from-brand to-[#3D6BE8] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">
-          Book Free Strategy Call <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
-        <a href="#ab-story" class="inline-flex items-center justify-center gap-2 min-h-12 px-7 rounded-full bg-white text-ink text-[13px] font-extrabold tracking-wide uppercase no-underline border border-line hover:border-brand/30 hover:text-brand transition">
-          Our Story
-        </a>
+      <div class="vh-hero-ctas vp-ctas" data-vh-hero>
+        <a href="/contact" class="vh-btn">Book a free consultation</a>
+        <a href="#ab-team" class="vh-btn vh-btn--ghost">Meet our teams</a>
       </div>
     </div>
   </section>
 
-  <!-- 2. STATEMENT -->
-  <section class="py-10 sm:py-14 md:py-16 border-t border-line">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 lg:gap-12 items-start">
-      <h2 class="ab-reveal m-0 text-[clamp(2rem,5.5vw,3.75rem)] font-extrabold tracking-[-0.04em] leading-[1.02]" data-ab-reveal>
-        Crafting products that <em class="italic text-brand">hit hard</em>.
-      </h2>
-      <p class="ab-reveal m-0 text-[15px] sm:text-[17px] leading-relaxed text-muted font-body md:pt-2" data-ab-reveal data-ab-delay="2">
-        We work with companies that have something worth building. Your dedicated Virtual Assistant coordinates strategy, design, development and marketing — so ideas move from concept to execution without bouncing between disconnected specialists.
-      </p>
-    </div>
-  </section>
+  <div class="vh-sheet">
 
-  <!-- 3. STATS -->
-  <section class="pb-16 sm:pb-24" aria-label="ScaleSphere at a glance">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 border-t border-line pt-8">
-        <?php foreach ($aboutStats as $i => $stat): ?>
-        <div class="ab-reveal" data-ab-reveal data-ab-delay="<?= min($i + 1, 4) ?>">
-          <strong class="block text-[clamp(2.2rem,5vw,3.5rem)] font-extrabold tracking-[-0.04em] leading-none ab-counter"
-                  data-target="<?= (int) $stat["target"] ?>"
-                  data-suffix="<?= ts_h($stat["suffix"]) ?>"><?= ts_h($stat["value"]) ?></strong>
-          <span class="block mt-2.5 text-[11px] sm:text-xs font-extrabold tracking-[0.1em] uppercase text-muted"><?= ts_h($stat["label"]) ?></span>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. STORY — dark band -->
-  <section class="py-10 sm:py-14 md:py-16 bg-brand-deep text-white" id="ab-story">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)] grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
-      <div class="ab-reveal" data-ab-reveal>
-        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-[#9ec5ff] mb-4">Our Story</span>
-        <h2 class="m-0 text-[clamp(2rem,5vw,3.4rem)] font-extrabold tracking-[-0.04em] leading-[1.05]">
-          Built around <em class="italic text-[#9ec5ff]">better ideas</em>.
-        </h2>
-        <div class="mt-8 pl-5 border-l-[3px] border-[#4c8dff] bg-white/5 py-5 pr-5 rounded-r-2xl">
-          <strong class="block text-lg mb-2">Technology should create progress.</strong>
-          <span class="block text-white/70 leading-relaxed font-body">Great digital experiences make businesses simpler, stronger and ready for what comes next.</span>
-        </div>
-      </div>
-      <div class="ab-reveal space-y-4 text-[15px] sm:text-base leading-relaxed text-white/75 font-body" data-ab-reveal data-ab-delay="2">
-        <p class="m-0">Businesses today need more than a website or an app. They need experiences that connect with people, solve real problems and support long-term growth.</p>
-        <p class="m-0">That is where <?= ts_h($site["name"]) ?> comes in. We assign you a dedicated Virtual Assistant who coordinates strategy, design, development and marketing — one daily contact backed by a full specialist team.</p>
-        <p class="m-0">Your assistant listens, understands the bigger picture, keeps feedback moving and builds around the outcomes that matter — from product and web to mobile and marketing.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. PRACTICES — Griflan “we know what we’re good at” -->
-  <section class="py-10 sm:py-14 md:py-16">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
-      <div class="ab-reveal max-w-xl mb-6 sm:mb-8" data-ab-reveal>
-        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">What Your Assistant Delivers</span>
-        <h2 class="m-0 text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.04em] leading-[1.05]">
-          Every service. <em class="italic text-brand">One assistant.</em>
-        </h2>
-        <p class="mt-4 text-[15px] leading-relaxed text-muted font-body">Four focused practices — all coordinated by your dedicated Virtual Assistant from strategy through launch.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 border-t border-line pt-10">
-        <?php foreach ($practices as $i => $practice): ?>
-        <article class="ab-reveal group" data-ab-reveal data-ab-delay="<?= min($i + 1, 4) ?>">
-          <div class="flex items-center gap-2.5 mb-3">
-            <span class="w-9 h-9 rounded-xl bg-brand-soft text-brand grid place-items-center text-sm"><i class="fas <?= ts_h($practice["icon"]) ?>" aria-hidden="true"></i></span>
-            <h3 class="m-0 text-lg font-extrabold tracking-[-0.02em] group-hover:text-brand transition-colors"><?= ts_h($practice["title"]) ?></h3>
-          </div>
-          <ul class="m-0 p-0 list-none flex flex-col">
-            <?php foreach ($practice["items"] as $item): ?>
-            <li class="border-b border-line py-2.5 text-[14px] font-semibold text-slate-600 last:border-0">
-              <a href="<?= ts_h(ts_service_href($item)) ?>" class="no-underline text-inherit hover:text-brand transition-colors"><?= ts_h($item) ?></a>
-            </li>
-            <?php endforeach; ?>
+    <!-- WHO WE ARE -->
+    <section class="vh-section vp-about" aria-labelledby="abWhoTitle">
+      <div class="vh-wrap vp-split">
+        <div class="vp-split-copy">
+          <span class="vh-pill vh-pill--neutral" data-vh-reveal><i class="fas fa-building" aria-hidden="true"></i> Who we are</span>
+          <h2 class="vh-h2" id="abWhoTitle" data-vh-reveal>Specialist skills, with the simplicity of one relationship</h2>
+          <p class="vh-small" data-vh-reveal>
+            Growing a business online usually means juggling an SEO agency, a web developer, an app studio and a designer — each with their own process and their own updates to chase.
+          </p>
+          <p class="vh-small" data-vh-reveal>
+            We built <?= ts_h($site["name"]) ?> to remove that friction. Your Virtual Assistant learns your business, explains your options, and coordinates our specialists from the first call through launch and beyond. You get the depth of a full agency, with one person who already knows your project.
+          </p>
+          <ul class="vh-checks" data-vh-reveal>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Real people — never bots or call centres</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> In-house specialists across four practices</li>
+            <li><i class="fas fa-check" aria-hidden="true"></i> Calls on phone, WhatsApp or video, wherever you are</li>
           </ul>
-          <a href="<?= ts_h($practice["href"]) ?>" class="inline-flex items-center gap-1.5 mt-4 text-[12px] font-extrabold uppercase tracking-[0.08em] text-brand no-underline">
-            Explore <i class="fas fa-arrow-right text-[10px]" aria-hidden="true"></i>
-          </a>
-        </article>
-        <?php endforeach; ?>
+        </div>
+        <figure class="vp-split-media" data-vh-img>
+          <img src="/images/team/office-2.jpg" alt="Laptop and project notes on a work desk" width="1024" height="683" loading="lazy" decoding="async">
+        </figure>
       </div>
-    </div>
-  </section>
 
-  <!-- 6. PROCESS -->
-  <section class="py-10 sm:py-14 bg-gradient-to-b from-[#f7faff] to-white border-t border-line">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
-      <div class="ab-reveal max-w-xl mb-10" data-ab-reveal>
-        <span class="inline-block text-[11px] font-extrabold tracking-[0.16em] uppercase text-brand mb-3">How It Works</span>
-        <h2 class="m-0 text-[clamp(2rem,5vw,3.4rem)] font-extrabold tracking-[-0.04em] leading-[1.05]">
-          From appointment to <em class="italic text-brand">delivery</em>.
-        </h2>
-        <p class="mt-3 text-[14px] sm:text-[15px] leading-relaxed text-muted font-body">Book on contact, your Virtual Assistant reaches out, we discuss services, then your assistant coordinates everything daily.</p>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <?php foreach ($journey as $i => $step): ?>
-        <article class="ab-reveal p-5 rounded-2xl border border-line bg-white hover:-translate-y-1 hover:border-brand/30 hover:shadow-lg transition duration-300" data-ab-reveal data-ab-delay="<?= min($i + 1, 4) ?>">
-          <span class="block text-[11px] font-extrabold tracking-[0.14em] text-brand mb-3"><?= ts_h($step["num"]) ?></span>
-          <span class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-brand-soft text-brand text-sm mb-2" aria-hidden="true"><i class="fas <?= ts_h($step["icon"] ?? "fa-check") ?>"></i></span>
-          <h3 class="m-0 mb-2 text-base font-extrabold"><?= ts_h($step["title"]) ?></h3>
-          <p class="m-0 text-[13px] leading-snug text-muted font-body"><?= ts_h($step["copy"]) ?></p>
-        </article>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. WINS -->
-  <section class="py-8 sm:py-10 md:py-12">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
-      <h2 class="ab-reveal m-0 mb-5 sm:mb-6 text-[clamp(2.2rem,6vw,4rem)] font-extrabold tracking-[-0.045em] leading-[1.02]" data-ab-reveal>
-        <em class="italic">You</em> grow.<br>We <em class="italic text-brand">deliver</em>.
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-line rounded-2xl overflow-hidden border border-line">
-        <?php foreach ($wins as $i => $win): ?>
-        <article class="ab-reveal bg-white p-6 sm:p-8 hover:bg-brand-soft/40 transition-colors" data-ab-reveal data-ab-delay="<?= min($i + 1, 4) ?>">
-          <h3 class="m-0 mb-2 text-lg sm:text-xl font-extrabold tracking-[-0.02em]"><?= ts_h($win["title"]) ?></h3>
-          <p class="m-0 text-[14px] sm:text-[15px] leading-relaxed text-muted font-body"><?= ts_h($win["copy"]) ?></p>
-        </article>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. CLIENTS / STACK MARQUEE -->
-  <section class="py-6 sm:py-8 border-y border-line bg-[#F0F2F6] overflow-hidden">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)] mb-4 sm:mb-5">
-      <h2 class="ab-reveal m-0 text-[clamp(1.5rem,3.6vw,2.25rem)] font-extrabold tracking-[-0.03em]" data-ab-reveal>
-        Recent <em class="italic text-brand">stack</em>
-      </h2>
-    </div>
-    <div class="ab-reveal relative overflow-hidden" data-ab-reveal data-ab-delay="1">
-      <div class="flex w-max gap-4 sm:gap-5 will-change-transform" data-ab-marquee>
-        <?php for ($loop = 0; $loop < 2; $loop++): ?>
-          <?php foreach ($clients as $name): ?>
-          <span class="shrink-0 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full border border-line bg-white text-[15px] sm:text-[18px] font-extrabold tracking-wide uppercase text-slate-700 shadow-[0_6px_18px_rgba(15,23,42,.05)]"><?= ts_h($name) ?></span>
+      <div class="vh-wrap">
+        <?php if (count($facts) > 1): ?>
+        <div class="vp-facts" data-vh-stagger>
+          <?php foreach ($facts as $f): ?>
+          <div class="vp-fact">
+            <strong><span data-vh-count="<?= (int) $f["value"] ?>"><?= (int) $f["value"] ?></span><?= ts_h($f["suffix"]) ?></strong>
+            <span class="vp-fact-label"><?= ts_h($f["label"]) ?></span>
+          </div>
           <?php endforeach; ?>
-        <?php endfor; ?>
+        </div>
+        <?php endif; ?>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 9. CONFESSIONS -->
-  <section class="py-10 sm:py-14 md:py-16 bg-brand-deep text-white">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)]">
-      <h2 class="ab-reveal m-0 mb-6 sm:mb-8 text-[clamp(2rem,5vw,3.5rem)] font-extrabold tracking-[-0.04em] leading-[1.05]" data-ab-reveal>
-        Client <em class="italic text-[#9ec5ff]">confessions</em>
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-        <?php foreach ($confessions as $i => $t): ?>
-        <blockquote class="ab-reveal m-0 p-6 sm:p-7 rounded-2xl border border-white/10 bg-white/[0.04]" data-ab-reveal data-ab-delay="<?= min($i + 1, 3) ?>">
-          <p class="m-0 mb-6 text-[15px] sm:text-base leading-relaxed font-body text-white/85">&ldquo;<?= ts_h($t["quote"]) ?>&rdquo;</p>
-          <footer class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-[12px] font-extrabold text-[#9ec5ff]"><?= ts_h($t["initials"]) ?></span>
-            <span>
-              <strong class="block text-sm font-extrabold"><?= ts_h($t["name"]) ?></strong>
-              <span class="text-[12px] text-white/55 font-body"><?= ts_h($t["role"]) ?></span>
-            </span>
-          </footer>
-        </blockquote>
-        <?php endforeach; ?>
+    <!-- LOCATION -->
+    <section class="vh-section vp-location" aria-labelledby="abLocTitle">
+      <div class="vh-wrap vp-loc-grid">
+        <div class="vp-loc-card" data-vh-reveal>
+          <span class="vh-pill vh-pill--green"><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Where we are</span>
+          <h2 class="vh-h3" id="abLocTitle">Based in <?= ts_h($site["address"]) ?>, working with clients worldwide</h2>
+          <p class="vh-small">Our team works from our office in <?= ts_h($site["address"]) ?>. Calls, updates and reviews are scheduled around your business hours, wherever you are.</p>
+          <ul class="vp-contact">
+            <li>
+              <span class="vp-contact-ico" aria-hidden="true"><i class="fas fa-map-marker-alt"></i></span>
+              <span><small>Office</small><?= ts_h($site["address"]) ?></span>
+            </li>
+            <li>
+              <span class="vp-contact-ico" aria-hidden="true"><i class="fas fa-phone-alt"></i></span>
+              <span><small>Phone</small><a href="tel:<?= ts_h($site["phoneHref"]) ?>"><?= ts_h($site["phone"]) ?></a></span>
+            </li>
+            <li>
+              <span class="vp-contact-ico" aria-hidden="true"><i class="fas fa-envelope"></i></span>
+              <span><small>Email</small><a href="mailto:<?= ts_h($site["email"]) ?>"><?= ts_h($site["email"]) ?></a></span>
+            </li>
+          </ul>
+          <a href="<?= ts_h($directions) ?>" class="vh-btn vh-btn--ghost" target="_blank" rel="noopener noreferrer">Get directions <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+        <div class="vp-map" data-vh-reveal>
+          <iframe src="<?= ts_h($mapSrc) ?>" title="Map showing the <?= ts_h($site["name"]) ?> office in <?= ts_h($site["address"]) ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 10. CLOSING + CTA -->
-  <section class="py-10 sm:py-14 md:py-16">
-    <div class="max-w-site mx-auto px-3 sm:px-5 lg:px-6 w-[min(1400px,100%)] text-center">
-      <p class="ab-reveal m-0 mx-auto max-w-4xl text-[clamp(1.5rem,4.2vw,2.75rem)] font-extrabold tracking-[-0.035em] leading-[1.15]" data-ab-reveal>
-        <?= ts_h($site["name"]) ?> sits at the intersection of strategy, craft and reliable delivery — shaping digital products that move metrics and leave a lasting mark.
-      </p>
-      <p class="ab-reveal mt-6 text-muted font-body" data-ab-reveal data-ab-delay="1">
-        Partnering with ambitious teams from <?= ts_h($site["address"]) ?>.
-      </p>
-      <div class="ab-reveal mt-10" data-ab-reveal data-ab-delay="2">
-        <a href="/contact" class="inline-flex items-center justify-center gap-2 min-h-12 px-8 rounded-full bg-gradient-to-br from-brand to-[#3D6BE8] text-white text-[13px] font-extrabold tracking-wide uppercase no-underline shadow-[0_14px_32px_rgba(28,79,214,.28)] hover:-translate-y-0.5 transition">
-          Let’s Connect <i class="fas fa-arrow-right" aria-hidden="true"></i>
-        </a>
+    <!-- TEAM -->
+    <section class="vh-section vp-team" id="ab-team" aria-labelledby="abTeamTitle">
+      <div class="vh-wrap">
+        <div class="vh-section-head">
+          <span class="vh-pill vh-pill--neutral" data-vh-reveal><i class="fas fa-users" aria-hidden="true"></i> Our team</span>
+          <h2 class="vh-h2" id="abTeamTitle" data-vh-reveal>The people behind every project</h2>
+          <p class="vh-small" data-vh-reveal>Each client works with a dedicated Virtual Assistant. Behind them, four specialist teams handle the work — one for each of our service practices.</p>
+        </div>
+
+        <article class="vp-lead-team" data-vh-reveal>
+          <div class="vp-lead-team-copy">
+            <span class="vh-tile vh-tile--green" aria-hidden="true"><i class="fas fa-headset"></i></span>
+            <div>
+              <h3 class="vh-h4">Virtual Assistants</h3>
+              <p class="vh-card-copy">Your day-to-day contact. They understand your goals, explain every service, write the brief, coordinate the specialists and keep you updated until the work is delivered.</p>
+            </div>
+          </div>
+          <div class="vh-stack" aria-hidden="true">
+            <?php foreach (["va-1", "va-2", "va-3", "va-5", "va-7"] as $img): ?>
+            <img src="/images/team/<?= ts_h($img) ?>.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+            <?php endforeach; ?>
+          </div>
+        </article>
+
+        <div class="vp-teams" data-vh-stagger>
+          <?php foreach ($teams as $t): ?>
+          <a class="vh-card vh-card--neutral vp-team-card" href="<?= ts_h($t["href"]) ?>">
+            <span class="vh-tile vh-tile--neutral" aria-hidden="true"><i class="fas <?= ts_h($t["icon"]) ?>"></i></span>
+            <h3 class="vh-h4"><?= ts_h($t["team"]) ?></h3>
+            <p class="vh-card-copy"><?= ts_h($t["copy"]) ?></p>
+            <ul class="vp-roles">
+              <?php foreach ($t["roles"] as $r): ?>
+              <li><?= ts_h($r) ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <span class="vh-practice-link"><?= ts_h($t["practice"]) ?> services <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+          </a>
+          <?php endforeach; ?>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- PROCESS -->
+    <section class="vh-section vp-process" aria-labelledby="abProcessTitle">
+      <div class="vh-wrap">
+        <div class="vh-section-head">
+          <span class="vh-pill vh-pill--green" data-vh-reveal><i class="fas fa-route" aria-hidden="true"></i> How we work</span>
+          <h2 class="vh-h2" id="abProcessTitle" data-vh-reveal>From your first message to a finished project</h2>
+        </div>
+        <ol class="vp-steps" data-vh-stagger>
+          <?php foreach ($journey as $step): ?>
+          <li class="vp-step">
+            <span class="vp-step-num"><?= ts_h($step["num"]) ?></span>
+            <span class="vp-step-ico" aria-hidden="true"><i class="fas <?= ts_h($step["icon"]) ?>"></i></span>
+            <h3 class="vp-step-title"><?= ts_h($step["title"]) ?></h3>
+            <p class="vh-card-copy"><?= ts_h($step["copy"]) ?></p>
+          </li>
+          <?php endforeach; ?>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WHY US -->
+    <section class="vh-section vp-why" aria-labelledby="abWhyTitle">
+      <div class="vh-wrap">
+        <div class="vh-section-head">
+          <span class="vh-pill vh-pill--neutral" data-vh-reveal><i class="fas fa-award" aria-hidden="true"></i> Why <?= ts_h($site["name"]) ?></span>
+          <h2 class="vh-h2" id="abWhyTitle" data-vh-reveal>Why businesses choose to work with us</h2>
+        </div>
+        <div class="vp-reasons" data-vh-stagger>
+          <?php foreach ($reasons as $r): ?>
+          <article class="vp-reason">
+            <span class="vp-reason-ico" aria-hidden="true"><i class="fas <?= ts_h($r["icon"]) ?>"></i></span>
+            <h3 class="vp-reason-title"><?= ts_h($r["title"]) ?></h3>
+            <p class="vh-card-copy"><?= ts_h($r["copy"]) ?></p>
+          </article>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="vh-section vh-cta-wrap">
+      <div class="vh-wrap">
+        <div class="vh-cta" data-vh-reveal>
+          <div>
+            <h2 class="vh-h2">Let's talk about your project</h2>
+            <p>Book a free consultation. Your Virtual Assistant will call you, understand what you need and recommend the right next step — with no obligation.</p>
+          </div>
+          <a href="/contact" class="vh-btn vh-btn--light">Book a free consultation <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </div>
-
-<script>
-(() => {
-  const root = document.querySelector("[data-ab-page]");
-  if (!root) return;
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const els = [...root.querySelectorAll("[data-ab-reveal]")];
-
-  const show = (el) => {
-    el.classList.remove("opacity-0", "translate-y-7");
-    el.classList.add("opacity-100", "translate-y-0");
-  };
-
-  els.forEach((el) => {
-    el.classList.add("transition", "duration-700", "ease-out");
-    const d = el.getAttribute("data-ab-delay");
-    if (d === "1") el.classList.add("delay-100");
-    if (d === "2") el.classList.add("delay-200");
-    if (d === "3") el.classList.add("delay-300");
-    if (d === "4") el.classList.add("delay-[400ms]");
-    if (reduce) {
-      show(el);
-      return;
-    }
-    el.classList.add("opacity-0", "translate-y-7");
-  });
-
-  if (!reduce && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        show(e.target);
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
-    els.forEach((el) => io.observe(el));
-    // Hero items near top: reveal immediately so first paint is never blank
-    requestAnimationFrame(() => {
-      els.slice(0, 4).forEach((el) => {
-        const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight * 0.92) show(el);
-      });
-    });
-  } else if (!reduce) {
-    els.forEach(show);
-  }
-
-  const counters = [...root.querySelectorAll(".ab-counter")];
-  const run = (el) => {
-    const target = Number(el.getAttribute("data-target") || "0");
-    const suffix = el.getAttribute("data-suffix") || "";
-    if (reduce || !target) {
-      el.textContent = target + suffix;
-      return;
-    }
-    const start = performance.now();
-    const tick = (now) => {
-      const t = Math.min(1, (now - start) / 1100);
-      el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3))) + suffix;
-      if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = target + suffix;
-    };
-    requestAnimationFrame(tick);
-  };
-
-  if ("IntersectionObserver" in window) {
-    const cio = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (!e.isIntersecting) return;
-        run(e.target);
-        cio.unobserve(e.target);
-      });
-    }, { threshold: 0.4 });
-    counters.forEach((el) => cio.observe(el));
-  } else {
-    counters.forEach(run);
-  }
-
-  const marquee = root.querySelector("[data-ab-marquee]");
-  if (marquee && window.gsap && !reduce) {
-    const half = marquee.scrollWidth / 2;
-    gsap.to(marquee, { x: -half, duration: 28, ease: "none", repeat: -1 });
-  }
-})();
-</script>
 <?php
-ts_layout("About Us", ob_get_clean(), [
-    "description" => "Learn about ScaleSphere — your dedicated Virtual Assistant for marketing, development, mobile apps and design.",
+$root = dirname(__DIR__, 3);
+$cssVer = @filemtime($root . "/public/css/va-home.css") ?: 1;
+$pagesVer = @filemtime($root . "/public/css/va-pages.css") ?: 1;
+$jsVer = @filemtime($root . "/public/js/va-home.js") ?: 1;
+ts_layout("About ScaleSphere | A Virtual Assistant-Led Digital Agency", ob_get_clean(), [
+    "description" => "Meet " . $site["name"] . ": a digital agency in " . $site["address"] . " that pairs every client with a dedicated Virtual Assistant, backed by marketing, development, mobile app and design teams.",
     "path" => "/about-us",
     "bodyClass" => "page-about",
+    "extraStyles" => ["/css/va-home.css?v=" . (int) $cssVer, "/css/va-pages.css?v=" . (int) $pagesVer],
+    "extraScripts" => ["/js/va-home.js?v=" . (int) $jsVer],
     "jsonld" => [
         ts_webpage_jsonld(
             "About Us",
-            "Learn about ScaleSphere — a digital solutions partner helping businesses turn ideas into products, experiences and measurable growth.",
+            "Meet " . $site["name"] . ": a digital agency that pairs every client with a dedicated Virtual Assistant, backed by in-house specialists.",
             "/about-us",
             "AboutPage"
         ),
