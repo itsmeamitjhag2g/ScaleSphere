@@ -95,7 +95,9 @@ function ts_public_paths(): array
     }
     if (function_exists("ts_blog_posts")) {
         foreach (ts_blog_posts() as $post) {
-            $paths[] = $post["href"];
+            if (($post["index"] ?? true) !== false) {
+                $paths[] = $post["href"];
+            }
         }
     }
     return array_values(array_unique($paths));
@@ -261,12 +263,24 @@ function ts_render_sitemap(): void
         }
     }
     $lastmod = gmdate("Y-m-d", $latest ?: time());
+    $postMods = [];
+    $blogLatest = "";
+    foreach (function_exists("ts_blog_posts") ? ts_blog_posts() : [] as $post) {
+        $mod = substr((string) (($post["modified"] ?? "") ?: ($post["date"] ?? "")), 0, 10);
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $mod)) {
+            $postMods[$post["href"]] = $mod;
+            $blogLatest = max($blogLatest, $mod);
+        }
+    }
+    if ($blogLatest !== "") {
+        $postMods["/blog"] = max($blogLatest, $lastmod);
+    }
     echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
     foreach (ts_public_paths() as $path) {
         echo "  <url>\n";
         echo "    <loc>" . ts_xml(ts_abs($path)) . "</loc>\n";
-        echo "    <lastmod>" . ts_xml($lastmod) . "</lastmod>\n";
+        echo "    <lastmod>" . ts_xml($postMods[$path] ?? $lastmod) . "</lastmod>\n";
         echo "    <changefreq>" . ($path === "/" ? "weekly" : "monthly") . "</changefreq>\n";
         echo "    <priority>" . ts_xml(ts_sitemap_priority($path)) . "</priority>\n";
         echo "  </url>\n";

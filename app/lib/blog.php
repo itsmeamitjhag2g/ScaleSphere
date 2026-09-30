@@ -13,8 +13,28 @@ function ts_blog_posts_dir(): string
     return dirname(__DIR__) . DIRECTORY_SEPARATOR . "pages" . DIRECTORY_SEPARATOR . "blog" . DIRECTORY_SEPARATOR . "post";
 }
 
-/** @return list<array<string, mixed>> */
+require_once __DIR__ . "/blog-view.php";
+
+/**
+ * Posts visible to the public: published and not scheduled for a future date.
+ *
+ * @return list<array<string, mixed>>
+ */
 function ts_blog_posts(): array
+{
+    static $public = null;
+    if (!is_array($public)) {
+        $public = array_values(array_filter(ts_blog_all_posts(), "ts_blog_is_public"));
+    }
+    return $public;
+}
+
+/**
+ * Every post file, including drafts and scheduled posts (dashboard use).
+ *
+ * @return list<array<string, mixed>>
+ */
+function ts_blog_all_posts(): array
 {
     static $posts = null;
     if (is_array($posts)) {
@@ -61,6 +81,8 @@ function ts_blog_posts(): array
         $data["cover"] = (string) ($data["cover"] ?? "/images/stock/photo-1460925895917-afdab827c52f.jpg");
         $data["readMinutes"] = (int) ($data["readMinutes"] ?? 4);
         $data["author"] = (string) ($data["author"] ?? "ScaleSphere");
+        $data["status"] = ($data["status"] ?? "published") === "draft" ? "draft" : "published";
+        $data["managed"] = !empty($data["managed"]);
         $data["file"] = $file;
         $posts[] = $data;
     }

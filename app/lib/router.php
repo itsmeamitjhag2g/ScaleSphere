@@ -40,7 +40,7 @@ function ts_web_route(string $path): array
         if ($path !== $canonical) {
             return ["redirect" => $canonical, "status" => 301];
         }
-        if (ts_blog_post_file($slug)) {
+        if (ts_blog_post_file($slug) && ts_blog_by_slug($slug)) {
             return ["file" => "blog/post/{$slug}.php", "vars" => [], "status" => 200];
         }
         return ["file" => "not-found.php", "vars" => [], "status" => 404];
@@ -83,6 +83,12 @@ function ts_web_route(string $path): array
 
 function ts_dispatch_web(string $path): void
 {
+    require_once __DIR__ . "/blog-admin.php";
+    if (ts_blog_admin_matches($path)) {
+        ts_blog_admin_dispatch($path);
+        return;
+    }
+
     if (
         ($_SERVER["REQUEST_METHOD"] ?? "") === "POST"
         && $path === "/contact"

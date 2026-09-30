@@ -5,3 +5,4 @@ storage/*.json
 composer.lock
 .vscode/
 /node_modules/
+storage/blog-admin/
