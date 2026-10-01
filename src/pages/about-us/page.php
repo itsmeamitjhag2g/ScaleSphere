@@ -56,8 +56,8 @@ $reasons = [
     ["icon" => "fa-chart-line", "title" => "Support after launch", "copy" => "Monthly reports, maintenance and improvements — we stay with you as your business grows."],
 ];
 
-$mapSrc = "https://www.google.com/maps?q=" . rawurlencode($site["address"]) . "&z=13&output=embed";
-$directions = "https://maps.google.com/?q=" . rawurlencode($site["address"]);
+$mapSrc = $site["mapEmbed"];
+$directions = $site["mapLink"];
 
 ob_start();
 ?>

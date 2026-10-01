@@ -53,7 +53,7 @@ $contactCards = [
         "icon_set" => "fas",
         "title" => "Location",
         "value" => $site["address"],
-        "href" => "https://maps.google.com/?q=" . rawurlencode($site["address"]),
+        "href" => $site["mapLink"],
         "tone" => "bg-[#E6F1EA] text-brand",
     ],
 ];

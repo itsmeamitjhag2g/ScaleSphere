@@ -14,7 +14,6 @@
             ["twitter", "Twitter / X", "fa-twitter"],
             ["linkedin", "LinkedIn", "fa-linkedin-in"],
             ["instagram", "Instagram", "fa-instagram"],
-            ["youtube", "YouTube", "fa-youtube"],
         ], fn($s) => ($site[$s[0]] ?? "") !== "");
         ?>
         <?php if ($socials): ?>
@@ -56,7 +55,7 @@
           <li><a href="mailto:<?= ts_h($site["email"]) ?>"><i class="far fa-envelope" aria-hidden="true"></i><span><?= ts_h($site["email"]) ?></span></a></li>
           <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span><?= ts_h($site["address"]) ?></span></li>
         </ul>
-        <a class="footer-map" href="https://maps.google.com/?q=<?= rawurlencode($site["address"]) ?>" target="_blank" rel="noopener noreferrer">Get Direction <i class="fas fa-arrow-right"></i></a>
+        <a class="footer-map" href="<?= ts_h($site["mapLink"]) ?>" target="_blank" rel="noopener noreferrer">Get Direction <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 

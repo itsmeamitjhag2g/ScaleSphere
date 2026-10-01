@@ -9,6 +9,8 @@ function ts_site(): array
     $url = rtrim((string) (ts_env("SITE_URL", ts()["clientUrl"] ?? "http://localhost:3000") ?? "http://localhost:3000"), "/");
     $email = (string) (ts_env("SITE_EMAIL", "info@scalesphere.com") ?? "info@scalesphere.com");
     $phone = (string) (ts_env("SITE_PHONE", "+91 8884 739 988") ?? "+91 8884 739 988");
+    $address = (string) (ts_env("SITE_ADDRESS", "Kota, Rajasthan, India") ?? "Kota, Rajasthan, India");
+    $mapQuery = trim((string) (ts_env("SITE_MAP_QUERY", "") ?? "")) ?: $address;
     $site = [
         "name" => (string) (ts_env("SITE_NAME", "ScaleSphere") ?? "ScaleSphere"),
         "tagline" => (string) (ts_env("SITE_TAGLINE", "Your dedicated Virtual Assistant for digital growth.") ?? "Your dedicated Virtual Assistant for digital growth."),
@@ -18,14 +20,14 @@ function ts_site(): array
         "phone" => $phone,
         "phoneHref" => preg_replace("/\s+/", "", $phone) ?? $phone,
         "whatsapp" => "https://wa.me/" . preg_replace("/\D+/", "", $phone),
-        "address" => (string) (ts_env("SITE_ADDRESS", "Kota, Rajasthan, India") ?? "Kota, Rajasthan, India"),
+        "address" => $address,
+        "mapEmbed" => "https://www.google.com/maps?q=" . rawurlencode($mapQuery) . "&z=17&hl=en&output=embed",
+        "mapLink" => "https://www.google.com/maps/search/?api=1&query=" . rawurlencode($mapQuery),
         "liveAssets" => rtrim((string) (ts_env("LIVE_ASSETS", $url) ?? $url), "/"),
         "facebook" => (string) (ts_env("SOCIAL_FACEBOOK", "") ?? ""),
         "twitter" => (string) (ts_env("SOCIAL_TWITTER", "") ?? ""),
         "linkedin" => (string) (ts_env("SOCIAL_LINKEDIN", "") ?? ""),
-        "pinterest" => (string) (ts_env("SOCIAL_PINTEREST", "") ?? ""),
         "instagram" => (string) (ts_env("SOCIAL_INSTAGRAM", "") ?? ""),
-        "youtube" => (string) (ts_env("SOCIAL_YOUTUBE", "") ?? ""),
         "certifications" => (string) (ts_env("SITE_CERTIFICATIONS", "") ?? ""),
     ];
     return $site;

@@ -58,8 +58,6 @@ function ts_organization_jsonld(): array
             $site["twitter"],
             $site["linkedin"],
             $site["instagram"],
-            $site["youtube"],
-            $site["pinterest"],
         ])),
     ];
 }

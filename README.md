@@ -166,9 +166,6 @@ SOCIAL_FACEBOOK=
 SOCIAL_TWITTER=
 SOCIAL_LINKEDIN=
 SOCIAL_INSTAGRAM=
-SOCIAL_YOUTUBE=
-SOCIAL_PINTEREST=
-
 # Set to 1 only when the site sits behind a proxy/CDN that terminates HTTPS (e.g. Cloudflare proxy).
 TRUST_PROXY=
 
