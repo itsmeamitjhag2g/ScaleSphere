@@ -392,7 +392,7 @@ ob_start();
         display:block;
         width:min(720px, 100%);
       margin:0 auto;
-        padding:clamp(5.25rem, 12vw, 5.75rem) clamp(1rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.75rem);
+        padding:clamp(1.75rem, 7vw, 2.75rem) clamp(1rem, 4vw, 1.5rem) clamp(1.25rem, 4vw, 1.75rem);
         text-align:center;
       }
       .svc-mh-eyebrow{

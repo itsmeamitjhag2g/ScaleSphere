@@ -504,6 +504,9 @@
   min-width:0;
 }
 .blg-filters::-webkit-scrollbar{ display:none; }
+@media (max-width:639px){
+  .blg-filters{ flex-wrap:wrap; overflow-x:visible; }
+}
 .blg-chip{
   flex:0 0 auto;
   appearance:none;

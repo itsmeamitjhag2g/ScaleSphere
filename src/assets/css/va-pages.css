@@ -202,9 +202,7 @@
   .vp-reasons,
   .vp-projects{ grid-template-columns:1fr; }
   .vp-lead-team-copy{ flex-direction:column; gap:14px; flex-basis:100%; }
-  .vp-filters{ flex-wrap:nowrap; overflow-x:auto; margin-inline:calc(-1 * var(--ss-pad-x, 5%)); padding-inline:var(--ss-pad-x, 5%); scrollbar-width:none; }
-  .vp-filters::-webkit-scrollbar{ display:none; }
-  .vp-filter{ flex-shrink:0; }
+  .vp-filter{ min-height:40px; padding:0 14px; font-size:13.5px; }
   .vp-loc-card .vh-btn,
   .vp-feature .vh-btn{ width:100%; }
 }
