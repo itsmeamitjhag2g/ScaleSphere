@@ -8,6 +8,7 @@
   --orange:#3B8767;
   --blue-soft:#E6F1EA;
   --muted:#6b6b6b;
+  --text:#1A1A1A;
   --line:rgba(31,122,90,.12);
   --deep:#0A0A12;
   --card:#ffffff;
@@ -814,7 +815,7 @@
 .blg-post-body h2:first-of-type{ margin-top:0; }
 .blg-post-body p{
   margin:0 0 1.15rem;
-  color:var(--muted);
+  color:var(--text);
   font-size:clamp(.98rem, 2vw, 1.12rem);
   line-height:1.7;
   font-weight:500;
@@ -822,17 +823,19 @@
 .blg-post-body ul{
   margin:0 0 1.25rem;
   padding-left:1.2rem;
-  color:var(--muted);
+  color:var(--text);
   font-size:clamp(.98rem, 2vw, 1.12rem);
   line-height:1.65;
+  font-weight:500;
 }
 .blg-post-body li{ margin-bottom:.45rem; }
 .blg-post-body ol{
   margin:0 0 1.25rem;
   padding-left:1.35rem;
-  color:var(--muted);
+  color:var(--text);
   font-size:clamp(.98rem, 2vw, 1.12rem);
   line-height:1.65;
+  font-weight:500;
 }
 .blg-post-body li > ul, .blg-post-body li > ol{ margin:.45rem 0 0; }
 .blg-post-body h3{
@@ -858,16 +861,40 @@
 }
 .blg-post-body a:not(.primary):not(.ghost):hover{ text-decoration-thickness:2px; }
 .blg-post-body strong{ color:var(--ink); font-weight:650; }
-.blg-post-body blockquote:not(.blg-post-quote){
-  margin:1.6rem 0;
-  padding:.2rem 0 .2rem 1.1rem;
-  border-left:3px solid #8FD3B3;
+.blg-post-body blockquote{
+  position:relative;
+  margin:2rem 0;
+  padding:1.35rem 1.5rem 1.35rem 4.1rem;
+  border:0;
+  border-radius:1.1rem;
+  background:#fff;
+  box-shadow:0 0 0 1px rgba(31,122,90,.14), 0 14px 30px rgba(15,23,42,.05);
   color:var(--ink);
-  font-size:clamp(1.02rem, 2.2vw, 1.2rem);
-  font-style:italic;
-  line-height:1.55;
+  font-family:"Plus Jakarta Sans", "Red Hat Display", sans-serif;
+  font-size:clamp(1.08rem, 2.4vw, 1.3rem);
+  font-weight:600;
+  font-style:normal;
+  line-height:1.5;
+  letter-spacing:-.01em;
 }
-.blg-post-body blockquote:not(.blg-post-quote) p{ color:inherit; font-size:inherit; }
+.blg-post-body blockquote::before{
+  content:"\201C";
+  position:absolute;
+  left:1.05rem;
+  top:.6rem;
+  font-family:Georgia, "Times New Roman", serif;
+  font-size:4.2rem;
+  line-height:1;
+  color:var(--blue);
+}
+.blg-post-body blockquote p{
+  margin:0 0 .6rem;
+  max-width:none;
+  color:inherit;
+  font:inherit;
+  letter-spacing:inherit;
+}
+.blg-post-body blockquote p:last-child{ margin-bottom:0; }
 .blg-post-body figure{ margin:1.75rem 0; }
 .blg-post-body figure img, .blg-post-body > p img{
   display:block;
@@ -920,7 +947,7 @@
   vertical-align:top;
 }
 .blg-post-body th{ color:var(--ink); font-weight:650; background:rgba(31,122,90,.05); }
-.blg-post-body td{ color:var(--muted); }
+.blg-post-body td{ color:var(--text); font-weight:500; }
 
 .blg-post-faq{ margin:2.25rem 0 0; }
 .blg-post-faq h2{ margin-top:0; }
@@ -972,42 +999,51 @@
 }
 
 .blg-post-callout{
-  margin:1.5rem 0 1.75rem;
-  padding:1.15rem 1.2rem;
-  border-left:3px solid var(--blue);
-  background:rgba(31,122,90,.06);
-  border-radius:0 .9rem .9rem 0;
+  margin:1.75rem 0 2rem;
+  padding:1.2rem 1.4rem 1.3rem;
+  border:1px solid rgba(31,122,90,.16);
+  border-left:4px solid var(--blue);
+  border-radius:0 1rem 1rem 0;
+  background:linear-gradient(135deg, #EAF5EE 0%, #F7FBF8 100%);
+  box-shadow:0 10px 24px rgba(31,122,90,.06);
 }
-.blg-post-callout-label{
-  margin:0 0 .35rem !important;
+.blg-post-callout > p:first-child{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;
+  margin:0 0 .7rem !important;
+  padding:.32rem .75rem;
+  border-radius:999px;
+  background:var(--blue);
+  color:#fff !important;
+  font-family:Montserrat, "Red Hat Display", sans-serif;
   font-size:.68rem !important;
-  font-weight:750 !important;
+  font-weight:700 !important;
+  font-style:normal;
+  line-height:1.2 !important;
   letter-spacing:.12em;
   text-transform:uppercase;
-  color:var(--blue) !important;
 }
-.blg-post-callout p:last-child{
-  margin:0 !important;
+.blg-post-callout > p:first-child::before{
+  content:"";
+  width:.42rem;
+  height:.42rem;
+  border-radius:50%;
+  background:#8FD3B3;
+}
+.blg-post-callout > p:first-child strong{ color:inherit; font-weight:inherit; }
+.blg-post-callout > p:not(:first-child){
+  margin:0 0 .55rem !important;
   color:var(--ink) !important;
-  font-weight:550 !important;
-  line-height:1.5 !important;
+  font-family:"Plus Jakarta Sans", "Red Hat Display", sans-serif;
+  font-size:clamp(1rem, 2vw, 1.12rem) !important;
+  font-weight:600 !important;
+  font-style:normal;
+  line-height:1.6 !important;
+  letter-spacing:0;
+  text-transform:none;
 }
-
-.blg-post-quote{
-  margin:1.75rem 0;
-  padding:0;
-  border:0;
-}
-.blg-post-quote p{
-  margin:0 !important;
-  font-size:clamp(1.15rem, 2.8vw, 1.55rem) !important;
-  line-height:1.35 !important;
-  font-weight:550 !important;
-  font-style:italic;
-  color:var(--ink) !important;
-  letter-spacing:-.02em;
-  max-width:32ch;
-}
+.blg-post-callout > p:last-child:not(:first-child){ margin-bottom:0 !important; }
 
 .blg-post-cta{
   margin:2.25rem 0 0;
@@ -1222,5 +1258,7 @@
   .blg-row-go{ font-size:max(11px, .6875rem) !important; }
   .blg-row-cat,
   .blg-post-rail-label{ font-size:max(10.5px, .6562rem) !important; }
-  .blg-post-callout-label{ font-size:max(10.5px, .6562rem) !important; }
+  .blg-post-callout > p:first-child{ font-size:max(10.5px, .6562rem) !important; }
+  .blg-post-body blockquote{ padding:1.15rem 1.15rem 1.15rem 3.3rem; }
+  .blg-post-body blockquote::before{ left:.8rem; font-size:3.4rem; }
 }
