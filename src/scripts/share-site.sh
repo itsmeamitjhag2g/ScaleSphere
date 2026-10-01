@@ -2,6 +2,11 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 PHP="${PHP:-php}"
+if ! command -v "$PHP" >/dev/null 2>&1; then
+  for p in "${LOCALAPPDATA:-$HOME/AppData/Local}/Programs/php-8.3/php.exe" "/c/xampp/php/php.exe"; do
+    [ -f "$p" ] && PHP="$p" && break
+  done
+fi
 PORT="${PORT:-3000}"
 CLOUDFLARED="${CLOUDFLARED:-cloudflared}"
 if ! command -v "$CLOUDFLARED" >/dev/null 2>&1 && [ -n "${LOCALAPPDATA:-}" ]; then

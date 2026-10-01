@@ -117,21 +117,30 @@ BLOG_CREDENTIAL_PASSWORD=choose-a-long-password-here
 
 ### 2.5 Start the site
 
-```bash
-# Windows (double-clicking src\scripts\start-site.cmd also works)
-src\scripts\start-site.cmd
+Open a terminal in the project folder (the one with `index.php`) and run one of these:
 
-# macOS / Linux / Git Bash
-./src/scripts/start-site.sh
+| Terminal | Command |
+|---|---|
+| Windows CMD / PowerShell | `src\scripts\start-site.cmd` (or double-click the file) |
+| Git Bash / macOS / Linux | `./src/scripts/start-site.sh` |
+| Any (PHP already in PATH) | `php -S localhost:3000 index.php` |
 
-# or directly
-php -S localhost:3000 index.php
+You should see:
+
+```text
+ScaleSphere: http://localhost:3000
+PHP 8.3.x Development Server (http://localhost:3000) started
 ```
 
-Open <http://localhost:3000>.
+Open <http://localhost:3000>. Keep this terminal open while you work; `Ctrl+C` stops the
+server. To use another port: `PORT=8080 ./src/scripts/start-site.sh` (Git Bash) or
+`set PORT=8080` then `src\scripts\start-site.cmd` (CMD).
 
 Use `localhost`, not `127.0.0.1`, in the browser. The scripts bind to `localhost`;
 mixing the two on Windows adds a ~200 ms delay to every request (or fails).
+
+After changing CSS or images, hard-refresh the browser (`Ctrl+Shift+R`): images are cached
+for 30 days, so a replaced photo with the same file name may otherwise still show the old one.
 
 ## 3. The `.env` file
 
@@ -376,22 +385,61 @@ and reference the `.jpg`/`.png` path in the template; the WebP switch happens on
 
 Shows the local site on another device or to a client, without hosting.
 
-1. Install Cloudflare Tunnel once: `winget install Cloudflare.cloudflared`.
-   If WinGet fails with `0x80072eff`, download `cloudflared-windows-amd64.exe` from
-   <https://github.com/cloudflare/cloudflared/releases/latest> and save it as
-   `%LOCALAPPDATA%\cloudflared\cloudflared.exe`.
-2. Run `src\scripts\share-site.cmd` (Windows) or `./src/scripts/share-site.sh` (macOS/Linux). It
-   starts PHP and prints a `https://….trycloudflare.com` URL.
+No account or login needed; Cloudflare gives a random `https://….trycloudflare.com` URL.
 
-If you already started the site with `src\scripts\start-site.cmd`, run the tunnel against `localhost`:
+**One-time setup: install `cloudflared`**
+
+- Windows: `winget install Cloudflare.cloudflared`.
+  If WinGet fails (e.g. `0x80072eff`), download `cloudflared-windows-amd64.exe` from
+  <https://github.com/cloudflare/cloudflared/releases/latest>, rename it to `cloudflared.exe`
+  and save it as `%LOCALAPPDATA%\cloudflared\cloudflared.exe`.
+- macOS: `brew install cloudflared`. Linux: see the
+  [download page](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/).
+
+Check it: `cloudflared --version`. On Windows the share scripts also find it in
+`%LOCALAPPDATA%\cloudflared\` even when it is not in PATH, so `command not found` in Git Bash
+is fine as long as you use the script.
+
+**Share the site**
+
+| Terminal | Command |
+|---|---|
+| Windows CMD / PowerShell | `src\scripts\share-site.cmd` |
+| Git Bash / macOS / Linux | `./src/scripts/share-site.sh` |
+
+The script makes sure a PHP server answers on `127.0.0.1:3000` (it reuses one that is
+already running or starts its own; leaving `start-site` open is fine) and then opens the tunnel. Wait a few seconds and copy the URL
+from the box it prints:
+
+```text
+Your quick Tunnel has been created! Visit it at:
+https://random-words-here.trycloudflare.com
+```
+
+Open that URL on a phone or send it to the client. A new random URL is created every run.
+
+**Without the script** (server already running from step 2.5), in a second terminal:
 
 ```bash
 cloudflared tunnel --url http://localhost:3000
+# Git Bash, if cloudflared is not in PATH:
+"$LOCALAPPDATA/cloudflared/cloudflared.exe" tunnel --url http://localhost:3000
 ```
 
-The link works only while both the PHP server and the tunnel run, and is slower than real
-hosting because everything goes through your internet upload and PHP's single-threaded
-dev server. Stop with `Ctrl+C`.
+If that gives **502 Bad gateway**, use the script instead.
+
+To call `cloudflared` directly in Git Bash, add it to PATH once:
+
+```bash
+echo 'export PATH="$PATH:$(cygpath -u "$LOCALAPPDATA")/cloudflared"' >> ~/.bashrc && source ~/.bashrc
+```
+
+**Notes**
+
+- The link works only while the PHP server and the tunnel keep running. `Ctrl+C` stops both.
+- It is slower than real hosting: everything goes through your internet upload and PHP's
+  single-threaded dev server. Use it for previews, not as the live site.
+- Anyone with the link can open the site (including the contact form), so close it when done.
 
 ## 10. Troubleshooting
 
@@ -399,7 +447,9 @@ dev server. Stop with `Ctrl+C`.
 |---|---|
 | `PHP not found` from `src\scripts\start-site.cmd` | Install PHP into `%LOCALAPPDATA%\Programs\php-8.3` or XAMPP (step 2.1). |
 | Every page/image is slow locally | Open `http://localhost:3000`, not `127.0.0.1:3000`. |
-| Tunnel shows **502 Bad gateway** | The PHP server isn't running, or the tunnel URL host differs from the server's (`localhost` vs `127.0.0.1`). Start the server, then run the tunnel against the same host. |
+| `cloudflared: command not found` (Git Bash) | It is installed but not in PATH. Use `./src/scripts/share-site.sh`, or add it to PATH (section 9). |
+| Tunnel shows **502 Bad gateway** | The PHP server isn't running, or the tunnel URL host differs from the server's (`localhost` vs `127.0.0.1`). Use the share script, which starts its own server on the right host. |
+| `Address already in use` on port 3000 | The site is already running in another terminal. Use that one, stop it with `Ctrl+C`, or start on another port (`PORT=8080`). |
 | Contact form says it saved but couldn't send email | Check the `MAIL_*` values. Gmail needs an App Password (4.2). On cPanel try port 465 + `ssl`. Some hosts block outgoing 587; use the cPanel mailbox. |
 | Blog admin URL shows 404 | The URL must use your `BLOG_ADMIN_PATH` value exactly. |
 | Blog login says invalid even with the right password | The hash must come from `password_hash` (4.5). Remove stray spaces in `.env`. |
