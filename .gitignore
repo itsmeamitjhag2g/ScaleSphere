@@ -1,8 +1,12 @@
 ﻿.env
-.env.example
 storage/*.json
 /vendor/
 composer.lock
 .vscode/
 /node_modules/
 storage/blog-admin/
+# WebP copies built by src/scripts/make-image-variants.php (originals in mobile/ stay tracked)
+src/assets/images/**/*-640.webp
+src/assets/images/dev/*.webp
+src/assets/images/stock/*.webp
+src/assets/images/team/*.webp

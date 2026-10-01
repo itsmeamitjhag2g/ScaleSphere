@@ -12,9 +12,6 @@ DirectoryIndex index.php
   <Files "index.php">
     Require all granted
   </Files>
-  <Files "front.php">
-    Require all denied
-  </Files>
 </IfModule>
 
 <IfModule mod_expires.c>
@@ -50,18 +47,18 @@ DirectoryIndex index.php
   RewriteRule ^\. - [F]
 
   # Block app internals / deps from direct web access
-  RewriteCond %{THE_REQUEST} \s/+(app|config|storage|vendor|scripts|composer\.(json|lock)|README\.md)[/?\s] [NC]
+  RewriteCond %{THE_REQUEST} \s/+(src|storage|vendor|node_modules|composer\.(json|lock)|README\.md|[^/?\s]+\.(cmd|sh|md))[/?\s] [NC]
   RewriteRule ^ - [F]
 
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
-  RewriteRule ^((?:css|js|images|fonts)/.+)$ public/$1 [END]
+  RewriteCond %{DOCUMENT_ROOT}/src/assets/$1 -f
+  RewriteRule ^((?:css|js|images|fonts)/.+)$ src/assets/$1 [END]
 
-  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f
-  RewriteRule ^(favicon\.ico|favicon\.png|apple-touch-icon\.png|scalesphere-logo\.png)$ public/$1 [END]
+  RewriteCond %{DOCUMENT_ROOT}/src/assets/$1 -f
+  RewriteRule ^(favicon\.ico|favicon\.png|apple-touch-icon\.png|site\.webmanifest)$ src/assets/$1 [END]
 
   RewriteRule ^index\.php$ - [L]
   RewriteRule ^ index.php [QSA,L]
