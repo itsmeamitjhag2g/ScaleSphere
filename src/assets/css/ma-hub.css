@@ -1069,20 +1069,36 @@ body.page-hub-mobile-apps main{
   transition:color .2s ease;
 }
 .s2-acc-item button:hover{ color:#3B8767; }
+.s2-acc-item button:focus-visible{ outline:2px solid #3B8767; outline-offset:4px; border-radius:10px; }
 .s2-acc-item button span{
-  width:28px; height:28px; border-radius:50%; flex:0 0 auto;
-  display:grid; place-items:center; background:#0F172A; color:#fff; font-size:1.125rem; line-height:1;
-  transition:background .2s ease, transform .25s ease;
+  position:relative; width:28px; height:28px; border-radius:50%; flex:0 0 auto;
+  background:#0F172A; transition:background .2s ease;
 }
+.s2-acc-item button span::before,
+.s2-acc-item button span::after{
+  content:""; position:absolute; left:50%; top:50%; width:11px; height:2px; margin:-1px 0 0 -5.5px;
+  border-radius:2px; background:#fff; transition:transform .3s cubic-bezier(.22,.8,.26,1);
+}
+.s2-acc-item button span::after{ transform:rotate(90deg); }
+.s2-acc-item.is-open button span{ background:var(--s2-lime); }
+.s2-acc-item.is-open button span::after{ transform:rotate(0deg) scaleX(0); }
 .s2-acc-item .ans{
-  display:none; padding:0 0 1.15rem;
-  color:var(--s2-dim); font-size:.9375rem; line-height:1.55;
+  display:grid; grid-template-rows:0fr; overflow:hidden; visibility:hidden;
+  transition:grid-template-rows .32s cubic-bezier(.22,.8,.26,1), visibility 0s linear .32s;
 }
-.s2-acc-item.is-open .ans{ display:block; animation:s2AnsIn .35s ease; }
-.s2-acc-item.is-open button span{ background:var(--s2-lime); color:#fff; transform:rotate(180deg); }
-@keyframes s2AnsIn{
-  from{ opacity:0; transform:translateY(-6px); }
-  to{ opacity:1; transform:none; }
+.s2-acc-item.is-open .ans{
+  grid-template-rows:1fr; visibility:visible;
+  transition:grid-template-rows .32s cubic-bezier(.22,.8,.26,1), visibility 0s;
+}
+.s2-acc-item .ans-in{
+  min-height:0; overflow:hidden;
+  color:var(--s2-dim); font-size:.9375rem; line-height:1.55;
+  opacity:0; transition:opacity .2s ease;
+}
+.s2-acc-item .ans-in::after{ content:""; display:block; height:1.15rem; }
+.s2-acc-item.is-open .ans-in{ opacity:1; transition:opacity .25s ease .08s; }
+@media (prefers-reduced-motion: reduce){
+  .s2-acc-item .ans, .s2-acc-item.is-open .ans, .s2-acc-item .ans-in, .s2-acc-item button span::after{ transition:none; }
 }
 
 /* ===== CLOSE ===== */

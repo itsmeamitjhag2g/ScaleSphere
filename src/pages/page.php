@@ -156,15 +156,14 @@ ob_start();
 
         <div class="vh-bento vh-bento--top" data-vh-stagger>
           <article class="vh-card vh-card--green vh-card--calc" data-vh-guide>
-            <label class="vh-select">
-              <span class="vh-sr">Choose the kind of project you have</span>
-              <select>
+            <div class="vh-select" data-vh-select>
+              <select aria-label="Choose the kind of project you have">
                 <?php foreach ($guide as $i => $g): ?>
                 <option value="<?= (int) $i ?>" data-copy="<?= ts_h($g["copy"]) ?>" data-asks="<?= ts_h(implode("|", $g["asks"])) ?>" data-href="<?= ts_h($g["href"]) ?>" data-icon="<?= ts_h($g["icon"]) ?>"><?= ts_h($g["label"]) ?></option>
                 <?php endforeach; ?>
               </select>
               <i class="fas fa-chevron-down" aria-hidden="true"></i>
-            </label>
+            </div>
             <div class="vh-guide-body" data-vh-guide-body aria-live="polite">
               <p class="vh-card-copy" data-vh-guide-copy><?= ts_h($guide[0]["copy"]) ?></p>
               <span class="vh-calc-label">Your assistant will ask about</span>

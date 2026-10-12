@@ -59,7 +59,7 @@ ob_start();
       <div class="vh-wrap">
         <article class="vp-feature" data-vh-reveal>
           <figure class="vp-feature-media">
-            <img src="<?= ts_h($featured["image"]) ?>" alt="<?= ts_h($featured["title"]) ?>" width="900" height="600" loading="eager" fetchpriority="high" decoding="async">
+            <img src="<?= ts_h($featured["image"]) ?>" alt="<?= ts_h($featured["title"]) ?>" width="2000" height="1335" loading="eager" fetchpriority="high" decoding="async">
           </figure>
           <div class="vp-feature-body">
             <span class="vh-pill"><i class="fas fa-star" aria-hidden="true"></i> Featured project</span>

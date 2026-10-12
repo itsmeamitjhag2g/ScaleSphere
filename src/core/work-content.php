@@ -27,7 +27,7 @@ function ts_work_projects(): array
             "challenge" => "Orders were taken over WhatsApp and spreadsheets, stock was often out of date and there was no way to sell online around the clock.",
             "solution" => "Our assistant mapped the full order flow with the owner, then our developers built a storefront with live inventory, online payments and a simple admin — with SEO set up from day one.",
             "outcome" => "The brand now sells online 24/7, stock stays accurate across channels and the team manages products without developer help.",
-            "image" => "/images/stock/photo-1556742049-0cfed4f6a45d.jpg",
+            "image" => "/images/stock/retail-checkout.jpg",
             "tags" => ["E-commerce", "Payments", "SEO"],
             "href" => "/contact",
             "featured" => true,

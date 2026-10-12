@@ -1645,3 +1645,47 @@ main table{
 }
 
 /* Homepage styles moved to /css/home.css */
+
+/* Branded option panel for native selects (see /js/ss-select.js) */
+select[data-ss-open]{
+  border-color:#1F7A5A !important;
+  box-shadow:0 0 0 3px rgba(31,122,90,.14) !important;
+}
+.ss-select-panel{
+  position:fixed; z-index:190; box-sizing:border-box;
+  min-width:180px; max-height:320px; overflow-y:auto; overscroll-behavior:contain;
+  padding:6px; background:#fff; color:#0F1B3D;
+  border:1px solid #E3E5EA; border-radius:14px;
+  box-shadow:0 22px 50px rgba(15,27,61,.16), 0 4px 12px rgba(15,27,61,.06);
+  scrollbar-width:thin; scrollbar-color:#9FCFB5 transparent;
+  animation:ssSelectIn .16s cubic-bezier(.22,.8,.26,1);
+  transform-origin:top center;
+}
+.ss-select-panel.is-up{ transform-origin:bottom center; }
+@keyframes ssSelectIn{
+  from{ opacity:0; transform:translateY(-4px) scale(.98); }
+  to{ opacity:1; transform:none; }
+}
+.ss-select-panel.is-up{ animation-name:ssSelectInUp; }
+@keyframes ssSelectInUp{
+  from{ opacity:0; transform:translateY(4px) scale(.98); }
+  to{ opacity:1; transform:none; }
+}
+.ss-select-opt{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:9px 12px; border-radius:10px; cursor:pointer;
+  font-size:14.5px; font-weight:500; line-height:1.35; letter-spacing:0; text-transform:none;
+  transition:background .12s ease, color .12s ease;
+}
+.ss-select-opt + .ss-select-opt{ margin-top:2px; }
+.ss-select-txt{ min-width:0; }
+.ss-select-check{ flex:0 0 auto; width:16px; height:16px; color:#1F7A5A; opacity:0; transform:scale(.6); transition:opacity .12s ease, transform .18s cubic-bezier(.22,.8,.26,1); }
+.ss-select-check svg{ display:block; width:100%; height:100%; }
+.ss-select-opt.is-active{ background:#F4F6F5; }
+.ss-select-opt[aria-selected="true"]{ background:#E6F1EA; color:#1E433B; font-weight:600; }
+.ss-select-opt[aria-selected="true"].is-active{ background:#DCEDE3; }
+.ss-select-opt[aria-selected="true"] .ss-select-check{ opacity:1; transform:none; }
+.ss-select-opt[aria-disabled="true"]{ color:#9AA1AE; cursor:not-allowed; background:none; }
+@media (prefers-reduced-motion: reduce){
+  .ss-select-panel{ animation:none; }
+}

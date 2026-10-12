@@ -473,9 +473,9 @@ function ts_render_mobile_apps_hub(): void
         <div class="s2-acc-item<?= $i === 0 ? " is-open" : "" ?>">
           <button type="button" aria-expanded="<?= $i === 0 ? "true" : "false" ?>">
             <?= ts_h($faq[0]) ?>
-            <span aria-hidden="true"><?= $i === 0 ? "−" : "+" ?></span>
+            <span aria-hidden="true"></span>
           </button>
-          <div class="ans"><?= ts_h($faq[1]) ?></div>
+          <div class="ans"><div class="ans-in"><?= ts_h($faq[1]) ?></div></div>
         </div>
         <?php endforeach; ?>
       </div>

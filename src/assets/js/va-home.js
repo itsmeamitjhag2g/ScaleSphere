@@ -134,6 +134,132 @@
       body.classList.add("is-swapping");
       timer = setTimeout(() => { render(opt); body.classList.remove("is-swapping"); }, 200);
     });
+
+    dropdown(select, card);
+  }
+
+  /* ---------- Custom listbox over the native select ---------- */
+  function dropdown(select, card) {
+    const wrap = select.closest("[data-vh-select]");
+    if (!wrap) return;
+    const opts = [...select.options];
+    const iconOf = (o) => (/^fa-[a-z0-9-]+$/.test(o.dataset.icon || "") ? o.dataset.icon : "fa-layer-group");
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "vh-select-btn";
+    btn.setAttribute("aria-haspopup", "listbox");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-controls", "vh-guide-list");
+    btn.innerHTML =
+      '<span class="vh-select-ico"><i class="fas" aria-hidden="true"></i></span>' +
+      '<span class="vh-select-text"><small>I need help with</small><span></span></span>' +
+      '<span class="vh-select-caret"><i class="fas fa-chevron-down" aria-hidden="true"></i></span>';
+    const btnIcon = btn.querySelector(".vh-select-ico i");
+    const btnText = btn.querySelector(".vh-select-text span");
+
+    const list = document.createElement("ul");
+    list.className = "vh-select-menu";
+    list.id = "vh-guide-list";
+    list.tabIndex = -1;
+    list.setAttribute("role", "listbox");
+    list.setAttribute("aria-label", select.getAttribute("aria-label") || "Project type");
+
+    const items = opts.map((o, i) => {
+      const li = document.createElement("li");
+      li.className = "vh-select-opt";
+      li.id = "vh-guide-opt-" + i;
+      li.setAttribute("role", "option");
+      li.innerHTML =
+        '<span class="vh-select-opt-ico"><i class="fas" aria-hidden="true"></i></span>' +
+        '<span class="vh-select-opt-label"></span>' +
+        '<i class="fas fa-check vh-select-check" aria-hidden="true"></i>';
+      li.querySelector(".vh-select-opt-ico i").classList.add(iconOf(o));
+      li.querySelector(".vh-select-opt-label").textContent = o.textContent.trim();
+      li.addEventListener("mousemove", () => focusItem(i, false));
+      li.addEventListener("click", () => choose(i));
+      list.appendChild(li);
+      return li;
+    });
+
+    let active = -1;
+    const isOpen = () => wrap.classList.contains("is-open");
+
+    const sync = () => {
+      const i = select.selectedIndex;
+      items.forEach((li, n) => li.setAttribute("aria-selected", n === i ? "true" : "false"));
+      btnIcon.className = "fas " + iconOf(opts[i]);
+      btnText.textContent = opts[i].textContent.trim();
+    };
+
+    const focusItem = (i, scroll = true) => {
+      if (i < 0 || i >= items.length) return;
+      if (active >= 0) items[active].classList.remove("is-focus");
+      active = i;
+      items[i].classList.add("is-focus");
+      list.setAttribute("aria-activedescendant", items[i].id);
+      if (!scroll) return;
+      const li = items[i];
+      if (li.offsetTop < list.scrollTop) list.scrollTop = li.offsetTop - 8;
+      else if (li.offsetTop + li.offsetHeight > list.scrollTop + list.clientHeight) {
+        list.scrollTop = li.offsetTop + li.offsetHeight - list.clientHeight + 8;
+      }
+    };
+
+    const open = () => {
+      if (isOpen()) return;
+      wrap.classList.add("is-open");
+      card.classList.add("is-open");
+      btn.setAttribute("aria-expanded", "true");
+      focusItem(select.selectedIndex);
+      list.focus({ preventScroll: true });
+    };
+
+    const close = (refocus = true) => {
+      if (!isOpen()) return;
+      wrap.classList.remove("is-open");
+      card.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+      if (refocus) btn.focus({ preventScroll: true });
+    };
+
+    const choose = (i) => {
+      if (i !== select.selectedIndex) {
+        select.selectedIndex = i;
+        select.dispatchEvent(new Event("change"));
+      }
+      sync();
+      close();
+    };
+
+    btn.addEventListener("click", () => (isOpen() ? close() : open()));
+    btn.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); open(); }
+    });
+
+    list.addEventListener("keydown", (e) => {
+      const last = items.length - 1;
+      switch (e.key) {
+        case "ArrowDown": e.preventDefault(); focusItem(Math.min(active + 1, last)); break;
+        case "ArrowUp": e.preventDefault(); focusItem(Math.max(active - 1, 0)); break;
+        case "Home": e.preventDefault(); focusItem(0); break;
+        case "End": e.preventDefault(); focusItem(last); break;
+        case "Enter":
+        case " ": e.preventDefault(); choose(active); break;
+        case "Escape": e.preventDefault(); close(); break;
+        case "Tab": close(false); break;
+      }
+    });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (isOpen() && !wrap.contains(e.target)) close(false);
+    });
+
+    select.tabIndex = -1;
+    select.setAttribute("aria-hidden", "true");
+    wrap.append(btn, list);
+    wrap.classList.add("is-enhanced");
+    sync();
   }
 
   /* ---------- Project filters ---------- */

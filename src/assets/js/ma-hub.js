@@ -481,24 +481,34 @@
     reveals.forEach((el) => el.classList.add("is-in"));
   }
 
-  root.querySelectorAll("[data-s2-acc] .s2-acc-item").forEach((item) => {
+  const accItems = [...root.querySelectorAll("[data-s2-acc] .s2-acc-item")];
+  let accAnchor = 0;
+  accItems.forEach((item, idx) => {
     const btn = item.querySelector("button");
     if (!btn) return;
     btn.addEventListener("click", () => {
       const open = item.classList.contains("is-open");
-      root.querySelectorAll("[data-s2-acc] .s2-acc-item").forEach((other) => {
+      const openAbove = accItems.some((o, n) => n < idx && o.classList.contains("is-open"));
+      const startTop = btn.getBoundingClientRect().top;
+      accItems.forEach((other) => {
         other.classList.remove("is-open");
-        const b = other.querySelector("button");
-        const s = b?.querySelector("span");
-        if (b) b.setAttribute("aria-expanded", "false");
-        if (s) s.textContent = "+";
+        other.querySelector("button")?.setAttribute("aria-expanded", "false");
       });
       if (!open) {
         item.classList.add("is-open");
         btn.setAttribute("aria-expanded", "true");
-        const s = btn.querySelector("span");
-        if (s) s.textContent = "−";
       }
+
+      /* An answer collapsing above would pull this question upward; keep it under the pointer. */
+      cancelAnimationFrame(accAnchor);
+      if (!openAbove) return;
+      const until = performance.now() + 420;
+      const hold = () => {
+        const drift = btn.getBoundingClientRect().top - startTop;
+        if (Math.abs(drift) >= 1) window.scrollTo({ top: window.scrollY + drift, behavior: "instant" });
+        if (performance.now() < until) accAnchor = requestAnimationFrame(hold);
+      };
+      hold();
     });
   });
 
