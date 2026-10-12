@@ -234,7 +234,7 @@ ob_start();
               <?php foreach ($steps as $i => $s):
                   [$nx, $ny] = $stepNodes[$i];
               ?>
-              <button type="button" class="vh-node<?= $i === 0 ? " is-active" : "" ?>" style="left:<?= round($nx / 6, 3) ?>%;top:<?= round($ny / 3.2, 3) ?>%" data-vh-node="<?= (int) $i ?>" data-x="<?= (int) $nx ?>" data-y="<?= (int) $ny ?>" data-title="<?= ts_h($s["title"]) ?>" data-copy="<?= ts_h($s["copy"]) ?>" data-icon="<?= ts_h($s["icon"]) ?>">
+              <button type="button" class="vh-node<?= $i === 0 ? " is-active" : "" ?>" style="left:<?= round($nx / 6, 3) ?>%;top:<?= round($ny / 3.2, 3) ?>%" data-vh-node="<?= (int) $i ?>" data-x="<?= (int) $nx ?>" data-y="<?= (int) $ny ?>" data-title="<?= ts_h($s["title"]) ?>" data-copy="<?= ts_h($s["copy"]) ?>" data-icon="<?= ts_h($s["icon"]) ?>" data-tip="Step <?= (int) $i + 1 ?>: <?= ts_h($s["title"]) ?>">
                 <i class="fas <?= ts_h($s["icon"]) ?>" aria-hidden="true"></i> <span><?= ts_h($s["short"]) ?></span>
               </button>
               <?php endforeach; ?>

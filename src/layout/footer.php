@@ -4,7 +4,7 @@
   <div class="wrap">
     <div class="footer-grid footer-grid-slim">
       <div class="footer-brand">
-        <a href="/" class="logo">
+        <a href="/" class="logo" aria-label="<?= ts_h($site["name"]) ?> home">
           <img src="<?= ts_h(ts_logo_white()) ?>" alt="<?= ts_h($site["name"]) ?>" width="217" height="44" class="footer-logo" loading="lazy" decoding="async">
         </a>
         <p class="footer-tagline">Your dedicated Virtual Assistant for marketing, development, mobile apps and design — one contact, full agency power.</p>

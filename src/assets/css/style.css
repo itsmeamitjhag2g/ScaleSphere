@@ -1689,3 +1689,33 @@ select[data-ss-open]{
 @media (prefers-reduced-motion: reduce){
   .ss-select-panel{ animation:none; }
 }
+
+/* Hover / focus tooltips (see /js/ss-tip.js) */
+.ss-tip{
+  --ss-tip-x:50%;
+  position:fixed; left:0; top:0; z-index:2000; box-sizing:border-box;
+  display:flex; align-items:center; gap:8px; max-width:260px;
+  padding:7px 11px; border-radius:9px;
+  background:#0F1B3D; color:#fff;
+  font:600 12.5px/1.35 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing:.005em; text-transform:none;
+  box-shadow:0 10px 24px rgba(15,27,61,.22), 0 2px 6px rgba(15,27,61,.12);
+  pointer-events:none; opacity:0; visibility:hidden; transform:translateY(4px);
+  transition:opacity .14s ease, transform .16s cubic-bezier(.22,.8,.26,1), visibility 0s linear .16s;
+}
+.ss-tip::after{
+  content:""; position:absolute; left:var(--ss-tip-x); top:100%;
+  width:9px; height:9px; margin:-5px 0 0 -4.5px; background:inherit;
+  border-radius:0 0 2px 0; transform:rotate(45deg);
+}
+.ss-tip.is-below{ transform:translateY(-4px); }
+.ss-tip.is-below::after{ top:auto; bottom:100%; margin:0 0 -5px -4.5px; border-radius:2px 0 0 0; }
+.ss-tip.is-on{ opacity:1; visibility:visible; transform:none; transition:opacity .14s ease, transform .16s cubic-bezier(.22,.8,.26,1), visibility 0s; }
+.ss-tip-badge{
+  flex:0 0 auto; padding:2px 7px; border-radius:999px;
+  background:rgba(255,255,255,.14); color:rgba(255,255,255,.85);
+  font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+}
+.ss-tip-badge.is-req{ background:#1F7A5A; color:#fff; }
+@media (prefers-reduced-motion: reduce){
+  .ss-tip, .ss-tip.is-on{ transition:none; transform:none; }
+}

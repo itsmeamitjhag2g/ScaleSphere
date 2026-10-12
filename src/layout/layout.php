@@ -184,6 +184,7 @@
   <script src="/js/site-motion.js?v=47"></script>
   <script src="/js/route-progress.js?v=4"></script>
   <script src="/js/ss-select.js?v=<?= (int) (@filemtime(dirname(__DIR__, 2) . "/src/assets/js/ss-select.js") ?: 1) ?>"></script>
+  <script src="/js/ss-tip.js?v=<?= (int) (@filemtime(dirname(__DIR__, 2) . "/src/assets/js/ss-tip.js") ?: 1) ?>"></script>
   <?php foreach ($extraScripts ?? [] as $src): ?>
   <script src="<?= ts_h($src) ?>"></script>
   <?php endforeach; ?>
